@@ -1,0 +1,26 @@
+.navbar {
+    background-color: beige;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    width: 100%;
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: #333; /* Cambia el color de texto predeterminado */
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s ease; /* Agrega una transición suave al color del texto */
+  }
+  
+  .navbar a.active {
+    color: #ff5733; /* Cambia el color del elemento activo */
+  }
+  
+  /* Agrega un efecto de hover */
+  .navbar a:hover {
+    color: #ff5733;
+  }
+  
