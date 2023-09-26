@@ -1,7 +1,8 @@
 // import React from 'react'
 
-export const HomeView = () => {
+const HomeView = () => {
   return (
     <div>HomeView</div>
   )
 }
+export default HomeView
