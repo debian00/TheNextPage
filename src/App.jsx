@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import HomeView from './Views/HomeView/HomeView'
 import Navbar from './Components/Navbar/Navbar'
 
-import DetailView from './Views/DetailView/DetailView'
+
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
           path="/detail"
           element={
             <>
-              <DetailView />
+        
           
             </>
           }
