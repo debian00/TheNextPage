@@ -10,27 +10,21 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={
+        <Route path="/" element={
             <>
               <HomeView />
               <Footer />
             </>
           }
         />
-        <Route
-          path="/home"
-          element={
+        <Route path="/home" element={
             <>
               <HomeView />
               <Footer />
             </>
           }
         />
-        <Route
-          path="/detail"
-          element={
+        <Route path="/detail" element={
             <>
               <DetailView />
               <Footer />

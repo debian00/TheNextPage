@@ -3,7 +3,7 @@ import principal from '../../assets/imghome/Principal2.png'
 import novedades from '../../assets/imghome/novedades.png'
 import tendencias from '../../assets/imghome/tendencias.png'
 import CardsTop3View from './CardsTop3View/CardsTop3View'
-import style from './home.module.css'
+import style from './HomeView.module.css'
 
 const HomeView = () => {
   return (
