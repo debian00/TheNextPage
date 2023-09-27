@@ -1,5 +1,5 @@
 // import React from 'react'
-import style from './Cardstop3.module.css'
+import style from './cardstop3.module.css'
 
 const CardsTop3View = () => {
   return (
