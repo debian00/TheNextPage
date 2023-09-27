@@ -74,6 +74,7 @@
 
 .socialMedia {
   margin: auto 5px;
+  position: relative;
 }
 
 .socialMedia ul {
@@ -81,7 +82,7 @@
 }
 
 .socialMedia ul li:not(.line) {
-  padding-block: 32px;
+  padding-block: 33px;
   padding-inline: 5px;
 }
 .line {
@@ -147,16 +148,20 @@ svg {
   position: absolute;
   height: 0;
   overflow: hidden;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.5),
+    0 4px 6px -4px rgba(0, 0, 0, 0.5);
   width: 200px;
   left: 28px;
   transition: height 0.5s ease;
 }
 
 .dropdown.open {
-  height: 140px;
+  height: 160px;
 }
 
 .dropdown li {
+  list-style: none;
   color: white;
   text-align: center;
   font-family: 'Roboto';

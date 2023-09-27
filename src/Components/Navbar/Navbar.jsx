@@ -75,6 +75,7 @@ const Navbar = () => {
               position: 'relative',
               gap: '10px',
               paddingRight: '10px',
+              marginBlock: '0',
             }}
           >
             <li>
