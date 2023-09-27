@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './DetailView.module.css'; // Importa las clases del módulo CSS
+import styles from './detailView.module.css'; // Importa las clases del módulo CSS
 
 function DetailView() {
   return (
