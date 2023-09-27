@@ -1,4 +1,4 @@
-import styles from './detailview.module.css' // Importa las clases del módulo CSS
+import styles from './DetailView.module.css' // Importa las clases del módulo CSS
 
 function DetailView() {
   return (

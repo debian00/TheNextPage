@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from './footer.module.css'; // Importa las clases del módulo CSS
+import styles from './Footer.module.css' // Importa las clases del módulo CSS
 
 function Footer() {
   return (
@@ -56,7 +55,7 @@ function Footer() {
         </li>
       </ul>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer
