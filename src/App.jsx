@@ -2,7 +2,7 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import HomeView from './Views/HomeView/HomeView'
 import Navbar from './Components/Navbar/Navbar'
-import Footer from './Components/Footer/Footer'
+
 import DetailView from './Views/DetailView/DetailView'
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           element={
             <>
               <HomeView />
-              <Footer />
+    
             </>
           }
         />
@@ -24,7 +24,7 @@ function App() {
           element={
             <>
               <HomeView />
-              <Footer />
+             
             </>
           }
         />
@@ -33,7 +33,7 @@ function App() {
           element={
             <>
               <DetailView />
-              <Footer />
+          
             </>
           }
         />
