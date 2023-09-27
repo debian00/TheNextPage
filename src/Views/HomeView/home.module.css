@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+
+/*Declaracion de variables*/
+:root {
+  --fuente-principal: 'Dela Gothic One', cursive;
+}
+
+.subTitulo {
+  font-family: var(--fuente-principal);
+  font-size: 45px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  padding-top: 15px;
+}
+.separador{
+    width: 90%;
+    
+    border: 1px solid black;
+}
+.containerImages{
+    transition: transform 0.2s;
+    
+}
+.containerImages:hover {
+    transform: translateY(-8px);
+}
+.imagesNovTen{
+    box-shadow: 1px 1px 17px #000;
+}
