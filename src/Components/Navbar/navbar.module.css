@@ -1,26 +1,169 @@
-.navbar {
-    background-color: beige;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
-    width: 100%;
-  }
-  
-  .navbar a {
-    text-decoration: none;
-    color: #333; /* Cambia el color de texto predeterminado */
-    font-weight: bold;
-    margin: 0 10px;
-    transition: color 0.3s ease; /* Agrega una transición suave al color del texto */
-  }
-  
-  .navbar a.active {
-    color: #ff5733; /* Cambia el color del elemento activo */
-  }
-  
-  /* Agrega un efecto de hover */
-  .navbar a:hover {
-    color: #ff5733;
-  }
-  
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+.nav {
+  display: flex;
+  flex-direction: row;
+  background: #e8e2c8;
+  padding: 20px;
+  width: 100%;
+  justify-content: space-between;
+  max-height: 104px;
+  transition: all 0.5s ease;
+}
+
+.nav ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: center;
+  text-align: center;
+  margin: auto 0;
+}
+
+.nav ul li a {
+  font-family: 'Roboto', sans-serif;
+
+  font-weight: 400;
+  font-size: 25px;
+  color: black;
+  margin-right: 20px;
+  transition: all 0.5s ease;
+  text-decoration: none;
+  display: flex;
+}
+
+.nav ul li a:hover {
+  padding: 5px 10px;
+  text-align: center;
+
+  background-color: #033d7b;
+  color: #fff;
+  border-radius: 15px;
+}
+
+.nav ul li a:not(:hover) {
+  padding-top: 5px;
+}
+
+.nav.active {
+  background-color: #091f44;
+  position: fixed;
+}
+
+.verticalBar {
+  background-color: #757575;
+  width: 0.1px;
+  height: 45%;
+  transform: translateX(-50%);
+  position: absolute;
+  left: 70px;
+  top: 27px;
+}
+
+.logoName {
+  text-transform: uppercase;
+  display: flex;
+  margin: auto 0;
+  margin-left: 25px;
+  text-align: center;
+  color: #033d7b;
+  font-size: 25px;
+  font-family: 'Lora', serif;
+  letter-spacing: 3px;
+}
+
+.socialMedia {
+  margin: auto 5px;
+}
+
+.socialMedia ul {
+  list-style: none;
+}
+
+.socialMedia ul li:not(.line) {
+  padding-block: 32px;
+  padding-inline: 5px;
+}
+.line {
+  margin-inline: 10px;
+  border-right: 0.1px solid #757575;
+  height: 42px;
+  margin: auto 0;
+}
+
+.socialMedia ul li:hover {
+  background: #033d7b;
+}
+.socialMedia ul li svg {
+  cursor: pointer;
+  color: #033d7b;
+}
+.socialMedia ul li:hover svg {
+  color: #e8e2c8;
+}
+
+.downNav {
+  padding: 10px;
+  padding-inline: 20px;
+  align-items: center;
+}
+.downNav ul {
+  display: flex;
+  gap: 20px;
+
+  list-style: none;
+  margin: auto 0;
+}
+.downNav ul li {
+  margin: auto 0;
+}
+
+.downNav ul li a,
+svg {
+  text-decoration: none;
+  color: white;
+  font-family: 'Roboto';
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  margin: auto 0;
+}
+
+.profile a {
+  text-decoration: none;
+  font-family: 'Roboto';
+  color: white;
+  text-align: center;
+  margin: auto 20px;
+}
+
+.dropdown {
+  background-color: #033d7b;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  position: absolute;
+  height: 0;
+  overflow: hidden;
+  width: 200px;
+  left: 28px;
+  transition: height 0.5s ease;
+}
+
+.dropdown.open {
+  height: 140px;
+}
+
+.dropdown li {
+  color: white;
+  text-align: center;
+  font-family: 'Roboto';
+  padding: 8px;
+}
+
+.dropdown ul li:hover {
+  background-color: #fff;
+  color: #033d7b;
+}
