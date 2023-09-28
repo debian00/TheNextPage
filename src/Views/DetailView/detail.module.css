@@ -9,6 +9,19 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
+  .containerotheautorbooks {
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: space-between;
+      width: 100%;     
+      padding: 0px;
+      position: relative;
+      gap: 20px;
+      height: 100vh;
+      background-image: url(../../assets/imgcatalogue/cataloguebg3.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
   
 
   .leftBox {

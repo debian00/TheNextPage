@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import HomeView from './Views/HomeView/HomeView'
 import Navbar from './Components/Navbar/Navbar'
 import DetailView from './Views/DetailView/DetailView.jsx'
+import CatalogueView from "./Views/CatalogueView/CatalogueView"
 
 function App() {
   return (
@@ -30,7 +31,15 @@ function App() {
             </>
           }
         />
+         <Route path="/catalogue" element={
+            <>
+              <CatalogueView/>
+          
+            </>
+          }
+        />
       </Routes>
+     
     </>
   )
 }
