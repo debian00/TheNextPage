@@ -63,6 +63,7 @@ const HomeView = () => {
           <CardsTop3View />
         </div>
       </div>
+      
     </div>
   )
 }

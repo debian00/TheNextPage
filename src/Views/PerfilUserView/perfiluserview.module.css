@@ -1,0 +1,55 @@
+/* Estilo del menú hamburguesa */
+/*Declaracion de variables*/
+:root {
+    --fuente-principal: 'Dela Gothic One', cursive;
+}
+
+.menu {
+    position: fixed;
+    left: 0;
+    top: 0%;
+    height: 100%;
+    width: 280px;
+    color: #fff;
+    background-color: #E8E2C8;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    align-items: center; /* Para centrar verticalmente */
+}
+.profile{
+    display: flex;
+    justify-content: center;
+    background-color: #82755B;
+}
+
+.profile img {
+    width: 180px;
+    height: 180px;
+    padding: 20px;
+    border-radius: 50%;
+}
+h4{
+    font-family: var(--fuente-principal);
+    color: black;
+    text-align: center;
+}
+
+
+.menuList {
+    list-style: none;
+    padding: 20px;
+    background-color: #E8E2C8;
+
+}
+
+.menuList li {
+    padding: 5px;
+}
+
+.menuList a {
+    text-decoration: none;
+    color: #000000;
+    font-family: var(--fuente-principal);
+    transition: background-color 0.3s; /* Agregar transición para suavizar el efecto */
+}
+
