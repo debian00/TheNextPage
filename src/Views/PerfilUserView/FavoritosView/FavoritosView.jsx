@@ -41,7 +41,8 @@ const FavoritosView = () => {
               xmlns="http://www.w3.org/2000/svg"
               width="35"
               height="15"
-              fill="currentColor"
+            //    color='black'
+              color='black'
               className="bi bi-file-excel"
               viewBox="0 7 16 4"
             >
@@ -88,7 +89,7 @@ const FavoritosView = () => {
               xmlns="http://www.w3.org/2000/svg"
               width="35"
               height="15"
-              fill="currentColor"
+               color='black'
               className="bi bi-file-excel"
               viewBox="0 7 16 4"
             >
@@ -135,7 +136,7 @@ const FavoritosView = () => {
               xmlns="http://www.w3.org/2000/svg"
               width="35"
               height="15"
-              fill="currentColor"
+               color='black'
               className="bi bi-file-excel"
               viewBox="0 7 16 4"
             >
@@ -182,7 +183,7 @@ const FavoritosView = () => {
               xmlns="http://www.w3.org/2000/svg"
               width="35"
               height="15"
-              fill="currentColor"
+               color='black'
               className="bi bi-file-excel"
               viewBox="0 7 16 4"
             >
