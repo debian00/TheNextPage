@@ -12,6 +12,7 @@ import {
   Youtube,
 } from '../../utils/Icons'
 import { useEffect, useRef, useState } from 'react'
+import SearchBar from './SearchBar/SearchBar'
 
 const Navbar = () => {
   const [fixed, setFixed] = useState(false)
@@ -140,6 +141,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+        <SearchBar></SearchBar>
         <div className={style.profile}>
           <Link>INGRESAR</Link>
           <Profile width={40}></Profile>
