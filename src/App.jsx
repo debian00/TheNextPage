@@ -7,6 +7,8 @@ import PerfilUserdView from './Views/PerfilUserView/PerfilUserView'
 import DetailView from './Views/DetailView/DetailView.jsx'
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3001'
+import CatalogueView from './Views/CatalogueView/CatalogueView'
+
 function App() {
   return (
     <>
@@ -50,6 +52,14 @@ function App() {
           element={
             <>
               <DetailView />
+            </>
+          }
+        />
+        <Route
+          path="/catalogue"
+          element={
+            <>
+              <CatalogueView />
             </>
           }
         />
