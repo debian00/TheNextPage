@@ -27,7 +27,11 @@ const Navbar = () => {
   }
 
   const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target) &&
+      event.target.id !== 'dropdown'
+    ) {
       setDropdown(false)
     }
   }
@@ -43,7 +47,11 @@ const Navbar = () => {
   }, [])
 
   const handleDrop = () => {
-    setDropdown(!dropdown)
+    if (dropdown) {
+      setDropdown(false)
+    } else {
+      setDropdown(true)
+    }
   }
 
   return (
@@ -53,6 +61,7 @@ const Navbar = () => {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
+          zIndex: '5',
         }}
       >
         <div
@@ -115,6 +124,7 @@ const Navbar = () => {
               <Link>INICIO</Link>
             </li>
             <li
+              id="dropdown"
               onClick={handleDrop}
               style={{
                 color: 'white',

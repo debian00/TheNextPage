@@ -104,6 +104,7 @@
 }
 
 .downNav {
+  z-index: 5;
   padding: 10px;
   padding-inline: 20px;
   align-items: center;
@@ -147,10 +148,9 @@ svg {
   justify-content: left;
   position: absolute;
   height: 0;
+  z-index: 3;
   overflow: hidden;
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.5),
-    0 4px 6px -4px rgba(0, 0, 0, 0.5);
+
   width: 200px;
   left: 26px;
   transition: height 0.5s ease;
