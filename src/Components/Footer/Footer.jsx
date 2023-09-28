@@ -1,9 +1,10 @@
-// import React from 'react'
-import style from './footer.module.css'
+// Importa las clases del módulo CSS
 
-const Footer = () => {
+function Footer() {
   return (
-    <div className={style.footerCont}>Footer</div>
+  <div>
+    
+  </div>
   )
 }
 

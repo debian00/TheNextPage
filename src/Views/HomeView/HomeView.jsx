@@ -3,7 +3,7 @@ import principal from '../../assets/imghome/Principal2.png'
 import novedades from '../../assets/imghome/novedades.png'
 import tendencias from '../../assets/imghome/tendencias.png'
 import CardsTop3View from './CardsTop3View/CardsTop3View'
-import style from './home.module.css'
+import style from './HomeView.module.css'
 
 const HomeView = () => {
   return (
@@ -13,17 +13,12 @@ const HomeView = () => {
       {/* Seccion de Novedades y Tendencias */}
       <div className="row d-flex justify-content-center">
         <h2 className={style.subTitulo}>Lo mas destacado</h2>
-        <div className={`col-5 m-5 ${style.containerImages}` } >
+        <div className={`col-5 m-5 ${style.containerImages}`}>
           <div className={`card text-bg-dark ${style.imagesNovTen}`}>
-            <img
-              src={novedades}
-              className="card-img"
-              alt="..."
-              
-            />
+            <img src={novedades} className="card-img" alt="..." />
           </div>
         </div>
-        <div className={`col-5 m-5 ${style.containerImages}` } >
+        <div className={`col-5 m-5 ${style.containerImages}`}>
           <div className={`card text-bg-dark ${style.imagesNovTen}`}>
             <img src={tendencias} className="card-img" alt="..." />
           </div>
