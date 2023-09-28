@@ -5,6 +5,7 @@ import EditarPerfilView from './EditarPerfilView/EditarPerfilView'
 import { useEffect, useState } from 'react'
 import FavoritosView from './FavoritosView/FavoritosView'
 import ComprasView from './ComprasView/ComprasView'
+import ReseñasView from './ReseñasView/ReseñasView'
 
 
 const PerfilUserdView = () => {
@@ -107,7 +108,7 @@ const PerfilUserdView = () => {
                     <path d="M13 6.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5zm0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5zm-.5 2.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1h5z" />
                     <path d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM2 1a1 1 0 0 0-1 1v1h14V2a1 1 0 0 0-1-1H2zM1 4v10a1 1 0 0 0 1 1h2V4H1zm4 0v11h9a1 1 0 0 0 1-1V4H5z" />
                   </svg>{' '}
-                  &nbsp; Reviews
+                  &nbsp; Mis reseñas
                 </a>
               </li>
               <li>
@@ -179,6 +180,11 @@ const PerfilUserdView = () => {
             <div className={`col-9 ${style.content}`}>
              
               <FavoritosView/>
+            </div>
+          ): componenteActual === "C"? (
+            <div className={`col-9 ${style.content}`}>
+             
+              <ReseñasView/>
             </div>
           ) :  componenteActual === "D"? (
             <div className={`col-9 ${style.content}`}>

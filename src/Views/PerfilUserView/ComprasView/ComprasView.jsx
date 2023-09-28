@@ -30,7 +30,7 @@ const ComprasView = () => {
             <p>
               <span>$78</span>
             </p>
-            <button type="button">Buy Now</button>
+            <button type="button">Reseña</button>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@ const ComprasView = () => {
             <p>
               <span>$78</span>
             </p>
-            <button type="button">Buy Now</button>
+            <button type="button">Reseña</button>
           </div>
         </div>
       </div>
