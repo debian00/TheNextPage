@@ -3,11 +3,11 @@
 :root {
     --fuente-principal: 'Dela Gothic One', cursive;
 }
-
+.content{
+    margin-left: 5rem;
+}
 .menu {
-    position: fixed;
-    left: 0;
-    top: 0%;
+    position: sticky;
     height: 100%;
     width: 280px;
     color: #fff;
@@ -28,6 +28,7 @@
     padding: 20px;
     border-radius: 50%;
 }
+
 h4{
     font-family: var(--fuente-principal);
     color: black;

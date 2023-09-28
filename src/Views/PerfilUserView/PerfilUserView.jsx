@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import FavoritosView from './FavoritosView/FavoritosView'
 import ComprasView from './ComprasView/ComprasView'
 
+
 const PerfilUserdView = () => {
   //Manejo de componentes 
   const [componenteActual, setComponenteActual] = useState('A');
@@ -25,7 +26,7 @@ const PerfilUserdView = () => {
     setColor("#82755B");
   },[])
   return (
-    <div className="container">
+    <div>
       <div className="row">
         {/* Perfil admin Lista de opciones*/}
         <div className={`col-2`}>
@@ -51,7 +52,7 @@ const PerfilUserdView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="currentColor"
+                    fill="black"
                     className="bi bi-person-fill-gear"
                     viewBox="0 0 16 16"
                   >
@@ -75,7 +76,7 @@ const PerfilUserdView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="currentColor"
+                    fill="black"
                     className="bi bi-bookmark-heart-fill"
                     viewBox="0 0 16 16"
                   >
@@ -99,7 +100,7 @@ const PerfilUserdView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="currentColor"
+                    fill="black"
                     className="bi bi-layout-text-window-reverse"
                     viewBox="0 0 16 16"
                   >
@@ -124,7 +125,7 @@ const PerfilUserdView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="currentColor"
+                    fill="black"
                     className="bi bi-bag-fill"
                     viewBox="0 0 16 16"
                   >
@@ -148,7 +149,7 @@ const PerfilUserdView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="currentColor"
+                    fill="black"
                     className="bi bi-box-arrow-right"
                     viewBox="0 0 16 16"
                   >
@@ -170,15 +171,18 @@ const PerfilUserdView = () => {
         {/* Contenido del admin */}
         {
           componenteActual === "A" ?(
-            <div className={`col-10 ${style.content}`}>
+            <div className={`col-9 ${style.content}`}>
+             
               <EditarPerfilView/>
             </div>
           ): componenteActual === "B"? (
-            <div className={`col-10 ${style.content}`}>
+            <div className={`col-9 ${style.content}`}>
+             
               <FavoritosView/>
             </div>
           ) :  componenteActual === "D"? (
-            <div className={`col-10 ${style.content}`}>
+            <div className={`col-9 ${style.content}`}>
+             
               <ComprasView/>
             </div>
           ):<h1>No hay nada</h1>

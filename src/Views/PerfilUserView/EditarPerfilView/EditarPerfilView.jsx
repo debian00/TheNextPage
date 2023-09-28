@@ -16,7 +16,7 @@ const EditarPerfilView = () => {
   return (
     <div>
         <Row>
-          <Col md="8" style={{ width: "100%", marginTop: "17px" }}>
+          <Col md="8" style={{ width: "95%", marginTop: "17px" }}>
             <Card>
               <CardHeader>
                 <h5 className="title">Editar Perfil</h5>
