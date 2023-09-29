@@ -76,6 +76,7 @@ const Navbar = () => {
           flexDirection: 'row',
           justifyContent: 'space-between',
           zIndex: '5',
+          backgroundColor: '#6f5475',
         }}
       >
         <div
@@ -86,9 +87,9 @@ const Navbar = () => {
             position: 'relative',
           }}
         >
-          <Logo color={fixed ? 'white' : '#033d7b'} width={'35'} />
+          <Logo color={fixed ? 'CCCFCE' : '#CCCFCE'} width={'35'} />
           <div className={style.verticalBar}></div>
-          <h3 className={style.logoName}>Biblioteca Nacional The Next Page</h3>
+          <h3 className={style.logoName}>The Next Page Library</h3>
         </div>
         <div className={style.socialMedia}>
           <ul
@@ -126,7 +127,7 @@ const Navbar = () => {
       <nav
         className={style.downNav}
         style={{
-          background: '#033d7b',
+          background: '#6f5475',
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -141,8 +142,8 @@ const Navbar = () => {
               id="dropdown"
               onClick={handleDrop}
               style={{
-                color: 'white',
-                fontFamily: "'Roboto'",
+                color: '#AAEEC4',
+                fontFamily: "'Avenir'",
                 cursor: 'pointer',
               }}
             >
