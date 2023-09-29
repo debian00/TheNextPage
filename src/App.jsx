@@ -8,6 +8,7 @@ import DetailView from './Views/DetailView/DetailView'
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3001'
 import CatalogueView from './Views/CatalogueView/CatalogueView'
+import AdminDashboardView from './Views/AdminDashboardView/AdminDashboardView'
 
 function App() {
   return (
@@ -28,6 +29,14 @@ function App() {
           element={
             <>
               <PerfilUserdView />
+            </>
+          }
+        />
+        <Route
+          path='/adminDashboard'
+          element={
+            <>
+              <AdminDashboardView/>
             </>
           }
         />
