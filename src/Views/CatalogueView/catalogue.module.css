@@ -35,7 +35,6 @@ hr {
 
 .container {
   display: flex;
-  justify-content: center;
   flex-direction: row;
 }
 
@@ -47,12 +46,40 @@ body {
 
 .filter {
   flex-direction: column;
-  background-color: white;
+  background-color: transparent;
   width: 300px;
-  flex: 2;
+  flex: 1;
   height: 200px;
+  margin-top: 50px;
+  text-align: left;
 }
 
 .render {
   flex: 1;
+}
+
+.verMas {
+  color: #033d7b;
+  cursor: pointer;
+}
+
+.verMas:hover {
+  color: #0454a9;
+}
+
+.filterInput {
+  background-color: rgb(223, 223, 223);
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
 }

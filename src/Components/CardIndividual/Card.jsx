@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
+import { Link } from 'react-router-dom'
 import style from './card.module.css'
-const Card = ({ title, price, author, image }) => {
+const Card = ({ title, price, author, image, id }) => {
   console.log(title)
   return (
     <div
@@ -16,7 +17,9 @@ const Card = ({ title, price, author, image }) => {
       }}
       className={style.card}
     >
-      <img src={image} style={{ width: '200px' }} />
+      <Link to={`/detail/${id}`}>
+        <img src={image} style={{ width: '200px' }} />
+      </Link>
       <div>
         <p
           style={{

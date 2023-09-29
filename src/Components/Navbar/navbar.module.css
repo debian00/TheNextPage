@@ -155,10 +155,11 @@ svg {
   left: 26px;
   transition: height 0.5s ease;
   border-radius: 0 0 5px 5px;
+  overflow-y: auto;
 }
 
 .dropdown.open {
-  height: 160px;
+  height: 200px;
 }
 
 .dropdown li {

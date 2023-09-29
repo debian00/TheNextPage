@@ -1,11 +1,18 @@
 /* eslint-disable no-case-declarations */
-import { GET_ALL_BOOKS, GET_AUTHOR_NAME, GET_BOOK_BY_ID } from './types'
+import {
+  GET_ALL_BOOKS,
+  GET_ALL_GENRES,
+  GET_BOOKS_NAME,
+  GET_BOOK_BY_ID,
+} from './types'
 
 const initialState = {
   books: [],
+  genres: [],
   detail: [],
   bookById: [],
   authors: [],
+  searchs: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -22,8 +29,21 @@ const rootReducer = (state = initialState, action) => {
 
     case GET_BOOK_BY_ID:
       return { ...state, bookById: action.payload }
-    case GET_AUTHOR_NAME:
-      return { ...state, authors: action.payload }
+    // case GET_AUTHOR_NAME:
+    //   return {
+    //     ...state,
+    //     searchs: [...action.payload.map((ele) => ele.name)],
+    //   }
+    case GET_BOOKS_NAME:
+      return {
+        ...state,
+        searchs: action.payload.map((ele) => ele.title),
+      }
+    case GET_ALL_GENRES:
+      return {
+        ...state,
+        genres: action.payload,
+      }
     default:
       return state
   }

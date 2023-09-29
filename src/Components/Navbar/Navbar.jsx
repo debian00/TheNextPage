@@ -1,6 +1,6 @@
 // import React from 'react'
 import style from './navbar.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Facebook,
   Instagram,
@@ -13,11 +13,20 @@ import {
 } from '../../utils/Icons'
 import { useEffect, useRef, useState } from 'react'
 import SearchBar from './SearchBar/SearchBar'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { getGenres } from '../../redux/actions/actionGet'
 
 const Navbar = () => {
+  const navigate = useNavigate()
   const [fixed, setFixed] = useState(false)
   const [dropdown, setDropdown] = useState(false)
+  const genres = useSelector((state) => state.genres)
   const dropdownRef = useRef(null)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getGenres())
+  }, [])
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -53,6 +62,10 @@ const Navbar = () => {
     } else {
       setDropdown(true)
     }
+  }
+
+  const handleSubmit = (e) => {
+    navigate(`/calogue?genre=${e}`)
   }
 
   return (
@@ -133,11 +146,14 @@ const Navbar = () => {
                 cursor: 'pointer',
               }}
             >
-              CATALOGO
+              GENEROS
             </li>
 
             <li>
               <Link>NOSOTROS</Link>
+            </li>
+            <li>
+              <Link to="/catalogue">CATALOGO</Link>
             </li>
           </ul>
         </div>
@@ -153,10 +169,13 @@ const Navbar = () => {
         className={`${style.dropdown} ${dropdown ? style.open : ''}`}
       >
         <ul>
-          <li>FILTROS</li>
-          <li>FILTROS</li>
-          <li>FILTROS</li>
-          <li>FILTROS</li>
+          {genres?.map((ele) => {
+            return (
+              <li onClick={() => handleSubmit(ele.name)} key={ele.id}>
+                {ele.name}
+              </li>
+            )
+          })}
         </ul>
       </div>
     </>

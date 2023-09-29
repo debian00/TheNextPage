@@ -9,6 +9,7 @@ const Cards = ({ allBooks }) => {
         return (
           <Card
             key={ele.id}
+            id={ele.id}
             image={ele.images[0]}
             title={ele.title}
             price={ele.sellPrice}
