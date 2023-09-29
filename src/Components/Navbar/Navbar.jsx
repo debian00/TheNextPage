@@ -123,7 +123,7 @@ const Navbar = () => {
         <div>
           <ul>
             <li>
-              <Link>INICIO</Link>
+              <Link to={'/'}>INICIO</Link>
             </li>
             <li
               id="dropdown"

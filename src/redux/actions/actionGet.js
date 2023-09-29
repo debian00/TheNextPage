@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { GET_ALL_BOOKS, GET_AUTHOR_NAME, GET_BOOK_BY_ID } from '../types'
 
-export const getAllBooks = () => {
+export const getAllBooks = ({ page }) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`/books/:id`)
+      const { data } = await axios(`/books?page=${page}&size=10`)
       return dispatch({
         type: GET_ALL_BOOKS,
         payload: data,

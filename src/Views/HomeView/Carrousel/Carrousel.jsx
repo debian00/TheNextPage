@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import { Carousel } from 'react-bootstrap'
 import style from './Carrousel.module.css'
