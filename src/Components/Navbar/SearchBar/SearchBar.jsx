@@ -1,10 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import style from './SearchBar.module.css'
 import { useEffect, useState } from 'react'
-import {
-  getAuthorSearch,
-  getBooksSearch,
-} from '../../../redux/actions/actionGet'
+import { getBooksSearch } from '../../../redux/actions/actionGet'
 const SearchBar = () => {
   const [search, setSearch] = useState('')
   const [visible, setVisible] = useState(false)

@@ -11,53 +11,17 @@ const HomeView = () => {
       {/* Imagen principal del Home */}
       <img src={principal} alt="" style={{ width: '100%', height: '60vh' }} />
       {/* Seccion de Novedades y Tendencias */}
-      <div className="row d-flex justify-content-center">
-        <h2 className={style.subTitulo}>Lo mas destacado</h2>
-        <div className={`col-5 m-5 ${style.containerImages}`}>
-          <div className={`card text-bg-dark ${style.imagesNovTen}`}>
-            <img src={novedades} className="card-img" alt="..." />
-          </div>
+      <section>
+        <div style={{ textAlign: 'left' }}>
+          <h3 style={{ fontSize: '22px', fontWeight: 'bold' }}>
+            Descubre Harry Potter
+          </h3>
+          <p style={{ color: '#92779E' }}>
+            Embárcate en las aventuras de Harry, Hermione y Ron en el mundo
+            mágico de Hogwarts.
+          </p>
         </div>
-        <div className={`col-5 m-5 ${style.containerImages}`}>
-          <div className={`card text-bg-dark ${style.imagesNovTen}`}>
-            <img src={tendencias} className="card-img" alt="..." />
-          </div>
-        </div>
-      </div>
-      {/* Seccion de top 3 */}
-      <div className="row d-flex justify-content-center mb-5">
-        <div className={style.separador}></div>
-        <h2 className={style.subTitulo}>Top 3 libros mas buscado del mes</h2>
-        <div className="col-4">
-          <CardsTop3View />
-        </div>
-        <div className="col-4">
-          <CardsTop3View />
-        </div>
-        <div className="col-4">
-          <CardsTop3View />
-        </div>
-      </div>
-      {/* Seccion libros de interes */}
-      <div className="row d-flex justify-content-center mb-5">
-        <div className={style.separador}></div>
-        <h2 className={style.subTitulo}>Libros que quizas te interesan</h2>
-        <div className="col-2 m-2">
-          <CardsTop3View />
-        </div>
-        <div className="col-2 m-2">
-          <CardsTop3View />
-        </div>
-        <div className="col-2 m-2">
-          <CardsTop3View />
-        </div>
-        <div className="col-2 m-2">
-          <CardsTop3View />
-        </div>
-        <div className="col-2 m-2">
-          <CardsTop3View />
-        </div>
-      </div>
+      </section>
     </div>
   )
 }
