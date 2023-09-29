@@ -29,7 +29,7 @@ const PerfilUserdView = () => {
   return (
     <div>
       <div className="row">
-        {/* Perfil admin Lista de opciones*/}
+        {/* Perfil usuario Lista de opciones*/}
         <div className={`col-2`}>
           <div className={`${style.menu}`}>
             <div className={style.profile}>
@@ -169,7 +169,7 @@ const PerfilUserdView = () => {
             </ul>
           </div>
         </div>
-        {/* Contenido del admin */}
+        {/* Contenido del usuario */}
         {
           componenteActual === "A" ?(
             <div className={`col-9 ${style.content}`}>

@@ -49,9 +49,8 @@ const EditarPerfilView = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <Col className="pr-1" md="6">
+                    <Col className="pl-1 justify-content-center d-flex" md="12">
                       <FormGroup>
-                        <label>Nombre Usuario</label>
                         <Input
                           name="userName"
                           placeholder="Nombre Usuario"
@@ -61,9 +60,12 @@ const EditarPerfilView = () => {
                         />
                       </FormGroup>
                     </Col>
-                    <Col className="pl-1" md="6">
+                    
+                  </Row>
+                  <Row>
+                  <Col className="pl-1" md="6">
                       <FormGroup>
-                        <label>Nombre Completo</label>
+                        <label>Nombre</label>
                         <Input
                           name="fullName"
                           placeholder="Nombre Completo"
@@ -72,27 +74,26 @@ const EditarPerfilView = () => {
                         />
                       </FormGroup>
                     </Col>
-                  </Row>
-                  <Row>
-                    <Col md="12">
+                    <Col className="pr-1" md="6">
                       <FormGroup>
-                        <label>Dirección</label>
+                        <label>Correo</label>
                         <Input
-                          name="address"
-                          placeholder="Dirección"
+                          name="nationality"
+                          placeholder="Correo"
                           type="text"
                           
                         />
                       </FormGroup>
                     </Col>
+                    
                   </Row>
                   <Row>
-                    <Col className="pr-1" md="6">
+                    <Col className="pl-1" md="6">
                       <FormGroup>
-                        <label>Nacionalidad</label>
+                        <label>Número Teléfono</label>
                         <Input
-                          name="nationality"
-                          placeholder="Nacionalidad"
+                          name="phoneNumber"
+                          placeholder="Número Teléfono"
                           type="text"
                           
                         />
@@ -109,30 +110,7 @@ const EditarPerfilView = () => {
                         />
                       </FormGroup>
                     </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pl-1" md="6">
-                      <FormGroup>
-                        <label>Número Teléfono</label>
-                        <Input
-                          name="phoneNumber"
-                          placeholder="Número Teléfono"
-                          type="text"
-                          
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-1" md="6">
-                      <FormGroup>
-                        <label>Género</label>
-                        <Input
-                          type="text"
-                          name="gender"
-                          id="genderSelect"
-                          
-                        />
-                      </FormGroup>
-                    </Col>
+                    
                   </Row>
                   <Row>
                     <Col md="12 d-flex justify-content-center align-items-center">
