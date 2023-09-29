@@ -4,7 +4,7 @@ import HomeView from './Views/HomeView/HomeView'
 import Navbar from './Components/Navbar/Navbar'
 import Footer from './Components/Footer/Footer'
 import PerfilUserdView from './Views/PerfilUserView/PerfilUserView'
-import DetailView from './Views/DetailView/DetailView.jsx'
+import DetailView from './Views/DetailView/DetailView'
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3001'
 import CatalogueView from './Views/CatalogueView/CatalogueView'
@@ -57,7 +57,7 @@ function App() {
           }
         />
         <Route
-          path="/detail"
+         path='/detail/:id'
           element={
             <>
               <DetailView />

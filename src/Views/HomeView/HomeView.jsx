@@ -1,5 +1,5 @@
 // import React from 'react'
-import principal from '../../assets/imghome/Principal2.png'
+import principal from '../../assets/imghome/banner.jpg'
 import novedades from '../../assets/imghome/novedades.png'
 import tendencias from '../../assets/imghome/tendencias.png'
 import CardsTop3View from './CardsTop3View/CardsTop3View'
@@ -9,7 +9,7 @@ const HomeView = () => {
   return (
     <div>
       {/* Imagen principal del Home */}
-      <img src={principal} alt="" style={{ width: '100vw', height: '60vh' }} />
+      <img src={principal} alt="" style={{ width: '100%', height: '60vh' }} />
       {/* Seccion de Novedades y Tendencias */}
       <div className="row d-flex justify-content-center">
         <h2 className={style.subTitulo}>Lo mas destacado</h2>
@@ -58,7 +58,6 @@ const HomeView = () => {
           <CardsTop3View />
         </div>
       </div>
-      
     </div>
   )
 }

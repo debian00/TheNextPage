@@ -1,6 +1,6 @@
 // import React from 'react'
 import style from './navbar.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Facebook,
   Instagram,
@@ -13,11 +13,20 @@ import {
 } from '../../utils/Icons'
 import { useEffect, useRef, useState } from 'react'
 import SearchBar from './SearchBar/SearchBar'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { getGenres } from '../../redux/actions/actionGet'
 
 const Navbar = () => {
+  const navigate = useNavigate()
   const [fixed, setFixed] = useState(false)
   const [dropdown, setDropdown] = useState(false)
+  const genres = useSelector((state) => state.genres)
   const dropdownRef = useRef(null)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getGenres())
+  }, [])
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -55,6 +64,10 @@ const Navbar = () => {
     }
   }
 
+  const handleSubmit = (e) => {
+    navigate(`/calogue?genre=${e}`)
+  }
+
   return (
     <>
       <nav
@@ -63,6 +76,7 @@ const Navbar = () => {
           flexDirection: 'row',
           justifyContent: 'space-between',
           zIndex: '5',
+          backgroundColor: '#6f5475',
         }}
       >
         <div
@@ -73,9 +87,9 @@ const Navbar = () => {
             position: 'relative',
           }}
         >
-          <Logo color={fixed ? 'white' : '#033d7b'} width={'35'} />
+          <Logo color={fixed ? 'CCCFCE' : '#CCCFCE'} width={'35'} />
           <div className={style.verticalBar}></div>
-          <h3 className={style.logoName}>Biblioteca Nacional The Next Page</h3>
+          <h3 className={style.logoName}>The Next Page Library</h3>
         </div>
         <div className={style.socialMedia}>
           <ul
@@ -113,7 +127,7 @@ const Navbar = () => {
       <nav
         className={style.downNav}
         style={{
-          background: '#033d7b',
+          background: '#6f5475',
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -122,22 +136,25 @@ const Navbar = () => {
         <div>
           <ul>
             <li>
-              <Link>INICIO</Link>
+              <Link to={'/'}>INICIO</Link>
             </li>
             <li
               id="dropdown"
               onClick={handleDrop}
               style={{
-                color: 'white',
-                fontFamily: "'Roboto'",
+                color: '#AAEEC4',
+                fontFamily: "'Avenir'",
                 cursor: 'pointer',
               }}
             >
-              CATALOGO
+              GENEROS
             </li>
 
             <li>
               <Link>NOSOTROS</Link>
+            </li>
+            <li>
+              <Link to="/catalogue">CATALOGO</Link>
             </li>
           </ul>
         </div>
@@ -153,10 +170,13 @@ const Navbar = () => {
         className={`${style.dropdown} ${dropdown ? style.open : ''}`}
       >
         <ul>
-          <li>FILTROS</li>
-          <li>FILTROS</li>
-          <li>FILTROS</li>
-          <li>FILTROS</li>
+          {genres?.map((ele) => {
+            return (
+              <li onClick={() => handleSubmit(ele.name)} key={ele.id}>
+                {ele.name}
+              </li>
+            )
+          })}
         </ul>
       </div>
     </>

@@ -6,14 +6,20 @@ import {
   GET_BOOK_BY_ID,
   SEARCH_USER_BY_NAME,
   USER_TO_ADMIN,
+  GET_ALL_BOOKS,
+  GET_ALL_GENRES,
+  GET_BOOKS_NAME,
+  GET_BOOK_BY_ID,
 } from './types'
 
 const initialState = {
   books: [],
+  genres: [],
   detail: [],
   bookById: [],
   authors: [],
   users: [],
+  searchs: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -32,6 +38,32 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, users: action.payload }
     case ADMIN_TO_USER:
       return { ...state, users: action.payload }
+      const existingBookIds = new Set(state.books.map((book) => book.id))
+
+      const newBooks = action.payload.rows.filter(
+        (book) => !existingBookIds.has(book.id)
+      )
+
+      const updatedBooks = [...state.books, ...newBooks]
+      return { ...state, books: updatedBooks }
+
+    case GET_BOOK_BY_ID:
+      return { ...state, bookById: action.payload }
+    // case GET_AUTHOR_NAME:
+    //   return {
+    //     ...state,
+    //     searchs: [...action.payload.map((ele) => ele.name)],
+    //   }
+    case GET_BOOKS_NAME:
+      return {
+        ...state,
+        searchs: action.payload.map((ele) => ele.title),
+      }
+    case GET_ALL_GENRES:
+      return {
+        ...state,
+        genres: action.payload,
+      }
     default:
       return state
   }
