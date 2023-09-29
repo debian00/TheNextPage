@@ -1,5 +1,5 @@
 // import React from 'react'
-import principal from '../../assets/imghome/Principal2.png'
+import principal from '../../assets/imghome/banner.jpg'
 import novedades from '../../assets/imghome/novedades.png'
 import tendencias from '../../assets/imghome/tendencias.png'
 import CardsTop3View from './CardsTop3View/CardsTop3View'
