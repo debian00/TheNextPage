@@ -6,7 +6,8 @@ import {
   GET_BOOKS_NAME,
   GET_BOOK_BY_ID,
   GET_ALL_USERS, 
-  SEARCH_USER_BY_NAME
+  SEARCH_USER_BY_NAME,
+  GET_ALL_BOOKS_COPY
 } from '../types'
 
 export const getAllBooks = ({ page }) => {
@@ -22,6 +23,21 @@ export const getAllBooks = ({ page }) => {
     }
   }
 }
+
+export const getAllBooksCopy = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(`/books`)
+      return dispatch({
+        type: GET_ALL_BOOKS_COPY,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 
 export const getBookById = (id) => {
   return async (dispatch) => {

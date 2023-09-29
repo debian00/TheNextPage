@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import style from './librosview.module.css'
 import { useEffect } from 'react'
-import { getAllBooks } from '../../../redux/actions/actionGet'
+import {  getAllBooksCopy } from '../../../redux/actions/actionGet'
 
 const Librosview = () => {
   //Hook para traer todos los libros
@@ -20,7 +20,7 @@ const Librosview = () => {
   }
   //Manejo ciclo de vida del componente con useEffect
   useEffect(() => {
-    dispatch(getAllBooks())
+    dispatch(getAllBooksCopy())
   }, [])
 
   return (

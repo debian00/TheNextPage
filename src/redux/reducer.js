@@ -8,6 +8,7 @@ import {
   USER_TO_ADMIN,
   GET_ALL_GENRES,
   GET_BOOKS_NAME,
+  GET_ALL_BOOKS_COPY
 } from './types'
 
 const initialState = {
@@ -31,6 +32,9 @@ const rootReducer = (state = initialState, action) => {
 
       const updatedBooks = [...state.books, ...newBooks]
       return { ...state, books: updatedBooks }
+    
+    case GET_ALL_BOOKS_COPY:
+      return {...state, books: action.payload}
 
     case GET_BOOK_BY_ID:
       return { ...state, bookById: action.payload }
