@@ -1,15 +1,13 @@
+/* eslint-disable no-case-declarations */
 import {
   ADMIN_TO_USER,
   GET_ALL_BOOKS,
   GET_ALL_USERS,
-  GET_AUTHOR_NAME,
   GET_BOOK_BY_ID,
   SEARCH_USER_BY_NAME,
   USER_TO_ADMIN,
-  GET_ALL_BOOKS,
   GET_ALL_GENRES,
   GET_BOOKS_NAME,
-  GET_BOOK_BY_ID,
 } from './types'
 
 const initialState = {
@@ -25,19 +23,6 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_BOOKS:
-      return { ...state, books: action.payload }
-    case GET_BOOK_BY_ID:
-      return { ...state, bookById: action.payload }
-    case GET_AUTHOR_NAME:
-      return { ...state, authors: action.payload }
-    case GET_ALL_USERS:
-      return { ...state, users: action.payload }
-    case SEARCH_USER_BY_NAME:
-      return { ...state, users: action.payload }
-    case USER_TO_ADMIN:
-      return { ...state, users: action.payload }
-    case ADMIN_TO_USER:
-      return { ...state, users: action.payload }
       const existingBookIds = new Set(state.books.map((book) => book.id))
 
       const newBooks = action.payload.rows.filter(
@@ -64,6 +49,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         genres: action.payload,
       }
+      case GET_ALL_USERS:
+        return { ...state, users: action.payload }
+      case SEARCH_USER_BY_NAME:
+        return { ...state, users: action.payload }
+      case USER_TO_ADMIN:
+        return { ...state, users: action.payload }
+      case ADMIN_TO_USER:
+        return { ...state, users: action.payload }
     default:
       return state
   }
