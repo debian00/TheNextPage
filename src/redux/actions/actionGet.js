@@ -5,9 +5,10 @@ import {
   GET_AUTHOR_NAME,
   GET_BOOKS_NAME,
   GET_BOOK_BY_ID,
-  GET_ALL_USERS, 
+  GET_ALL_USERS,
   SEARCH_USER_BY_NAME,
-  GET_ALL_BOOKS_COPY
+  GET_ALL_BOOKS_COPY,
+  GET_BOOKS_BY_NAME,
 } from '../types'
 
 export const getAllBooks = ({ page }) => {
@@ -37,7 +38,6 @@ export const getAllBooksCopy = () => {
     }
   }
 }
-
 
 export const getBookById = (id) => {
   return async (dispatch) => {
@@ -69,18 +69,18 @@ export const getAuthorSearch = (search) => {
 }
 
 export const getAllUsers = () => {
-  return async(dispatch) => {
+  return async (dispatch) => {
     try {
-      const {data} = await axios('/users')
+      const { data } = await axios('/users')
       dispatch({
-        type:GET_ALL_USERS,
-        payload: data
+        type: GET_ALL_USERS,
+        payload: data,
       })
     } catch (error) {
       console.log(error)
     }
   }
-}   
+}
 export const getBooksSearch = (search) => {
   return async (dispatch) => {
     try {
@@ -95,16 +95,30 @@ export const getBooksSearch = (search) => {
     }
   }
 }
+export const getBooksByName = (search) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios('/books/search?title=' + search)
+      console.log(data.title)
+      dispatch({
+        type: GET_BOOKS_BY_NAME,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 
 export const searchUserByName = (name, email) => {
-  if (!name) name=''
-  if (!email) email=''
+  if (!name) name = ''
+  if (!email) email = ''
   return async function (dispatch) {
     try {
-      const {data} = await axios(`/users/search?name=${name}&email=${email}`)
+      const { data } = await axios(`/users/search?name=${name}&email=${email}`)
       return dispatch({
-        type:SEARCH_USER_BY_NAME,
-        payload: data
+        type: SEARCH_USER_BY_NAME,
+        payload: data,
       })
     } catch (error) {
       console.log(error)

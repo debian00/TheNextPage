@@ -1,6 +1,8 @@
 // import React from 'react'
+import { Suspense } from 'react'
+import CardHome from '../../Components/CardHome/CardHome'
 import principal from '../../assets/imghome/banner.jpg'
-import novedades from '../../assets/imghome/novedades.png'
+import harry from '../../assets/imghome/harry.png'
 import tendencias from '../../assets/imghome/tendencias.png'
 import CardsTop3View from './CardsTop3View/CardsTop3View'
 import style from './HomeView.module.css'
@@ -11,17 +13,122 @@ const HomeView = () => {
       {/* Imagen principal del Home */}
       <img src={principal} alt="" style={{ width: '100%', height: '60vh' }} />
       {/* Seccion de Novedades y Tendencias */}
-      <section>
-        <div style={{ textAlign: 'left' }}>
-          <h3 style={{ fontSize: '22px', fontWeight: 'bold' }}>
-            Descubre Harry Potter
-          </h3>
-          <p style={{ color: '#92779E' }}>
-            Embárcate en las aventuras de Harry, Hermione y Ron en el mundo
-            mágico de Hogwarts.
-          </p>
-        </div>
-      </section>
+      <Suspense fallback={<p>Loading</p>}>
+        <section style={{ paddingInline: '50px', paddingTop: '20px' }}>
+          {/* <img
+            src={harry}
+            style={{
+              width: '100%',
+              height: '300px',
+              objectFit: 'cover',
+              objectPosition: 'center -150px',
+            }}
+          ></img> */}
+          <div
+            style={{
+              marginTop: '20px',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+            >
+              <h3 style={{ margin: '0', fontSize: '22px', fontWeight: 'bold' }}>
+                Descubre Harry Potter
+              </h3>
+              <p
+                style={{
+                  alignItems: 'center',
+                  display: 'center',
+                  textAlign: 'center',
+                  margin: '0',
+                }}
+              >
+                Ver mas
+              </p>
+            </div>
+            <p style={{ color: '#92779E', textAlign: 'left' }}>
+              Embárcate en las aventuras de Harry, Hermione y Ron en el mundo
+              mágico de Hogwarts.
+            </p>
+            <CardHome books="Harry"></CardHome>
+          </div>
+        </section>
+        <section style={{ paddingInline: '50px', paddingTop: '20px' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+            >
+              <h3 style={{ margin: '0', fontSize: '22px', fontWeight: 'bold' }}>
+                El señor de los anillos
+              </h3>
+              <p
+                style={{
+                  alignItems: 'center',
+                  display: 'center',
+                  textAlign: 'center',
+                  margin: '0',
+                }}
+              >
+                Ver mas
+              </p>
+            </div>
+            <p style={{ color: '#92779E', textAlign: 'left' }}>
+              Explora tierras lejanas, encuentra personajes inolvidables y vive
+              aventuras inigualables en un mundo lleno de magia y peligro.
+            </p>
+
+            <CardHome books="Ani"></CardHome>
+          </div>
+        </section>
+        <section style={{ paddingInline: '50px', paddingTop: '20px' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+            >
+              <h3 style={{ margin: '0', fontSize: '22px', fontWeight: 'bold' }}>
+                Lo mejor de Gabriel Garcia Marquez
+              </h3>
+              <p
+                style={{
+                  alignItems: 'center',
+                  margin: '0',
+                  display: 'center',
+                  textAlign: 'center',
+                }}
+              >
+                Ver mas
+              </p>
+            </div>
+            <p style={{ color: '#92779E', textAlign: 'left' }}>
+              Explora tierras lejanas, encuentra personajes inolvidables y vive
+              aventuras inigualables en un mundo lleno de magia y peligro.
+            </p>
+
+            <CardHome author="Gabriel García Márquez"></CardHome>
+          </div>
+        </section>
+      </Suspense>
     </div>
   )
 }

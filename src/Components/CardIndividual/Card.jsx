@@ -9,7 +9,7 @@ const Card = ({ title, price, author, image, id }) => {
         background: 'white',
         padding: '20px',
         paddingBottom: '0',
-        maxHeight: '370px',
+        maxHeight: '530px',
         maxWidth: '300px',
         margin: '20px',
         boxShadow:
@@ -17,9 +17,13 @@ const Card = ({ title, price, author, image, id }) => {
       }}
       className={style.card}
     >
-      <Link to={`/detail/${id}`}>
-        <img src={image} style={{ width: '150px' }} />
-      </Link>
+      <div
+        style={{ display: 'flex', margin: 'auto 0', justifyContent: 'center' }}
+      >
+        <Link to={`/detail/${id}`}>
+          <img src={image} style={{ width: '150px' }} />
+        </Link>
+      </div>
       <div>
         <p
           style={{

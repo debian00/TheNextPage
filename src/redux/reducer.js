@@ -8,7 +8,8 @@ import {
   USER_TO_ADMIN,
   GET_ALL_GENRES,
   GET_BOOKS_NAME,
-  GET_ALL_BOOKS_COPY
+  GET_ALL_BOOKS_COPY,
+  GET_BOOKS_BY_NAME,
 } from './types'
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   authors: [],
   users: [],
   searchs: [],
+  booksSearch: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -32,9 +34,9 @@ const rootReducer = (state = initialState, action) => {
 
       const updatedBooks = [...state.books, ...newBooks]
       return { ...state, books: updatedBooks }
-    
+
     case GET_ALL_BOOKS_COPY:
-      return {...state, books: action.payload}
+      return { ...state, books: action.payload }
 
     case GET_BOOK_BY_ID:
       return { ...state, bookById: action.payload }
@@ -53,14 +55,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         genres: action.payload,
       }
-      case GET_ALL_USERS:
-        return { ...state, users: action.payload }
-      case SEARCH_USER_BY_NAME:
-        return { ...state, users: action.payload }
-      case USER_TO_ADMIN:
-        return { ...state, users: action.payload }
-      case ADMIN_TO_USER:
-        return { ...state, users: action.payload }
+    case GET_ALL_USERS:
+      return { ...state, users: action.payload }
+    case SEARCH_USER_BY_NAME:
+      return { ...state, users: action.payload }
+    case USER_TO_ADMIN:
+      return { ...state, users: action.payload }
+    case ADMIN_TO_USER:
+      return { ...state, users: action.payload }
+
+    case GET_BOOKS_BY_NAME:
+      return { ...state, booksSearch: action.payload }
     default:
       return state
   }
