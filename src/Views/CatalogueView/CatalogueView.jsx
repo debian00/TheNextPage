@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import styles from '../CatalogueView/catalogue.module.css'
 import RenderCard from './RenderCard/RenderCard'
 import { useLocation } from 'react-router-dom'
@@ -84,7 +84,9 @@ function CatalogueView() {
       </div>
 
       <div className={styles.render}>
-        <RenderCard></RenderCard>
+        <Suspense fallback={<p>Loading</p>}>
+          <RenderCard></RenderCard>
+        </Suspense>
       </div>
     </div>
   )

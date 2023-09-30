@@ -9,7 +9,6 @@
   justify-content: space-between;
   max-height: 104px;
   transition: all 0.5s ease;
-
 }
 
 .nav ul {
@@ -47,7 +46,7 @@
 }
 
 .nav.active {
-  background-color: #AAEEC4;
+  background-color: #aaeec4;
   position: fixed;
 }
 
@@ -68,10 +67,10 @@
   margin: auto 0;
   margin-left: 25px;
   text-align: center;
-  color: #CCCFCE;
+  color: #cccfce;
   font-size: 3em;
   font-family: 'Avenir', sans-serif;
- font-weight: 50;
+  font-weight: 50;
   background-color: #6f5475;
 }
 
@@ -90,20 +89,20 @@
 }
 .line {
   margin-inline: 10px;
-  border-right: 0.1px solid #6f5475;
+  border-right: 0.1px solid #aaeec4;
   height: 42px;
   margin: auto 0;
 }
 
 .socialMedia ul li:hover {
-  background: #AAEEC4;
+  background: #aaeec4;
 }
 .socialMedia ul li svg {
   cursor: pointer;
-  color: #CCCFCE;
+  color: #cccfce;
 }
 .socialMedia ul li:hover svg {
-  color: #555F5D;
+  color: #555f5d;
 }
 
 .downNav {
@@ -126,12 +125,11 @@
 .downNav ul li a,
 svg {
   text-decoration: none;
-  color: #CCCFCE;
+  color: #cccfce;
   font-family: 'Avenir', sans-serif;
 }
 .downNav ul li:hover {
-  color: #CCCFCE;
-  
+  color: #cccfce;
 }
 
 .profile {
@@ -143,7 +141,7 @@ svg {
 .profile a {
   text-decoration: none;
   font-family: 'Avenir', sans-serif;
-  color: #CCCFCE;
+  color: #cccfce;
   text-align: center;
   margin: auto 20px;
 }
@@ -171,7 +169,7 @@ svg {
 
 .dropdown li {
   list-style: none;
-  color: #AAEEC4;
+  color: #aaeec4;
   text-align: center;
   font-family: 'Avenir', sans-serif;
   padding: 8px;
@@ -179,6 +177,6 @@ svg {
 }
 
 .dropdown ul li:hover {
-  background-color: #AAEEC4;
-  color: #555F5D;
+  background-color: #aaeec4;
+  color: #555f5d;
 }

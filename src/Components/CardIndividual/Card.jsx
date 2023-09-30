@@ -9,17 +9,21 @@ const Card = ({ title, price, author, image, id }) => {
         background: 'white',
         padding: '20px',
         paddingBottom: '0',
-        minHeight: '430px',
-        minWidth: '300px',
+        maxHeight: '530px',
+        maxWidth: '300px',
         margin: '20px',
         boxShadow:
           '0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1 )',
       }}
       className={style.card}
     >
-      <Link to={`/detail/${id}`}>
-        <img src={image} style={{ width: '200px' }} />
-      </Link>
+      <div
+        style={{ display: 'flex', margin: 'auto 0', justifyContent: 'center' }}
+      >
+        <Link to={`/detail/${id}`}>
+          <img src={image} style={{ width: '150px' }} />
+        </Link>
+      </div>
       <div>
         <p
           style={{
