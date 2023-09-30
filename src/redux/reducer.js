@@ -11,6 +11,7 @@ import {
   GET_ALL_BOOKS_COPY,
 
   GET_BOOKS_BY_NAME,
+  UPDATE_BOOK,
 } from './types'
 
 const initialState = {
@@ -67,7 +68,9 @@ const rootReducer = (state = initialState, action) => {
 
     case GET_BOOKS_BY_NAME:
       return { ...state, booksSearch: action.payload }
-    default:
+    case UPDATE_BOOK:
+      return {...state, books: action.payload}
+      default:
       return state
   }
 }

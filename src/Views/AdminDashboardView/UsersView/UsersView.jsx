@@ -59,8 +59,6 @@ const UsersView = () => {
 
   //Funcion para dar permisos de admin al usuario
   const handlerUserToAdmin = (e, id) => {
-    console.log('id', id);
-    e.preventDefault()
     const confirmed = window.confirm(
       '¿Estas seguro que quieres cambiar el rol a admin?'
     )
@@ -72,7 +70,6 @@ const UsersView = () => {
 
   //Funcion para pasar de usuario a admin
   const handlerAdminToUser = (e, id) => {
-    e.preventDefault()
     const confirmed = window.confirm(
       '¿Estas seguro que quieres cambiar el rol a usuario?'
     )

@@ -60,7 +60,7 @@ const CrearLibroView = () => {
         handleFile(file);
     };
      // Función para manejar el archivo seleccionado
-  const handleFile = async (file) => {
+    const handleFile = async (file) => {
     console.log(file);
 
     if (!file.type.includes("image")) {
@@ -82,7 +82,7 @@ const CrearLibroView = () => {
 
       setForm({ ...form, images: data.secure_url });
     }
-  };
+    };
   //Funcion para eliminar la imagen seleccionada
   const handleDelete = () => {
     setForm({ ...form, images: "" });
@@ -113,7 +113,7 @@ const CrearLibroView = () => {
                     background: "rgba(255, 255, 255, 0.801)",
                     margin: `20px`,
                     textAlign: "center",
-                    width: "334.77px",
+                    width: "295px",
                     position: "relative",
                     height: "367.88px",
                     borderRadius: "10px",
@@ -127,7 +127,7 @@ const CrearLibroView = () => {
                       <img
                         style={{
                           borderRadius: "10px",
-                          width: "334.77px",
+                          width: "250.77px",
                           height: "367.88px",
                 
                           objectFit: "cover",
