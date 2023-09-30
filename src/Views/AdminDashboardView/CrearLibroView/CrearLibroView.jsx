@@ -149,7 +149,7 @@ const CrearLibroView = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         width="50"
                         height="50"
-                        fill="currentColor"
+                        fill="black"
                         className="bi bi-card-image"
                         viewBox="0 0 16 16"
                       >
