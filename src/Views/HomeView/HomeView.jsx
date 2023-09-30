@@ -2,10 +2,8 @@
 import { Suspense } from 'react'
 import CardHome from '../../Components/CardHome/CardHome'
 import principal from '../../assets/imghome/banner.jpg'
-import harry from '../../assets/imghome/harry.png'
-import tendencias from '../../assets/imghome/tendencias.png'
-import CardsTop3View from './CardsTop3View/CardsTop3View'
 import style from './HomeView.module.css'
+import Carrousel from './Carrousel/Carrousel'
 
 const HomeView = () => {
   return (
@@ -14,7 +12,12 @@ const HomeView = () => {
       <img src={principal} alt="" style={{ width: '100%', height: '60vh' }} />
       {/* Seccion de Novedades y Tendencias */}
       <Suspense fallback={<p>Loading</p>}>
-        <section style={{ paddingInline: '50px', paddingTop: '20px' }}>
+        <section
+          style={{
+            paddingInline: '50px',
+            paddingTop: '20px',
+          }}
+        >
           {/* <img
             src={harry}
             style={{
@@ -29,6 +32,8 @@ const HomeView = () => {
               marginTop: '20px',
               display: 'flex',
               flexDirection: 'column',
+              padding: '20px',
+              border: '2px solid rgb(215 215 215)',
             }}
           >
             <div
@@ -63,6 +68,8 @@ const HomeView = () => {
             style={{
               display: 'flex',
               flexDirection: 'column',
+              padding: '20px',
+              border: '2px solid rgb(215 215 215)',
             }}
           >
             <div
@@ -93,11 +100,14 @@ const HomeView = () => {
             <CardHome books="Ani"></CardHome>
           </div>
         </section>
+        <Carrousel></Carrousel>
         <section style={{ paddingInline: '50px', paddingTop: '20px' }}>
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
+              padding: '20px',
+              border: '2px solid rgb(215 215 215)',
             }}
           >
             <div

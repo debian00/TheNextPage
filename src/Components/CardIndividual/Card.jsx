@@ -10,7 +10,7 @@ const Card = ({ title, price, author, image, id }) => {
         padding: '20px',
         paddingBottom: '0',
         maxHeight: '530px',
-        maxWidth: '300px',
+        maxWidth: '263px',
         margin: '20px',
         boxShadow:
           '0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1 )',

@@ -2,10 +2,9 @@
 import { useState } from 'react'
 import { Carousel } from 'react-bootstrap'
 import style from './Carrousel.module.css'
-import image1 from '../../../assets/imghome/Ladronadelibros.jpg'
-import image2 from '../../../assets/imghome/Crepusculo.jpg'
-import image3 from '../../../assets/imghome/harry2020.jpg'
-
+import image1 from '../../../assets/imghome/gatsby.jpg'
+import image2 from '../../../assets/imghome/comic.jpg'
+import image3 from '../../../assets/imghome/davinci.jpg'
 const Carrousel = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [animationActive, setAnimationActive] = useState(false)
