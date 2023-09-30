@@ -11,7 +11,7 @@
     height: 100%;
     width: 280px;
     color: #fff;
-    background-color: #E8E2C8;
+    background-color: #a58aa5;
     overflow-y: auto;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
     align-items: center; /* Para centrar verticalmente */
@@ -19,7 +19,7 @@
 .profile{
     display: flex;
     justify-content: center;
-    background-color: #82755B;
+    background-color: #6f5475;
 }
 
 .profile img {
@@ -39,7 +39,7 @@ h4{
 .menuList {
     list-style: none;
     padding: 20px;
-    background-color: #E8E2C8;
+    background-color: #a58aa5;
 
 }
 

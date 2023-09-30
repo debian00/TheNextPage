@@ -9,7 +9,7 @@
 .card {
     --font-color: #111;
     --font-color-sub: #7e7e7e;
-    --bg-color: #E8E2C8;
+    --bg-color: #ded8d7;
     --main-color: #111;
     --main-focus: #2d8cf0;
     width: calc(30% - 2rem);
@@ -192,3 +192,56 @@
   .cardBtn:active {
     transform: translateY(3px);
   }
+  .buton { 
+    position: absolute;
+   /*  bottom: 80.5%;
+    left: 91%; */
+    top : 0;
+    right : 0;
+    transform: translate(-0%, 0%);
+    z-index: 2;
+    background-color: rgb(35, 90, 163);
+    color: #ffffff;
+    border: none;
+    padding: 5px 5px;
+    border-top-left-radius: none !important;
+   /*  border-radius: 3px; */
+    cursor: pointer;
+    /* margin-top: 20px; */
+    width: 53px;
+    transition: background-color 0.3s ease;
+  
+}
+
+.buton:hover {
+    background-color: rgb(19, 60, 113);
+}
+.click{
+    color:blue;
+    cursor: pointer;
+}
+
+.inputfile{
+    background-color: #59415b;
+    border-radius: 15px;
+    padding: 5px;
+    color: white;
+    margin-top: 10px;
+    margin: 15px;
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+}
+.customFade .modalOpen {
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}

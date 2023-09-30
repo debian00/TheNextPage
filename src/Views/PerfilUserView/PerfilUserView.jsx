@@ -13,18 +13,18 @@ const PerfilUserdView = () => {
   const [componenteActual, setComponenteActual] = useState('A');
   
   //Manejo de color del perfil usuario
-  const [color, setColor] = useState('#82755B');
+  const [color, setColor] = useState('#59415b');
   const [selectedLink, setSelectedLink] = useState(null);
 
   //Manejar la opcion seleccionada mediante color
   const handleSelect = (linkName)=>{
     setComponenteActual(linkName);
-    setColor('#82755B');
+    setColor('#59415b');
     setSelectedLink(linkName);
   }
   useEffect(() => {
     setSelectedLink('A')
-    setColor("#82755B");
+    setColor("#59415b");
   },[])
   return (
     <div>
@@ -46,7 +46,7 @@ const PerfilUserdView = () => {
                       width: "100%",
                       paddingInline: "5px",
                       backgroundColor: selectedLink === "A" ? color : "white",
-                      color: "black",
+                      color: selectedLink === "A" ? "white" : "black", 
                     }}>
                   {' '}
                   <svg
@@ -71,7 +71,7 @@ const PerfilUserdView = () => {
                       width: "100%",
                       paddingInline: "5px",
                       backgroundColor: selectedLink === "B" ? color : "white",
-                      color:  "black",
+                      color: selectedLink === "B" ? "white" : "black", 
                     }}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +95,7 @@ const PerfilUserdView = () => {
                       width: "100%",
                       paddingInline: "5px",
                       backgroundColor: selectedLink === "C" ? color : "white",
-                      color: "black",
+                      color: selectedLink === "C" ? "white" : "black", 
                     }}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +120,7 @@ const PerfilUserdView = () => {
                       width: "100%",
                       paddingInline: "5px",
                       backgroundColor: selectedLink === "D" ? color : "white",
-                      color: "black",
+                      color: selectedLink === "D" ? "white" : "black", 
                     }}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +144,7 @@ const PerfilUserdView = () => {
                       width: "100%",
                       paddingInline: "5px",
                       backgroundColor: selectedLink === "E" ? color : "white",
-                      color: "black",
+                      color: selectedLink === "E" ? "white" : "black", 
                     }}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
