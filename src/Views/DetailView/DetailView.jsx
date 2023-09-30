@@ -1,31 +1,90 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getBookById } from '../../redux/actions/actionGet'; // Asegúrate de que la importación sea correcta
-import styles from './detail.module.css';
+import { getBookById } from '../../redux/actions/actionGet';
+import styles from './detail.module.css'; // Importa los estilos CSS
 import { useParams } from "react-router-dom";
 
 function DetailView() {
-  const { id } = useParams(); 
-  const bookData = useSelector((state) => state.bookById); // Accede a los datos del libro desde Redux (state.bookById)
+  const { id } = useParams();
+  const bookData = useSelector((state) => state.bookById);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Llama a la acción getBookById para obtener los datos del libro
-    dispatch(getBookById(id)); // Reemplaza "1" con el ID del libro que deseas obtener
+    dispatch(getBookById(id));
   }, [dispatch, id]);
 
   return (
     <div className={styles.container}>
-      {/* Caja Izquierda con Imagen */}
-      <div className={styles.leftBox}>
-        <img src={bookData.images} alt="Imagen" />
+    <div className={`cover ${styles.cover}`}>
+      <div className={`book ${styles.book}`}>
+        <label htmlFor="page-1" className={`book__page book__page--1 ${styles['book__page']} ${styles['book__page--1']}`}>
+          <img src={bookData.images} alt="" />
+        </label>
+
+        <label htmlFor="page-2" className={`book__page book__page--4 ${styles['book__page']} ${styles['book__page--4']}`}>
+          <div className={`page__content ${styles['page__content']}`}>
+            <h1 className={`page__content-title ${styles['page__content-title']}`}>Descripción:</h1>
+            <div className={`page__content-blockquote ${styles['page__content-blockquote']}`}>
+              <p className={`page__content-blockquote-text ${styles['page__content-blockquote-text']}`}>{bookData.description} </p>
+              
+              <span className={`page__content-blockquote-reference ${styles['page__content-blockquote-reference']}`}>Encyclopedia Galactica*</span>
+            </div>
+            <div className={`page__number ${styles['page__number']}`}>3</div>
+          </div>
+        </label>
+
+        <input type="radio" name="page" id="page-1" />
+
+        <input type="radio" name="page" id="page-2" />
+        <label htmlFor="page-2" className={`book__page book__page--2 ${styles['book__page']} ${styles['book__page--2']}`}>
+          <div className={`book__page-front ${styles['book__page-front']}`}>
+            <div className={`page__content ${styles['page__content']}`}>
+              <h1 className={`page__content-book-title ${styles['page__content-book-title']}`}>{bookData.title} </h1>
+              <h2 className={`page__content-author ${styles['page__content-author']}`}>{bookData.author} </h2>
+
+              <p className={`page__content-credits ${styles['page__content-credits']}`}>
+                GÉNERO
+                <span>{bookData.genre} </span>
+              </p>
+
+              <p className={`page__content-credits ${styles['page__content-credits']}`}>
+                PRECIO DE VENTA
+                <span>$ {bookData.sellPrice} </span>
+              </p>
+
+              <div className={`page__content-copyright ${styles['page__content-copyright']}`}>
+                <p>Fecha de publicación</p>
+                <p>{bookData.publicationYear} </p>
+              </div>
+            </div>
+          </div>
+          <div className={`book__page-back ${styles['book__page-back']}`}>
+            <div className={`page__content ${styles['page__content']}`}>
+              <h1 className={`page__content-title ${styles['page__content-title']}`}>Contents</h1>
+              <table className={`page__content-table ${styles['page__content-table']}`}>
+                <tr>
+                  <td align="left">Puntuación general</td><td align="right">{bookData.averageScore}</td>
+                </tr>
+                <tr>
+                  <td align="left">Número de reseñas</td><td align="right">{bookData.numberOfReviews}</td>
+                </tr>
+                <tr>
+                  <td align="left">Stock</td><td align="right">{bookData.stock}</td>
+                </tr>
+                <tr>
+                  <td align="left">Autor</td><td align="right">{bookData.author}</td>
+                </tr>
+                <tr>
+                  <td align="left">Año de publicación</td><td align="right">{bookData.publicationYear}</td>
+                </tr>
+              </table>
+
+              <div className={`page__number ${styles['page__number']}`}>2</div>
+            </div>
+          </div>
+        </label>
       </div>
-      {/* Caja Derecha con Texto */}
-      <div className={styles.rightBox}>
-        <h1 className={styles.title}>{bookData.title}</h1>
-        <h2 className={styles.author}>{bookData.author}</h2>
-        <h2 className={styles.resume}>{bookData.description}</h2>
-      </div>
+    </div>
     </div>
   );
 }
