@@ -1,6 +1,6 @@
 // import React from 'react'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers, searchUserByName } from '../../../redux/actions/actionGet'
 import {
@@ -11,10 +11,12 @@ import {
 } from '../../../redux/actions/actionPatch'
 import { deleteUserById } from '../../../redux/actions/actionDelete'
 import style from './usersview.module.css'
+import { postPromotion } from '../../../redux/actions/actionPost'
 
 const UsersView = () => {
   //Estado para traer todos los usuarios
   const users = useSelector((state) => state.users)
+  const [refresh, setRefresh] = useState()
 
   //Hook useDispatch
   const dispatch = useDispatch()
@@ -27,7 +29,7 @@ const UsersView = () => {
     )
     if (confirmed) {
       dispatch(stopUserById(id))
-      dispatch(getAllUsers())
+      setRefresh(getAllUsers())
     }
   }
   //Funcion para reactivaar usuario
@@ -36,7 +38,7 @@ const UsersView = () => {
     const confirmed = window.confirm('¿Deseas reactivar este usuario?')
     if (confirmed) {
       dispatch(restoreUserById(id))
-      dispatch(getAllUsers())
+      setRefresh(getAllUsers())
     }
   }
   //Funcion para eliminar usuario
@@ -47,7 +49,7 @@ const UsersView = () => {
     )
     if (confirmed) {
       dispatch(deleteUserById(id))
-      dispatch(getAllUsers())
+      setRefresh(getAllUsers())
     }
   }
 
@@ -63,8 +65,8 @@ const UsersView = () => {
       '¿Estas seguro que quieres cambiar el rol a admin?'
     )
     if (confirmed) {
-    dispatch(userToAdmin(id))
-    console.log('Echo correctamente');
+      dispatch(userToAdmin(id))
+      setRefresh(getAllUsers())
     }
   }
 
@@ -73,15 +75,21 @@ const UsersView = () => {
     const confirmed = window.confirm(
       '¿Estas seguro que quieres cambiar el rol a usuario?'
     )
-    if(confirmed){
+    if (confirmed) {
       dispatch(adminToUser(id))
+      setRefresh(getAllUsers())
     }
+  }
+  //Funcion para enviar las promociones
+  const handleSendMessage = (email) => {
+    console.log("llego el email", email);
+    dispatch(postPromotion(email))
   }
 
   //Ciclo de vida del componente con el useEffect
   useEffect(() => {
     dispatch(getAllUsers())
-  }, [dispatch])
+  }, [refresh])
   return (
     <div>
       <div className="col-md-6 mt-4 justify-content-center d-flex">
@@ -105,6 +113,7 @@ const UsersView = () => {
             <th scope="col">Teléfono</th>
             <th scope="col">Tipo usuario</th>
             <th scope="col">Cambiar rol a</th>
+            <th scope="col">Promocion</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
@@ -118,6 +127,7 @@ const UsersView = () => {
                 >
                   {index + 1}
                 </th>
+                {/* Avatar */}
                 <td
                   style={{ backgroundColor: ele.hide ? '#edd55e' : '#9bdb92' }}
                 >
@@ -131,98 +141,127 @@ const UsersView = () => {
                     }}
                   />
                 </td>
+                {/* Usuario Name */}
                 <td
                   style={{ backgroundColor: ele.hide ? '#edd55e' : '#9bdb92' }}
                 >
                   {ele.userName}
                 </td>
+                {/* Nombre Completo */}
                 <td
                   style={{ backgroundColor: ele.hide ? '#edd55e' : '#9bdb92' }}
                 >
                   {ele.name}
                 </td>
+                {/* Email */}
                 <td
                   style={{ backgroundColor: ele.hide ? '#edd55e' : '#9bdb92' }}
                 >
                   {ele.email}
                 </td>
+                {/* Telefono */}
                 <td
                   style={{ backgroundColor: ele.hide ? '#edd55e' : '#9bdb92' }}
                 >
                   {ele.phoneNumber}
                 </td>
+                {/* Tipo Usuario */}
                 <td
                   style={{ backgroundColor: ele.hide ? '#edd55e' : '#9bdb92' }}
                 >
-                  {ele.userType === "admin" ? (
-                  <button type="button" className="btn btn-danger" disabled>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="black"
-                      className="bi bi-person-fill-gear"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"></path>
-                    </svg>
-                    Admin
-                  </button>
-                  
-                  ):(
-                  <button type="button" className="btn btn-success" disabled>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="black"
-                      className="bi bi-person-fill-up"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.354-5.854 1.5 1.5a.5.5 0 0 1-.708.708L13 11.707V14.5a.5.5 0 0 1-1 0v-2.793l-.646.647a.5.5 0 0 1-.708-.708l1.5-1.5a.5.5 0 0 1 .708 0ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
-                      <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"></path>
-                    </svg>
-                    User
-                  </button>
+                  {ele.userType === 'admin' ? (
+                    <button type="button" className="btn btn-danger" disabled>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="black"
+                        className="bi bi-person-fill-gear"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"></path>
+                      </svg>
+                      Admin
+                    </button>
+                  ) : (
+                    <button type="button" className="btn btn-success" disabled>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="black"
+                        className="bi bi-person-fill-up"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.354-5.854 1.5 1.5a.5.5 0 0 1-.708.708L13 11.707V14.5a.5.5 0 0 1-1 0v-2.793l-.646.647a.5.5 0 0 1-.708-.708l1.5-1.5a.5.5 0 0 1 .708 0ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+                        <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"></path>
+                      </svg>
+                      User
+                    </button>
                   )}
-                  
                 </td>
+                {/* Rol */}
                 <td
                   style={{ backgroundColor: ele.hide ? '#edd55e' : '#9bdb92' }}
                 >
-                  {ele.userType === "user" ? (
-                  <button onClick={(e) => handlerUserToAdmin(e, ele.id)} type="button" className="btn btn-danger" >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="black"
-                      className="bi bi-person-fill-gear"
-                      viewBox="0 0 16 16"
+                  {ele.userType === 'user' ? (
+                    <button
+                      onClick={(e) => handlerUserToAdmin(e, ele.id)}
+                      type="button"
+                      className="btn btn-danger"
                     >
-                      <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"></path>
-                    </svg>
-                    Admin
-                  </button>
-                  
-                  ):(
-                  <button onClick={(e) => handlerAdminToUser(e, ele.id)} type="button" className="btn btn-success" >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="black"
-                      className="bi bi-person-fill-up"
-                      viewBox="0 0 16 16"
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="black"
+                        className="bi bi-person-fill-gear"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"></path>
+                      </svg>
+                      Admin
+                    </button>
+                  ) : (
+                    <button
+                      onClick={(e) => handlerAdminToUser(e, ele.id)}
+                      type="button"
+                      className="btn btn-success"
                     >
-                      <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.354-5.854 1.5 1.5a.5.5 0 0 1-.708.708L13 11.707V14.5a.5.5 0 0 1-1 0v-2.793l-.646.647a.5.5 0 0 1-.708-.708l1.5-1.5a.5.5 0 0 1 .708 0ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
-                      <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"></path>
-                    </svg>
-                    User
-                  </button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="black"
+                        className="bi bi-person-fill-up"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.354-5.854 1.5 1.5a.5.5 0 0 1-.708.708L13 11.707V14.5a.5.5 0 0 1-1 0v-2.793l-.646.647a.5.5 0 0 1-.708-.708l1.5-1.5a.5.5 0 0 1 .708 0ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+                        <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"></path>
+                      </svg>
+                      User
+                    </button>
                   )}
-
                 </td>
+                {/* Promocion */}
+                <td
+                  style={{ backgroundColor: ele.hide ? '#edd55e' : '#9bdb92' }}
+                >
+                  <button type="button" className="btn btn-info" onClick={() => handleSendMessage(ele.email)}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="Black"
+                      className="bi bi-gift-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zm6 4v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7h6zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9H2.5z"></path>
+                    </svg>
+                    
+                  </button>
+                </td>
+                {/* Acciones */}
                 <td
                   style={{ backgroundColor: ele.hide ? '#edd55e' : '#9bdb92' }}
                 >

@@ -11,3 +11,14 @@ export const createBook = (form) => {
         }
     }
 }
+
+export const postPromotion = (email) => {
+    return async () => {
+        try {
+            const {data} = await axios.post('/sendmail', {to: email })
+            console.log(data);
+        } catch (error) {
+            console.log(error.response.data.error) 
+        }
+    }
+}
