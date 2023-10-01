@@ -9,7 +9,16 @@ const HomeView = () => {
   return (
     <div>
       {/* Imagen principal del Home */}
-      <img src={principal} alt="" style={{ width: '100%', height: '60vh' }} />
+      <img
+        src={principal}
+        alt=""
+        style={{
+          width: '100%',
+          height: '60vh',
+          objectFit: 'cover',
+          objectPosition: 'center -400px',
+        }}
+      />
       {/* Seccion de Novedades y Tendencias */}
       <Suspense fallback={<p>Loading</p>}>
         <section
@@ -18,15 +27,6 @@ const HomeView = () => {
             paddingTop: '20px',
           }}
         >
-          {/* <img
-            src={harry}
-            style={{
-              width: '100%',
-              height: '300px',
-              objectFit: 'cover',
-              objectPosition: 'center -150px',
-            }}
-          ></img> */}
           <div
             style={{
               marginTop: '20px',
