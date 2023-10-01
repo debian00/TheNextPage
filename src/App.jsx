@@ -29,6 +29,7 @@ function App() {
           element={
             <>
               <PerfilUserdView />
+              <Footer />
             </>
           }
         />
@@ -37,6 +38,7 @@ function App() {
           element={
             <>
               <AdminDashboardView/>
+              <Footer />
             </>
           }
         />
@@ -45,6 +47,7 @@ function App() {
           element={
             <>
               <HomeView />
+              <Footer />
             </>
           }
         />
@@ -53,6 +56,7 @@ function App() {
           element={
             <>
               <HomeView />
+              <Footer />
             </>
           }
         />
@@ -61,6 +65,7 @@ function App() {
           element={
             <>
               <DetailView />
+              <Footer />
             </>
           }
         />
@@ -69,6 +74,7 @@ function App() {
           element={
             <>
               <CatalogueView />
+              <Footer />
             </>
           }
         />
