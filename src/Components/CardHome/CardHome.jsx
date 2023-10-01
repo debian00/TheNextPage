@@ -26,7 +26,6 @@ const CardHome = ({ books, author }) => {
   useEffect(() => {
     fetchBook()
   }, [books])
-  console.log(book)
 
   return (
     <div

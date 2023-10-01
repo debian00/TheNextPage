@@ -11,13 +11,20 @@ import {
   GET_BOOKS_BY_NAME,
 } from '../types'
 
-export const getAllBooks = ({ page }) => {
+export const getAllBooks = ({ priceMin, priceMax, page, genre }) => {
+  if (priceMax == 0) priceMax = ''
+  if (priceMin == 0) priceMin = ''
+  const genresId = genre.join(',')
+  console.log(priceMax, priceMin)
   return async (dispatch) => {
     try {
-      const { data } = await axios(`/books?page=${page}&size=10`)
+      const { data } = await axios(
+        `/books?page=${page}&size=10&priceMin=${priceMin}&priceMax=${priceMax}&genre=${genresId}`
+      )
+      console.log(data)
       return dispatch({
         type: GET_ALL_BOOKS,
-        payload: data,
+        payload: { books: data.rows, currentPage: page },
       })
     } catch (error) {
       console.log(error)
@@ -130,7 +137,6 @@ export const getGenres = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios('/genre')
-      console.log(data.title)
       dispatch({
         type: GET_ALL_GENRES,
         payload: data,
