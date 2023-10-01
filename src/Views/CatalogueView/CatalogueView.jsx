@@ -29,7 +29,7 @@ function CatalogueView() {
     <div className={styles.container}>
       <div className={styles.filter}>
         <h3 style={{ fontSize: '25px', marginLeft: '13px', marginBottom: '0' }}>
-          Preferencias!
+          Preferencias
         </h3>
         {/* <div className={styles.filterInput}>
           <label className={`form-label ${styles.label}`}>Generos</label>
@@ -47,7 +47,7 @@ function CatalogueView() {
             }}
             className={`form-label ${styles.label}`}
           >
-            Generos
+            Géneros
           </label>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {genres?.slice(0, visibleGenres).map((e, index) => {
@@ -76,7 +76,7 @@ function CatalogueView() {
                 className={styles.verMas}
                 onClick={() => setVisibleGenres((prev) => prev + 10)}
               >
-                Ver mas
+                Ver más
               </p>
             )}
           </div>
