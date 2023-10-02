@@ -97,7 +97,7 @@ const HomeView = () => {
               aventuras inigualables en un mundo lleno de magia y peligro.
             </p>
 
-            <CardHome books="Ani"></CardHome>
+            <CardHome author="J.R.R. Tolkien"></CardHome>
           </div>
         </section>
         <Carrousel></Carrousel>

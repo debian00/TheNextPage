@@ -36,7 +36,7 @@ const AdminDashboardView = () => {
             <div className={style.profile}>
               <img src={perfil} alt="Foto de perfil" />
             </div>
-            <h4>Nombre Usuario</h4>
+            <h4>Nombre Admin</h4>
             <ul className={style.menuList}>
               <li>
                 <a
@@ -60,7 +60,7 @@ const AdminDashboardView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'A' ? 'white' : 'black'}
                     className="bi bi-person-fill-gear"
                     viewBox="0 0 16 16"
                   >
@@ -90,7 +90,7 @@ const AdminDashboardView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'B' ? 'white' : 'black'}
                     className="bi bi-people-fill"
                     viewBox="0 0 16 16"
                   >
@@ -120,7 +120,7 @@ const AdminDashboardView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'C' ? 'white' : 'black'}
                     className="bi bi-journals"
                     viewBox="0 0 16 16"
                   >
@@ -151,7 +151,7 @@ const AdminDashboardView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'D' ? 'white' : 'black'}
                     className="bi bi-tags-fill"
                     viewBox="0 0 16 16"
                   >
@@ -182,7 +182,7 @@ const AdminDashboardView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'E' ? 'white' : 'black'}
                     className="bi bi-journal-plus"
                     viewBox="0 0 16 16"
                   >
@@ -217,7 +217,7 @@ const AdminDashboardView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'F' ? 'white' : 'black'}
                     className="bi bi-box-arrow-right"
                     viewBox="0 0 16 16"
                   >
