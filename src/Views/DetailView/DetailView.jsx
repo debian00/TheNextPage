@@ -16,13 +16,14 @@ function DetailView() {
     dispatch(getBookById(id))
     dispatch(getGenres())
   }, [dispatch, id])
+
   const getGenreName = (genreId) => {
     const genreNames = genreId.genre?.map((id) => {
       const genre = genres.find((genre) => genre.id === id)
-      return genre ? genre.name : '' // Si el género existe, devuelve su nombre, sino devuelve un string vacío
+      return genre ? genre.name : ''
     })
 
-    return genreNames?.join(', ') // Devuelve los nombres de los géneros separados por coma
+    return genreNames?.join(', ')
   }
 
   return (
