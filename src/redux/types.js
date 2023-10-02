@@ -11,6 +11,6 @@ export const USER_TO_ADMIN = 'USER_TO_ADMIN'
 export const ADMIN_TO_USER = 'ADMIN_TO_USER'
 export const GET_BOOKS_NAME = 'GET_BOOKS_NAME'
 export const GET_ALL_BOOKS_COPY = 'GET_ALL_BOOKS_COPY'
-export const UPDATE_BOOK = "UPDATE_BOOK"
+export const UPDATE_BOOK = 'UPDATE_BOOK'
 export const GET_BOOKS_BY_NAME = 'GET_BOOKS_BY_NAME'
-
+export const GET_ALL_AUTHORS = 'GET_ALL_AUTHORS'

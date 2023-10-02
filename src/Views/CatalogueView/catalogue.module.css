@@ -35,6 +35,7 @@ hr {
 
 .container {
   display: flex;
+  /* height: 100%; */
   flex-direction: row;
 }
 
@@ -49,13 +50,13 @@ body {
   background-color: transparent;
   width: 300px;
   flex: 0.5;
-  height: 200px;
   margin-top: 50px;
   text-align: left;
 }
 
 .render {
   flex: 2;
+  height: 100%;
 }
 
 .verMas {
@@ -82,4 +83,22 @@ body {
 .label {
   display: block;
   margin-bottom: 5px;
+}
+
+.select {
+  padding: 10px 5px;
+  border-radius: 20px;
+  border: 2px solid rgb(140, 69, 156);
+  background-color: transparent;
+}
+
+.select:hover {
+  color: rgb(140, 69, 156);
+}
+.author {
+  width: 100%;
+  background-color: #d1d1d1;
+  padding: 5px;
+  border-radius: 50px;
+  border: 1px solid #31394d;
 }

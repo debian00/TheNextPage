@@ -1,6 +1,6 @@
 // import React from 'react'
 import style from './admindashboard.module.css'
-import perfil from '../../assets/imghome/perfil.jpg'
+import perfil from '../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
 
 import { useEffect, useState } from 'react'
 import EditarPerfilView from '../PerfilUserView/EditarPerfilView/EditarPerfilView'
@@ -29,14 +29,14 @@ const AdminDashboardView = () => {
 
   return (
     <div>
-      <div className="row">
+      <div className={`${style.panel} row`}>
         {/* Perfil admin Lista de opciones*/}
-        <div className={`col-2`}>
+        <div className={`${style.profilePanel} col-2`}>
           <div className={`${style.menu}`}>
             <div className={style.profile}>
               <img src={perfil} alt="Foto de perfil" />
             </div>
-            <h4>Nombre Usuario</h4>
+            <h4>Nombre Admin</h4>
             <ul className={style.menuList}>
               <li>
                 <a
@@ -52,7 +52,7 @@ const AdminDashboardView = () => {
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'A' ? color : 'white',
-                    color: selectedLink === "A" ? "white" : "black", 
+                    color: selectedLink === 'A' ? 'white' : 'black',
                   }}
                 >
                   {' '}
@@ -60,7 +60,7 @@ const AdminDashboardView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'A' ? 'white' : 'black'}
                     className="bi bi-person-fill-gear"
                     viewBox="0 0 16 16"
                   >
@@ -83,14 +83,14 @@ const AdminDashboardView = () => {
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'B' ? color : 'white',
-                    color: selectedLink === "B" ? "white" : "black", 
+                    color: selectedLink === 'B' ? 'white' : 'black',
                   }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'B' ? 'white' : 'black'}
                     className="bi bi-people-fill"
                     viewBox="0 0 16 16"
                   >
@@ -113,14 +113,14 @@ const AdminDashboardView = () => {
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'C' ? color : 'white',
-                    color: selectedLink === "C" ? "white" : "black", 
+                    color: selectedLink === 'C' ? 'white' : 'black',
                   }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'C' ? 'white' : 'black'}
                     className="bi bi-journals"
                     viewBox="0 0 16 16"
                   >
@@ -144,14 +144,14 @@ const AdminDashboardView = () => {
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'D' ? color : 'white',
-                    color: selectedLink === "D" ? "white" : "black", 
+                    color: selectedLink === 'D' ? 'white' : 'black',
                   }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'D' ? 'white' : 'black'}
                     className="bi bi-tags-fill"
                     viewBox="0 0 16 16"
                   >
@@ -175,14 +175,14 @@ const AdminDashboardView = () => {
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'E' ? color : 'white',
-                    color: selectedLink === "E" ? "white" : "black", 
+                    color: selectedLink === 'E' ? 'white' : 'black',
                   }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'E' ? 'white' : 'black'}
                     className="bi bi-journal-plus"
                     viewBox="0 0 16 16"
                   >
@@ -210,14 +210,14 @@ const AdminDashboardView = () => {
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'F' ? color : 'white',
-                    color: selectedLink === "F" ? "white" : "black", 
+                    color: selectedLink === 'F' ? 'white' : 'black',
                   }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'F' ? 'white' : 'black'}
                     className="bi bi-box-arrow-right"
                     viewBox="0 0 16 16"
                   >
@@ -254,7 +254,9 @@ const AdminDashboardView = () => {
             <CrearLibroView />
           </div>
         ): (
-          <h1>No hay nada</h1>
+          <div className={`col-9 ${style.content}`}>
+            <h1>Soy el componente ofertas</h1>
+        </div>
         )}
       </div>
     </div>

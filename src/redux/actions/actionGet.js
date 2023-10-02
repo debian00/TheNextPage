@@ -9,15 +9,32 @@ import {
   SEARCH_USER_BY_NAME,
   GET_ALL_BOOKS_COPY,
   GET_BOOKS_BY_NAME,
+  GET_ALL_AUTHORS,
 } from '../types'
 
-export const getAllBooks = ({ page }) => {
+export const getAllBooks = ({
+  priceMin,
+  priceMax,
+  page,
+  genre,
+  order,
+  author,
+  title,
+}) => {
+  if (priceMax == 0) priceMax = ''
+  if (priceMin == 0) priceMin = ''
+
+  const genresId = genre.join(',')
+  console.log(priceMax, priceMin)
   return async (dispatch) => {
     try {
-      const { data } = await axios(`/books?page=${page}&size=10`)
+      const { data } = await axios(
+        `/books?page=${page}&size=10&sellPriceMin=${priceMin}&sellPriceMax=${priceMax}&genre=${genresId}&order=${order}&author=${author}&title=${title}`
+      )
+      console.log(data)
       return dispatch({
         type: GET_ALL_BOOKS,
-        payload: data,
+        payload: { books: data.rows, currentPage: page },
       })
     } catch (error) {
       console.log(error)
@@ -25,10 +42,10 @@ export const getAllBooks = ({ page }) => {
   }
 }
 
-export const getAllBooksCopy = () => {
+export const getAllBooksCopy = (page) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`/books`)
+      const { data } = await axios(`/books?page=${page}`)
       return dispatch({
         type: GET_ALL_BOOKS_COPY,
         payload: data,
@@ -45,6 +62,20 @@ export const getBookById = (id) => {
       const { data } = await axios('/books/' + id)
       return dispatch({
         type: GET_BOOK_BY_ID,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getAuthors = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios('/author')
+      dispatch({
+        type: GET_ALL_AUTHORS,
         payload: data,
       })
     } catch (error) {
@@ -130,7 +161,6 @@ export const getGenres = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios('/genre')
-      console.log(data.title)
       dispatch({
         type: GET_ALL_GENRES,
         payload: data,

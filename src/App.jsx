@@ -12,6 +12,8 @@ import AdminDashboardView from './Views/AdminDashboardView/AdminDashboardView'
 import LoginAndRegister from "./Views/Login&Register/Login&Register"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import AboutUs from "./Views/AboutUsView/AboutUsView"
+import FAQ from './Views/FaqView/FaqView'
 
 function App() {
   return (
@@ -88,6 +90,24 @@ function App() {
               <LoginAndRegister/>
               <Footer/>
             </>
+          }/>
+          
+         <Route
+          path="/aboutus"
+          element={
+            <>
+              <AboutUs />
+              <Footer />
+            </>
+          }
+        />
+         <Route
+          path="/faq"
+          element={
+            <>
+              <FAQ />
+              <Footer />
+            </>
           }
         />
       </Routes>
@@ -95,4 +115,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

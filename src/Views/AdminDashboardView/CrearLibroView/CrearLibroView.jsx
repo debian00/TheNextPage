@@ -4,15 +4,16 @@ import { useEffect, useState } from 'react'
 import style from './crearlibro.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { createBook } from '../../../redux/actions/actionPost'
-import { getGenres } from '../../../redux/actions/actionGet'
+import { getAuthors, getGenres } from '../../../redux/actions/actionGet'
 
 const CrearLibroView = () => {
   //Traer todos los gener
   const allGenres = useSelector((state) => state.genres)
+  const allAuthor = useSelector((state) => state.authors)
   console.log('Tdosos', allGenres)
   //Estado para el formulario
   const [form, setForm] = useState({
-    tittle: '',
+    title: '',
     author: [],
     description: '',
     genre: [],
@@ -23,7 +24,7 @@ const CrearLibroView = () => {
   })
   //Estado para manejar los errores
   const [errors, setErrors] = useState({
-    tittle: '',
+    title: '',
     author: [],
     description: '',
     genre: [],
@@ -40,22 +41,32 @@ const CrearLibroView = () => {
     await dispatch(createBook(form))
     //Volvemos a dejar vacio el formulario
     setForm({
-      tittle: '',
-      author: [],
+      title: '',
+      author: '',
       description: '',
       genre: [],
       publicationYear: '',
       images: [],
       sellPrice: '',
       stock: '',
+      availability: true,
     })
   }
   //Funcion para manejar los campos
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    })
+    const { name, value } = e.target
+    if (name == 'genre') {
+      const genres = [parseInt(value, 10)]
+      setForm({
+        ...form,
+        genre: genres,
+      })
+    } else {
+      setForm({
+        ...form,
+        [name]: value,
+      })
+    }
   }
   //Funcio para manejar la imagen de la portada
   const handleDrop = (event) => {
@@ -94,13 +105,14 @@ const CrearLibroView = () => {
   //Montamos el componente para traer los genres
   useEffect(() => {
     dispatch(getGenres())
+    dispatch(getAuthors())
   }, [])
   return (
     <div>
       <h1>Componente Crear Libro</h1>
       <form onSubmit={handleSubmit}>
-        <div className="card mb-12">
-          <div className="row g-0">
+        <div className={` card mb-12`}>
+          <div className={` row g-0`}>
             <div className="col-md-4">
               {/* Agregar Imagenes */}
               <div
@@ -137,7 +149,7 @@ const CrearLibroView = () => {
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={handleDrop}
                   >
-                    {form.images ? (
+                    {form.images.length ? (
                       <div>
                         <img
                           style={{
@@ -221,36 +233,50 @@ const CrearLibroView = () => {
               </div>
             </div>
 
-            <div className="col-md-8">
+            <div className={` col-md-8`}>
               <div className="card-body">
                 <div className="row justify-content-center d-flex">
-                  <div className="col-6">
+                  <div className="col-6 mb-3">
                     <h5 className="card-title mt-1">Título del Libro</h5>
                     <input
                       type="text"
                       className="form-control"
-                      name="tittle"
+                      name="title"
                       onChange={handleChange}
-                      value={form.tittle}
+                      value={form.title}
                       placeholder="Título"
                       required
                     />
                   </div>
-                </div>
-                <div className="row justify-content-center d-flex">
-                  <div className="col-6">
+                  <div className="col-6 mb-3" style={{ gridArea: 'autor' }}>
                     <h5 className="card-title mt-1">Autor del Libro</h5>
-                    <input
-                      type="text"
-                      className="form-control"
+                    {/* <input
+                        type="text"
+                        className="form-control"
+                        name="author"
+                        onChange={handleChange}
+                        value={form.author}
+                        placeholder="Autor"
+                        required
+                      /> */}
+                    <select
+                      className="form-select"
                       name="author"
                       onChange={handleChange}
                       value={form.author}
-                      placeholder="Autor"
                       required
-                    />
+                    >
+                      <option value="">Selecciona un autor</option>
+                      {allAuthor.map((ele) => (
+                        <option key={ele.id} value={ele.name}>
+                          {ele.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                  <div className="col-6">
+                </div>
+                <div className="row justify-content-center d-flex">
+                  <div className="col-6 mb-3">
                     <h5 className="card-title mt-1">Género del Libro</h5>
                     <select
                       className="form-select"
@@ -261,14 +287,12 @@ const CrearLibroView = () => {
                     >
                       <option value="">Selecciona un género</option>
                       {allGenres.map((ele) => (
-                        <option key={ele.id} value={ele.name}>
+                        <option key={ele.id} value={ele.id}>
                           {ele.name}
                         </option>
                       ))}
                     </select>
                   </div>
-                </div>
-                <div className="row justify-content-center d-flex">
                   <div className="col-6">
                     <h5 className="card-title mt-1">
                       Año de Publicación del Libro
@@ -283,7 +307,9 @@ const CrearLibroView = () => {
                       required
                     />
                   </div>
-                  <div className="col-6">
+                </div>
+                <div className="row justify-content-center d-flex">
+                  <div className="col-6 mb-3">
                     <h5 className="card-title mt-1">Precio del Libro</h5>
                     <input
                       type="text"
@@ -295,8 +321,6 @@ const CrearLibroView = () => {
                       required
                     />
                   </div>
-                </div>
-                <div className="row justify-content-center d-flex">
                   <div className="col-6">
                     <h5 className="card-title mt-1">Stock</h5>
                     <input
@@ -309,7 +333,9 @@ const CrearLibroView = () => {
                       required
                     />
                   </div>
-                  <div className="col-6">
+                </div>
+                <div className="row justify-content-center d-flex">
+                  {/* <div className="col-6">
                     <h5 className="card-title mt-1">Disponibilidad</h5>
                     <input
                       type="text"
@@ -318,10 +344,10 @@ const CrearLibroView = () => {
                       placeholder="Disponibilidad"
                       required
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row justify-content-center d-flex">
-                  <div className="col-12">
+                  <div className="col-12 mb-3">
                     <h5 className="card-title mt-1">Descripción del Libro</h5>
                     <textarea
                       className="form-control"

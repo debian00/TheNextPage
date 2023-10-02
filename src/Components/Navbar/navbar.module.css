@@ -138,7 +138,8 @@ svg {
   margin: auto 0;
 }
 
-.profile a {
+.profile a,
+.profile p {
   text-decoration: none;
   font-family: 'Avenir', sans-serif;
   color: #cccfce;
