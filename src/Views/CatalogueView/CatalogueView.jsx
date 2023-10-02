@@ -20,6 +20,7 @@ function CatalogueView() {
     page: 1,
     order: '',
     author: '',
+    title: '',
   })
 
   const handleChange = (e) => {
@@ -57,6 +58,25 @@ function CatalogueView() {
           >
             Preferencias
           </h3>
+          <div className={`${styles.filterInput}`}>
+            <label
+              htmlFor="inputName"
+              style={{
+                marginRight: '10px',
+                fontSize: '18px',
+                fontWeight: 'bolder',
+              }}
+              className={`form-label ${styles.label}`}
+            >
+              Titulo
+            </label>
+            <input
+              onChange={handleChange}
+              name={'title'}
+              className={styles.author}
+              value={filter.title}
+            ></input>
+          </div>
           <div className={`${styles.filterInput}`}>
             <label
               htmlFor="inputName"

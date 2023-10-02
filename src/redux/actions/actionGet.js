@@ -19,6 +19,7 @@ export const getAllBooks = ({
   genre,
   order,
   author,
+  title,
 }) => {
   if (priceMax == 0) priceMax = ''
   if (priceMin == 0) priceMin = ''
@@ -28,7 +29,7 @@ export const getAllBooks = ({
   return async (dispatch) => {
     try {
       const { data } = await axios(
-        `/books?page=${page}&size=10&sellPriceMin=${priceMin}&sellPriceMax=${priceMax}&genre=${genresId}&order=${order}&author=${author}`
+        `/books?page=${page}&size=10&sellPriceMin=${priceMin}&sellPriceMax=${priceMax}&genre=${genresId}&order=${order}&author=${author}&title=${title}`
       )
       console.log(data)
       return dispatch({
