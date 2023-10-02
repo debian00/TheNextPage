@@ -135,7 +135,7 @@ const HomeView = () => {
               aventuras inigualables en un mundo lleno de magia y peligro.
             </p>
 
-            <CardHome author="Gabriel García Márquez"></CardHome>
+            <CardHome author="Gabriel Garc"></CardHome>
           </div>
         </section>
       </Suspense>

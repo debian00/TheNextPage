@@ -29,9 +29,9 @@ const AdminDashboardView = () => {
 
   return (
     <div>
-      <div className="row">
+      <div className={`${style.panel} row`}>
         {/* Perfil admin Lista de opciones*/}
-        <div className={`col-2`}>
+        <div className={`${style.profilePanel} col-2`}>
           <div className={`${style.menu}`}>
             <div className={style.profile}>
               <img src={perfil} alt="Foto de perfil" />
@@ -52,7 +52,7 @@ const AdminDashboardView = () => {
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'A' ? color : 'white',
-                    color: selectedLink === "A" ? "white" : "black", 
+                    color: selectedLink === 'A' ? 'white' : 'black',
                   }}
                 >
                   {' '}
@@ -83,7 +83,7 @@ const AdminDashboardView = () => {
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'B' ? color : 'white',
-                    color: selectedLink === "B" ? "white" : "black", 
+                    color: selectedLink === 'B' ? 'white' : 'black',
                   }}
                 >
                   <svg
@@ -113,7 +113,7 @@ const AdminDashboardView = () => {
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'C' ? color : 'white',
-                    color: selectedLink === "C" ? "white" : "black", 
+                    color: selectedLink === 'C' ? 'white' : 'black',
                   }}
                 >
                   <svg
@@ -144,7 +144,7 @@ const AdminDashboardView = () => {
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'D' ? color : 'white',
-                    color: selectedLink === "D" ? "white" : "black", 
+                    color: selectedLink === 'D' ? 'white' : 'black',
                   }}
                 >
                   <svg
@@ -175,7 +175,7 @@ const AdminDashboardView = () => {
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'E' ? color : 'white',
-                    color: selectedLink === "E" ? "white" : "black", 
+                    color: selectedLink === 'E' ? 'white' : 'black',
                   }}
                 >
                   <svg
@@ -210,7 +210,7 @@ const AdminDashboardView = () => {
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'F' ? color : 'white',
-                    color: selectedLink === "F" ? "white" : "black", 
+                    color: selectedLink === 'F' ? 'white' : 'black',
                   }}
                 >
                   <svg

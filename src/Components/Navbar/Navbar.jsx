@@ -139,14 +139,14 @@ const Navbar = () => {
               <Link to={'/'}>INICIO</Link>
             </li>
             <li>
-              <Link to="/aboutus">NOSOTROS</Link>
-            </li>
-            <li>
               <Link to="/catalogue">CATALOGO</Link>
             </li>
             <li>
-              <Link to="/faq">FAQ</Link>
+              <Link to="/aboutus">NOSOTROS</Link>
             </li>
+            <li>
+              <Link to="/faq">FAQ</Link>
+            </li>            
           </ul>
         </div>
         <SearchBar></SearchBar>
@@ -167,7 +167,6 @@ const Navbar = () => {
           <Profile width={40}></Profile>
         </div>
       </nav>
-
       <div
         ref={dropdownRef}
         className={`${style.dropdown} ${dropdown ? style.open : ''}`}

@@ -56,7 +56,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_BOOKS_NAME:
       return {
         ...state,
-        searchs: action.payload.map((ele) => ele.title),
+        searchs: action.payload,
       }
     case GET_ALL_GENRES:
       return {

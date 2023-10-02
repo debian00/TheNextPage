@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import style from './SearchBar.module.css'
 import { useEffect, useState } from 'react'
 import { getBooksSearch } from '../../../redux/actions/actionGet'
+import { Link } from 'react-router-dom'
 const SearchBar = () => {
   const [search, setSearch] = useState('')
   const [visible, setVisible] = useState(false)
@@ -23,6 +24,7 @@ const SearchBar = () => {
       setVisible(false)
     }, 10) // Adjust the delay as needed
   }
+  console.log(searches)
 
   return (
     <div className={style.inputContainer}>
@@ -38,7 +40,15 @@ const SearchBar = () => {
         <div className={style.dropdown}>
           <ul>
             {searches?.slice(0, 5).map((ele) => {
-              return <li key={ele}>{ele}</li>
+              return (
+                <Link
+                  to={`/detail/${ele.id}`}
+                  style={{ textDecoration: 'none' }}
+                  key={ele}
+                >
+                  <li style={{ color: 'gray' }}>{ele.title}</li>
+                </Link>
+              )
             })}
           </ul>
         </div>
