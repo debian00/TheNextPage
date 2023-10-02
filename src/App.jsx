@@ -36,10 +36,10 @@ function App() {
           }
         />
         <Route
-          path='/adminDashboard'
+          path="/adminDashboard"
           element={
             <>
-              <AdminDashboardView/>
+              <AdminDashboardView />
               <Footer />
             </>
           }
@@ -63,7 +63,7 @@ function App() {
           }
         />
         <Route
-         path='/detail/:id'
+          path="/detail/:id"
           element={
             <>
               <DetailView />

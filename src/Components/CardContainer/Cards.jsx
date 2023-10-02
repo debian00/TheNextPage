@@ -5,7 +5,6 @@ const Cards = ({ allBooks }) => {
   return (
     <div className={style.container}>
       {allBooks?.map((ele) => {
-        console.log(ele)
         return (
           <Card
             key={ele.id}

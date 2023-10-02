@@ -1,27 +1,26 @@
-import { useDispatch, useSelector } from 'react-redux'
+/* eslint-disable react/prop-types */
+import { useDispatch } from 'react-redux'
 import Cards from '../../../Components/CardContainer/Cards'
 import styles from './RenderCard.module.css'
 import { getAllBooks } from '../../../redux/actions/actionGet'
 import { useEffect, useState } from 'react'
 
-function RenderCard() {
-  const allBooks = useSelector((state) => state.books)
+// eslint-disable-next-line react/prop-types
+function RenderCard({ filter, setFilter }) {
+  const [books, setBooks] = useState([])
   const dispatch = useDispatch()
-  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     console.log('Llegaste al final de la página, cargando más libros...')
-    dispatch(getAllBooks({ page: 1 }))
 
     const handleScroll = () => {
-      if (
-        window.scrollY + window.innerHeight >=
-        document.documentElement.scrollHeight
-      ) {
+      const scrollHeight = document.documentElement.scrollHeight
+      const scrollPosition = window.scrollY + window.innerHeight
+      const scrollThreshold = 0.9
+      if (scrollPosition >= scrollHeight * scrollThreshold) {
         // Si el usuario ha llegado al final de la página, carga más libros
-        const nextPage = currentPage + 1
-        dispatch(getAllBooks({ page: nextPage }))
-        setCurrentPage(nextPage)
+        const nextPage = filter.page + 1
+        setFilter({ ...filter, page: nextPage })
       }
     }
 
@@ -41,11 +40,22 @@ function RenderCard() {
     return () => {
       window.removeEventListener('scroll', throttleScroll)
     }
-  }, [dispatch, currentPage])
+  }, [dispatch, filter])
+
+  useEffect(() => {
+    dispatch(getAllBooks(filter)).then((response) => {
+      if (filter.page === 1) {
+        console.log('aaaaaaaaapaa', response)
+        setBooks(response.payload.books)
+      } else {
+        setBooks((prevBooks) => [...prevBooks, ...response.payload.books])
+      }
+    })
+  }, [filter, dispatch])
 
   return (
     <div className={`${styles.cardCont} `}>
-      <Cards allBooks={allBooks}></Cards>
+      <Cards allBooks={books}></Cards>
     </div>
   )
 }

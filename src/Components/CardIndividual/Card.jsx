@@ -2,7 +2,6 @@
 import { Link } from 'react-router-dom'
 import style from './card.module.css'
 const Card = ({ title, price, author, image, id }) => {
-  console.log(title)
   return (
     <div
       style={{

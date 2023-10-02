@@ -9,7 +9,6 @@ import {
   GET_ALL_GENRES,
   GET_BOOKS_NAME,
   GET_ALL_BOOKS_COPY,
-
   GET_BOOKS_BY_NAME,
   UPDATE_BOOK,
 } from './types'
@@ -28,15 +27,21 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_BOOKS:
-      const existingBookIds = new Set(state.books.map((book) => book.id))
+      const { books: newBooks, currentPage } = action.payload
+      let updatedBooks
 
-      const newBooks = action.payload.rows.filter(
-        (book) => !existingBookIds.has(book.id)
-      )
+      if (currentPage === 1) {
+        // Si es la primera página, reemplaza los libros existentes con los nuevos resultados
+        updatedBooks = newBooks
+      } else {
+        // Si no es la primera página, concatena los nuevos resultados con los libros existentes
+        updatedBooks = [...state.books, ...newBooks]
+      }
 
-      const updatedBooks = [...state.books, ...newBooks]
-      return { ...state, books: updatedBooks }
-
+      return {
+        ...state,
+        books: updatedBooks,
+      }
     case GET_ALL_BOOKS_COPY:
       return { ...state, books: action.payload }
 
@@ -69,8 +74,8 @@ const rootReducer = (state = initialState, action) => {
     case GET_BOOKS_BY_NAME:
       return { ...state, booksSearch: action.payload }
     case UPDATE_BOOK:
-      return {...state, books: action.payload}
-      default:
+      return { ...state, books: action.payload }
+    default:
       return state
   }
 }
