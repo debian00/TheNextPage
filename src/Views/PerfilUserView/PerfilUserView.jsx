@@ -1,6 +1,6 @@
 // import React from 'react';
 import style from './perfiluserview.module.css'
-import perfil from '../../assets/imghome/perfil.jpg'
+import perfil from '../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
 import EditarPerfilView from './EditarPerfilView/EditarPerfilView'
 import { useEffect, useState } from 'react'
 import FavoritosView from './FavoritosView/FavoritosView'

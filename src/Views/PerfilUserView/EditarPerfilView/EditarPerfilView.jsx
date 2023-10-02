@@ -9,7 +9,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import perfil from '../../../assets/imghome/perfil.jpg'
+import perfil from '../../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
 import style from './editarperfilview.module.css'
 
 const EditarPerfilView = () => {

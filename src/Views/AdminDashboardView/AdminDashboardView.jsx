@@ -1,6 +1,6 @@
 // import React from 'react'
 import style from './admindashboard.module.css'
-import perfil from '../../assets/imghome/perfil.jpg'
+import perfil from '../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
 
 import { useEffect, useState } from 'react'
 import EditarPerfilView from '../PerfilUserView/EditarPerfilView/EditarPerfilView'
@@ -254,7 +254,9 @@ const AdminDashboardView = () => {
             <CrearLibroView />
           </div>
         ): (
-          <h1>No hay nada</h1>
+          <div className={`col-9 ${style.content}`}>
+            <h1>Soy el componente ofertas</h1>
+        </div>
         )}
       </div>
     </div>
