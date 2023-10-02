@@ -20,11 +20,16 @@ function CatalogueView() {
     page: 1,
     order: '',
     author: '',
+    title: '',
   })
 
   const handleChange = (e) => {
     const { value, name } = e.target
     setFilter({ ...filter, [name]: value, page: 1 })
+  }
+
+  const handlePrice = (min, max) => {
+    setFilter({ ...filter, priceMin: min, priceMax: max, page: 1 })
   }
 
   const handleChecked = (e) => {
@@ -63,11 +68,31 @@ function CatalogueView() {
               }}
               className={`form-label ${styles.label}`}
             >
+              Titulo
+            </label>
+            <input
+              onChange={handleChange}
+              name={'title'}
+              className={styles.author}
+              value={filter.title}
+            ></input>
+          </div>
+          <div className={`${styles.filterInput}`}>
+            <label
+              htmlFor="inputName"
+              style={{
+                marginRight: '10px',
+                fontSize: '18px',
+                fontWeight: 'bolder',
+              }}
+              className={`form-label ${styles.label}`}
+            >
               Autor
             </label>
             <input
               onChange={handleChange}
               name={'author'}
+              className={styles.author}
               value={filter.author}
             ></input>
           </div>
@@ -131,12 +156,7 @@ function CatalogueView() {
               <p
                 style={{ marginBottom: '5px', cursor: 'pointer' }}
                 onClick={() => {
-                  setFilter({
-                    ...filter,
-                    priceMin: 0,
-                    priceMax: 0,
-                    page: 1,
-                  })
+                  handlePrice(0, 0)
                 }}
               >
                 Todos
@@ -144,12 +164,7 @@ function CatalogueView() {
               <p
                 style={{ marginBottom: '5px', cursor: 'pointer' }}
                 onClick={() => {
-                  setFilter({
-                    ...filter,
-                    priceMin: 2000,
-                    priceMax: 4999,
-                    page: 1,
-                  })
+                  handlePrice(2000, 4999)
                 }}
               >
                 Entre 2000 - 4999
@@ -157,12 +172,7 @@ function CatalogueView() {
               <p
                 style={{ marginBottom: '5px', cursor: 'pointer' }}
                 onClick={() => {
-                  setFilter({
-                    ...filter,
-                    priceMin: 5000,
-                    priceMax: 11999,
-                    page: 1,
-                  })
+                  handlePrice(5000, 11999)
                 }}
               >
                 Entre 5000 - 11999
@@ -170,12 +180,7 @@ function CatalogueView() {
               <p
                 style={{ marginBottom: '5px', cursor: 'pointer' }}
                 onClick={() => {
-                  setFilter({
-                    ...filter,
-                    priceMin: 12000,
-                    priceMax: 17999,
-                    page: 1,
-                  })
+                  handlePrice(12000, 17999)
                 }}
               >
                 Entre 12000 - 17999
@@ -183,12 +188,7 @@ function CatalogueView() {
               <p
                 style={{ marginBottom: '5px', cursor: 'pointer' }}
                 onClick={() => {
-                  setFilter({
-                    ...filter,
-                    priceMin: 18000,
-                    priceMax: 20000,
-                    page: 1,
-                  })
+                  handlePrice(18000, 20000)
                 }}
               >
                 Entre 18000 - 20000

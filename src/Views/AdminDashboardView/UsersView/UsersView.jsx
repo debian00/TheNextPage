@@ -28,8 +28,8 @@ const UsersView = () => {
       '¿Estás seguro que quieres suspender este usuario?'
     )
     if (confirmed) {
-      dispatch(stopUserById(id))
       setRefresh(getAllUsers())
+      dispatch(stopUserById(id))
     }
   }
   //Funcion para reactivaar usuario
@@ -37,8 +37,8 @@ const UsersView = () => {
     e.preventDefault()
     const confirmed = window.confirm('¿Deseas reactivar este usuario?')
     if (confirmed) {
-      dispatch(restoreUserById(id))
       setRefresh(getAllUsers())
+      dispatch(restoreUserById(id))
     }
   }
   //Funcion para eliminar usuario
@@ -48,8 +48,8 @@ const UsersView = () => {
       '¿Estás seguro que quieres eliminar este usuario?'
     )
     if (confirmed) {
-      dispatch(deleteUserById(id))
       setRefresh(getAllUsers())
+      dispatch(deleteUserById(id))
     }
   }
 
@@ -65,8 +65,8 @@ const UsersView = () => {
       '¿Estas seguro que quieres cambiar el rol a admin?'
     )
     if (confirmed) {
-      dispatch(userToAdmin(id))
       setRefresh(getAllUsers())
+      dispatch(userToAdmin(id))
     }
   }
 
@@ -76,14 +76,18 @@ const UsersView = () => {
       '¿Estas seguro que quieres cambiar el rol a usuario?'
     )
     if (confirmed) {
-      dispatch(adminToUser(id))
       setRefresh(getAllUsers())
+      dispatch(adminToUser(id))
     }
   }
   //Funcion para enviar las promociones
   const handleSendMessage = (email) => {
-    console.log("llego el email", email);
+    const confirmed = window.confirm(
+      '¿Deseas enviar esta promocion al usuario?'
+    )
+    if (confirmed) {
     dispatch(postPromotion(email))
+    }
   }
 
   //Ciclo de vida del componente con el useEffect
@@ -110,7 +114,6 @@ const UsersView = () => {
             <th scope="col">Usuario</th>
             <th scope="col">Nombre</th>
             <th scope="col">Email</th>
-            <th scope="col">Teléfono</th>
             <th scope="col">Tipo usuario</th>
             <th scope="col">Cambiar rol a</th>
             <th scope="col">Promocion</th>
@@ -158,12 +161,6 @@ const UsersView = () => {
                   style={{ backgroundColor: ele.hide ? '#edd55e' : '#9bdb92' }}
                 >
                   {ele.email}
-                </td>
-                {/* Telefono */}
-                <td
-                  style={{ backgroundColor: ele.hide ? '#edd55e' : '#9bdb92' }}
-                >
-                  {ele.phoneNumber}
                 </td>
                 {/* Tipo Usuario */}
                 <td

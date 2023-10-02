@@ -139,10 +139,10 @@ const Navbar = () => {
               <Link to={'/'}>INICIO</Link>
             </li>
             <li>
-              <Link to="/aboutus">NOSOTROS</Link>
+              <Link to="/catalogue">CATALOGO</Link>
             </li>
             <li>
-              <Link to="/catalogue">CATALOGO</Link>
+              <Link to="/aboutus">NOSOTROS</Link>
             </li>
             <li>
               <Link to="/faq">FAQ</Link>

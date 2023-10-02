@@ -95,3 +95,10 @@ body {
 .select:hover {
   color: rgb(140, 69, 156);
 }
+.author {
+  width: 100%;
+  background-color: #d1d1d1;
+  padding: 5px;
+  border-radius: 50px;
+  border: 1px solid #31394d;
+}

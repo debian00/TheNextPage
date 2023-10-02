@@ -9,18 +9,11 @@ const CardHome = ({ books, author }) => {
   const fetchBook = async () => {
     if (books) {
       let allBooks = []
-      for (let i = 1; i <= 4; i++) {
-        const { data } = await axios.get(`/books?page=${i}&size=10`)
-        allBooks = [...allBooks, ...data.rows]
-      }
-      setBook(allBooks.filter((ele) => ele.title.includes(books)))
-    } else if (author) {
-      let allBooks = []
-      for (let i = 1; i <= 4; i++) {
-        const { data } = await axios.get(`/books?page=${i}&size=10`)
-        allBooks = [...allBooks, ...data.rows]
-      }
-      setBook(allBooks.filter((ele) => ele.author[0].includes(author)))
+      const { data } = await axios.get(`/books?page=1&size=10&title=${books}`)
+      setBook(data.rows)
+    } else {
+      const { data } = await axios.get(`/books?page=1&size=10&author=${author}`)
+      setBook(data.rows)
     }
   }
   useEffect(() => {
