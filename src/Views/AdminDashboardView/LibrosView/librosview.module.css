@@ -1,6 +1,6 @@
 .cardCont {
   display: flex;
-
+  margin-top: 1rem;
   flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en filas */
   justify-content: space-between; /* Distribuye las tarjetas horizontalmente */
 

@@ -105,7 +105,7 @@ const Librosview = () => {
 
   return (
     <div>
-      <div className={style.miNavbar}>
+      {/* <div className={style.miNavbar}>
         <div className="row">
           <div className="col-3">
             <select className={style.select}>
@@ -133,7 +133,7 @@ const Librosview = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
       <div className={style.cardCont}>
         {allBooks?.rows?.map((ele) => (
           <div className={style.card} key={ele.id}>
