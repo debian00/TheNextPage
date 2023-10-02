@@ -65,7 +65,7 @@ const Navbar = () => {
   }
 
   const handleSubmit = (e) => {
-    navigate(`/calogue?genre=${e}`)
+    navigate(`/catalogue?genre=${e}`)
   }
 
   return (
@@ -138,17 +138,6 @@ const Navbar = () => {
             <li>
               <Link to={'/'}>INICIO</Link>
             </li>
-            <li
-              id="dropdown"
-              onClick={handleDrop}
-              style={{
-                color: '#AAEEC4',
-                fontFamily: "'Avenir'",
-                cursor: 'pointer',
-              }}
-            >
-              GENEROS
-            </li>
 
             <li>
               <Link>NOSOTROS</Link>
@@ -160,6 +149,18 @@ const Navbar = () => {
         </div>
         <SearchBar></SearchBar>
         <div className={style.profile}>
+          <Link
+            to={'/admindashboard'}
+            // id="dropdown"
+            // onClick={handleDrop}
+            // style={{
+            //   color: '#AAEEC4',
+            //   fontFamily: "'Avenir'",
+            //   cursor: 'pointer',
+            // }}
+          >
+            ADMIN
+          </Link>
           <Link>INGRESAR</Link>
           <Profile width={40}></Profile>
         </div>
@@ -172,7 +173,7 @@ const Navbar = () => {
         <ul>
           {genres?.map((ele) => {
             return (
-              <li onClick={() => handleSubmit(ele.name)} key={ele.id}>
+              <li onClick={() => handleSubmit(ele.id)} key={ele.id}>
                 {ele.name}
               </li>
             )

@@ -1,21 +1,12 @@
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useState, useRef } from 'react'
 import styles from '../CatalogueView/catalogue.module.css'
 import RenderCard from './RenderCard/RenderCard'
-import { useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { getGenres } from '../../redux/actions/actionGet'
+import { useSelector } from 'react-redux'
 
 function CatalogueView() {
-  const location = useLocation()
   const [visibleGenres, setVisibleGenres] = useState(10)
 
   const genres = useSelector((state) => state.genres)
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getGenres())
-  }, [dispatch])
-  const searchParams = new URLSearchParams(location.search)
-  const genreValue = searchParams.get('genre')
 
   const [checkedGenre, setCheckedGenre] = useState({})
   const [selectGenre, setSelectGenre] = useState({})
@@ -27,7 +18,14 @@ function CatalogueView() {
     publishYearMin: 1814,
     publishYearMax: 2023,
     page: 1,
+    order: '',
+    author: '',
   })
+
+  const handleChange = (e) => {
+    const { value, name } = e.target
+    setFilter({ ...filter, [name]: value, page: 1 })
+  }
 
   const handleChecked = (e) => {
     const { name, value, checked } = e.target
@@ -55,6 +53,24 @@ function CatalogueView() {
           >
             Preferencias
           </h3>
+          <div className={`${styles.filterInput}`}>
+            <label
+              htmlFor="inputName"
+              style={{
+                marginRight: '10px',
+                fontSize: '18px',
+                fontWeight: 'bolder',
+              }}
+              className={`form-label ${styles.label}`}
+            >
+              Autor
+            </label>
+            <input
+              onChange={handleChange}
+              name={'author'}
+              value={filter.author}
+            ></input>
+          </div>
           <div className={`${styles.filterInput}`}>
             <label
               htmlFor="inputName"
@@ -182,6 +198,39 @@ function CatalogueView() {
         </div>
 
         <div className={styles.render}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'right',
+              padding: '20px',
+            }}
+          >
+            {/* <button
+              onClick={() => {
+                setFilter({ ...filter, order: 'titleAsc' })
+              }}
+            >
+              ORDENAR
+            </button> */}
+            <select
+              name="order"
+              onChange={handleChange}
+              className={styles.select}
+            >
+              <option value={'titleAsc'} name={'order'}>
+                Ordernar A-Z
+              </option>
+              <option value={'titleDesc'} name={'order'}>
+                Ordernar Z-A
+              </option>
+              <option value={'sellPriceAsc'} name={'order'}>
+                Ordernar precio menor - mayor
+              </option>
+              <option value={'sellPriceDesc'} name={'order'}>
+                Ordernar precio mayor - menor
+              </option>
+            </select>
+          </div>
           <RenderCard filter={filter} setFilter={setFilter}></RenderCard>
         </div>
       </div>

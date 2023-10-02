@@ -9,17 +9,26 @@ import {
   SEARCH_USER_BY_NAME,
   GET_ALL_BOOKS_COPY,
   GET_BOOKS_BY_NAME,
+  GET_ALL_AUTHORS,
 } from '../types'
 
-export const getAllBooks = ({ priceMin, priceMax, page, genre }) => {
+export const getAllBooks = ({
+  priceMin,
+  priceMax,
+  page,
+  genre,
+  order,
+  author,
+}) => {
   if (priceMax == 0) priceMax = ''
   if (priceMin == 0) priceMin = ''
+
   const genresId = genre.join(',')
   console.log(priceMax, priceMin)
   return async (dispatch) => {
     try {
       const { data } = await axios(
-        `/books?page=${page}&size=10&priceMin=${priceMin}&priceMax=${priceMax}&genre=${genresId}`
+        `/books?page=${page}&size=10&priceMin=${priceMin}&priceMax=${priceMax}&genre=${genresId}&order=${order}&author=${author}`
       )
       console.log(data)
       return dispatch({
@@ -52,6 +61,20 @@ export const getBookById = (id) => {
       const { data } = await axios('/books/' + id)
       return dispatch({
         type: GET_BOOK_BY_ID,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getAuthors = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios('/author')
+      dispatch({
+        type: GET_ALL_AUTHORS,
         payload: data,
       })
     } catch (error) {
