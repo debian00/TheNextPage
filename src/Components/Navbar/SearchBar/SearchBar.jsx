@@ -33,7 +33,6 @@ const SearchBar = () => {
   })
 
   useEffect(() => {
-    setVisible(true)
     dispatch(getBooksSearch(search))
   }, [dispatch, search])
 
@@ -45,7 +44,6 @@ const SearchBar = () => {
   return (
     <div className={style.inputContainer}>
       <input
-        type="text"
         onChange={handleSearch}
         name="text"
         className={style.input}
