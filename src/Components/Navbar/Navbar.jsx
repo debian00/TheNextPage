@@ -149,13 +149,16 @@ const Navbar = () => {
             >
               GENEROS
             </li>
-
             <li>
-              <Link>NOSOTROS</Link>
+              <Link to="/aboutus">NOSOTROS</Link>
             </li>
             <li>
               <Link to="/catalogue">CATALOGO</Link>
             </li>
+            <li>
+              <Link to="/faq">FAQ</Link>
+            </li>
+            
           </ul>
         </div>
         <SearchBar></SearchBar>
