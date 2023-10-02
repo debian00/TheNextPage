@@ -22,8 +22,11 @@ const Navbar = () => {
   const [fixed, setFixed] = useState(false)
   const [dropdown, setDropdown] = useState(false)
   const genres = useSelector((state) => state.genres)
-  const dropdownRef = useRef(null)
-  const dispatch = useDispatch()
+  const dropdownRef = useRef(null);
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token")
+
+
   useEffect(() => {
     dispatch(getGenres())
   }, [])
@@ -160,8 +163,12 @@ const Navbar = () => {
         </div>
         <SearchBar></SearchBar>
         <div className={style.profile}>
-          <Link>INGRESAR</Link>
-          <Profile width={40}></Profile>
+        {token 
+        ? <><Link to="/userPanel"> MI PERFIL</Link></>
+        : <><Link to="/check">INGRESAR</Link>
+          <Profile width={40}></Profile></>
+          }  
+          
         </div>
       </nav>
 

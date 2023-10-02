@@ -9,6 +9,9 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3001'
 import CatalogueView from './Views/CatalogueView/CatalogueView'
 import AdminDashboardView from './Views/AdminDashboardView/AdminDashboardView'
+import LoginAndRegister from "./Views/Login&Register/Login&Register"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 function App() {
   return (
@@ -75,6 +78,15 @@ function App() {
             <>
               <CatalogueView />
               <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/check'
+          element={
+            <>
+              <LoginAndRegister/>
+              <Footer/>
             </>
           }
         />
