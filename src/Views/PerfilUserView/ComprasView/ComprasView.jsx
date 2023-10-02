@@ -1,4 +1,5 @@
 // import React from 'react';
+import ReseñasView from '../ReseñasView/ReseñasView';
 import style from './comprasview.module.css'
 
 const ComprasView = () => {
@@ -27,10 +28,7 @@ const ComprasView = () => {
             </p>
           </div>
           <div className={style.productPriceBtn}>
-            <p>
-              <span>$78</span>
-            </p>
-            <button type="button">Reseña</button>
+            <button type="button" onClick={() => <ReseñasView/>}>Reseña</button>
           </div>
         </div>
       </div>
@@ -56,10 +54,10 @@ const ComprasView = () => {
             </p>
           </div>
           <div className={style.productPriceBtn}>
-            <p>
-              <span>$78</span>
-            </p>
-            <button type="button">Reseña</button>
+       
+                <button type="button">Reseña</button>
+
+            
           </div>
         </div>
       </div>
