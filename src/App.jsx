@@ -9,6 +9,8 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3001'
 import CatalogueView from './Views/CatalogueView/CatalogueView'
 import AdminDashboardView from './Views/AdminDashboardView/AdminDashboardView'
+import AboutUs from "./Views/AboutUsView/AboutUsView"
+import FAQ from './Views/FaqView/FaqView'
 
 function App() {
   return (
@@ -74,6 +76,24 @@ function App() {
           element={
             <>
               <CatalogueView />
+              <Footer />
+            </>
+          }
+        />
+         <Route
+          path="/aboutus"
+          element={
+            <>
+              <AboutUs />
+              <Footer />
+            </>
+          }
+        />
+         <Route
+          path="/faq"
+          element={
+            <>
+              <FAQ />
               <Footer />
             </>
           }
