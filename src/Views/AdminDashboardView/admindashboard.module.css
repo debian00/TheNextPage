@@ -32,7 +32,6 @@
 }
 
 .menu h4 {
-  font-family: var(--fuente-principal);
   color: black;
   background-color: #e8e8e8;
   margin: 0;
@@ -52,7 +51,6 @@
 .menuList a {
   text-decoration: none;
   color: #000000;
-  font-family: var(--fuente-principal);
   transition: background-color 0.3s; /* Agregar transición para suavizar el efecto */
 }
 
