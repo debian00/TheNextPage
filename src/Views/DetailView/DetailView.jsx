@@ -3,16 +3,29 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getBookById } from '../../redux/actions/actionGet';
 import styles from './detail.module.css'; // Importa los estilos CSS
 import { useParams } from "react-router-dom";
+import { getGenres } from '../../redux/actions/actionGet'; 
 
 function DetailView() {
   const { id } = useParams();
   const bookData = useSelector((state) => state.bookById);
-
+  const genres = useSelector((state) => state.genres);
+  console.log("trae los géneros",genres);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getBookById(id));
+    dispatch(getGenres());
   }, [dispatch, id]);
+    // Función para obtener el nombre del género a partir del ID
+    console.log("bookdatagenre",bookData.genre)
+    const getGenreName = (genreId) => {
+      console.log("generos",genres);
+      const genre = genres.find((g) => g.id === genreId);
+      console.log("genreid", genreId);
+      console.log("genre", genre);
+      return genre ? genre.name : 'Desconocido'; // Puedes manejar el caso de género desconocido según tus necesidades
+      
+    };
     
   return (
     <div className={styles.container}>
@@ -28,7 +41,7 @@ function DetailView() {
             <div className={`page__content-blockquote ${styles['page__content-blockquote']}`}>
               <p className={`page__content-blockquote-text ${styles['page__content-blockquote-text']}`}>{bookData.description} </p>
               
-              <span className={`page__content-blockquote-reference ${styles['page__content-blockquote-reference']}`}>Encyclopedia Galactica*</span>
+              <span className={`page__content-blockquote-reference ${styles['page__content-blockquote-reference']}`}>The Next Page Library</span>
             </div>
             <div className={`page__number ${styles['page__number']}`}>3</div>
           </div>
@@ -45,7 +58,8 @@ function DetailView() {
 
               <p className={`page__content-credits ${styles['page__content-credits']}`}>
                 GÉNERO
-                <span>{bookData.genre} </span>
+                <span>{getGenreName(bookData.id)} </span>
+                
               </p>
 
               <p className={`page__content-credits ${styles['page__content-credits']}`}>

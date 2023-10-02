@@ -14,7 +14,8 @@ const Librosview = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   //Estado para el formulario
   const [form, setForm] = useState({
-    tittle: '',
+    id: '',
+    title: '',
     author: [],
     description: '',
     genre: [],
@@ -22,11 +23,12 @@ const Librosview = () => {
     images: [],
     sellPrice: '',
     stock: '',
+    availability: true,
   })
   //Estado para manejar los errores
   const [errors, setErrors] = useState({
-    tittle: '',
-    author: [],
+    title: '',
+    author: '',
     description: '',
     genre: [],
     publicationYear: '',
@@ -45,17 +47,17 @@ const Librosview = () => {
     return <div>{descripcion}</div>
   }
   //Funcion para recortar la cantinda de letras en la descripcion
-  const tittleCut = (tittle) => {
-    if (tittle.length > 20) {
-      const newTittle = tittle.split('').slice(0, 20).join('')
+  const tittleCut = (title) => {
+    if (title.length > 20) {
+      const newTittle = title.split('').slice(0, 20).join('')
       return <div>{newTittle}</div>
     }
-    return <div>{tittle}</div>
+    return <div>{title}</div>
   }
   //Funcion para enviar la info
   const handleUpdate = async (e) => {
     e.preventDefault()
-    await dispatch(updateBook(form))
+    await axios.put(`/books/update/${form.id}`, form)
   }
   //Funcion para manejar los campos
   const handleChange = (e) => {
@@ -100,25 +102,25 @@ const Librosview = () => {
   }
   //Paginado
   const scrollToTop = () => {
-    window.scrollTo({behavior:"smooth", top:0})
-   };
- 
-   const [currentPage, setCurrentPage] = useState(0)
-   const totalProp = Math.ceil(allBooks.count / 10);
- 
-   const nextHandler = () => {
-     scrollToTop()
-     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalProp - 1));
-   };
- 
-   const prevHandler = () => {
-     scrollToTop()
-     setCurrentPage((prevPage) => Math.max(prevPage - 1, 0));
-   };
- 
-   useEffect(() => {
-     dispatch(getAllBooksCopy(currentPage));
-   }, [currentPage, dispatch]);
+    window.scrollTo({ behavior: 'smooth', top: 0 })
+  }
+
+  const [currentPage, setCurrentPage] = useState(0)
+  const totalProp = Math.ceil(allBooks.count / 10)
+
+  const nextHandler = () => {
+    scrollToTop()
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalProp - 1))
+  }
+
+  const prevHandler = () => {
+    scrollToTop()
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 0))
+  }
+
+  useEffect(() => {
+    dispatch(getAllBooksCopy(currentPage))
+  }, [currentPage, dispatch])
 
   //Manejo ciclo de vida del componente con useEffect
   useEffect(() => {
@@ -182,12 +184,13 @@ const Librosview = () => {
                 onClick={() => {
                   setIsModalOpen(true)
                   setForm({
-                    tittle: ele.title,
-                    author: ele.author, 
+                    id: ele.id,
+                    title: ele.title,
+                    author: ele.author,
                     description: ele.description,
-                    genre: ele.genre, 
+                    genre: ele.genre,
                     publicationYear: ele.publicationYear,
-                    images: ele.images,
+                    images: ele.images[0],
                     sellPrice: ele.sellPrice,
                     stock: ele.stock,
                   })
@@ -228,16 +231,16 @@ const Librosview = () => {
         ))}
       </div>
       <div className={style.buttonContainer}>
-          <button onClick={prevHandler} className={style.button}>
-            PREV
-          </button>
-          <p>
-            Pagina {currentPage + 1} de {totalProp}
-          </p>
-          <button onClick={nextHandler} className={style.button}>
-            NEXT
-          </button>
-        </div>
+        <button onClick={prevHandler} className={style.button}>
+          PREV
+        </button>
+        <p>
+          Pagina {currentPage + 1} de {totalProp}
+        </p>
+        <button onClick={nextHandler} className={style.button}>
+          NEXT
+        </button>
+      </div>
       <div
         className={`modal fade ${style.customFade}`}
         id="exampleModalXl"
@@ -249,7 +252,7 @@ const Librosview = () => {
           <div className="modal-content ">
             <div className="modal-header">
               <h1 className="modal-title fs-4" id="exampleModalXlLabel">
-                Libro Elegido {form.tittle}
+                Libro Elegido {form.title}
               </h1>
               <button
                 type="button"
@@ -387,22 +390,20 @@ const Librosview = () => {
                     <div className="col-md-8">
                       <div className="card-body">
                         <div className="row justify-content-center d-flex">
-                          <div className="col-6">
+                          <div className="col-6 mb-3">
                             <h5 className="card-title mt-1">
                               Título del Libro
                             </h5>
                             <input
                               type="text"
                               className="form-control"
-                              name="tittle"
+                              name="title"
                               onChange={handleChange}
-                              value={form.tittle}
+                              value={form.title}
                               placeholder="Título"
                               required
                             />
                           </div>
-                        </div>
-                        <div className="row justify-content-center d-flex">
                           <div className="col-6">
                             <h5 className="card-title mt-1">Autor del Libro</h5>
                             <input
@@ -415,7 +416,9 @@ const Librosview = () => {
                               required
                             />
                           </div>
-                          <div className="col-6">
+                        </div>
+                        <div className="row justify-content-center d-flex">
+                          <div className="col-6 mb-3">
                             <h5 className="card-title mt-1">
                               Género del Libro
                             </h5>
@@ -429,8 +432,6 @@ const Librosview = () => {
                               required
                             />
                           </div>
-                        </div>
-                        <div className="row justify-content-center d-flex">
                           <div className="col-6">
                             <h5 className="card-title mt-1">
                               Año de Publicación del Libro
@@ -445,7 +446,9 @@ const Librosview = () => {
                               required
                             />
                           </div>
-                          <div className="col-6">
+                        </div>
+                        <div className="row justify-content-center d-flex">
+                          <div className="col-6 mb-3">
                             <h5 className="card-title mt-1">
                               Precio del Libro
                             </h5>
@@ -459,8 +462,6 @@ const Librosview = () => {
                               required
                             />
                           </div>
-                        </div>
-                        <div className="row justify-content-center d-flex">
                           <div className="col-6">
                             <h5 className="card-title mt-1">Stock</h5>
                             <input
@@ -473,19 +474,10 @@ const Librosview = () => {
                               required
                             />
                           </div>
-                          <div className="col-6">
-                            <h5 className="card-title mt-1">Disponibilidad</h5>
-                            <input
-                              type="text"
-                              className="form-control"
-                              name="disponibilidad"
-                              placeholder="Disponibilidad"
-                              required
-                            />
-                          </div>
                         </div>
+
                         <div className="row justify-content-center d-flex">
-                          <div className="col-12">
+                          <div className="col-12 mb-3">
                             <h5 className="card-title mt-1">
                               Descripción del Libro
                             </h5>
