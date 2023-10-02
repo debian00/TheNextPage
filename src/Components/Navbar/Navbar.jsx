@@ -146,7 +146,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link to="/faq">FAQ</Link>
-            </li>
+            </li>            
           </ul>
         </div>
         <SearchBar></SearchBar>
@@ -167,7 +167,6 @@ const Navbar = () => {
           <Profile width={40}></Profile>
         </div>
       </nav>
-
       <div
         ref={dropdownRef}
         className={`${style.dropdown} ${dropdown ? style.open : ''}`}
