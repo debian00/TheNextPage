@@ -20,7 +20,10 @@ const Card = ({ title, price, author, image, id }) => {
         style={{ display: 'flex', margin: 'auto 0', justifyContent: 'center' }}
       >
         <Link to={`/detail/${id}`}>
-          <img src={image} style={{ width: '150px' }} />
+          <img
+            src={image}
+            style={{ width: '150px', height: '221px', objectFit: 'cover' }}
+          />
         </Link>
       </div>
       <div>

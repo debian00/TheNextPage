@@ -11,6 +11,7 @@ import {
   GET_ALL_BOOKS_COPY,
   GET_BOOKS_BY_NAME,
   UPDATE_BOOK,
+  GET_ALL_AUTHORS,
 } from './types'
 
 const initialState = {
@@ -61,6 +62,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         genres: action.payload,
+      }
+    case GET_ALL_AUTHORS:
+      return {
+        ...state,
+        authors: action.payload,
       }
     case GET_ALL_USERS:
       return { ...state, users: action.payload }

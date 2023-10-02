@@ -84,3 +84,14 @@ body {
   display: block;
   margin-bottom: 5px;
 }
+
+.select {
+  padding: 10px 5px;
+  border-radius: 20px;
+  border: 2px solid rgb(140, 69, 156);
+  background-color: transparent;
+}
+
+.select:hover {
+  color: rgb(140, 69, 156);
+}
