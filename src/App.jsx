@@ -90,8 +90,9 @@ function App() {
               <LoginAndRegister/>
               <Footer/>
             </>
-          }/>
-          
+          }
+          />
+
          <Route
           path="/aboutus"
           element={

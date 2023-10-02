@@ -113,7 +113,7 @@ const Login = React.forwardRef((props,ref ) => {
                         <br></br>
                         <p className={style.span}>o </p>
                         <br></br>
-                        <button type="button">Accede con Google</button>
+                        <button type="button" className={style.buton}>Accede con Google</button>
                     </div>
                     </div>
                 </fieldset>

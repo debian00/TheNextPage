@@ -28,31 +28,31 @@
 .span {
   font-size: 25px;
 }
+.span:hover {
+  color: rgb(90, 16, 90);
+}
 
 .buton { 
-  position: absolute;
- /*  bottom: 80.5%;
-  left: 91%; */
-  top : 0;
-  right : 0;
-  transform: translate(-0%, 0%);
-  z-index: 2;
-  background-color: rgb(35, 90, 163);
+
+ 
+  
+  background-color: rgb(140, 82, 158);
   color: #ffffff;
   border: none;
   padding: 5px 5px;
   border-top-left-radius: none !important;
- /*  border-radius: 3px; */
+  border-radius: 5px;
   cursor: pointer;
   /* margin-top: 20px; */
-  width: 40px;
+
+  width: 200px;
   box-shadow: #06142d;
   transition: background-color 0.3s ease;
 
 }
 
 .buton:hover {
-  background-color: rgb(19, 60, 113);
+  background-color: rgb(110, 19, 113);
 }
 .label:focus, 
 .label:hover {
