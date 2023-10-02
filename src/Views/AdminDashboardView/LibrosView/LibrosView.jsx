@@ -98,6 +98,28 @@ const Librosview = () => {
   const handleDelete = () => {
     setForm({ ...form, images: '' })
   }
+  //Paginado
+  const scrollToTop = () => {
+    window.scrollTo({behavior:"smooth", top:0})
+   };
+ 
+   const [currentPage, setCurrentPage] = useState(0)
+   const totalProp = Math.ceil(allBooks.count / 10);
+ 
+   const nextHandler = () => {
+     scrollToTop()
+     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalProp - 1));
+   };
+ 
+   const prevHandler = () => {
+     scrollToTop()
+     setCurrentPage((prevPage) => Math.max(prevPage - 1, 0));
+   };
+ 
+   useEffect(() => {
+     dispatch(getAllBooksCopy(currentPage));
+   }, [currentPage, dispatch]);
+
   //Manejo ciclo de vida del componente con useEffect
   useEffect(() => {
     dispatch(getAllBooksCopy())
@@ -205,6 +227,17 @@ const Librosview = () => {
           </div>
         ))}
       </div>
+      <div className={style.buttonContainer}>
+          <button onClick={prevHandler} className={style.button}>
+            PREV
+          </button>
+          <p>
+            Pagina {currentPage + 1} de {totalProp}
+          </p>
+          <button onClick={nextHandler} className={style.button}>
+            NEXT
+          </button>
+        </div>
       <div
         className={`modal fade ${style.customFade}`}
         id="exampleModalXl"

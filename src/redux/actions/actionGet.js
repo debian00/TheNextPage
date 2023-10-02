@@ -42,10 +42,10 @@ export const getAllBooks = ({
   }
 }
 
-export const getAllBooksCopy = () => {
+export const getAllBooksCopy = (page) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`/books`)
+      const { data } = await axios(`/books?page=${page}`)
       return dispatch({
         type: GET_ALL_BOOKS_COPY,
         payload: data,
