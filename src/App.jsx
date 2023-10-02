@@ -9,6 +9,9 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3001'
 import CatalogueView from './Views/CatalogueView/CatalogueView'
 import AdminDashboardView from './Views/AdminDashboardView/AdminDashboardView'
+import LoginAndRegister from "./Views/Login&Register/Login&Register"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AboutUs from "./Views/AboutUsView/AboutUsView"
 import FAQ from './Views/FaqView/FaqView'
 
@@ -80,6 +83,16 @@ function App() {
             </>
           }
         />
+        <Route
+          path='/check'
+          element={
+            <>
+              <LoginAndRegister/>
+              <Footer/>
+            </>
+          }
+          />
+
          <Route
           path="/aboutus"
           element={
@@ -103,4 +116,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
