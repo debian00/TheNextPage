@@ -68,6 +68,7 @@ function CatalogueView() {
             <input
               onChange={handleChange}
               name={'author'}
+              className={styles.author}
               value={filter.author}
             ></input>
           </div>
