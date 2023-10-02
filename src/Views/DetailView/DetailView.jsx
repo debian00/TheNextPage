@@ -7,12 +7,13 @@ import { useParams } from "react-router-dom";
 function DetailView() {
   const { id } = useParams();
   const bookData = useSelector((state) => state.bookById);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getBookById(id));
   }, [dispatch, id]);
-
+    
   return (
     <div className={styles.container}>
     <div className={`cover ${styles.cover}`}>
