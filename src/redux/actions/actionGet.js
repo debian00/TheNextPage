@@ -28,7 +28,7 @@ export const getAllBooks = ({
   return async (dispatch) => {
     try {
       const { data } = await axios(
-        `/books?page=${page}&size=10&priceMin=${priceMin}&priceMax=${priceMax}&genre=${genresId}&order=${order}&author=${author}`
+        `/books?page=${page}&size=10&sellPriceMin=${priceMin}&sellPriceMax=${priceMax}&genre=${genresId}&order=${order}&author=${author}`
       )
       console.log(data)
       return dispatch({

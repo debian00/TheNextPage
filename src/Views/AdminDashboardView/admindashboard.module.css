@@ -11,7 +11,7 @@
   height: 100%;
   width: 280px;
   color: #fff;
-  background-color: #f8f8f8;
+  background-color: #e8e8e8;
   overflow-y: auto;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   align-items: center; /* Para centrar verticalmente */
@@ -34,8 +34,8 @@
 .menu h4 {
   font-family: var(--fuente-principal);
   color: black;
-  background-color: #f8f8f8;
-
+  background-color: #e8e8e8;
+  margin: 0;
   text-align: center;
 }
 

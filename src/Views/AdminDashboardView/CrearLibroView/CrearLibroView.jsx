@@ -111,8 +111,8 @@ const CrearLibroView = () => {
     <div>
       <h1>Componente Crear Libro</h1>
       <form onSubmit={handleSubmit}>
-        <div className="card mb-12">
-          <div className="row g-0">
+        <div className={` card mb-12`}>
+          <div className={` row g-0`}>
             <div className="col-md-4">
               {/* Agregar Imagenes */}
               <div
@@ -233,10 +233,10 @@ const CrearLibroView = () => {
               </div>
             </div>
 
-            <div className="col-md-8">
+            <div className={` col-md-8`}>
               <div className="card-body">
                 <div className="row justify-content-center d-flex">
-                  <div className="col-6">
+                  <div className="col-6 mb-3">
                     <h5 className="card-title mt-1">Título del Libro</h5>
                     <input
                       type="text"
@@ -248,19 +248,17 @@ const CrearLibroView = () => {
                       required
                     />
                   </div>
-                </div>
-                <div className="row justify-content-center d-flex">
-                  <div className="col-6">
+                  <div className="col-6 mb-3" style={{ gridArea: 'autor' }}>
                     <h5 className="card-title mt-1">Autor del Libro</h5>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="author"
-                      onChange={handleChange}
-                      value={form.author}
-                      placeholder="Autor"
-                      required
-                    />
+                    {/* <input
+                        type="text"
+                        className="form-control"
+                        name="author"
+                        onChange={handleChange}
+                        value={form.author}
+                        placeholder="Autor"
+                        required
+                      /> */}
                     <select
                       className="form-select"
                       name="author"
@@ -276,7 +274,9 @@ const CrearLibroView = () => {
                       ))}
                     </select>
                   </div>
-                  <div className="col-6">
+                </div>
+                <div className="row justify-content-center d-flex">
+                  <div className="col-6 mb-3">
                     <h5 className="card-title mt-1">Género del Libro</h5>
                     <select
                       className="form-select"
@@ -293,8 +293,6 @@ const CrearLibroView = () => {
                       ))}
                     </select>
                   </div>
-                </div>
-                <div className="row justify-content-center d-flex">
                   <div className="col-6">
                     <h5 className="card-title mt-1">
                       Año de Publicación del Libro
@@ -309,7 +307,9 @@ const CrearLibroView = () => {
                       required
                     />
                   </div>
-                  <div className="col-6">
+                </div>
+                <div className="row justify-content-center d-flex">
+                  <div className="col-6 mb-3">
                     <h5 className="card-title mt-1">Precio del Libro</h5>
                     <input
                       type="text"
@@ -321,8 +321,6 @@ const CrearLibroView = () => {
                       required
                     />
                   </div>
-                </div>
-                <div className="row justify-content-center d-flex">
                   <div className="col-6">
                     <h5 className="card-title mt-1">Stock</h5>
                     <input
@@ -335,6 +333,8 @@ const CrearLibroView = () => {
                       required
                     />
                   </div>
+                </div>
+                <div className="row justify-content-center d-flex">
                   {/* <div className="col-6">
                     <h5 className="card-title mt-1">Disponibilidad</h5>
                     <input
@@ -347,7 +347,7 @@ const CrearLibroView = () => {
                   </div> */}
                 </div>
                 <div className="row justify-content-center d-flex">
-                  <div className="col-12">
+                  <div className="col-12 mb-3">
                     <h5 className="card-title mt-1">Descripción del Libro</h5>
                     <textarea
                       className="form-control"
