@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import style from './librosview.module.css'
 import { useEffect, useState } from 'react'
 import { getAllBooksCopy } from '../../../redux/actions/actionGet'
-import { updateBook } from '../../../redux/actions/actionPut'
+// import { updateBook } from '../../../redux/actions/actionPut'
 import axios from 'axios'
 
 const Librosview = () => {
@@ -493,7 +493,7 @@ const Librosview = () => {
                         </div>
                         <div className="row justify-content-center d-flex">
                           <div className="col-12 mt-3">
-                            <button type="submit" className="btn btn-primary">
+                            <button type="submit" className="btn btn-primary" aria-label="Close">
                               Editar Libro
                             </button>
                           </div>
