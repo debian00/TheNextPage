@@ -14,6 +14,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AboutUs from "./Views/AboutUsView/AboutUsView"
 import FAQ from './Views/FaqView/FaqView'
+import ForgotPassword from './Views/ForgotPassword/ForgotPassword'
+import ResetPassword from './Views/ForgotPassword/ResetPassword'
 
 function App() {
   return (
@@ -111,6 +113,8 @@ function App() {
             </>
           }
         />
+         <Route path='/forgot-password' element={<ForgotPassword/>}></Route>
+      <Route path="/reset_password/:id/:token" element={<ResetPassword/>}></Route>
       </Routes>
     </>
   )
