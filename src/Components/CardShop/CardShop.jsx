@@ -1,28 +1,32 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom'
-import style from './card.module.css'
-const Card = ({ title, price, author, image, id }) => {
+import style from './CardShop.module.css'
+
+const CardShop = ({ title, image, price, id, author }) => {
   return (
     <div
       style={{
         padding: '20px',
         paddingBottom: '0',
         maxHeight: '530px',
-        width: '200px',
+        width: '100%',
         boxShadow:
           '0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1 )',
       }}
-      className={style.card}
     >
       <div
-        style={{ display: 'flex', margin: 'auto 0', justifyContent: 'center' }}
+        style={{
+          display: 'flex',
+          margin: 'auto 0',
+          justifyContent: 'center',
+        }}
       >
-        <Link to={`/detail/${id}`}>
-          <img
-            src={image}
-            style={{ width: '150px', height: '221px', objectFit: 'cover' }}
-          />
-        </Link>
+        <img
+          src={
+            'https://res.cloudinary.com/dkdounmsa/image/upload/v1695758724/Libros/wqvzgyradatr0vcb0466.webp'
+          }
+          style={{ width: '120px', height: '201px', objectFit: 'cover' }}
+        />
       </div>
       <div>
         <p
@@ -65,4 +69,4 @@ const Card = ({ title, price, author, image, id }) => {
   )
 }
 
-export default Card
+export default CardShop

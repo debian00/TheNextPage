@@ -45,7 +45,7 @@ const SearchBar = () => {
     <div className={style.inputContainer}>
       <input
         onChange={handleSearch}
-        name="text"
+        type="search"
         className={style.input}
         placeholder="Busca tu libro favorito"
         onClick={handleOnClose}
