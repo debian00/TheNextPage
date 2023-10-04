@@ -1,0 +1,94 @@
+.inputContainer {
+  position: relative;
+}
+
+.input {
+  font-size: 1em;
+  padding: 0.4em 2em;
+  border: none;
+  border-radius: 6px;
+  background-color: #e8e8e8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+  width: 351px;
+  color: #333;
+  z-index: 5;
+}
+
+.input:hover {
+  background-color: #f2f2f2;
+}
+
+.input:focus {
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input::placeholder {
+  color: #999;
+}
+
+.highlight {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #6c63ff;
+  transition: width 0.3s ease;
+}
+
+.input:focus + .highlight {
+  width: 100%;
+}
+
+/* Optional: Animation on focus */
+@keyframes input-focus {
+  from {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+  }
+
+  to {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.input:focus {
+  animation: input-focus 0.3s ease;
+}
+
+.dropdown {
+  display: flex;
+  width: 351px;
+  flex-direction: column;
+  position: absolute;
+  gap: 0;
+  top: 33px;
+  z-index: 3;
+}
+.dropdown ul {
+  gap: 0;
+  display: flex;
+  width: 351px;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown ul li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown ul li:hover {
+  background-color: #f2f2f2;
+}

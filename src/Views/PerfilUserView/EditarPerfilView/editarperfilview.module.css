@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Courgette&family=Kaushan+Script&family=Noto+Sans+HK:wght@600&family=Pacifico&display=swap');
+.containerImagen {
+  /* background: linear-gradient(to bottom, #8b8b8b, #000000); */
+  border-radius: 15px;
+  margin-bottom: 15px;
+  /* box-shadow: 0px 4px 6px #6693e2; */
+}
+.firma {
+  font-family: 'Allura', cursive;
+  z-index: 15;
+  position: absolute;
+  right: 5px;
+  color: #333;
+
+  margin: 10px;
+  margin-top: 200px;
+}
+
+.buttons {
+  padding-inline: 40px;
+  padding-block: 5px;
+  background: #091f44;
+  border: none;
+  border-radius: 10px;
+  color: #eee;
+}
+
+.buttons:hover {
+  background: #0e2f6a;
+}

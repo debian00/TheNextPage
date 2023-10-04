@@ -1,0 +1,11 @@
+.landing {
+  width: 100%;
+  position: relative;
+  padding-inline: 50px;
+  padding-block: 20px;
+}
+
+.landing img {
+  max-height: 300px;
+  object-fit: cover;
+}

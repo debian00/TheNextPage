@@ -1,163 +1,102 @@
-.site_footer
-{
-  background-color:#26272b;
-  padding:45px 0 20px;
-  font-size:15px;
-  line-height:24px;
-  color:#737373;
+
+
+@import url('https://fonts.cdnfonts.com/css/avenir');
+
+body{
+  line-height: 1.5;
+  font-family: 'Avenir', sans-serif;
 }
-.site_footer hr
-{
-  border-top-color:#bbb;
-  opacity:0.5
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
 }
-.site_footer hr.small
-{
-  margin:20px 0
+.container{
+  max-width: 1170px;
+  margin:auto;
 }
-.site_footer h6
-{
-  color:#fff;
-  font-size:16px;
-  text-transform:uppercase;
-  margin-top:5px;
-  letter-spacing:2px
+.row{
+  display: flex;
+  flex-wrap: wrap;
 }
-.site_footer a
-{
-  color:#737373;
+ul{
+  list-style: none;
 }
-.site_footer a:hover
-{
-  color:#3366cc;
-  text-decoration:none;
+.footer{
+  background-color: #24262b;
+    padding: 70px 0;
 }
-.footer_links
-{
-  padding-left:0;
-  list-style:none
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
 }
-.footer_links li
-{
-  display:block
+.footer-col h4{
+  font-size: 18px;
+  color: #ffffff;
+  text-transform: capitalize;
+  margin-bottom: 35px;
+  font-weight: 500;
+  position: relative;
+  font-family: 'Avenir', sans-serif;
 }
-.footer_links a
-{
-  color:#737373
+.footer-col h4::before{
+  content: '';
+  position: absolute;
+  left:0;
+  bottom: -10px;
+  background-color: #aaeec4;
+  height: 2px;
+  box-sizing: border-box;
+  width: 50px;
+  font-family: 'Avenir', sans-serif;
 }
-.footer_links a:active,.footer_links a:focus,.footer_links a:hover
-{
-  color:#3366cc;
-  text-decoration:none;
+.footer-col ul li:not(:last-child){
+  margin-bottom: 10px;
 }
-.footer_links.inline li
-{
-  display:inline-block
+.footer-col ul li a{
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 300;
+  text-align: left;
+  color: #bbbbbb;
+  display: block;
+  transition: all 0.3s ease;
 }
-.site_footer .social_icons
-{
-  text-align:right
+.footer-col ul li a:hover{
+  color: #aaeec4;
+  padding-left: 8px;
 }
-.site_footer .social_icons a
-{
-  width:40px;
-  height:40px;
-  line-height:40px;
-  margin-left:6px;
-  margin-right:0;
-  border-radius:100%;
-  background-color:#33353d
+.footer-col .social-links a{
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255,255,255,0.2);
+  margin:0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.5s ease;
 }
-.copyright_text
-{
-  margin:0
+.footer-col .social-links a:hover{
+  color: #24262b;
+  background-color: #ffffff;
 }
-@media (max-width:991px)
-{
-  .site_footer [class^=col_]
-  {
-    margin-bottom:30px
-  }
+
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
 }
-@media (max-width:767px)
-{
-  .site_footer
-  {
-    padding-bottom:0
-  }
-  .site_footer .copyright_text,.site_footer .social_icons
-  {
-    text-align:center
-  }
 }
-.social_icons
-{
-  padding-left:0;
-  margin-bottom:0;
-  list-style:none
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
 }
-.social_icons li
-{
-  display:inline-block;
-  margin-bottom:4px
 }
-.social_icons li.title
-{
-  margin-right:15px;
-  text-transform:uppercase;
-  color:#96a2b2;
-  font-weight:700;
-  font-size:13px
-}
-.social_icons a{
-  background-color:#eceeef;
-  color:#818a91;
-  font-size:16px;
-  display:inline-block;
-  line-height:44px;
-  width:44px;
-  height:44px;
-  text-align:center;
-  margin-right:8px;
-  border-radius:100%;
-  -webkit-transition:all .2s linear;
-  -o-transition:all .2s linear;
-  transition:all .2s linear
-}
-.social_icons a:active,.social_icons a:focus,.social_icons a:hover
-{
-  color:#fff;
-  background-color:#29aafe
-}
-.social_icons.size_sm a
-{
-  line-height:34px;
-  height:34px;
-  width:34px;
-  font-size:14px
-}
-.social_icons a.facebook:hover
-{
-  background-color:#3b5998
-}
-.social_icons a.twitter:hover
-{
-  background-color:#00aced
-}
-.social_icons a.linkedin:hover
-{
-  background-color:#007bb6
-}
-.social_icons a.dribbble:hover
-{
-  background-color:#ea4c89
-}
-@media (max-width:767px)
-{
-  .social_icons li.title
-  {
-    display:block;
-    margin-right:0;
-    font-weight:600
-  }
-}
+
+
+

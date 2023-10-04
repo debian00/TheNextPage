@@ -1,61 +1,53 @@
-// import styles from '../Footer/Footer.module.css' // Importa las clases del módulo CSS
+import styles from "../Footer/footer.module.css"
 
-// function Footer() {
-//   return (
-//     <footer className={styles.site_footer}>
-//       {/* Línea Horizontal */}
-//       <hr className={styles.site_footer_hr} />
+function Footer() {
+  return (
+  <div>
+    <footer className={styles.footer}>
+  <div className={styles.container}>
+    <div className={styles.row}>
+      <div className={styles['footer-col']}>
+        <h4>The Next Page</h4>
+        <ul>
+          <li><a href="#">Sobre Nosotros</a></li>
+          <li><a href="#">Nuestros servicios</a></li>
+          <li><a href="#">Politica de privacidad</a></li>
+          <li><a href="#">Preguntas frequentes</a></li>
+        </ul>
+      </div>
+      <div className={styles['footer-col']}>
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Devoluciones</a></li>
+          <li><a href="#">Estatus de mi orden</a></li>
+          <li><a href="#">Opciones de pago</a></li>
+        </ul>
+      </div>
+      <div className={styles['footer-col']}>
+        <h4>online shop</h4>
+        <ul>
+          <li><a href="#">Catálogo</a></li>
+          <li><a href="#">Secuelas</a></li>
+          <li><a href="#">Novedades</a></li>
+          <li><a href="#">Redomendados</a></li>
+        </ul>
+      </div>
+      <div className={styles['footer-col']}>
+        <h4>follow us</h4>
+        <div className={styles['social-links']}>
+          <a href="#"><i className="fab fa-facebook-f"></i></a>
+          <a href="#"><i className="fab fa-twitter"></i></a>
+          <a href="#"><i className="fab fa-instagram"></i></a>
+          <a href="#"><i className="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 
-//       {/* Texto en el Pie de Página */}
-//       <div className={styles.site_footer_text}>
-//         <p>&copy;2021 Nadine Coelho | Todos los derechos reservados</p>
-//       </div>
+  </div>
+  )
+}
 
-//       {/* Enlaces en el Pie de Página */}
-//       <ul className={styles.footer_links}>
-//         <li>
-//           <a href="#">Inicio</a>
-//         </li>
-//         <li>
-//           <a href="#">Acerca de</a>
-//         </li>
-//         <li>
-//           <a href="#">Servicios</a>
-//         </li>
-//         <li>
-//           <a href="#">Equipo</a>
-//         </li>
-//         <li>
-//           <a href="#">Contacto</a>
-//         </li>
-//       </ul>
-
-//       {/* Iconos de Redes Sociales */}
-//       <ul className={styles.social_icons}>
-//         <li className={styles.social_icons_title}>Síguenos:</li>
-//         <li>
-//           <a href="#" className={styles.social_icons_a}>
-//             <ion-icon name="logo-facebook"></ion-icon>
-//           </a>
-//         </li>
-//         <li>
-//           <a href="#" className={styles.social_icons_a}>
-//             <ion-icon name="logo-twitter"></ion-icon>
-//           </a>
-//         </li>
-//         <li>
-//           <a href="#" className={styles.social_icons_a}>
-//             <ion-icon name="logo-linkedin"></ion-icon>
-//           </a>
-//         </li>
-//         <li>
-//           <a href="#" className={styles.social_icons_a}>
-//             <ion-icon name="logo-instagram"></ion-icon>
-//           </a>
-//         </li>
-//       </ul>
-//     </footer>
-//   )
-// }
-
-// export default Footer
+export default Footer

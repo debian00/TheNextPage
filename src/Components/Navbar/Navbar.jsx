@@ -1,6 +1,6 @@
 // import React from 'react'
 import style from './navbar.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Facebook,
   Instagram,
@@ -12,11 +12,24 @@ import {
   Youtube,
 } from '../../utils/Icons'
 import { useEffect, useRef, useState } from 'react'
+import SearchBar from './SearchBar/SearchBar'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { getGenres } from '../../redux/actions/actionGet'
 
 const Navbar = () => {
+  const navigate = useNavigate()
   const [fixed, setFixed] = useState(false)
   const [dropdown, setDropdown] = useState(false)
-  const dropdownRef = useRef(null)
+  const genres = useSelector((state) => state.genres)
+  const dropdownRef = useRef(null);
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token")
+
+
+  useEffect(() => {
+    dispatch(getGenres())
+  }, [])
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -27,7 +40,11 @@ const Navbar = () => {
   }
 
   const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target) &&
+      event.target.id !== 'dropdown'
+    ) {
       setDropdown(false)
     }
   }
@@ -43,7 +60,15 @@ const Navbar = () => {
   }, [])
 
   const handleDrop = () => {
-    setDropdown(!dropdown)
+    if (dropdown) {
+      setDropdown(false)
+    } else {
+      setDropdown(true)
+    }
+  }
+
+  const handleSubmit = (e) => {
+    navigate(`/catalogue?genre=${e}`)
   }
 
   return (
@@ -53,6 +78,8 @@ const Navbar = () => {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
+          zIndex: '5',
+          backgroundColor: '#6f5475',
         }}
       >
         <div
@@ -63,9 +90,9 @@ const Navbar = () => {
             position: 'relative',
           }}
         >
-          <Logo color={fixed ? 'white' : '#033d7b'} width={'35'} />
+          <Logo color={fixed ? 'CCCFCE' : '#CCCFCE'} width={'35'} />
           <div className={style.verticalBar}></div>
-          <h3 className={style.logoName}>Biblioteca Nacional The Next Page</h3>
+          <h3 className={style.logoName}>The Next Page Library</h3>
         </div>
         <div className={style.socialMedia}>
           <ul
@@ -103,7 +130,7 @@ const Navbar = () => {
       <nav
         className={style.downNav}
         style={{
-          background: '#033d7b',
+          background: '#6f5475',
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -112,83 +139,59 @@ const Navbar = () => {
         <div>
           <ul>
             <li>
-              <Link>INICIO</Link>
+              <Link to={'/'}>INICIO</Link>
             </li>
-            <li
-              onClick={handleDrop}
-              style={{
-                color: 'white',
-                fontFamily: "'Roboto'",
-                cursor: 'pointer',
-              }}
-            >
-              CATALOGO
-            </li>
-
             <li>
-              <Link>NOSOTROS</Link>
+              <Link to="/catalogue">CATALOGO</Link>
             </li>
+            <li>
+              <Link to="/aboutus">NOSOTROS</Link>
+            </li>
+            <li>
+              <Link to="/faq">FAQ</Link>
+            </li>            
           </ul>
         </div>
+        <SearchBar></SearchBar>
         <div className={style.profile}>
+          <Link
+            to={'/admindashboard'}
+            // id="dropdown"
+            // onClick={handleDrop}
+            // style={{
+            //   color: '#AAEEC4',
+            //   fontFamily: "'Avenir'",
+            //   cursor: 'pointer',
+            // }}
+          >
+            ADMIN
+          </Link>
           <Link>INGRESAR</Link>
           <Profile width={40}></Profile>
+          
+        {token 
+        ? <><Link to="/userPanel"> MI PERFIL</Link></>
+        : <><Link to="/check">INGRESAR</Link>
+          <Profile width={40}></Profile></>
+          }  
+          
         </div>
       </nav>
-
       <div
         ref={dropdownRef}
         className={`${style.dropdown} ${dropdown ? style.open : ''}`}
       >
         <ul>
-          <li>FILTROS</li>
-          <li>FILTROS</li>
-          <li>FILTROS</li>
-          <li>FILTROS</li>
+          {genres?.map((ele) => {
+            return (
+              <li onClick={() => handleSubmit(ele.id)} key={ele.id}>
+                {ele.name}
+              </li>
+            )
+          })}
         </ul>
       </div>
     </>
-    // <nav className={`${style.nav} ${fixed ? style.active : ''}`}>
-    //   <div style={{ margin: 'auto 0' }}>
-    //     <ul>
-    //       <li>
-    //         <Link to={'/'} style={{ color: fixed ? 'white' : 'black' }}>
-    //           Inicio
-    //         </Link>
-    //       </li>
-    //       <li>
-    //         <Link to={'/'} style={{ color: fixed ? 'white' : 'black' }}>
-    //           Productos
-    //         </Link>
-    //       </li>
-    //       <li>
-    //         <Link to={'/about'} style={{ color: fixed ? 'white' : 'black' }}>
-    //           Nosotros
-    //         </Link>
-    //       </li>
-    //       <li>
-    //         <Link to={'/'} style={{ color: fixed ? 'white' : 'black' }}>
-    //           FAQs
-    //         </Link>
-    //       </li>
-    //     </ul>
-    //   </div>
-    //   <div style={{ marginTop: '12px' }}>
-    //     <svg
-    //       xmlns="http://www.w3.org/2000/svg"
-    //       width="45"
-    //       height="45"
-    //       fill={fixed ? 'white' : 'black'}
-    //       viewBox="0 0 16 16"
-    //     >
-    //       <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-    //       <path
-    //         fillRule="evenodd"
-    //         d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-    //       />
-    //     </svg>
-    //   </div>
-    // </nav>
   )
 }
 

@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+@import url('https://fonts.cdnfonts.com/css/avenir');
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,600|Tulpen+One&display=swap');
 .nav {
   display: flex;
   flex-direction: row;
-  background: #e8e2c8;
+  background-color: #6f5475;
   padding: 20px;
   width: 100%;
   justify-content: space-between;
@@ -21,7 +21,7 @@
 }
 
 .nav ul li a {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Avenir', sans-serif;
 
   font-weight: 400;
   font-size: 25px;
@@ -36,7 +36,7 @@
   padding: 5px 10px;
   text-align: center;
 
-  background-color: #033d7b;
+  background-color: #6f5475;
   color: #fff;
   border-radius: 15px;
 }
@@ -46,12 +46,13 @@
 }
 
 .nav.active {
-  background-color: #091f44;
+  background-color: #aaeec4;
   position: fixed;
 }
 
 .verticalBar {
-  background-color: #757575;
+  backdrop-filter: blur(5px);
+  background-color: rgb(170, 238, 196);
   width: 0.1px;
   height: 45%;
   transform: translateX(-50%);
@@ -66,10 +67,11 @@
   margin: auto 0;
   margin-left: 25px;
   text-align: center;
-  color: #033d7b;
-  font-size: 25px;
-  font-family: 'Lora', serif;
-  letter-spacing: 3px;
+  color: #cccfce;
+  font-size: 3em;
+  font-family: 'Avenir', sans-serif;
+  font-weight: 50;
+  background-color: #6f5475;
 }
 
 .socialMedia {
@@ -82,28 +84,29 @@
 }
 
 .socialMedia ul li:not(.line) {
-  padding-block: 33px;
+  padding-block: 35px;
   padding-inline: 5px;
 }
 .line {
   margin-inline: 10px;
-  border-right: 0.1px solid #757575;
+  border-right: 0.1px solid #aaeec4;
   height: 42px;
   margin: auto 0;
 }
 
 .socialMedia ul li:hover {
-  background: #033d7b;
+  background: #aaeec4;
 }
 .socialMedia ul li svg {
   cursor: pointer;
-  color: #033d7b;
+  color: #cccfce;
 }
 .socialMedia ul li:hover svg {
-  color: #e8e2c8;
+  color: #555f5d;
 }
 
 .downNav {
+  z-index: 5;
   padding: 10px;
   padding-inline: 20px;
   align-items: center;
@@ -122,8 +125,11 @@
 .downNav ul li a,
 svg {
   text-decoration: none;
-  color: white;
-  font-family: 'Roboto';
+  color: #cccfce;
+  font-family: 'Avenir', sans-serif;
+}
+.downNav ul li:hover {
+  color: #cccfce;
 }
 
 .profile {
@@ -132,45 +138,46 @@ svg {
   margin: auto 0;
 }
 
-.profile a {
+.profile a,
+.profile p {
   text-decoration: none;
-  font-family: 'Roboto';
-  color: white;
+  font-family: 'Avenir', sans-serif;
+  color: #cccfce;
   text-align: center;
   margin: auto 20px;
 }
 
 .dropdown {
-  background-color: #033d7b;
+  background-color: #6f5475;
   display: flex;
   flex-direction: column;
   justify-content: left;
   position: absolute;
   height: 0;
+  z-index: 3;
   overflow: hidden;
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.5),
-    0 4px 6px -4px rgba(0, 0, 0, 0.5);
+
   width: 200px;
   left: 26px;
   transition: height 0.5s ease;
   border-radius: 0 0 5px 5px;
+  overflow-y: auto;
 }
 
 .dropdown.open {
-  height: 160px;
+  height: 200px;
 }
 
 .dropdown li {
   list-style: none;
-  color: white;
+  color: #aaeec4;
   text-align: center;
-  font-family: 'Roboto';
+  font-family: 'Avenir', sans-serif;
   padding: 8px;
   cursor: pointer;
 }
 
 .dropdown ul li:hover {
-  background-color: #fff;
-  color: #033d7b;
+  background-color: #aaeec4;
+  color: #555f5d;
 }
