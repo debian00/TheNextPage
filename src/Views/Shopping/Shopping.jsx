@@ -1,20 +1,43 @@
 import CardHome from '../../Components/CardHome/CardHome'
 import CardShop from '../../Components/CardShop/CardShop'
-import { Check } from '../../utils/Icons'
+import { Bag, Check } from '../../utils/Icons'
 import style from './Shopping.module.css'
+import { Trash } from './../../utils/Icons'
 
 const Shopping = () => {
   return (
     <div className={style.container}>
       <div className={style.cart}>
+        <div className={style.buttons}>
+          <button id={style.shop}>
+            <Bag width={20} /> Seguir comprando
+          </button>
+          <button id={style.reset}>
+            {' '}
+            <Trash width={20}></Trash> Restablecer carrito
+          </button>
+        </div>
         <div style={style.card}>
           <CardShop
             title={'El señor de los anillos'}
-            price={'5100$'}
+            price={'5100'}
             author={'J.J.K Rowling'}
           />
         </div>
-        <div style={style.buttons}></div>
+        <div style={style.card}>
+          <CardShop
+            title={'El señor de los anillos'}
+            price={'5100'}
+            author={'J.J.K Rowling'}
+          />
+        </div>
+        <div style={style.card}>
+          <CardShop
+            title={'El señor de los anillos'}
+            price={'5100'}
+            author={'J.J.K Rowling'}
+          />
+        </div>
       </div>
       <div className={style.checkout}>
         <div className={style.price}>
