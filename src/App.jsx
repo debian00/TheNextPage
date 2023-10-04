@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AboutUs from "./Views/AboutUsView/AboutUsView"
 import FAQ from './Views/FaqView/FaqView'
+import ChatBot from "../src/Components/Chatbot/Chatbot"
 
 function App() {
   return (
@@ -106,6 +107,16 @@ function App() {
           path="/faq"
           element={
             <>
+              <FAQ />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/chatbot"
+          element={
+            <>
+            <ChatBot/>
               <FAQ />
               <Footer />
             </>
