@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import style from "./Login.module.css"
 import { getLogin } from "../../redux/actions/actionPost";
 import { Modal } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../Views/Login&Register/Login&Register.css"
 
 const Login = React.forwardRef((props,ref ) => {
@@ -102,7 +102,7 @@ const Login = React.forwardRef((props,ref ) => {
                             <p style={{ visibility: "hidden" }}> &nbsp; </p>
                             )}
                     </div>
-                    
+                    <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
                     <div className = "d-flex flex-column justify-content-center align-items-center">
                     <div className = "m-1">
                         <button type="submit">Enviar</button>
