@@ -16,7 +16,7 @@ import AboutUs from "./Views/AboutUsView/AboutUsView"
 import FAQ from './Views/FaqView/FaqView'
 import ForgotPassword from './Views/ForgotPassword/ForgotPassword'
 import ResetPassword from './Views/ForgotPassword/ResetPassword'
-import ChatBot from "../src/Components/Chatbot/Chatbot"
+//import ChatBot from "./Components/Chatbot/Chatbot"
 
 function App() {
   return (
@@ -116,16 +116,7 @@ function App() {
         />
          <Route path='/forgot-password' element={<ForgotPassword/>}></Route>
       <Route path="/reset_password/:id/:token" element={<ResetPassword/>}></Route>
-        <Route
-          path="/chatbot"
-          element={
-            <>
-            <ChatBot/>
-              <FAQ />
-              <Footer />
-            </>
-          }
-        />
+       
       </Routes>
     </>
   )
