@@ -120,7 +120,8 @@ function App() {
           path="/shoppingCart"
           element={
             <>
-              <Shopping />
+            {/* <ChatBot/> */}
+              <FAQ />
               <Footer />
             </>
           }

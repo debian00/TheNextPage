@@ -13,6 +13,7 @@ const Cards = ({ allBooks }) => {
             title={ele.title}
             price={ele.sellPrice}
             author={ele.author}
+            availability={ele.availability}
           />
         )
       })}
