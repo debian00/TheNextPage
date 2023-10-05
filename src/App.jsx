@@ -16,7 +16,7 @@ import AboutUs from "./Views/AboutUsView/AboutUsView"
 import FAQ from './Views/FaqView/FaqView'
 import ForgotPassword from './Views/ForgotPassword/ForgotPassword'
 import ResetPassword from './Views/ForgotPassword/ResetPassword'
-import ChatBot from "../src/Components/Chatbot/Chatbot"
+// import ChatBot from "../src/Components/Chatbot/Chatbot"
 
 function App() {
   return (
@@ -120,7 +120,7 @@ function App() {
           path="/chatbot"
           element={
             <>
-            <ChatBot/>
+            {/* <ChatBot/> */}
               <FAQ />
               <Footer />
             </>

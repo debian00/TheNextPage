@@ -10,6 +10,7 @@ import {
   GET_ALL_BOOKS_COPY,
   GET_BOOKS_BY_NAME,
   GET_ALL_AUTHORS,
+  GET_BOOK_BY_AVAILABILITY,
 } from '../types'
 
 export const getAllBooks = ({
@@ -41,6 +42,25 @@ export const getAllBooks = ({
     }
   }
 }
+
+export const getBookByAvailability = ({ page, availability, order ,title } ) => {
+
+  return async (dispatch) => {
+    try {
+      if (!title) title = ''
+      const {data} = await axios(`/books?page=${page}&size=10&availability=${availability}&order=${order}&title=${title}`)
+      // &order=${order}&author=${author}&title=${title}
+      dispatch({
+        type: GET_BOOK_BY_AVAILABILITY,
+        payload:data
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+
 
 export const getAllBooksCopy = (page) => {
   return async (dispatch) => {
@@ -165,6 +185,28 @@ export const getGenres = () => {
         type: GET_ALL_GENRES,
         payload: data,
       })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getBookPause = (id) => {
+  return async() => {
+    try {
+      const { data } = await axios('/books/pause/' + id)
+      console.log(data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getBookRestore = (id) => {
+  return async() => {
+    try {
+      const { data } = await axios('/books/restore/' + id)
+      console.log(data);
     } catch (error) {
       console.log(error)
     }

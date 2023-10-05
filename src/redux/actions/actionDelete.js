@@ -1,14 +1,22 @@
-import { DELETE_USER_BY_ID } from "../types"
+
 import axios from "axios"
 
 export const deleteUserById = (id) => {
-    return async(dispatch) => {
+    return async() => {
         try {
             const {data} = await axios.delete('/users/delete/'+ id)
-            dispatch({
-                type: DELETE_USER_BY_ID,
-                payload: data
-            })
+            console.log(data);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const deleteBookById = (id) => {
+    return async() => {
+        try {
+            const {data} = await axios.delete('/books/delete/' + id)
+            console.log(data);
         } catch (error) {
             console.log(error)
         }

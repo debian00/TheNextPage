@@ -12,6 +12,7 @@ import {
   GET_BOOKS_BY_NAME,
   UPDATE_BOOK,
   GET_ALL_AUTHORS,
+  GET_BOOK_BY_AVAILABILITY
 } from './types'
 
 const initialState = {
@@ -45,7 +46,8 @@ const rootReducer = (state = initialState, action) => {
       }
     case GET_ALL_BOOKS_COPY:
       return { ...state, books: action.payload }
-
+    case GET_BOOK_BY_AVAILABILITY:
+        return{ books:action.payload}
     case GET_BOOK_BY_ID:
       return { ...state, bookById: action.payload }
     // case GET_AUTHOR_NAME:

@@ -17,7 +17,7 @@ const ForgotPassword = () => {
 
     axios.defaults.withCredentials = true;
     const handleSubmitBack = () => {
-      navigate('/checkIn');
+      navigate('/check');
     }
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const ForgotPassword = () => {
         const response = await axios.post('http://localhost:3001/forgot-password', { email });
         if (response.data.Status === "Success") {
             alert("Email enviado, revisa tu bandeja de entrada!")
-            navigate('/checkIn');
+            navigate('/check');
         }
       }else{
         alert('Email no registrado en la bdd')
@@ -38,6 +38,8 @@ const ForgotPassword = () => {
     }
 
     
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       dispatch(getAllUsers())
     },[])

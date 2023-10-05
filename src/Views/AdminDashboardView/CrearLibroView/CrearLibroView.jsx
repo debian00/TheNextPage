@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import style from './crearlibro.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { createBook } from '../../../redux/actions/actionPost'
+import { createBook, postAuthor, postGenre } from '../../../redux/actions/actionPost'
 import { getAuthors, getGenres } from '../../../redux/actions/actionGet'
 
 const CrearLibroView = () => {
@@ -22,6 +22,15 @@ const CrearLibroView = () => {
     sellPrice: '',
     stock: '',
   })
+  //Estado para manejar el autor 
+  const [autor, setAutor] = useState({
+    author: [],
+  })
+  //Estado para manejar el genero 
+  const [genero, setGenero] = useState({
+    genre: [],
+  })
+  console.log('Autor', autor);
   //Estado para manejar los errores
   const [errors, setErrors] = useState({
     title: '',
@@ -34,6 +43,15 @@ const CrearLibroView = () => {
     stock: '',
   })
   console.log('formulario', form)
+  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked2, setIsChecked2] = useState(false)
+  // Función para manejar cambios en el estado del checkbox
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked) // Invierte el estado actual
+  }
+  const handleCheckboxChange2 = () => {
+    setIsChecked2(!isChecked2) // Invierte el estado actual
+  }
   const dispatch = useDispatch()
   //Funcion para enviar los datos
   const handleSubmit = async (e) => {
@@ -52,6 +70,24 @@ const CrearLibroView = () => {
       availability: true,
     })
   }
+  //Funcion para crear autor
+  const handleSubmitAuthor = async (e) => {
+    e.preventDefault();
+    await dispatch(postAuthor(autor));
+    // Después de agregar el autor, actualiza la lista de autores
+    dispatch(getAuthors());
+    // Limpia el campo de autor en el estado
+    setAutor({ author: "" });
+  };
+  //Funcion para crear genero
+  const handleSubmitGenre = async (e) => {
+    e.preventDefault();
+    await dispatch(postGenre(autor));
+    // Después de agregar el autor, actualiza la lista de autores
+    dispatch(getGenres());
+    // Limpia el campo de autor en el estado
+    setGenero({ genre: "" });
+  };
   //Funcion para manejar los campos
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -62,6 +98,12 @@ const CrearLibroView = () => {
         genre: genres,
       })
     } else {
+      setAutor({
+        author: value
+      })
+      setGenero({
+        genre: value
+      })
       setForm({
         ...form,
         [name]: value,
@@ -248,32 +290,21 @@ const CrearLibroView = () => {
                       required
                     />
                   </div>
-                  <div className="col-6 mb-3" style={{ gridArea: 'autor' }}>
-                    <h5 className="card-title mt-1">Autor del Libro</h5>
-                    {/* <input
-                        type="text"
-                        className="form-control"
-                        name="author"
-                        onChange={handleChange}
-                        value={form.author}
-                        placeholder="Autor"
-                        required
-                      /> */}
-                    <select
-                      className="form-select"
-                      name="author"
+                  <div className="col-6">
+                    <h5 className="card-title mt-1">
+                      Año de Publicación del Libro
+                    </h5>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="publicationYear"
                       onChange={handleChange}
-                      value={form.author}
+                      value={form.publicationYear}
+                      placeholder="Año de Publicación"
                       required
-                    >
-                      <option value="">Selecciona un autor</option>
-                      {allAuthor.map((ele) => (
-                        <option key={ele.id} value={ele.name}>
-                          {ele.name}
-                        </option>
-                      ))}
-                    </select>
+                    />
                   </div>
+                  
                 </div>
                 <div className="row justify-content-center d-flex">
                   <div className="col-6 mb-3">
@@ -292,20 +323,78 @@ const CrearLibroView = () => {
                         </option>
                       ))}
                     </select>
+                    <div>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={isChecked2}
+                          onChange={handleCheckboxChange2}
+                        />
+                        &nbsp; ¿No se encuentra el genero? ¡Agrégalo!
+                      </label>
+                      {isChecked2 && (
+                        <div  className="d-flex">
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="author" 
+                            onChange={handleChange}
+                            value={genero.genre}
+                            placeholder="Agregar nuevo genero"
+                            required
+                          />
+                          <button type="button" className="btn btn-primary" onClick={handleSubmitGenre}>
+                            Agregar
+                          </button>
+                        
+                      </div>
+                      )}
+                    </div>
                   </div>
-                  <div className="col-6">
-                    <h5 className="card-title mt-1">
-                      Año de Publicación del Libro
-                    </h5>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="publicationYear"
+                  <div className="col-6 mb-3" style={{ gridArea: 'autor' }}>
+                    <h5 className="card-title mt-1">Autor del Libro</h5>
+
+                    <select
+                      className="form-select"
+                      name="author"
                       onChange={handleChange}
-                      value={form.publicationYear}
-                      placeholder="Año de Publicación"
+                      value={form.author}
                       required
-                    />
+                    >
+                      <option value="">Selecciona un autor</option>
+                      {allAuthor.map((ele) => (
+                        <option key={ele.id} value={ele.name}>
+                          {ele.name}
+                        </option>
+                      ))}
+                    </select>
+                    <div>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={handleCheckboxChange}
+                        />
+                        &nbsp; ¿No se encuentra el autor? ¡Agrégalo!
+                      </label>
+                      {isChecked && (
+                        <div  className="d-flex">
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="author" 
+                            onChange={handleChange}
+                            value={autor.author}
+                            placeholder="Agregar nuevo autor"
+                            required
+                          />
+                          <button type="button" className="btn btn-primary" onClick={handleSubmitAuthor}>
+                            Agregar
+                          </button>
+                        
+                      </div>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="row justify-content-center d-flex">
