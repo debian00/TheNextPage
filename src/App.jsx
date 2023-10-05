@@ -17,7 +17,7 @@ import FAQ from './Views/FaqView/FaqView'
 import Shopping from './Views/Shopping/Shopping'
 import ForgotPassword from './Views/ForgotPassword/ForgotPassword'
 import ResetPassword from './Views/ForgotPassword/ResetPassword'
-import ChatBot from "../src/Components/Chatbot/Chatbot"
+//import ChatBot from "./Components/Chatbot/Chatbot"
 
 function App() {
   return (
@@ -119,7 +119,7 @@ function App() {
           path="/shoppingCart"
           element={
             <>
-            <ChatBot/>
+            {/* <ChatBot/> */}
               <FAQ />
               <Footer />
             </>
