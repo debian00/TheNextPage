@@ -17,6 +17,7 @@ import FAQ from './Views/FaqView/FaqView'
 import Shopping from './Views/Shopping/Shopping'
 import ForgotPassword from './Views/ForgotPassword/ForgotPassword'
 import ResetPassword from './Views/ForgotPassword/ResetPassword'
+import Checkout from './Views/Checkout/Checkout'
 //import ChatBot from "./Components/Chatbot/Chatbot"
 
 function App() {
@@ -120,6 +121,15 @@ function App() {
           element={
             <>
               <Shopping />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <>
+              <Checkout />
               <Footer />
             </>
           }
