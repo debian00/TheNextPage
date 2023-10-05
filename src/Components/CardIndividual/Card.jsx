@@ -9,9 +9,7 @@ const Card = ({ title, price, author, image, id, availability }) => {
         padding: '20px',
         paddingBottom: '0',
         maxHeight: '530px',
-        maxWidth: '220px',
-        width: '220px',
-        margin: '20px',
+        width: '200px',
         boxShadow:
           '0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1 )',
         position: 'relative', 
