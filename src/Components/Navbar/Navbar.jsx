@@ -1,7 +1,8 @@
 // import React from 'react'
 import style from './navbar.module.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {
+  Cart,
   Facebook,
   Instagram,
   Logo,
@@ -19,20 +20,20 @@ import { getGenres } from '../../redux/actions/actionGet'
 
 const Navbar = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const [fixed, setFixed] = useState(false)
   const [dropdown, setDropdown] = useState(false)
   const genres = useSelector((state) => state.genres)
-  const dropdownRef = useRef(null);
-  const dispatch = useDispatch();
-  const token = localStorage.getItem("token")
-
+  const dropdownRef = useRef(null)
+  const dispatch = useDispatch()
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     dispatch(getGenres())
   }, [])
 
   const handleScroll = () => {
-    if (window.scrollY > 50) {
+    if (window.scrollY > 80) {
       setFixed(true)
     } else {
       setFixed(false)
@@ -128,13 +129,21 @@ const Navbar = () => {
         </div>
       </nav>
       <nav
-        className={style.downNav}
         style={{
           background: '#6f5475',
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
+          width: '100%',
+          transition: 'all 0.3s ease',
         }}
+        className={`${style.downNav} ${
+          fixed &&
+          location.pathname !== '/shoppingCart' &&
+          location.pathname !== '/checkout'
+            ? style.fixed
+            : ''
+        }`}
       >
         <div>
           <ul>
@@ -149,7 +158,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link to="/faq">FAQ</Link>
-            </li>            
+            </li>
           </ul>
         </div>
         <SearchBar></SearchBar>
@@ -166,15 +175,23 @@ const Navbar = () => {
           >
             ADMIN
           </Link>
-          <Link>INGRESAR</Link>
-          <Profile width={40}></Profile>
-          
-        {token 
-        ? <><Link to="/userPanel"> MI PERFIL</Link></>
-        : <><Link to="/check">INGRESAR</Link>
-          <Profile width={40}></Profile></>
-          }  
-          
+
+          {token ? (
+            <>
+              <Link to="/userPanel" id="dropdown">
+                {' '}
+                MI PERFIL
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/check">INGRESAR</Link>
+              <Profile width={40}></Profile>
+            </>
+          )}
+          <Link>
+            <Cart width={40}></Cart>
+          </Link>
         </div>
       </nav>
       <div

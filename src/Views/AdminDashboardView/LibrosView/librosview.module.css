@@ -46,8 +46,7 @@
   width: 110px;
   height: 150px;
   border: 2px solid black;
-  /* background-color: #228b22; */
-  /* background-image: linear-gradient(to top,transparent 10px,rgba(0,0,0,0.3) 10px,rgba(0,0,0,0.3) 13px,transparent 13px); */
+ 
 }
 .cardImg .img::before {
     /* delete */
@@ -59,9 +58,7 @@
      left: 50%;
      bottom: -4px;
      background-repeat: no-repeat;
-     /* background-image: radial-gradient(ellipse at center,rgba(0,0,0,0.7) 30%,transparent 30%),linear-gradient(to top,transparent 17px,rgba(0,0,0,0.3) 17px,rgba(0,0,0,0.3) 20px,transparent 20px),linear-gradient(to right,black 2px,transparent 2px),linear-gradient(to left,black 2px,transparent 2px),linear-gradient(to top,black 2px,#228b22 2px); */
-     /* background-size: 60% 10%,100% 100%,100% 65%,100% 65%,100% 50%; */
-     /* background-position: center 3px,center bottom,center bottom,center bottom,center bottom; */
+ 
      border-radius: 0 0 4px 4px;
      z-index: 2;
    }
@@ -76,16 +73,7 @@
      left: 50%;
      top: -13px;
      background-repeat: no-repeat;
-     /* background-image: linear-gradient(80deg,#ffc0cb 45%,transparent 45%),linear-gradient(-175deg,#ffc0cb 45%,transparent 45%),linear-gradient(80deg,rgba(0,0,0,0.2) 51%,rgba(0,0,0,0) 51%),linear-gradient(-175deg,rgba(0,0,0,0.2) 51%,rgba(0,0,0,0) 51%),radial-gradient(circle at center,#ffa6b6 45%,rgba(0,0,0,0.2) 45%,rgba(0,0,0,0.2) 52%,rgba(0,0,0,0) 52%),linear-gradient(45deg,rgba(0,0,0,0) 48%,rgba(0,0,0,0.2) 48%,rgba(0,0,0,0.2) 52%,rgba(0,0,0,0) 52%),linear-gradient(65deg,rgba(0,0,0,0) 48%,rgba(0,0,0,0.2) 48%,rgba(0,0,0,0.2) 52%,rgba(0,0,0,0) 52%),linear-gradient(22deg,rgba(0,0,0,0) 48%,rgba(0,0,0,0.2) 48%,rgba(0,0,0,0.2) 54%,rgba(0,0,0,0) 54%); */
-     /* background-size: 100% 100%,100% 100%,100% 100%,100% 100%,100% 100%,100% 75%,100% 95%,100% 60%;
-     background-position: center center;
-     border-top-left-radius: 120px;
-     border-top-right-radius: 10px;
-     border-bottom-left-radius: 10px;
-     border-bottom-right-radius: 70px; */
-     /* border-top: 2px solid black;
-     border-left: 2px solid black;
-     transform: rotate(45deg); */
+   
      z-index: 1;
    }
    .cardTitle {
@@ -106,6 +94,7 @@
     width: 100%;
     border: 1px solid var(--main-color);
     border-radius: 50px;
+    margin-bottom: 0.5rem;
   }
   .miNavbar{
     margin-top: 10px;
@@ -137,7 +126,9 @@
     border-radius: 5px; /* Borde redondeado */
     outline: none; /* Elimina el contorno predeterminado en algunos navegadores */
 }
-
+.separator{
+  border: 1px solid black; 
+}
 
   .botonCrear{
     width: 100%;
@@ -161,28 +152,24 @@
     font-weight: 500;
     color: var(--font-color-sub);
   }
-
+  /*Editar book*/
   .cardBtn {
     height: 35px;
-    background: var(--bg-color);
+
     border: 2px solid var(--main-color);
     border-radius: 5px;
     padding: 0 15px;
     transition: all 0.3s;
   }
-  
   .cardBtn svg {
     width: 100%;
     height: 100%;
     fill: var(--main-color);
     transition: all 0.3s;
   }
-  
-  .cardImg:hover {
-    transform: translateY(-3px);
-  }
   .cardBtn:hover {
     border: 2px solid var(--main-focus);
+    background: var(--bg-color);
   }
   
   .cardBtn:hover svg {
@@ -192,6 +179,94 @@
   .cardBtn:active {
     transform: translateY(3px);
   }
+  /*Borrar book*/
+  .cardBtnDele {
+    height: 35px;
+
+    border: 2px solid var(--main-color);
+    border-radius: 5px;
+    padding: 0 15px;
+    transition: all 0.3s;
+  }
+  .cardBtnDele svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--main-color);
+    transition: all 0.3s;
+  }
+  .cardBtnDele:hover {
+    border: 2px solid white;
+    background: rgb(192, 55, 55);
+  }
+  
+  .cardBtnDele:hover svg {
+    fill: white;
+  }
+  
+  .cardBtnDele:active {
+    transform: translateY(3px);
+  }
+  /*Pausar book*/
+  .cardBtnEdit {
+    height: 35px;
+
+    border: 2px solid var(--main-color);
+    border-radius: 5px;
+    padding: 0 15px;
+    transition: all 0.3s;
+  }
+  .cardBtnEdit svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--main-color);
+    transition: all 0.3s;
+  }
+  .cardBtnEdit:hover {
+    border: 2px solid white;
+    background: #d1870d;
+  }
+  
+  .cardBtnEdit:hover svg {
+    fill: white;
+  }
+  
+  .cardBtnEdit:active {
+    transform: translateY(3px);
+  }
+   /*Restaurar book*/
+   .cardBtnRest {
+    height: 35px;
+
+    border: 2px solid var(--main-color);
+    border-radius: 5px;
+    padding: 0 15px;
+    transition: all 0.3s;
+  }
+  .cardBtnRest svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--main-color);
+    transition: all 0.3s;
+  }
+  .cardBtnRest:hover {
+    border: 2px solid white;
+    background: #14d10d;
+  }
+  
+  .cardBtnRest:hover svg {
+    fill: white;
+  }
+  
+  .cardBtnRest:active {
+    transform: translateY(3px);
+  }
+  
+  
+  
+  .cardImg:hover {
+    transform: translateY(-3px);
+  }
+  
   .buton { 
     position: absolute;
    /*  bottom: 80.5%;

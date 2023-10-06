@@ -2,16 +2,24 @@
 import { useDispatch, useSelector } from 'react-redux'
 import style from './librosview.module.css'
 import { useEffect, useState } from 'react'
-import { getAllBooksCopy } from '../../../redux/actions/actionGet'
+import {
+  getAllBooksCopy,
+  getBookByAvailability,
+  getBookPause,
+  getBookRestore,
+} from '../../../redux/actions/actionGet'
 // import { updateBook } from '../../../redux/actions/actionPut'
 import axios from 'axios'
+import { deleteBookById } from '../../../redux/actions/actionDelete'
 
 const Librosview = () => {
   //Hook para traer todos los libros
   const allBooks = useSelector((state) => state.books)
+  const [refresh, setRefresh] = useState()
   console.log(allBooks)
   //Estado para manejar el modal
   const [isModalOpen, setIsModalOpen] = useState(false)
+  
   //Estado para el formulario
   const [form, setForm] = useState({
     id: '',
@@ -40,8 +48,8 @@ const Librosview = () => {
   const dispatch = useDispatch()
   //Funcion para recortar la cantinda de letras en la descripcion
   const descripctionCut = (descripcion) => {
-    if (descripcion.length > 90) {
-      const newDescription = descripcion.split('').slice(0, 80).join('')
+    if (descripcion.length > 50) {
+      const newDescription = descripcion.split('').slice(0, 50).join('')
       return <div>{newDescription}</div>
     }
     return <div>{descripcion}</div>
@@ -58,6 +66,41 @@ const Librosview = () => {
   const handleUpdate = async (e) => {
     e.preventDefault()
     await axios.put(`/books/update/${form.id}`, form)
+  }
+  //Funcion para eliminar el libro
+  const handleDeleteBook = (e, id) => {
+    e.preventDefault()
+    const confirmed = window.confirm(
+      '¿Estás seguro que quieres eliminar este libro?'
+    )
+    if (confirmed) {
+      setRefresh(getAllBooksCopy())
+      dispatch(deleteBookById(id))
+    }
+  }
+  //Funcion para suspender el libro
+  const handlePauseBook = (e, id) => {
+    e.preventDefault()
+    console.log('otro id para editar', id)
+    const confirmed = window.confirm(
+      '¿Estás seguro que quieres suspender este libro?'
+    )
+    if (confirmed) {
+      setRefresh(getAllBooksCopy())
+      dispatch(getBookPause(id))
+    }
+  }
+  //Funcion para restaurar el libro
+  const handleRestoreBook = (e, id) => {
+    e.preventDefault()
+    console.log('otro id para restaurar', id)
+    const confirmed = window.confirm(
+      '¿Estás seguro que quieres restaurar este libro?'
+    )
+    if (confirmed) {
+      setRefresh(getAllBooksCopy())
+      dispatch(getBookRestore(id))
+    }
   }
   //Funcion para manejar los campos
   const handleChange = (e) => {
@@ -100,6 +143,39 @@ const Librosview = () => {
   const handleDelete = () => {
     setForm({ ...form, images: '' })
   }
+  //Filtrado combinado
+  const [filter, setFilter] = useState({
+    page: 0,
+    availability: 'true',
+    order: 'titleAsc',
+    title: '',
+  });
+  //Funcion para ver cual estan disponibles
+  const handleAvailability = (e) => {
+    const opcion = e.target.value;
+    const newFilter = { ...filter, availability: opcion };
+    setFilter(newFilter);
+    setCurrentPage(0);
+    dispatch(getBookByAvailability(newFilter));
+  };
+  //Funcion para ordenar
+  const handleOrder = (e) => {
+    const selectedOrder = e.target.value;
+    const newFilter = { ...filter, order: selectedOrder };
+    setFilter(newFilter);
+    setCurrentPage(0);
+    dispatch(getBookByAvailability(newFilter));
+  };
+   //Funcion para buscar por titulo
+   const handlerInputChange = (e) => {
+    const opcion = e.target.value;
+    const newFilter = { ...filter,title :opcion };
+    setFilter(newFilter);
+    setCurrentPage(0);
+    dispatch(getBookByAvailability(newFilter));
+  }
+
+  
   //Paginado
   const scrollToTop = () => {
     window.scrollTo({ behavior: 'smooth', top: 0 })
@@ -122,29 +198,45 @@ const Librosview = () => {
     dispatch(getAllBooksCopy(currentPage))
   }, [currentPage, dispatch])
 
+ 
   //Manejo ciclo de vida del componente con useEffect
   useEffect(() => {
     dispatch(getAllBooksCopy())
-  }, [])
+  }, [refresh])
 
   return (
     <div>
-      {/* <div className={style.miNavbar}>
+      <div className={style.miNavbar}>
         <div className="row">
-          <div className="col-3">
-            <select className={style.select}>
-              <option value="opcion1">Filtros Autor</option>
-              <option value="opcion2">Opción 2</option>
-              <option value="opcion3">Opción 3</option>
-              <option value="opcion4">Opción 4</option>
+          <div className="col-2">
+            <select
+              onChange={handleAvailability}
+              className={style.select}
+            >
+              <option value={'true'}>Disponible</option>
+              <option value={'false'}>No Disponible</option>
             </select>
           </div>
-          <div className="col-3">
-            <select className={style.select}>
-              <option value="opcion1">Filtros Libros</option>
-              <option value="opcion2">Opción 2</option>
-              <option value="opcion3">Opción 3</option>
-              <option value="opcion4">Opción 4</option>
+          <div className="col-4">
+            <select className={style.select} onChange={handleOrder}>
+            <option value={'titleAsc'} name={'order'}>
+                Ordernar A-Z
+              </option>
+              <option value={'titleDesc'} name={'order'}>
+                Ordernar Z-A
+              </option>
+              <option value={'stockAsc'} name={'order'}>
+                Ordernar Stock menor - mayor
+              </option>
+              <option value={'stockDesc'} name={'order'}>
+                Ordernar Stock mayor - menor
+              </option>
+              <option value={'createdAtAsc'} name={'order'}>
+                Ordernar Fecha libro creacion menor - mayor
+              </option>
+              <option value={'createdAtDesc'} name={'order'}>
+                Ordernar Fecha libro creacion mayor - menor
+              </option>
             </select>
           </div>
           <div className="col-6">
@@ -152,12 +244,13 @@ const Librosview = () => {
               type="text"
               id="myInput"
               className={style.myInput}
-              name="search"
+              name={'title'}
+              onChange={(e) => handlerInputChange(e)}
               placeholder="🔍   Search for names.."
             />
           </div>
         </div>
-      </div> */}
+      </div>
       <div className={style.cardCont}>
         {allBooks?.rows?.map((ele) => (
           <div className={style.card} key={ele.id}>
@@ -174,58 +267,110 @@ const Librosview = () => {
             <div className={style.cardSubtitle}>
               {descripctionCut(ele.description)}
             </div>
-            <hr className={style.cardDivider} />
+            <div className={style.cardPrice}>
+              <span>$</span> {ele.sellPrice}
+            </div>
+            <div className={style.cardDivider}></div>
             <div className={style.cardFooter}>
-              <div className={style.cardPrice}>
-                <span>$</span> {ele.sellPrice}
+              <div className="d-flex">
+                {/* Editar */}
+
+                <button
+                  disabled={!ele.availability}
+                  className={style.cardBtn}
+                  onClick={() => {
+                    setIsModalOpen(true)
+                    setForm({
+                      id: ele.id,
+                      title: ele.title,
+                      author: ele.author,
+                      description: ele.description,
+                      genre: ele.genre,
+                      publicationYear: ele.publicationYear,
+                      images: ele.images[0],
+                      sellPrice: ele.sellPrice,
+                      stock: ele.stock,
+                    })
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="7"
+                    height="9"
+                    fill="currentColor"
+                    className="bi bi-pencil-fill"
+                    viewBox="0 0 16 16"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModalXl"
+                  >
+                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                  </svg>
+                </button>
+                {/* Eliminar */}
+
+                <button
+                  disabled={!ele.availability}
+                  type="button"
+                  className={style.cardBtnDele}
+                  style={{ height: '35px' }}
+                  onClick={(e) => {
+                    handleDeleteBook(e, ele.id)
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="7"
+                    height="9"
+                    fill="currentColor"
+                    className="bi bi-x-lg"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"></path>
+                  </svg>
+                </button>
+
+                {/* Suspender */}
+                <button
+                  type="button"
+                  className={style.cardBtnEdit}
+                  style={{ height: '35px' }}
+                  onClick={(e) => {
+                    handlePauseBook(e, ele.id)
+                  }}
+                  disabled={!ele.availability}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="7"
+                    height="9"
+                    fill="black"
+                    className="bi bi-pause-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"></path>
+                  </svg>
+                </button>
+                {/* Reactivar */}
+                <button
+                  disabled={ele.availability}
+                  type="button"
+                  onClick={(e) => {
+                    handleRestoreBook(e, ele.id)
+                  }}
+                  className={style.cardBtnRest}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="7"
+                    height="9"
+                    fill="black"
+                    className="bi bi-check-lg"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
+                  </svg>
+                </button>
               </div>
-              <button
-                className={style.cardBtn}
-                onClick={() => {
-                  setIsModalOpen(true)
-                  setForm({
-                    id: ele.id,
-                    title: ele.title,
-                    author: ele.author,
-                    description: ele.description,
-                    genre: ele.genre,
-                    publicationYear: ele.publicationYear,
-                    images: ele.images[0],
-                    sellPrice: ele.sellPrice,
-                    stock: ele.stock,
-                  })
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="7"
-                  height="9"
-                  fill="currentColor"
-                  className="bi bi-pencil-fill"
-                  viewBox="0 0 16 16"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModalXl"
-                >
-                  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-danger"
-                style={{ height: '35px' }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="35"
-                  height="15"
-                  //    color='black'
-                  color="black"
-                  className="bi bi-file-excel"
-                  viewBox="0 7 16 4"
-                >
-                  <path d="M5.18 4.616a.5.5 0 0 1 .704.064L8 7.219l2.116-2.54a.5.5 0 1 1 .768.641L8.651 8l2.233 2.68a.5.5 0 0 1-.768.64L8 8.781l-2.116 2.54a.5.5 0 0 1-.768-.641L7.349 8 5.116 5.32a.5.5 0 0 1 .064-.704z"></path>
-                </svg>
-              </button>
             </div>
           </div>
         ))}
@@ -235,7 +380,7 @@ const Librosview = () => {
           PREV
         </button>
         <p>
-          Pagina {currentPage + 1} de {totalProp}
+          Pagina {currentPage  + 1 } de {totalProp}
         </p>
         <button onClick={nextHandler} className={style.button}>
           NEXT
@@ -493,7 +638,11 @@ const Librosview = () => {
                         </div>
                         <div className="row justify-content-center d-flex">
                           <div className="col-12 mt-3">
-                            <button type="submit" className="btn btn-primary" aria-label="Close">
+                            <button
+                              type="submit"
+                              className="btn btn-primary"
+                              aria-label="Close"
+                            >
                               Editar Libro
                             </button>
                           </div>

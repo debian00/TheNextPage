@@ -1,14 +1,15 @@
 // import React from 'react'
 import { Suspense } from 'react'
 import CardHome from '../../Components/CardHome/CardHome'
-import principal from '../../assets/imghome/banner.jpg'
+import principal from '../../assets/imghome/THE NEXT PAGE.png'
 import style from './HomeView.module.css'
 import Carrousel from './Carrousel/Carrousel'
 
 const HomeView = () => {
   return (
-    <div>
+    <div style={{ background: '#f7f7f7' }}>
       {/* Imagen principal del Home */}
+
       <img
         src={principal}
         alt=""
@@ -16,7 +17,8 @@ const HomeView = () => {
           width: '100%',
           height: '60vh',
           objectFit: 'cover',
-          objectPosition: 'center -400px',
+          objectPosition: 'center 80%',
+          position: 'relative',
         }}
       />
       {/* Seccion de Novedades y Tendencias */}
@@ -48,7 +50,6 @@ const HomeView = () => {
               <p
                 style={{
                   alignItems: 'center',
-                  display: 'center',
                   textAlign: 'center',
                   margin: '0',
                 }}
@@ -139,6 +140,26 @@ const HomeView = () => {
           </div>
         </section>
       </Suspense>
+      <section className={style.triangle}></section>
+      {/* <section
+        className={style.triangleEnd}
+        style={{ height: '70vh', background: '#95659f' }}
+      >
+        <div className={style.news}>
+          <div className={style.letter}>
+            <div>
+              <h2>Suscribete a nuestro newsletter.</h2>
+              <p>
+                Entérate antes de nuestros descuentos, novedades y artículos de
+                interés!
+              </p>
+            </div>
+            <div></div>
+            <div></div>
+          </div>
+          <div></div>
+        </div>
+      </section> */}
     </div>
   )
 }

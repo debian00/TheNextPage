@@ -14,6 +14,28 @@ export const createBook = (form) => {
   }
 }
 
+export const postAuthor = (name) => {
+    return async () => {
+        try {
+            const {data} = await axios.post('/author/create', {name})
+            console.log(data);
+        } catch (error) {
+            console.log(error.response.data.error) 
+        }
+    }
+}
+
+export const postGenre = (name) => {
+    return async () => {
+        try {
+            const {data} = await axios.post('/genre/create', {name})
+            console.log(data);
+        } catch (error) {
+            console.log(error.response.data.error) 
+        }
+    }
+}
+
 export const postPromotion = (email) => {
     return async () => {
         try {

@@ -37,6 +37,7 @@ const CardHome = ({ books, author }) => {
             price={ele.sellPrice}
             id={ele.id}
             author={ele.author}
+            availability={ele.availability}
           ></Card>
         )
       })}
