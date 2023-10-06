@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllBooksCopy, getAuthors } from '../../../redux/actions/actionGet'
 import style from './autorview.module.css'
-import { updateAuthor } from '../../../redux/actions/actionPut'
 import { postAuthor } from '../../../redux/actions/actionPost'
 import axios from 'axios'
 
@@ -33,7 +32,8 @@ const AutorView = () => {
     const newAuthorName = editedName[authorId]
 
     try {
-      await dispatch(updateAuthor({ id: authorId, name: newAuthorName }))
+      await axios.put(`/author/update/${authorId}`, {name:newAuthorName})
+      // await dispatch(updateAuthor({ id: authorId, name: newAuthorName }))
     } catch (error) {
       console.error('Error al actualizar el autor:', error)
     }
