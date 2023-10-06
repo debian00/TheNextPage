@@ -5,6 +5,7 @@ import { getLogin } from "../../redux/actions/actionPost";
 import { Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../../Views/Login&Register/Login&Register.css"
+import "react-bootstrap"
 
 const Login = React.forwardRef((props,ref ) => {
 
@@ -27,20 +28,16 @@ const Login = React.forwardRef((props,ref ) => {
 
 
     return (
-    <div className="demoPage1" ref={ref} style={{
-        background: "url('./utils/paper1.png')",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
+    <div ref={ref} 
         
-        
-      }}>
-        <div className={style.formLogin}>
-            <form onSubmit={onSubmit} className={` d-flex flex-column justify-content-center align-items-center ${style.formLogin}`}>
-                <fieldset>
+      >
+        <div style={{padding : "10px" , height : "100%"}} className={style.form}>
+            <form onSubmit={onSubmit}  >
+                <fieldset className={` d-flex flex-column justify-content-center align-items-center text-center ${style.formLogin}`} >
                     <legend className={style.legend}>Logueate</legend>
-                    <div className="input">
-                        <label htmlFor="email">EMAIL : </label>
+                    <div className="d-flex ">
+                      <div className=" d-flex flex-row mb-4">
+                        <label htmlFor="email" className={style.label}>EMAIL : </label>
                         <input  
                         className={style.inputs}
                          placeholder="Escribe tu email aqui"
@@ -56,9 +53,11 @@ const Login = React.forwardRef((props,ref ) => {
                          })}
                         >
                         </input> 
-                        
+                      </div>
+                        <div className="d-flex flex-row">
+
                             {errors.email ? (
-                            <p
+                              <p
                             style={{
                                 color: "red",
                                 fontSize: "15px",
@@ -75,16 +74,19 @@ const Login = React.forwardRef((props,ref ) => {
 
                             </div>
                     
+                              </div>
                       
                    
                     <div>
-                        <label htmlFor="password">PASSWORD : </label>
-                        <input {...register("password" , {
+                        <label htmlFor="password" className={style.label} >PASSWORD : </label>
+                        <input className={style.inputs} {...register("password" , {
                             required : {
                                 value:true,
                                 message : "Escibe tu contraseña"
                             }
-                        })} placeholder="Escribe tu email aqui"></input>
+                        })} placeholder="Tu contraseña aqui...">
+
+                        </input>
 
                         {errors.password ? (
                             <p
@@ -102,17 +104,17 @@ const Login = React.forwardRef((props,ref ) => {
                             <p style={{ visibility: "hidden" }}> &nbsp; </p>
                             )}
                     </div>
-                    <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
+                    <Link to="/forgot-password"><span style={{ fontSize: "20px",cursor: "pointer", color: "black" }}>¿Olvidaste tu contraseña? <span className={style.spanLink} >Haz click aqui! </span></span></Link>
                     <div className = "d-flex flex-column justify-content-center align-items-center">
                     <div className = "m-1">
-                        <button type="submit">Enviar</button>
+                        <button type="submit" className={style.butonlogin}>Enviar</button>
                     </div>
                     <hr></hr>
-                    <div className = "m-1 d-flex flex-column justify-content-around align-items-center">
-                        <span className={style.span}>No estas registrado? <span style={{ cursor: "pointer", color: "blueviolet" }} onClick={() => handleNextPage()}>Regístrate aqui</span></span>
-                        <br></br>
-                        <p className={style.span}>o </p>
-                        <br></br>
+                    <div className = " d-flex flex-column justify-content-around align-items-center">
+                        <span className={style.span}>No estas registrado? <span  className={style.spanLink}  onClick={() => handleNextPage()}>Regístrate aqui</span></span>
+                        
+                        <p >o </p>
+                        
                         <button type="button" className={style.buton}>Accede con Google</button>
                     </div>
                     </div>
