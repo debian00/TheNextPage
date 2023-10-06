@@ -138,7 +138,11 @@ const Navbar = () => {
           transition: 'all 0.3s ease',
         }}
         className={`${style.downNav} ${
-          fixed && location.pathname !== '/shoppingCart' ? style.fixed : ''
+          fixed &&
+          location.pathname !== '/shoppingCart' &&
+          location.pathname !== '/checkout'
+            ? style.fixed
+            : ''
         }`}
       >
         <div>
