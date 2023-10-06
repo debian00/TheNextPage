@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getBookById } from '../../redux/actions/actionGet'
 import styles from './detail.module.css' // Importa los estilos CSS

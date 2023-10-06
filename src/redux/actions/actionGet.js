@@ -11,6 +11,7 @@ import {
   GET_BOOKS_BY_NAME,
   GET_ALL_AUTHORS,
   GET_BOOK_BY_AVAILABILITY,
+  GET_BOOK_BY_NAME_AUTHOR,
 } from '../types'
 
 export const getAllBooks = ({
@@ -53,6 +54,21 @@ export const getBookByAvailability = ({ page, availability, order ,title } ) => 
       dispatch({
         type: GET_BOOK_BY_AVAILABILITY,
         payload:data
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export const getBookByNameAuthor = (author) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios(`/books?author=${author}`)
+      const bookNames = data.rows.map((book) => book.title); 
+      dispatch({
+        type:GET_BOOK_BY_NAME_AUTHOR,
+        payload: bookNames
       })
     } catch (error) {
       console.log(error);
