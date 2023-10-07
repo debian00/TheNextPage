@@ -28,9 +28,9 @@ const PerfilUserdView = () => {
   },[])
   return (
     <div>
-      <div className="row">
+      <div className={`${style.panel} row`}>
         {/* Perfil usuario Lista de opciones*/}
-        <div className={`col-2`}>
+        <div className={`${style.profilePanel} col-2`}>
           <div className={`${style.menu}`}>
             <div className={style.profile}>
               <img src={perfil} alt="Foto de perfil" />
@@ -53,7 +53,7 @@ const PerfilUserdView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'A' ? 'white' : 'black'}
                     className="bi bi-person-fill-gear"
                     viewBox="0 0 16 16"
                   >
@@ -77,7 +77,7 @@ const PerfilUserdView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'B' ? 'white' : 'black'}
                     className="bi bi-bookmark-heart-fill"
                     viewBox="0 0 16 16"
                   >
@@ -101,7 +101,7 @@ const PerfilUserdView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'C' ? 'white' : 'black'}
                     className="bi bi-layout-text-window-reverse"
                     viewBox="0 0 16 16"
                   >
@@ -126,7 +126,7 @@ const PerfilUserdView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'D' ? 'white' : 'black'}
                     className="bi bi-bag-fill"
                     viewBox="0 0 16 16"
                   >
@@ -150,7 +150,7 @@ const PerfilUserdView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'E' ? 'white' : 'black'}
                     className="bi bi-box-arrow-right"
                     viewBox="0 0 16 16"
                   >

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom'
 import style from './card.module.css'
-const Card = ({ title, price, author, image, id, availability }) => {
+const Card = ({ title, price, author, image, id, availability, forSale }) => {
   return (
     <div
       style={{
@@ -66,7 +66,39 @@ const Card = ({ title, price, author, image, id, availability }) => {
             {author}
           </span>
         </p>
-        <h3 style={{ textAlign: 'right', paddingBottom: '5px' }}>${price}</h3>
+        {forSale ? (
+          <div>
+            <div>
+              <h6 style={{ display: 'inline-block', justifyContent: 'end' }}>
+                Antes:{' '}
+              </h6>
+              <h6
+                style={{
+                  display: 'inline-block',
+                  textAlign: 'right',
+                  paddingBottom: '5px',
+                  textDecoration: 'line-through',
+                }}
+              >
+                ${price}
+              </h6>
+            </div>
+            <div>
+              <h5 style={{ display: 'inline-block' }}>Ahora: </h5>
+              <h5
+                style={{
+                  display: 'inline-block',
+                  textAlign: 'right',
+                  paddingBottom: '5px',
+                }}
+              >
+                ${price * 0.75}
+              </h5>
+            </div>
+          </div>
+        ) : (
+          <h3 style={{ textAlign: 'right', paddingBottom: '5px' }}>${price}</h3>
+        )}
       </div>
     </div>
   )

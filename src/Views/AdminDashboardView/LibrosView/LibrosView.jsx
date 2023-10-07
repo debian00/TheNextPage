@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import style from './librosview.module.css'
 import { useEffect, useState } from 'react'
 import {
-  getAllBooks,
-  getAllBooksCopy,
   getBookByAvailability,
   getBookPause,
   getBookRestore,
@@ -19,10 +17,10 @@ import { updateBook } from '../../../redux/actions/actionPut'
 const Librosview = () => {
   //Hook para traer todos los libros
   const allBooks = useSelector((state) => state.books)
-  const [refresh, setRefresh] = useState()
+ 
   console.log(allBooks)
   //Estado para manejar el modal
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  
   const dispatch = useDispatch()
 
   //! EDITADO ------------------------

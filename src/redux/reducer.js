@@ -18,6 +18,7 @@ import {
   DELETE_BOOK,
   STOP_BOOK,
   RESTORE_BOOK,
+  GET_ALL_BOOKS_OFFER
 } from './types'
 
 const initialState = {
@@ -52,6 +53,8 @@ const rootReducer = (state = initialState, action) => {
       }
     case GET_ALL_BOOKS_COPY:
       return { ...state, books: action.payload }
+    case GET_ALL_BOOKS_OFFER:
+      return {...state, books: action.payload}
     case GET_BOOK_BY_AVAILABILITY:
       return { ...state, books: action.payload }
     case GET_BOOK_BY_NAME_AUTHOR:
@@ -59,7 +62,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_BOOK_BY_ID:
       return { ...state, bookById: action.payload }
     case GET_BOOK_BY_OFFER:
-      return {...state, books: action.payload}
+      return { ...state, books: action.payload }
     case GET_BOOKS_NAME:
       return {
         ...state,
@@ -83,6 +86,7 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, users: action.payload }
     case ADMIN_TO_USER:
       return { ...state, users: action.payload }
+    
     case DELETE_BOOK:
       const bookDeleted = {
         count: state.books.count,

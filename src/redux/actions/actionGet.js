@@ -14,6 +14,7 @@ import {
   GET_BOOK_BY_NAME_AUTHOR,
   STOP_BOOK,
   RESTORE_BOOK,
+  GET_ALL_BOOKS_OFFER,
 } from '../types'
 
 export const getAllBooks = ({
@@ -53,7 +54,6 @@ export const getBookByAvailability = ({ page, availability, order, title }) => {
       const { data } = await axios(
         `/books?page=${page}&size=10&availability=${availability}&order=${order}&title=${title}`
       )
-      // &order=${order}&author=${author}&title=${title}
       dispatch({
         type: GET_BOOK_BY_AVAILABILITY,
         payload: data,
@@ -85,6 +85,20 @@ export const getAllBooksCopy = (page) => {
       const { data } = await axios(`/books?page=${page}`)
       return dispatch({
         type: GET_ALL_BOOKS_COPY,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getAllBooksOffer = (forSale) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(`/books?forSale=${forSale}`)
+      return dispatch({
+        type: GET_ALL_BOOKS_OFFER,
         payload: data,
       })
     } catch (error) {
