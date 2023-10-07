@@ -8,6 +8,7 @@ import UsersView from './UsersView/UsersView'
 import Librosview from './LibrosView/LibrosView'
 import CrearLibroView from './CrearLibroView/CrearLibroView'
 import AutorView from './AutorView/AutorView'
+import { Link } from 'react-router-dom'
 
 const AdminDashboardView = () => {
   //Manejo de componentes
@@ -40,7 +41,7 @@ const AdminDashboardView = () => {
             <h4>Nombre Admin</h4>
             <ul className={style.menuList}>
               <li>
-                <a
+                <Link
                   onClick={() => {
                     handleSelect('A')
                   }}
@@ -68,10 +69,10 @@ const AdminDashboardView = () => {
                     <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z" />
                   </svg>{' '}
                   &nbsp; Editar Perfil
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   onClick={() => {
                     handleSelect('B')
                   }}
@@ -98,10 +99,10 @@ const AdminDashboardView = () => {
                     <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
                   </svg>{' '}
                   &nbsp; Usuarios
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   onClick={() => {
                     handleSelect('C')
                   }}
@@ -129,10 +130,10 @@ const AdminDashboardView = () => {
                     <path d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z" />
                   </svg>{' '}
                   &nbsp; Libros
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   onClick={() => {
                     handleSelect('D')
                   }}
@@ -160,10 +161,10 @@ const AdminDashboardView = () => {
                     <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
                   </svg>{' '}
                   &nbsp; Ofertas
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   onClick={() => {
                     handleSelect('E')
                   }}
@@ -195,10 +196,10 @@ const AdminDashboardView = () => {
                     <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                   </svg>{' '}
                   &nbsp; Publicar Libro
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   onClick={() => {
                     handleSelect('F')
                   }}
@@ -226,10 +227,10 @@ const AdminDashboardView = () => {
                     <path d="M2 1a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2ZM1 3a1 1 0 0 1 1-1h2v2H1V3Zm4 10V2h9a1 1 0 0 1 1 1v9c0 .285-.12.543-.31.725C14.15 11.494 12.822 10 10 10c-3.037 0-4.345 1.73-4.798 3H5Zm-4-2h3v2H2a1 1 0 0 1-1-1v-1Zm3-1H1V8h3v2Zm0-3H1V5h3v2Z" />
                   </svg>{' '}
                   &nbsp; Publicar Autor
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   onClick={() => {
                     handleSelect('G')
                   }}
@@ -263,7 +264,7 @@ const AdminDashboardView = () => {
                     />
                   </svg>{' '}
                   &nbsp; Salir
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -289,7 +290,7 @@ const AdminDashboardView = () => {
           <div className={`col-9 ${style.content}`}>
             <AutorView />
           </div>
-        ) :(
+        ) : (
           <div className={`col-9 ${style.content}`}>
             <h1>Soy el componente ofertas</h1>
           </div>

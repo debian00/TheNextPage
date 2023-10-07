@@ -12,6 +12,8 @@ import {
   GET_ALL_AUTHORS,
   GET_BOOK_BY_AVAILABILITY,
   GET_BOOK_BY_NAME_AUTHOR,
+  STOP_BOOK,
+  RESTORE_BOOK,
 } from '../types'
 
 export const getAllBooks = ({
@@ -44,19 +46,20 @@ export const getAllBooks = ({
   }
 }
 
-export const getBookByAvailability = ({ page, availability, order ,title } ) => {
-
+export const getBookByAvailability = ({ page, availability, order, title }) => {
   return async (dispatch) => {
     try {
       if (!title) title = ''
-      const {data} = await axios(`/books?page=${page}&size=10&availability=${availability}&order=${order}&title=${title}`)
+      const { data } = await axios(
+        `/books?page=${page}&size=10&availability=${availability}&order=${order}&title=${title}`
+      )
       // &order=${order}&author=${author}&title=${title}
       dispatch({
         type: GET_BOOK_BY_AVAILABILITY,
-        payload:data
+        payload: data,
       })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 }
@@ -64,19 +67,17 @@ export const getBookByAvailability = ({ page, availability, order ,title } ) => 
 export const getBookByNameAuthor = (author) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios(`/books?author=${author}`)
-      const bookNames = data.rows.map((book) => book.title); 
+      const { data } = await axios(`/books?author=${author}`)
+      const bookNames = data.rows.map((book) => book.title)
       dispatch({
-        type:GET_BOOK_BY_NAME_AUTHOR,
-        payload: bookNames
+        type: GET_BOOK_BY_NAME_AUTHOR,
+        payload: bookNames,
       })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 }
-
-
 
 export const getAllBooksCopy = (page) => {
   return async (dispatch) => {
@@ -208,10 +209,14 @@ export const getGenres = () => {
 }
 
 export const getBookPause = (id) => {
-  return async() => {
+  return async (dispatch) => {
     try {
       const { data } = await axios('/books/pause/' + id)
-      console.log(data);
+      dispatch({
+        type: STOP_BOOK,
+        payload: id,
+      })
+      console.log(data)
     } catch (error) {
       console.log(error)
     }
@@ -219,10 +224,14 @@ export const getBookPause = (id) => {
 }
 
 export const getBookRestore = (id) => {
-  return async() => {
+  return async (dispatch) => {
     try {
       const { data } = await axios('/books/restore/' + id)
-      console.log(data);
+      dispatch({
+        type: RESTORE_BOOK,
+        payload: id,
+      })
+      console.log(data)
     } catch (error) {
       console.log(error)
     }

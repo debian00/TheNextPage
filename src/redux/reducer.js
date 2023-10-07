@@ -14,6 +14,9 @@ import {
   GET_ALL_AUTHORS,
   GET_BOOK_BY_AVAILABILITY,
   GET_BOOK_BY_NAME_AUTHOR,
+  DELETE_BOOK,
+  STOP_BOOK,
+  RESTORE_BOOK,
 } from './types'
 
 const initialState = {
@@ -25,7 +28,7 @@ const initialState = {
   users: [],
   searchs: [],
   booksSearch: [],
-  bookNameAuthor: []
+  bookNameAuthor: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -49,9 +52,9 @@ const rootReducer = (state = initialState, action) => {
     case GET_ALL_BOOKS_COPY:
       return { ...state, books: action.payload }
     case GET_BOOK_BY_AVAILABILITY:
-        return{ ...state, books:action.payload}
+      return { ...state, books: action.payload }
     case GET_BOOK_BY_NAME_AUTHOR:
-        return{ ...state, bookNameAuthor: action.payload }
+      return { ...state, bookNameAuthor: action.payload }
     case GET_BOOK_BY_ID:
       return { ...state, bookById: action.payload }
     // case GET_AUTHOR_NAME:
@@ -82,12 +85,68 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, users: action.payload }
     case ADMIN_TO_USER:
       return { ...state, users: action.payload }
+    case DELETE_BOOK:
+      const bookDeleted = {
+        count: state.books.count,
+        rows: state.books.rows.filter((book) => book.id !== action.payload),
+      }
+      return {
+        ...state,
+        books: bookDeleted,
+      }
+    case UPDATE_BOOK:
+      const bookUpdate = {
+        count: state.books.count,
+        rows: state.books.rows.map((book) =>
+          book.id === action.payload.id ? action.payload : book
+        ),
+      }
+      return {
+        ...state,
+        books: bookUpdate,
+      }
+    case STOP_BOOK:
+      const stopedBook = state.books.rows.map((book) => {
+        if (book.id === action.payload) {
+          return {
+            ...book,
+            availability: false,
+          }
+        }
+        return book
+      })
 
+      const booksWithAvailabilityChanged = {
+        count: state.books.count,
+        rows: stopedBook,
+      }
+
+      return {
+        ...state,
+        books: booksWithAvailabilityChanged,
+      }
+    case RESTORE_BOOK:
+      const restoreBook = state.books.rows.map((book) => {
+        if (book.id === action.payload) {
+          return {
+            ...book,
+            availability: true,
+          }
+        }
+        return book
+      })
+
+      const bookRestored = {
+        count: state.books.count,
+        rows: restoreBook,
+      }
+
+      return {
+        ...state,
+        books: bookRestored,
+      }
     case GET_BOOKS_BY_NAME:
       return { ...state, booksSearch: action.payload }
-    case UPDATE_BOOK:
-      return { ...state, books: action.payload }
-    
     default:
       return state
   }
