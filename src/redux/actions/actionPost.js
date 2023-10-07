@@ -60,7 +60,7 @@ export const CreateUser = async (register, setModal, navigate) => {
           setTimeout(() => {
             setModal(false);
             navigate("/home");
-          }, 10000);
+          }, 1500);
           return;
 
     } catch (error) {

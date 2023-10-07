@@ -1,8 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@300&display=swap');
-.legend {
-  font-size: 60px;
-  font-family: 'Kalam', cursive;
-}
 
 .inputs {
   border: none;
@@ -18,44 +13,29 @@
   position: relative;
   z-index: -1;
 }
-.label {
-  padding: 10px !important;
-  height: 45px !important;
-  text-align: center;
-  font-size: 15px;
-  color: #091f44 !important;
-  background-color: aliceblue;
-  display: inline-block;
-  border-radius: 15px;
-}
+
 .buton {
   position: absolute;
-  /*  bottom: 80.5%;
-  left: 91%; */
   top: 0;
   right: 0;
   transform: translate(-0%, 0%);
   z-index: 2;
-  background-color: rgb(35, 90, 163);
-  color: #ffffff;
+  background : linear-gradient( rgba(199, 197, 199, 0.767),  rgba(162, 7, 240, 0.452) , rgba(195, 196, 197, 0.829));
+  color: rgba(0, 0, 0, 0.767);
   border: none;
   padding: 5px 5px;
   border-top-left-radius: none !important;
-  /*  border-radius: 3px; */
   cursor: pointer;
-  /* margin-top: 20px; */
   width: 40px;
-  box-shadow: #06142d;
+  box-shadow: 0  3px 15px 1px  #06142d;
   transition: background-color 0.3s ease;
 }
 
 .buton:hover {
-  background-color: rgb(19, 60, 113);
+  background :rgba(255, 255, 255, 0.938);
+ 
 }
-.label:focus,
-.label:hover {
-  background-color: rgba(209, 209, 209, 0.699);
-}
+
 
 .inputfile + label {
   font-size: 1.25em;
@@ -70,9 +50,214 @@
   background-color: red;
 }
 
+.label {
+  
+  padding: 10px !important;
+  font-size: 20px;
+  color: #091f44 !important;
+ font-size: 20px;
+ 
+}
+.space {
+  margin : 20px
+}
+
 .hr {
   border-bottom: 2px;
-  width: 80%;
-  /* border-width: 3px; */
-  color: rgba(79, 79, 79, 0.33);
+  width: 100%;
+ margin : 30px;
+ margin-top : 10px !important; 
+  color: rgba(118, 50, 145, 0.973);
 }
+
+
+.inputs {
+  margin-left : 10px;
+  border : none;
+  border-bottom:3px solid  rgb(123, 26, 153) ;
+  background-color: transparent;
+  border-radius: 5px;
+ height: 40px;
+ width: 230px;
+}
+
+.inputs:hover {
+
+border :  3px solid rgb(123, 26, 153) !important
+}
+.label1 {
+  width: 220px;
+  padding: 10px !important;
+  font-size: 20px;
+  color: #1b0944 !important;
+  font-size: 20px;
+ background-color: rgb(230, 221, 221);
+ box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.719);
+ display: inline-block;
+ border-radius: 15px;
+ height: 45px !important;
+ text-align: center;
+ margin-bottom: 40px;
+}
+.label1:focus,
+.label1:hover {
+  background : linear-gradient( rgba(153, 31, 153, 0.767),  rgba(108, 74, 201, 0.781) , rgba(189, 197, 212, 0.829));
+  
+}
+.label2 {
+  width: 140px;
+  padding: 10px !important;
+  font-size: 20px;
+  color: #1b0944 !important;
+  font-size: 20px;
+ background-color: rgb(230, 221, 221);
+ box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.719);
+ display: inline-block;
+ border-radius: 15px;
+ height: 45px !important;
+ text-align: center;
+ margin-bottom: 40px;
+ margin-left: 30px;
+}
+.label2:focus,
+.label2:hover {
+  background : linear-gradient( rgba(153, 31, 153, 0.767),  rgba(108, 74, 201, 0.781) , rgba(189, 197, 212, 0.829));
+  
+}
+
+.ima {
+  width: 100% !important;
+  background : linear-gradient( rgba(153, 31, 153, 0.767),  rgba(108, 74, 201, 0.781) , rgba(189, 197, 212, 0.829));
+  -webkit-box-shadow: 0px 10px 7px -3px rgba(0,0,0,0.41);
+  -moz-box-shadow: 0px 10px 7px -3px rgba(0,0,0,0.41);
+  box-shadow: 0px 10px 7px -3px rgba(0,0,0,0.41);
+  margin-bottom: 20px;
+  padding : 30px
+}
+
+
+.inputs {
+  margin-left : 10px;
+  border : none;
+  border-bottom:3px solid  rgb(123, 26, 153) ;
+  background-color: transparent;
+  border-radius: 5px;
+ height: 40px;
+ width: 230px;
+}
+
+.inputs:hover {
+
+border :  3px solid rgb(123, 26, 153) !important
+}
+
+.button {
+  width: 300px;
+  padding: 10px !important;
+  font-size: 20px;
+  color: #1b0944 !important;
+ font-size: 20px;
+ background-color: rgba(255, 255, 255, 0.795);
+ box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.719);
+ display: inline-block;
+  border-radius: 15px;
+  height: 45px !important;
+  text-align: center;
+  border : none
+}
+.button:focus,
+.button:hover {
+  background : linear-gradient( rgba(153, 31, 153, 0.767),  rgba(108, 74, 201, 0.781) , rgba(189, 197, 212, 0.829));
+  
+}
+
+.divDrop {
+
+    border: 10px  #ccc;
+    background: rgba(255, 255, 255, 0.801);
+    margin: 20px;
+    text-align: center;
+    width: 295px;
+    position: relative;
+    height: 367.88px;
+    border-radius: 10px;
+  box-shadow: 0 5px 15px 1px rgba(0, 0, 0, 0.671);
+}
+.span {
+  font-size: 22px;
+  margin : 0
+}
+.butonlogin { 
+
+ 
+  margin: 10px;
+  background-color: rgb(140, 82, 158);
+  color: #ffffff;
+  border: none;
+  padding: 5px 5px;
+  border-top-left-radius: none !important;
+  border-radius: 5px;
+  cursor: pointer;
+  /* margin-top: 20px; */
+ height: 50px;
+  width:300px;
+  box-shadow: #06142d;
+  transition: background-color 0.3s ease;
+
+}
+.butonlogin:hover {
+  background-color: #562c66f6;
+}
+
+
+.spanLink{
+  cursor: pointer;
+  color: rgb(140, 82, 158);
+  font-size: 22px;
+
+}
+.spanLink:hover {
+color: #562c66f6;
+}
+
+.imagen {
+  background:
+    linear-gradient(to bottom, #7b3f99c2, #9c95a08a, #aea5b179, #6d2b7eb2),
+    url('https://images.unsplash.com/photo-1614849963640-9cc74b2a826f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80') no-repeat center center/cover;
+    -webkit-box-shadow: inset -42px 0px 57px 11px rgba(0,0,0,0.57);
+    -moz-box-shadow: inset -42px 0px 57px 11px rgba(0,0,0,0.57);
+    box-shadow: inset -42px 0px 57px 11px rgba(0,0,0,0.57);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.imagen1 {
+  background:
+  linear-gradient(to bottom, #532a68c2, #655f688a, #918e9279, #572663b2),
+  url('https://assets.wfcdn.com/im/09250526/resize-h700-w700%5Ecompr-r85/6747/67475949/Dublin+Bookcase.jpg') no-repeat center center/cover;
+  -webkit-box-shadow: inset -42px 0px 57px 11px rgba(0,0,0,0.57);
+-moz-box-shadow: inset -42px 0px 57px 11px rgba(0,0,0,0.57);
+box-shadow: inset -42px 0px 57px 11px rgba(0,0,0,0.57);
+  width: 100%;
+  height: 100%;
+  z-index: -1;;
+}
+
+.formLogin {
+   
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+ padding : 60px;
+border-radius: 15px;
+
+}
+.legend {
+  padding: 10px;
+  font-size: 60px;
+  margin-bottom : 50px
+}
+ 
