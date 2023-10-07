@@ -18,6 +18,7 @@ import Shopping from './Views/Shopping/Shopping'
 import ForgotPassword from './Views/ForgotPassword/ForgotPassword'
 import ResetPassword from './Views/ForgotPassword/ResetPassword'
 import Checkout from './Views/Checkout/Checkout'
+import PromocionesView from './Views/PromocionesView/PromocionesView'
 //import ChatBot from "./Components/Chatbot/Chatbot"
 
 function App() {
@@ -140,6 +141,7 @@ function App() {
           path="/reset_password/:id/:token"
           element={<ResetPassword />}
         ></Route>
+        <Route path='/promociones' element={<><PromocionesView/><Footer /></>}/>
       </Routes>
     </>
   )

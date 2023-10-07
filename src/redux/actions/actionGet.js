@@ -44,13 +44,13 @@ export const getAllBooks = ({
   }
 }
 
-export const getBookByAvailability = ({ page, availability, order ,title } ) => {
+export const getBookByAvailability = ({ page, availability, order ,title} ) => {
 
   return async (dispatch) => {
     try {
       if (!title) title = ''
+     
       const {data} = await axios(`/books?page=${page}&size=10&availability=${availability}&order=${order}&title=${title}`)
-      // &order=${order}&author=${author}&title=${title}
       dispatch({
         type: GET_BOOK_BY_AVAILABILITY,
         payload:data

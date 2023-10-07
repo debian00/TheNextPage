@@ -14,6 +14,7 @@ import {
   GET_ALL_AUTHORS,
   GET_BOOK_BY_AVAILABILITY,
   GET_BOOK_BY_NAME_AUTHOR,
+  GET_BOOK_BY_OFFER,
 } from './types'
 
 const initialState = {
@@ -54,11 +55,8 @@ const rootReducer = (state = initialState, action) => {
         return{ ...state, bookNameAuthor: action.payload }
     case GET_BOOK_BY_ID:
       return { ...state, bookById: action.payload }
-    // case GET_AUTHOR_NAME:
-    //   return {
-    //     ...state,
-    //     searchs: [...action.payload.map((ele) => ele.name)],
-    //   }
+    case GET_BOOK_BY_OFFER:
+      return {...state, books: action.payload}
     case GET_BOOKS_NAME:
       return {
         ...state,

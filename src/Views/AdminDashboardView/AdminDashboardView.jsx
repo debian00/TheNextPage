@@ -8,6 +8,7 @@ import UsersView from './UsersView/UsersView'
 import Librosview from './LibrosView/LibrosView'
 import CrearLibroView from './CrearLibroView/CrearLibroView'
 import AutorView from './AutorView/AutorView'
+import PromocionLibroView from './PromocionLibrosView/PromocionLibroView'
 
 const AdminDashboardView = () => {
   //Manejo de componentes
@@ -131,37 +132,7 @@ const AdminDashboardView = () => {
                   &nbsp; Libros
                 </a>
               </li>
-              <li>
-                <a
-                  onClick={() => {
-                    handleSelect('D')
-                  }}
-                  href="#"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    borderRadius: '15px',
-                    height: '70px',
-                    width: '100%',
-                    paddingInline: '5px',
-                    backgroundColor: selectedLink === 'D' ? color : 'white',
-                    color: selectedLink === 'D' ? 'white' : 'black',
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="35"
-                    height="35"
-                    fill={selectedLink === 'D' ? 'white' : 'black'}
-                    className="bi bi-tags-fill"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                    <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
-                  </svg>{' '}
-                  &nbsp; Ofertas
-                </a>
-              </li>
+              
               <li>
                 <a
                   onClick={() => {
@@ -231,6 +202,38 @@ const AdminDashboardView = () => {
               <li>
                 <a
                   onClick={() => {
+                    handleSelect('D')
+                  }}
+                  href="#"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    borderRadius: '15px',
+                    height: '70px',
+                    width: '100%',
+                    paddingInline: '5px',
+                    backgroundColor: selectedLink === 'D' ? color : 'white',
+                    color: selectedLink === 'D' ? 'white' : 'black',
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="35"
+                    height="35"
+                    fill={selectedLink === 'D' ? 'white' : 'black'}
+                    className="bi bi-tags-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                    <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
+                  </svg>{' '}
+                  &nbsp; Ofertas
+                </a>
+              </li>
+              
+              <li>
+                <a
+                  onClick={() => {
                     handleSelect('G')
                   }}
                   href="#"
@@ -284,6 +287,10 @@ const AdminDashboardView = () => {
         ) : componenteActual === 'E' ? (
           <div className={`col-9 ${style.content}`}>
             <CrearLibroView />
+          </div>
+        ) :componenteActual === 'D' ? (
+          <div className={`col-9 ${style.content}`}>
+            <PromocionLibroView/>
           </div>
         ) : componenteActual === 'F' ? (
           <div className={`col-9 ${style.content}`}>

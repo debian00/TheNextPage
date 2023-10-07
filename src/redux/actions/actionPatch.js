@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ADMIN_TO_USER, RESTORE_USER_BY_ID, STOP_USER_BY_ID, USER_TO_ADMIN } from '../types'
+import { ADMIN_TO_USER, GET_BOOK_BY_OFFER, RESTORE_USER_BY_ID, STOP_USER_BY_ID, USER_TO_ADMIN } from '../types'
 
 
 export const stopUserById = (id) => {
@@ -55,3 +55,19 @@ export const adminToUser = (id) => {
         }
     }
 }
+
+export const getBookByOffer = ({ page, forSale, order ,title} ) => {
+
+    return async (dispatch) => {
+      try {
+        if (!title) title = ''
+        const {data} = await axios(`/books?page=${page}&size=10&forSale=${forSale}&order=${order}&title=${title}`)
+        dispatch({
+          type: GET_BOOK_BY_OFFER,
+          payload:data
+        })
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
