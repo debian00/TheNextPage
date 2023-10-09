@@ -151,12 +151,20 @@ export const handleGitHubLogin = async (setModal, navigate) => {
     try {
         const provider = new GithubAuthProvider();
         const result = await signInWithPopup(auth, provider);
-        console.log(result);
-        try {
+
+        const userInfo =  result._tokenResponse;
+        const obj =   {   screenName : userInfo.displayName, 
+                            profilePic : userInfo.photoUrl,
+                            email : userInfo.email,
+                            fullName : userInfo.fullName, 
+                            password : "AAdsadsad1321321"
+                        };
+        console.log(obj);
+      /*   try {
             await getLogin(obj , setModal , navigate);
         } catch (error) {
             await CreateUser(obj , setModal,navigate)
-        }
+        } */
      /*    try {
             await getLogin(obj , setModal , navigate);
 
