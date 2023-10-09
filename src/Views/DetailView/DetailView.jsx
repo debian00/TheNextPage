@@ -5,6 +5,7 @@ import styles from './detail.module.css' // Importa los estilos CSS
 import { useParams } from 'react-router-dom'
 import { getGenres } from '../../redux/actions/actionGet'
 import axios from 'axios'
+import { MercadoPago, Stripe } from '../../utils/Icons'
 
 function DetailView() {
   const { id } = useParams()
@@ -161,9 +162,47 @@ function DetailView() {
         </div>
       </div>
 
-      <div style={{ height: '40vh' }}>
-        <div className={styles.card}></div>
-        <button onClick={handleCart}>Añadir al carrito</button>
+      <div
+        style={{
+          padding: '40px',
+          width: '80%',
+          margin: '0 auto',
+        }}
+      >
+        <div className={styles.card}>
+          <div className={styles.image}>
+            <img src={bookData.images} />
+            <div className={styles.info}>
+              <h2>{bookData.title}</h2>
+              <p>
+                Por: <span>{bookData.author}</span>
+              </p>
+              <div className={styles.genres}>
+                <ul>
+                  {bookData.genre?.map((ele) => {
+                    const infoGenre = genres.find((genre) => {
+                      return genre.id === ele
+                    })
+                    return <li key={infoGenre.id}>{infoGenre.name}</li>
+                  })}
+                </ul>
+              </div>
+              <div className={styles.sipnosis}>
+                <h3>Sinopsis:</h3>
+                <p>{bookData.description}</p>
+              </div>
+            </div>
+            <div className={styles.checkout}>
+              <h3>${bookData.sellPrice}</h3>
+              <button onClick={handleCart}>Añadir al carrito</button>
+              <div className={styles.method}>
+                <h4>Metodos de pago</h4>
+                <Stripe width={120}></Stripe>
+                <MercadoPago width={120}></MercadoPago>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

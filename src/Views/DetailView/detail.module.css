@@ -46,6 +46,8 @@ body {
   width: calc(var(--baseline) * 60);
   height: calc(var(--baseline) * 42.6);
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.3);
+  position: relative;
+  bottom: 70px;
 }
 
 /* Estilo del libro */
@@ -241,4 +243,82 @@ input[type='radio'] {
 input[type='radio']:checked + .book__page {
   transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
   transform: rotateY(-180deg);
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.image img {
+  height: 300px;
+  width: 200px;
+  object-fit: cover;
+}
+.image {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.info {
+  text-align: left;
+}
+.info h2 {
+  color: #3b3b3b;
+}
+.info p {
+  margin-bottom: 5px;
+}
+.info p span {
+  font-family: 'Roboto';
+  font-size: 16px;
+  color: #6f5475;
+  height: fit-content;
+}
+
+.genres ul li {
+  color: rgb(255, 255, 255);
+  display: block;
+  width: fit-content;
+  padding: 5px 7px;
+  font-size: 13px;
+  background: #878787;
+}
+
+.sipnosis {
+  width: 100%;
+}
+.sipnosis h3 {
+  font-weight: bold;
+  width: fit-content;
+}
+.sipnosis p {
+}
+
+.checkout h3 {
+  font-weight: bold;
+}
+
+.checkout {
+  width: 100%;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+.checkout button {
+  background-color: #6f5475;
+  color: #f5f5f5;
+  border: none;
+  padding: 10px;
+}
+.checkout svg {
+  color: #6f5475;
+}
+
+.method {
+  margin-top: 20px;
 }
