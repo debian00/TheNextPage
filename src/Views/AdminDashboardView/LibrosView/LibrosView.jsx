@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import style from './librosview.module.css'
 import { useEffect, useState } from 'react'
 import {
-  getAllBooksCopy,
   getBookByAvailability,
   getBookPause,
   getBookRestore,
@@ -11,16 +10,22 @@ import {
 // import { updateBook } from '../../../redux/actions/actionPut'
 import axios from 'axios'
 import { deleteBookById } from '../../../redux/actions/actionDelete'
+import Card from '../../../Components/CardIndividual/Card'
+import { CheckWithLine, Delete, Pencil, Stop } from '../../../utils/Icons'
+import { updateBook } from '../../../redux/actions/actionPut'
+import { showSuccessNotification } from '../../../utils/Toast'
 
 const Librosview = () => {
   //Hook para traer todos los libros
   const allBooks = useSelector((state) => state.books)
-  const [refresh, setRefresh] = useState()
+
   console.log(allBooks)
   //Estado para manejar el modal
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  
-  //Estado para el formulario
+
+  const dispatch = useDispatch()
+
+  //! EDITADO ------------------------
+
   const [form, setForm] = useState({
     id: '',
     title: '',
@@ -45,40 +50,34 @@ const Librosview = () => {
     stock: '',
   })
 
-  const dispatch = useDispatch()
-  //Funcion para recortar la cantinda de letras en la descripcion
-  const descripctionCut = (descripcion) => {
-    if (descripcion.length > 50) {
-      const newDescription = descripcion.split('').slice(0, 50).join('')
-      return <div>{newDescription}</div>
-    }
-    return <div>{descripcion}</div>
-  }
-  //Funcion para recortar la cantinda de letras en la descripcion
-  const tittleCut = (title) => {
-    if (title.length > 20) {
-      const newTittle = title.split('').slice(0, 20).join('')
-      return <div>{newTittle}</div>
-    }
-    return <div>{title}</div>
-  }
-  //Funcion para enviar la info
   const handleUpdate = async (e) => {
     e.preventDefault()
-    await axios.put(`/books/update/${form.id}`, form)
+    dispatch(updateBook(form, form.id))
   }
-  //Funcion para eliminar el libro
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  //! --------------------- NO TOCAR --
+
+  //? BORRADO LOGICO -----------------------
+
+  //* Funcion para eliminar el libro
   const handleDeleteBook = (e, id) => {
     e.preventDefault()
     const confirmed = window.confirm(
       '¿Estás seguro que quieres eliminar este libro?'
     )
     if (confirmed) {
-      setRefresh(getAllBooksCopy())
       dispatch(deleteBookById(id))
+      showSuccessNotification('¡Operación exitosa!')
     }
   }
-  //Funcion para suspender el libro
+  //* Funcion para suspender el libro
   const handlePauseBook = (e, id) => {
     e.preventDefault()
     console.log('otro id para editar', id)
@@ -86,11 +85,11 @@ const Librosview = () => {
       '¿Estás seguro que quieres suspender este libro?'
     )
     if (confirmed) {
-      setRefresh(getAllBooksCopy())
+      showSuccessNotification('¡Operación exitosa!')
       dispatch(getBookPause(id))
     }
   }
-  //Funcion para restaurar el libro
+  //* Funcion para restaurar el libro
   const handleRestoreBook = (e, id) => {
     e.preventDefault()
     console.log('otro id para restaurar', id)
@@ -98,18 +97,14 @@ const Librosview = () => {
       '¿Estás seguro que quieres restaurar este libro?'
     )
     if (confirmed) {
-      setRefresh(getAllBooksCopy())
+      showSuccessNotification('¡Operación exitosa!')
       dispatch(getBookRestore(id))
     }
   }
-  //Funcion para manejar los campos
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    })
-  }
-  //Funcio para manejar la imagen de la portada
+
+  //? ----------------------- NO TOCAR ---
+
+  //! EDITADO (IMAGEN) -----------------------
   const handleDrop = (event) => {
     event.preventDefault()
     const file = event.dataTransfer.files[0]
@@ -139,70 +134,56 @@ const Librosview = () => {
       setForm({ ...form, images: data.secure_url })
     }
   }
-  //Funcion para eliminar la imagen seleccionada
+
   const handleDelete = () => {
     setForm({ ...form, images: '' })
   }
+
+  //! ----------------------- NO TOCAR ----
+
   //Filtrado combinado
   const [filter, setFilter] = useState({
-    page: 0,
+    page: 1,
     availability: 'true',
     order: 'titleAsc',
     title: '',
-  });
+  })
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Para una transición suave
+    })
+  }
   //Funcion para ver cual estan disponibles
-  const handleAvailability = (e) => {
-    const opcion = e.target.value;
-    const newFilter = { ...filter, availability: opcion };
-    setFilter(newFilter);
-    setCurrentPage(0);
-    dispatch(getBookByAvailability(newFilter));
-  };
-  //Funcion para ordenar
-  const handleOrder = (e) => {
-    const selectedOrder = e.target.value;
-    const newFilter = { ...filter, order: selectedOrder };
-    setFilter(newFilter);
-    setCurrentPage(0);
-    dispatch(getBookByAvailability(newFilter));
-  };
-   //Funcion para buscar por titulo
-   const handlerInputChange = (e) => {
-    const opcion = e.target.value;
-    const newFilter = { ...filter,title :opcion };
-    setFilter(newFilter);
-    setCurrentPage(0);
-    dispatch(getBookByAvailability(newFilter));
+  const handleFilter = (e) => {
+    const { value, name } = e.target
+    const newFilter = { ...filter, [name]: value, page: 1 }
+    setFilter(newFilter)
   }
 
-  
-  //Paginado
-  const scrollToTop = () => {
-    window.scrollTo({ behavior: 'smooth', top: 0 })
-  }
-
-  const [currentPage, setCurrentPage] = useState(0)
   const totalProp = Math.ceil(allBooks.count / 10)
 
   const nextHandler = () => {
     scrollToTop()
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalProp - 1))
+    setFilter((prevFilter) => {
+      const nextPage = prevFilter.page + 1
+      return { ...prevFilter, page: Math.min(nextPage, totalProp) }
+    })
   }
 
   const prevHandler = () => {
     scrollToTop()
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 0))
+    setFilter((prevFilter) => {
+      const prevPage = prevFilter.page - 1
+      return { ...prevFilter, page: Math.max(prevPage, 1) }
+    })
   }
 
   useEffect(() => {
-    dispatch(getAllBooksCopy(currentPage))
-  }, [currentPage, dispatch])
+    dispatch(getBookByAvailability(filter))
+  }, [filter, dispatch])
 
- 
   //Manejo ciclo de vida del componente con useEffect
-  useEffect(() => {
-    dispatch(getAllBooksCopy())
-  }, [refresh])
 
   return (
     <div>
@@ -210,7 +191,8 @@ const Librosview = () => {
         <div className="row">
           <div className="col-2">
             <select
-              onChange={handleAvailability}
+              onChange={handleFilter}
+              name="availability"
               className={style.select}
             >
               <option value={'true'}>Disponible</option>
@@ -218,8 +200,12 @@ const Librosview = () => {
             </select>
           </div>
           <div className="col-4">
-            <select className={style.select} onChange={handleOrder}>
-            <option value={'titleAsc'} name={'order'}>
+            <select
+              className={style.select}
+              name="order"
+              onChange={handleFilter}
+            >
+              <option value={'titleAsc'} name={'order'}>
                 Ordernar A-Z
               </option>
               <option value={'titleDesc'} name={'order'}>
@@ -245,7 +231,7 @@ const Librosview = () => {
               id="myInput"
               className={style.myInput}
               name={'title'}
-              onChange={(e) => handlerInputChange(e)}
+              onChange={handleFilter}
               placeholder="🔍   Search for names.."
             />
           </div>
@@ -253,136 +239,83 @@ const Librosview = () => {
       </div>
       <div className={style.cardCont}>
         {allBooks?.rows?.map((ele) => (
-          <div className={style.card} key={ele.id}>
-            <div className={style.cardImg}>
-              <div className={style.img}>
-                <img
-                  style={{ width: '110px', height: '150px' }}
-                  src={ele.images}
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className={style.cardTitle}>{tittleCut(ele.title)}</div>
-            <div className={style.cardSubtitle}>
-              {descripctionCut(ele.description)}
-            </div>
-            <div className={style.cardPrice}>
-              <span>$</span> {ele.sellPrice}
-            </div>
-            <div className={style.cardDivider}></div>
-            <div className={style.cardFooter}>
-              <div className="d-flex">
-                {/* Editar */}
+          <div key={ele.id} className={style.individualCard}>
+            <Card
+              title={ele.title}
+              image={ele.images[0]}
+              price={ele.sellPrice}
+              id={ele.id}
+              author={ele.author}
+              availability={ele.availability}
+            ></Card>
+            <div className={style.buttonsEdit}>
+              <button
+                disabled={!ele.availability}
+                id={style.edit}
+                data-bs-target="#exampleModalXl"
+                data-bs-toggle="modal"
+                onClick={() => {
+                  setForm({
+                    id: ele.id,
+                    title: ele.title,
+                    author: ele.author,
+                    description: ele.description,
+                    genre: ele.genre,
+                    publicationYear: ele.publicationYear,
+                    images: ele.images[0],
+                    sellPrice: ele.sellPrice,
+                    stock: ele.stock,
+                  })
+                }}
+              >
+                <Pencil width={30} />
+              </button>
+              <button
+                disabled={!ele.availability}
+                id={style.delete}
+                type="button"
+                onClick={(e) => {
+                  handleDeleteBook(e, ele.id)
+                }}
+              >
+                <Delete width={30} />
+              </button>
 
+              {ele.availability ? (
                 <button
-                  disabled={!ele.availability}
-                  className={style.cardBtn}
-                  onClick={() => {
-                    setIsModalOpen(true)
-                    setForm({
-                      id: ele.id,
-                      title: ele.title,
-                      author: ele.author,
-                      description: ele.description,
-                      genre: ele.genre,
-                      publicationYear: ele.publicationYear,
-                      images: ele.images[0],
-                      sellPrice: ele.sellPrice,
-                      stock: ele.stock,
-                    })
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="7"
-                    height="9"
-                    fill="currentColor"
-                    className="bi bi-pencil-fill"
-                    viewBox="0 0 16 16"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModalXl"
-                  >
-                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                  </svg>
-                </button>
-                {/* Eliminar */}
-
-                <button
-                  disabled={!ele.availability}
+                  id={style.stop}
                   type="button"
-                  className={style.cardBtnDele}
-                  style={{ height: '35px' }}
-                  onClick={(e) => {
-                    handleDeleteBook(e, ele.id)
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="7"
-                    height="9"
-                    fill="currentColor"
-                    className="bi bi-x-lg"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"></path>
-                  </svg>
-                </button>
-
-                {/* Suspender */}
-                <button
-                  type="button"
-                  className={style.cardBtnEdit}
-                  style={{ height: '35px' }}
                   onClick={(e) => {
                     handlePauseBook(e, ele.id)
                   }}
                   disabled={!ele.availability}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="7"
-                    height="9"
-                    fill="black"
-                    className="bi bi-pause-fill"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"></path>
-                  </svg>
+                  <Stop width={30} />
                 </button>
-                {/* Reactivar */}
+              ) : (
                 <button
                   disabled={ele.availability}
                   type="button"
+                  id={style.restore}
                   onClick={(e) => {
                     handleRestoreBook(e, ele.id)
                   }}
-                  className={style.cardBtnRest}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="7"
-                    height="9"
-                    fill="black"
-                    className="bi bi-check-lg"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"></path>
-                  </svg>
+                  <CheckWithLine width={30} />
                 </button>
-              </div>
+              )}
             </div>
           </div>
         ))}
       </div>
       <div className={style.buttonContainer}>
-        <button onClick={prevHandler} className={style.button}>
+        <button onClick={() => prevHandler()} className={style.button}>
           PREV
         </button>
         <p>
-          Pagina {currentPage  + 1 } de {totalProp}
+          Pagina {filter.page} de {totalProp}
         </p>
-        <button onClick={nextHandler} className={style.button}>
+        <button onClick={() => nextHandler()} className={style.button}>
           NEXT
         </button>
       </div>
@@ -391,7 +324,6 @@ const Librosview = () => {
         id="exampleModalXl"
         aria-labelledby="exampleModalXlLabel"
         aria-hidden="true"
-        style={{ display: isModalOpen ? 'block' : 'none' }}
       >
         <div className="modal-dialog modal-xl">
           <div className="modal-content ">

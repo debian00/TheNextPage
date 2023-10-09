@@ -45,6 +45,48 @@ const HomeView = () => {
               }}
             >
               <h3 style={{ margin: '0', fontSize: '22px', fontWeight: 'bold' }}>
+                Nuestras novedades!
+              </h3>
+              <p
+                style={{
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  margin: '0',
+                }}
+              >
+                Ver mas
+              </p>
+            </div>
+            <p style={{ color: '#92779E', textAlign: 'left', width: '60%' }}>
+              Aquí encontrarás las últimas tendencias, historias emocionantes y
+              conocimientos que te inspirarán. Sumérgete en un mundo de
+              descubrimientos literarios y deja que tu imaginación vuele alto.
+            </p>
+            <CardHome order="createdAtDesc"></CardHome>
+          </div>
+        </section>
+        <section
+          style={{
+            paddingInline: '50px',
+            paddingTop: '20px',
+          }}
+        >
+          <div
+            style={{
+              marginTop: '20px',
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '20px',
+              border: '2px solid rgb(215 215 215)',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+            >
+              <h3 style={{ margin: '0', fontSize: '22px', fontWeight: 'bold' }}>
                 Descubre Harry Potter
               </h3>
               <p

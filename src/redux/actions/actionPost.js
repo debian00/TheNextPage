@@ -146,3 +146,15 @@ export const handleGitHubLogin = async () => {
         console.log(error);        
     }
 };
+
+
+export const createReviews = (form) => {
+    return async () => {
+        try {
+            const {data} = await axios.post('/review/create', form)
+            console.log(data);
+        } catch (error) {
+            console.log(error.response.data.error) 
+        }
+    }
+}

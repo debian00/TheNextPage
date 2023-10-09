@@ -3,7 +3,11 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import style from './crearlibro.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { createBook, postAuthor, postGenre } from '../../../redux/actions/actionPost'
+import {
+  createBook,
+  postAuthor,
+  postGenre,
+} from '../../../redux/actions/actionPost'
 import { getAuthors, getGenres } from '../../../redux/actions/actionGet'
 
 const CrearLibroView = () => {
@@ -22,15 +26,15 @@ const CrearLibroView = () => {
     sellPrice: '',
     stock: '',
   })
-  //Estado para manejar el autor 
+  //Estado para manejar el autor
   const [autor, setAutor] = useState({
     author: [],
   })
-  //Estado para manejar el genero 
+  //Estado para manejar el genero
   const [genero, setGenero] = useState({
     genre: [],
   })
-  console.log('Autor', autor);
+  console.log('Autor', autor)
   //Estado para manejar los errores
   const [errors, setErrors] = useState({
     title: '',
@@ -72,22 +76,22 @@ const CrearLibroView = () => {
   }
   //Funcion para crear autor
   const handleSubmitAuthor = async (e) => {
-    e.preventDefault();
-    await dispatch(postAuthor(autor));
+    e.preventDefault()
+    await dispatch(postAuthor(autor))
     // Después de agregar el autor, actualiza la lista de autores
-    dispatch(getAuthors());
+    dispatch(getAuthors())
     // Limpia el campo de autor en el estado
-    setAutor({ author: "" });
-  };
+    setAutor({ author: '' })
+  }
   //Funcion para crear genero
   const handleSubmitGenre = async (e) => {
-    e.preventDefault();
-    await dispatch(postGenre(autor));
+    e.preventDefault()
+    await dispatch(postGenre(autor))
     // Después de agregar el autor, actualiza la lista de autores
-    dispatch(getGenres());
+    dispatch(getGenres())
     // Limpia el campo de autor en el estado
-    setGenero({ genre: "" });
-  };
+    setGenero({ genre: '' })
+  }
   //Funcion para manejar los campos
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -99,10 +103,10 @@ const CrearLibroView = () => {
       })
     } else {
       setAutor({
-        author: value
+        author: value,
       })
       setGenero({
-        genre: value
+        genre: value,
       })
       setForm({
         ...form,
@@ -125,8 +129,6 @@ const CrearLibroView = () => {
       return
     } else {
       setErrors({ ...errors, images: '' })
-      const imageURL = URL.createObjectURL(new Blob([file]))
-      setForm({ ...form, images: imageURL })
 
       const fileData = new FormData()
       fileData.append('file', file)
@@ -154,7 +156,7 @@ const CrearLibroView = () => {
       <h1>Componente Crear Libro</h1>
       <form onSubmit={handleSubmit}>
         <div className={` card mb-12`}>
-          <div className={` row g-0`}>
+          <div className={` row g-0`} style={{ margin: '0' }}>
             <div className="col-md-4">
               {/* Agregar Imagenes */}
               <div
@@ -180,12 +182,10 @@ const CrearLibroView = () => {
                     style={{
                       border: '10px  #ccc',
                       background: 'rgba(255, 255, 255, 0.801)',
-                      margin: `20px`,
                       textAlign: 'center',
-                      width: '295px',
                       position: 'relative',
                       height: '367.88px',
-                      borderRadius: '10px',
+                      padding: '0',
                     }}
                     onDragEnter={(e) => e.preventDefault()}
                     onDragOver={(e) => e.preventDefault()}
@@ -195,8 +195,7 @@ const CrearLibroView = () => {
                       <div>
                         <img
                           style={{
-                            borderRadius: '10px',
-                            width: '250.77px',
+                            width: '100%',
                             height: '367.88px',
 
                             objectFit: 'cover',
@@ -240,23 +239,9 @@ const CrearLibroView = () => {
                     )}
                   </div>
 
-                  {errors.images ? (
-                    <p
-                      style={{
-                        color: 'red',
-                        visibility: 'visible',
-                        marginBottom: '0',
-                      }}
-                    >
-                      {errors.images}
-                    </p>
-                  ) : (
-                    <p style={{ visibility: 'hidden' }}>&nbsp;</p>
-                  )}
                   <div
                     style={{
                       backgroundColor: '#6f5475',
-                      borderBottomLeftRadius: '10px',
                     }}
                     className="d-flex flex-column justify-content-center align-items-center"
                   >
@@ -269,7 +254,6 @@ const CrearLibroView = () => {
                         onChange={(e) => handleFile(e.target.files[0])}
                       />
                     </div>
-                    <div></div>
                   </div>
                 </div>
               </div>
@@ -304,7 +288,6 @@ const CrearLibroView = () => {
                       required
                     />
                   </div>
-                  
                 </div>
                 <div className="row justify-content-center d-flex">
                   <div className="col-6 mb-3">
@@ -333,21 +316,24 @@ const CrearLibroView = () => {
                         &nbsp; ¿No se encuentra el genero? ¡Agrégalo!
                       </label>
                       {isChecked2 && (
-                        <div  className="d-flex">
+                        <div className="d-flex">
                           <input
                             type="text"
                             className="form-control"
-                            name="author" 
+                            name="author"
                             onChange={handleChange}
                             value={genero.genre}
                             placeholder="Agregar nuevo genero"
                             required
                           />
-                          <button type="button" className="btn btn-primary" onClick={handleSubmitGenre}>
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={handleSubmitGenre}
+                          >
                             Agregar
                           </button>
-                        
-                      </div>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -378,21 +364,24 @@ const CrearLibroView = () => {
                         &nbsp; ¿No se encuentra el autor? ¡Agrégalo!
                       </label>
                       {isChecked && (
-                        <div  className="d-flex">
+                        <div className="d-flex">
                           <input
                             type="text"
                             className="form-control"
-                            name="author" 
+                            name="author"
                             onChange={handleChange}
                             value={autor.author}
                             placeholder="Agregar nuevo autor"
                             required
                           />
-                          <button type="button" className="btn btn-primary" onClick={handleSubmitAuthor}>
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={handleSubmitAuthor}
+                          >
                             Agregar
                           </button>
-                        
-                      </div>
+                        </div>
                       )}
                     </div>
                   </div>

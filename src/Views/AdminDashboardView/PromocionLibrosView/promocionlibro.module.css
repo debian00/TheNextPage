@@ -2,12 +2,58 @@
   display: flex;
   margin-top: 1rem;
   flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en filas */
-  justify-content: space-evenly; /* Distribuye las tarjetas horizontalmente */
+  justify-content: space-between; /* Distribuye las tarjetas horizontalmente */
+
   width: 100%; /* Opcional: Limita el ancho del contenedor para que no se extienda demasiado */
 }
+
 .individualCard {
   display: flex;
   position: relative;
+}
+.buttonsEdit {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  bottom: 30px;
+  width: 84%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background: #e4e4e4;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  box-shadow:
+    0 -10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 -4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+.buttonsEdit button {
+  transition: transform 0.2s ease;
+  border: none;
+  background-color: #e4e4e4;
+  padding: 5px;
+  border-radius: 2px;
+  color: #b4b4b4;
+}
+.buttonsEdit button:hover {
+  transform: translateY(-10px);
+}
+
+.buttonsEdit #edit:hover {
+  color: #5ca7d6;
+}
+.buttonsEdit #restore:hover {
+  color: #5cd66a;
+}
+.buttonsEdit #stop:hover {
+  color: #d6d25c;
+}
+.buttonsEdit #delete:hover {
+  color: #d65c5c;
+}
+
+.individualCard:hover .buttonsEdit {
+  opacity: 1;
 }
 
 .miNavbar {
@@ -39,30 +85,6 @@
   border: 1px solid #ccc; /* Borde */
   border-radius: 5px; /* Borde redondeado */
   outline: none; /* Elimina el contorno predeterminado en algunos navegadores */
-}
-
-.buton {
-  position: absolute;
-  /*  bottom: 80.5%;
-    left: 91%; */
-  top: 0;
-  right: 0;
-  transform: translate(-0%, 0%);
-  z-index: 2;
-  background-color: rgb(35, 90, 163);
-  color: #ffffff;
-  border: none;
-  padding: 5px 5px;
-  border-top-left-radius: none !important;
-  /*  border-radius: 3px; */
-  cursor: pointer;
-  /* margin-top: 20px; */
-  width: 53px;
-  transition: background-color 0.3s ease;
-}
-
-.buton:hover {
-  background-color: rgb(19, 60, 113);
 }
 .click {
   color: blue;
@@ -122,51 +144,4 @@
   background-color: #051229;
   border: 2px solid transparent;
   color: #f4f4f4;
-}
-
-.buttonsEdit {
-  position: absolute;
-  bottom: 30px;
-  width: 84%;
-  left: 50%;
-  transform: translate(-50%, 50%);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 15px;
-  background: #e4e4e4;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  box-shadow:
-    0 -10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 -4px 6px -4px rgba(0, 0, 0, 0.1);
-}
-
-.buttonsEdit button {
-  transition: transform 0.2s ease;
-  border: none;
-  background-color: #e4e4e4;
-  padding: 5px;
-  border-radius: 2px;
-  color: #b4b4b4;
-}
-.buttonsEdit button:hover {
-  transform: translateY(-10px);
-}
-
-.buttonsEdit #edit:hover {
-  color: #5ca7d6;
-}
-.buttonsEdit #restore:hover {
-  color: #5cd66a;
-}
-.buttonsEdit #stop:hover {
-  color: #d6d25c;
-}
-.buttonsEdit #delete:hover {
-  color: #d65c5c;
-}
-
-.individualCard:hover .buttonsEdit {
-  opacity: 1;
 }
