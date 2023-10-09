@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import FavoritosView from './FavoritosView/FavoritosView'
 import ComprasView from './ComprasView/ComprasView'
 import ReseñasView from './ReseñasView/ReseñasView'
+import { Navigate } from 'react-router-dom'
 
 
 const PerfilUserdView = () => {
@@ -191,7 +192,15 @@ const PerfilUserdView = () => {
              
               <ComprasView/>
             </div>
-          ):<h1>No hay nada</h1>
+          ): componenteActual === "E" ? (
+             <div>
+                <h5>Estas seguro que quieres salir?</h5>
+                <div>
+                  <button type='button' onClick={() => {localStorage.removeItem("token"), localStorage.removeItem("user")}}>Si</button>
+                  <button type='button'>No </button>
+                  </div>
+             </div>
+          ) : null
         }
       </div>
     </div>

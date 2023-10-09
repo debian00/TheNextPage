@@ -18,7 +18,7 @@ export default function LoginAndRegister() {
   const ref = useRef()
 
 
-  const token = JSON.parse(localStorage.getItem("token"));
+ /*  const token = JSON.parse(localStorage.getItem("token"));
   const entry = useCallback(() => {
     if(token) {
       navigate("/home")
@@ -28,14 +28,14 @@ export default function LoginAndRegister() {
   useEffect(() => {
     entry()
   }, [entry])
-
+ */
 
   const scrollToComponent = (componentId) => {
     scroller.scrollTo(componentId, {
       duration: 1000,
       delay: 350,
       smooth: "easeInOutQuart",
-      offset : -40
+      offset : 0
     });
   };
   const scroll = useCallback(() => {
@@ -56,8 +56,8 @@ export default function LoginAndRegister() {
   return ( 
   <div className="index" >
 
-    <div className="container"id="book" style={{marginLeft : "600px"}} >
-    <HTMLFlipBook  ref={ref} className="book-container book"  clickEventForward={false}  startPage={1} useMouseEvents={false} maxShadowOpacity={0} disableFlipByClick={true} width={630} height={810} maxHeight={1000} maxWidth={1200} usePortrait={false}>
+    <div className="container"id="book"  >
+    <HTMLFlipBook  ref={ref} className="book-container book"  clickEventForward={false}  startPage={1} useMouseEvents={false} maxShadowOpacity={1} disableFlipByClick={true} width={550} height={750} maxHeight={1000} maxWidth={1200} usePortrait={false}>
 
     
 
