@@ -33,12 +33,22 @@ const Navbar = () => {
     dispatch(getGenres())
   }, [])
 
+  const handleDrop = () => {
+    setDropdown(true)
+  }
   const handleScroll = () => {
     if (window.scrollY > 80) {
       setFixed(true)
     } else {
       setFixed(false)
     }
+  }
+
+  const logOut = () => {
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+    setDropdown(false)
+    navigate('/')
   }
 
   const handleClickOutside = (event) => {
@@ -150,25 +160,25 @@ const Navbar = () => {
         </div>
         <SearchBar></SearchBar>
         <div className={style.profile}>
-          <Link
-            to={'/admindashboard'}
-            // id="dropdown"
-            // onClick={handleDrop}
-            // style={{
-            //   color: '#AAEEC4',
-            //   fontFamily: "'Avenir'",
-            //   cursor: 'pointer',
-            // }}
-          >
-            ADMIN
-          </Link>
-
           {token ? (
             <>
-              <Link to="/userPanel" id="dropdown">
+              <img
+                style={{
+                  borderRadius: '990px',
+                  width: '50px',
+                  height: '50px',
+                  objectFit: 'cover',
+                }}
+                src={user.profilePic}
+              ></img>
+              <p
+                onClick={handleDrop}
+                style={{ cursor: 'pointer' }}
+                id="dropdown"
+              >
                 {' '}
-                MI PERFIL
-              </Link>
+                {user.name}
+              </p>
             </>
           ) : (
             <>
@@ -187,20 +197,33 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-      <div
-        ref={dropdownRef}
-        className={`${style.dropdown} ${dropdown ? style.open : ''}`}
-      >
-        <ul>
-          {genres?.map((ele) => {
-            return (
-              <li onClick={() => handleSubmit(ele.id)} key={ele.id}>
-                {ele.name}
+      {user && token && (
+        <div
+          ref={dropdownRef}
+          className={`${style.dropdown} ${
+            dropdown && user.userType == 'user'
+              ? style.open
+              : dropdown && user.userType == 'admin'
+              ? style.openAdmin
+              : ''
+          }`}
+        >
+          <ul>
+            <li>
+              <Link>Mi perfil</Link>
+            </li>
+            {user.userType == 'admin' && (
+              <li>
+                <Link to={'/admindashboard'}>Admin</Link>
               </li>
-            )
-          })}
-        </ul>
-      </div>
+            )}
+
+            <li onClick={logOut} style={{ color: '#d65555' }}>
+              Salir
+            </li>
+          </ul>
+        </div>
+      )}
     </>
   )
 }

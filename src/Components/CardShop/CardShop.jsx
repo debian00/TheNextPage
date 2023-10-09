@@ -103,10 +103,13 @@ const CardShop = ({ title, image, quantity, price, id, author, userId }) => {
           </div>
           <div>
             <p style={{ textAlign: 'center', margin: '0' }}>Cantidad:</p>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <button onClick={() => minusQuantity()}>Bajar</button>
+            <div
+              style={{ display: 'flex', flexDirection: 'row' }}
+              className={style.quantity}
+            >
+              <button onClick={() => minusQuantity()}>-</button>
               <p>{quantity}</p>
-              <button onClick={() => plusQuantity()}>Subir</button>
+              <button onClick={() => plusQuantity()}>+</button>
             </div>
           </div>
         </div>

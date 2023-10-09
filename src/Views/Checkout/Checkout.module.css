@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 .container {
   display: flex;
   flex-direction: row;
@@ -60,7 +61,8 @@
 
 .finalPrice {
   width: 50%;
-
+  padding: 20px;
+  padding-top: 50px;
   background:
     linear-gradient(to bottom, #6f5475, #864595e3, #6c0997a9, #9400d3fd),
     url('../../assets/imghome/checkout.jpg') no-repeat center center/cover;
@@ -71,12 +73,31 @@
   flex-direction: column;
   text-align: center;
 }
-.method select {
-  border-radius: 0;
-  text-align: center;
-  padding: 10px;
+.method button {
+  border-radius: 10px;
+  background-color: #ffffffca;
+  border: 2px solid #6a63ff;
+  color: #6a63ff;
 }
-.method option {
+.method button:hover {
+  background-color: #6a63ff;
+  color: #ffffffca;
+}
+
+.total p {
+  font-family: 'Roboto';
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.security {
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
-  border-radius: 0;
+}
+
+.security p {
+  font-size: 14px;
 }

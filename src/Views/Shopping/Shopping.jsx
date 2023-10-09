@@ -42,7 +42,7 @@ const Shopping = () => {
               <CardShop
                 userId={id}
                 title={ele.book.title}
-                price={ele.price}
+                price={ele.book.sellPrice}
                 author={ele.book.author}
                 image={ele.book.images[0]}
                 id={ele.book.id}
@@ -97,7 +97,7 @@ const Shopping = () => {
             <h3>{Math.round(priceTotal() * 1.1)}</h3>
           </div>
         </div>
-        <Link to={'/checkout'} style={{ width: '100%' }}>
+        <Link to={`/checkout/${id}`} style={{ width: '100%' }}>
           <button className={style.pago} style={{ width: '100%' }}>
             <Check width={20} />
             Completar el pago

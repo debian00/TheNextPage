@@ -128,7 +128,7 @@ function App() {
           }
         />
         <Route
-          path="/checkout"
+          path="/checkout/:id"
           element={
             <>
               <Checkout />
