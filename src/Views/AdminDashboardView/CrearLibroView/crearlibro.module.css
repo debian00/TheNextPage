@@ -24,12 +24,12 @@
 .click {
   color: blue;
   cursor: pointer;
+  font-size: 18px;
+  font-family: sans-serif;
 }
 
 .inputfile {
   background-color: #59415b;
-  border-radius: 15px;
-  padding: 5px;
   color: white;
   margin-top: 10px;
   margin: 15px;

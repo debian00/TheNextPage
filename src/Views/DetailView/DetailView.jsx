@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import { getGenres } from '../../redux/actions/actionGet'
 import axios from 'axios'
 import { MercadoPago, Stripe } from '../../utils/Icons'
+import { showSuccessNotification } from '../../utils/Toast'
 
 function DetailView() {
   const { id } = useParams()
@@ -32,6 +33,8 @@ function DetailView() {
     const idUser = JSON.parse(localStorage.getItem('user'))
     const userId = idUser.id
     await axios.post(`/cart/add/${userId}`, { bookId: id })
+    showSuccessNotification('¡Se añadio al carrito con exito!')
+
     console.log('Se guardo en el carrito')
   }
 
@@ -167,6 +170,8 @@ function DetailView() {
           padding: '40px',
           width: '80%',
           margin: '0 auto',
+          border: '2px solid rgba(234, 234, 234, 0.8)',
+          marginBlock: '20px',
         }}
       >
         <div className={styles.card}>
@@ -203,6 +208,7 @@ function DetailView() {
             </div>
           </div>
         </div>
+        <div></div>
       </div>
     </div>
   )
