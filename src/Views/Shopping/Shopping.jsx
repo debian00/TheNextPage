@@ -1,10 +1,29 @@
-import CardHome from '../../Components/CardHome/CardHome'
 import CardShop from '../../Components/CardShop/CardShop'
 import { Bag, Check } from '../../utils/Icons'
 import style from './Shopping.module.css'
 import { Trash } from './../../utils/Icons'
+import { Link, useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { getCartUser } from './../../redux/actions/actionGet'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 const Shopping = () => {
+  const { id } = useParams()
+  const allCart = useSelector((state) => state.cart)
+  console.log(allCart)
+  const priceTotal = () => {
+    let price = 0
+    allCart.map((ele) => {
+      price += ele.price
+    })
+    return price
+  }
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getCartUser(id))
+  }, [id])
+
   return (
     <div className={style.container}>
       <div className={style.cart}>
@@ -17,27 +36,21 @@ const Shopping = () => {
             <Trash width={20}></Trash> Restablecer carrito
           </button>
         </div>
-        <div style={style.card}>
-          <CardShop
-            title={'El señor de los anillos'}
-            price={'5100'}
-            author={'J.J.K Rowling'}
-          />
-        </div>
-        <div style={style.card}>
-          <CardShop
-            title={'El señor de los anillos'}
-            price={'5100'}
-            author={'J.J.K Rowling'}
-          />
-        </div>
-        <div style={style.card}>
-          <CardShop
-            title={'El señor de los anillos'}
-            price={'5100'}
-            author={'J.J.K Rowling'}
-          />
-        </div>
+        {allCart.map((ele) => {
+          return (
+            <div style={style.card} key={ele.id}>
+              <CardShop
+                userId={id}
+                title={ele.book.title}
+                price={ele.book.sellPrice}
+                author={ele.book.author}
+                image={ele.book.images[0]}
+                id={ele.book.id}
+                quantity={ele.quantity}
+              />
+            </div>
+          )
+        })}
       </div>
       <div className={style.checkout}>
         <div className={style.price}>
@@ -52,8 +65,26 @@ const Shopping = () => {
           >
             Resumen de Compra
           </h3>
-          <p>Subtotal</p>
-          <p>Impuesto (10%)</p>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
+            <p>Subtotal</p>
+            <p>{priceTotal()}</p>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
+            <p>Impuesto:</p>
+            <p>(10%)</p>
+          </div>
           <div className={style.line}></div>
           <div
             style={{
@@ -63,14 +94,15 @@ const Shopping = () => {
             }}
           >
             <h3 style={{ textAlign: 'left' }}>Total: </h3>
-            <h3>$2000</h3>
+            <h3>{Math.round(priceTotal() * 1.1)}</h3>
           </div>
         </div>
-
-        <button className={style.pago}>
-          <Check width={20} />
-          Completar el pago
-        </button>
+        <Link to={`/checkout/${id}`} style={{ width: '100%' }}>
+          <button className={style.pago} style={{ width: '100%' }}>
+            <Check width={20} />
+            Completar el pago
+          </button>
+        </Link>
       </div>
     </div>
   )

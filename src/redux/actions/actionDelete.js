@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { DELETE_BOOK } from '../types'
+import { DELETE_BOOK, DELETE_CART } from '../types'
 
 export const deleteUserById = (id) => {
   return async () => {
@@ -23,5 +23,17 @@ export const deleteBookById = (id) => {
     } catch (error) {
       console.log(error)
     }
+  }
+}
+
+export const deleteCart = (id, bookId) => async (dispatch) => {
+  try {
+    const { data } = await axios.delete(`/cart/delete/${id}/${bookId}`)
+    dispatch({
+      type: DELETE_CART,
+      payload: data,
+    })
+  } catch (error) {
+    console.log(error)
   }
 }

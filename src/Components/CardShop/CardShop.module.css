@@ -20,3 +20,20 @@
   justify-content: center;
   margin: 0 auto;
 }
+
+.quantity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.quantity button {
+  background: rgb(226, 226, 226);
+  border: 1px solid rgba(187, 187, 187, 0.752);
+  padding-block: 5px;
+  padding-inline: 15px;
+  border-radius: 10px;
+}
+.quantity p {
+  margin: auto 0;
+}

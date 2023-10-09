@@ -32,7 +32,7 @@ const AdminDashboardView = () => {
 
   return (
     <div>
-      <div className={`${style.panel} row`}>
+      <div className={`${style.panel} row`} style={{ marginRight: '0' }}>
         {/* Perfil admin Lista de opciones*/}
         <div className={`${style.profilePanel} col-2`}>
           <div className={`${style.menu}`}>

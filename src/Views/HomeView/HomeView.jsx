@@ -62,7 +62,7 @@ const HomeView = () => {
               conocimientos que te inspirarán. Sumérgete en un mundo de
               descubrimientos literarios y deja que tu imaginación vuele alto.
             </p>
-            <CardHome order="createdAtAsc"></CardHome>
+            <CardHome order="createdAtDesc"></CardHome>
           </div>
         </section>
         <section

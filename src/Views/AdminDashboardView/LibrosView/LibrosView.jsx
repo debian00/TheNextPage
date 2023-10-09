@@ -13,14 +13,15 @@ import { deleteBookById } from '../../../redux/actions/actionDelete'
 import Card from '../../../Components/CardIndividual/Card'
 import { CheckWithLine, Delete, Pencil, Stop } from '../../../utils/Icons'
 import { updateBook } from '../../../redux/actions/actionPut'
+import { showSuccessNotification } from '../../../utils/Toast'
 
 const Librosview = () => {
   //Hook para traer todos los libros
   const allBooks = useSelector((state) => state.books)
- 
+
   console.log(allBooks)
   //Estado para manejar el modal
-  
+
   const dispatch = useDispatch()
 
   //! EDITADO ------------------------
@@ -73,6 +74,7 @@ const Librosview = () => {
     )
     if (confirmed) {
       dispatch(deleteBookById(id))
+      showSuccessNotification('¡Operación exitosa!')
     }
   }
   //* Funcion para suspender el libro
@@ -83,6 +85,7 @@ const Librosview = () => {
       '¿Estás seguro que quieres suspender este libro?'
     )
     if (confirmed) {
+      showSuccessNotification('¡Operación exitosa!')
       dispatch(getBookPause(id))
     }
   }
@@ -94,6 +97,7 @@ const Librosview = () => {
       '¿Estás seguro que quieres restaurar este libro?'
     )
     if (confirmed) {
+      showSuccessNotification('¡Operación exitosa!')
       dispatch(getBookRestore(id))
     }
   }

@@ -19,12 +19,15 @@ import ForgotPassword from './Views/ForgotPassword/ForgotPassword'
 import ResetPassword from './Views/ForgotPassword/ResetPassword'
 import Checkout from './Views/Checkout/Checkout'
 import PromocionesView from './Views/PromocionesView/PromocionesView'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 //import ChatBot from "./Components/Chatbot/Chatbot"
 
 function App() {
   return (
     <>
       <Navbar />
+      <ToastContainer position="bottom-right"></ToastContainer>
       <Routes>
         <Route
           path="/"
@@ -118,7 +121,7 @@ function App() {
           }
         />
         <Route
-          path="/shoppingCart"
+          path="/shoppingCart/:id"
           element={
             <>
               {/* <ChatBot/> */}
@@ -128,7 +131,7 @@ function App() {
           }
         />
         <Route
-          path="/checkout"
+          path="/checkout/:id"
           element={
             <>
               <Checkout />
@@ -141,7 +144,15 @@ function App() {
           path="/reset_password/:id/:token"
           element={<ResetPassword />}
         ></Route>
-        <Route path='/promociones' element={<><PromocionesView/><Footer /></>}/>
+        <Route
+          path="/promociones"
+          element={
+            <>
+              <PromocionesView />
+              <Footer />
+            </>
+          }
+        />
       </Routes>
     </>
   )
