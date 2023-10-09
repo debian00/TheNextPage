@@ -9,6 +9,7 @@ import {
   postGenre,
 } from '../../../redux/actions/actionPost'
 import { getAuthors, getGenres } from '../../../redux/actions/actionGet'
+import { showSuccessNotification } from '../../../utils/Toast'
 
 const CrearLibroView = () => {
   //Traer todos los gener
@@ -73,6 +74,7 @@ const CrearLibroView = () => {
       stock: '',
       availability: true,
     })
+    showSuccessNotification('Libro creado con exito')
   }
   //Funcion para crear autor
   const handleSubmitAuthor = async (e) => {

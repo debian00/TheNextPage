@@ -210,7 +210,7 @@ const Navbar = () => {
         >
           <ul>
             <li>
-              <Link to={`/userpanel/${user.id}`}>Mi perfil</Link>
+              <Link to={`/userpanel/`}>Mi perfil</Link>
             </li>
             {user.userType == 'admin' && (
               <li>
