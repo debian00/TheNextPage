@@ -18,7 +18,8 @@ import {
   DELETE_BOOK,
   STOP_BOOK,
   RESTORE_BOOK,
-  GET_ALL_BOOKS_OFFER
+  GET_ALL_BOOKS_OFFER,
+  GET_REVIEW_BY_ID
 } from './types'
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   genres: [],
   detail: [],
   bookById: [],
+  reviews: [],
   authors: [],
   users: [],
   searchs: [],
@@ -61,6 +63,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, bookNameAuthor: action.payload }
     case GET_BOOK_BY_ID:
       return { ...state, bookById: action.payload }
+    case GET_REVIEW_BY_ID:
+      return { ...state, reviews: action.payload }
     case GET_BOOK_BY_OFFER:
       return { ...state, books: action.payload }
     case GET_BOOKS_NAME:

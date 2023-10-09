@@ -15,6 +15,7 @@ import {
   STOP_BOOK,
   RESTORE_BOOK,
   GET_ALL_BOOKS_OFFER,
+  GET_REVIEW_BY_ID,
 } from '../types'
 
 export const getAllBooks = ({
@@ -113,6 +114,20 @@ export const getBookById = (id) => {
       const { data } = await axios('/books/' + id)
       return dispatch({
         type: GET_BOOK_BY_ID,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getReview = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios('/review/' + id)
+      return dispatch({
+        type: GET_REVIEW_BY_ID,
         payload: data,
       })
     } catch (error) {

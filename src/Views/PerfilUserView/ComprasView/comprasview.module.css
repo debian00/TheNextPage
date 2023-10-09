@@ -95,7 +95,7 @@
     color: #474747;
   }
   .sepator{
-    border: 1px solid black;
+    border: 1px solid #6f5475;
     width: 100%;
     justify-content: center;
     display: flex;
@@ -130,4 +130,159 @@
   
   .productPriceBtn button:hover {
     background-color: #79b0a1;
+  }
+  .postCard {
+    width: 260px;
+    height: 340px;
+    background: #e4e4e4;
+    box-shadow:
+      10px 10px 20px #afafaf;
+    padding: 10px;
+    width: calc(30% - 2rem);
+      margin-bottom: 1rem;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .postCard textarea {
+    resize: none;
+    width: 100%;
+    height: 40%;
+    padding: 5px;
+    font-family: Sans-serif;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    color: #000000;
+  }
+  
+  hr {
+    border: 1px solid #6f5475;
+    width: 100%;
+    border-radius: 10em;
+  }
+  .buttonRow {
+    margin-top: 7px;
+    margin-bottom: 3px;
+  }
+  .buttonRow button {
+    border-radius: 10px;
+    border: none;
+    width: 77px;
+    height: 58px;
+    font-family: Sans-serif;
+    color: #fff;
+    box-shadow: 0px 4px 4px #bdbdbd;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .buttonRow button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+  }
+  
+  .postCard {
+    width: 260px;
+    height: 340px;
+    background: #e4e4e4;
+    box-shadow:
+      10px 10px 20px #afafaf;
+    padding: 10px;
+    width: calc(30% - 2rem);
+      margin-bottom: 1rem;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .postCard textarea {
+    resize: none;
+    width: 100%;
+    height: 40%;
+    padding: 5px;
+    font-family: Sans-serif;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    color: #000000;
+  }
+  
+  hr {
+    border: 1px solid #6f5475;
+    width: 100%;
+    border-radius: 10em;
+  }
+  .buttonRow {
+    margin-top: 7px;
+    margin-bottom: 3px;
+  }
+  .buttonRow button {
+    border-radius: 10px;
+    border: none;
+    width: 77px;
+    height: 58px;
+    font-family: Sans-serif;
+    color: #fff;
+    box-shadow: 0px 4px 4px #bdbdbd;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .buttonRow button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+  }
+  
+  .post {
+    width: 50%;
+    padding: 6px;
+    margin-top: 7px;
+    border: none;
+    border-radius: 11px;
+    font-size: 18px;
+    font-family: Sans-serif;
+    color: #fff;
+    background-size: 200% 100%;
+    background-image: linear-gradient(145deg, #92779e, #6f5475, #a58aa5);
+    transition: 0.3s ease-out;
+  }
+  
+  .post:hover {
+    background-position: 99%;
+  }
+  .rating:not(:checked) > input {
+    position: absolute;
+    appearance: none;
+  }
+  
+  .rating:not(:checked) > label {
+    float: right;
+    cursor: pointer;
+    font-size: 30px;
+    color: #666;
+  }
+  
+  .rating:not(:checked) > label:before {
+    content: '★';
+  }
+  
+  .rating > input:checked + label:hover,
+  .rating > input:checked + label:hover ~ label,
+  .rating > input:checked ~ label:hover,
+  .rating > input:checked ~ label:hover ~ label,
+  .rating > label:hover ~ input:checked ~ label {
+    color: #e58e09;
+  }
+  
+  .rating:not(:checked) > label:hover,
+  .rating:not(:checked) > label:hover ~ label {
+    color: #ff9e0b;
+  }
+  
+  .rating > input:checked ~ label {
+    color: #ffa723;
   }
