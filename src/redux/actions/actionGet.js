@@ -182,11 +182,11 @@ export const getAllUsers = () => {
 export const getBooksSearch = (search) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios('/books/search?title=' + search)
+      const { data } = await axios('/books?title=' + search)
       console.log(data.title)
       dispatch({
         type: GET_BOOKS_NAME,
-        payload: data,
+        payload: data.rows,
       })
     } catch (error) {
       console.log(error)
