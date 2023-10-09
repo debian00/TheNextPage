@@ -118,7 +118,7 @@ function App() {
           }
         />
         <Route
-          path="/shoppingCart"
+          path="/shoppingCart/:id"
           element={
             <>
               {/* <ChatBot/> */}
@@ -141,7 +141,15 @@ function App() {
           path="/reset_password/:id/:token"
           element={<ResetPassword />}
         ></Route>
-        <Route path='/promociones' element={<><PromocionesView/><Footer /></>}/>
+        <Route
+          path="/promociones"
+          element={
+            <>
+              <PromocionesView />
+              <Footer />
+            </>
+          }
+        />
       </Routes>
     </>
   )

@@ -59,3 +59,7 @@
   padding: 30px;
   margin-right: 0;
 }
+
+.content {
+  flex: 1 !important;
+}

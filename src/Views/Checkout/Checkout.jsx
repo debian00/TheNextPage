@@ -1,7 +1,14 @@
 import { Link } from 'react-router-dom'
 import { Warning } from '../../utils/Icons'
 import style from './Checkout.module.css'
+import { useSelector } from 'react-redux'
+import { getUrlPayment } from '../../redux/actions/actionGet'
 const Checkout = () => {
+  const cart = useSelector((state) => state.cart)
+  const handlePayment = () => {
+    getUrlPayment(cart)
+  }
+
   return (
     <div className={style.container}>
       <div className={style.checkout}>
@@ -32,11 +39,7 @@ const Checkout = () => {
           </div>
           <div className={style.method}>
             <label>Metodo de pago</label>
-            <select>
-              <option>Seleccione un metodo de pago</option>
-              <option>Mercado Pago</option>
-              <option>Stripe</option>
-            </select>
+            <button onClick={() => handlePayment()}>PAGAR</button>
           </div>
           <div className={style.pago}>
             <p>
@@ -46,7 +49,11 @@ const Checkout = () => {
           </div>
         </div>
       </div>
-      <div className={style.finalPrice}></div>
+      <div className={style.finalPrice}>
+        {cart.map((ele) => {
+          return <h1 key={ele.id}>{ele.book.title}</h1>
+        })}
+      </div>
     </div>
   )
 }

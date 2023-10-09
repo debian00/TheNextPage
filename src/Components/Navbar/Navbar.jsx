@@ -27,6 +27,7 @@ const Navbar = () => {
   const dropdownRef = useRef(null)
   const dispatch = useDispatch()
   const token = localStorage.getItem('token')
+  const user = JSON.parse(localStorage.getItem('user'))
 
   useEffect(() => {
     dispatch(getGenres())
@@ -59,14 +60,6 @@ const Navbar = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
-
-  const handleDrop = () => {
-    if (dropdown) {
-      setDropdown(false)
-    } else {
-      setDropdown(true)
-    }
-  }
 
   const handleSubmit = (e) => {
     navigate(`/catalogue?genre=${e}`)
@@ -137,13 +130,7 @@ const Navbar = () => {
           width: '100%',
           transition: 'all 0.3s ease',
         }}
-        className={`${style.downNav} ${
-          fixed &&
-          location.pathname !== '/shoppingCart' &&
-          location.pathname !== '/checkout'
-            ? style.fixed
-            : ''
-        }`}
+        className={`${style.downNav}`}
       >
         <div>
           <ul>
@@ -189,9 +176,15 @@ const Navbar = () => {
               <Profile width={40}></Profile>
             </>
           )}
-          <Link>
-            <Cart width={40}></Cart>
-          </Link>
+          {user ? (
+            <Link to={`/shoppingCart/${user.id}`}>
+              <Cart width={40}></Cart>
+            </Link>
+          ) : (
+            <Link to={`/check`}>
+              <Cart width={40}></Cart>
+            </Link>
+          )}
         </div>
       </nav>
       <div

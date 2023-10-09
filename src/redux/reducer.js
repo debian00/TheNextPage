@@ -18,7 +18,10 @@ import {
   DELETE_BOOK,
   STOP_BOOK,
   RESTORE_BOOK,
-  GET_ALL_BOOKS_OFFER
+  GET_ALL_BOOKS_OFFER,
+  GET_CART_USER,
+  UPDATE_QUANTITY,
+  DELETE_CART,
 } from './types'
 
 const initialState = {
@@ -31,6 +34,7 @@ const initialState = {
   searchs: [],
   booksSearch: [],
   bookNameAuthor: [],
+  cart: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -54,7 +58,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_ALL_BOOKS_COPY:
       return { ...state, books: action.payload }
     case GET_ALL_BOOKS_OFFER:
-      return {...state, books: action.payload}
+      return { ...state, books: action.payload }
     case GET_BOOK_BY_AVAILABILITY:
       return { ...state, books: action.payload }
     case GET_BOOK_BY_NAME_AUTHOR:
@@ -86,7 +90,7 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, users: action.payload }
     case ADMIN_TO_USER:
       return { ...state, users: action.payload }
-    
+
     case DELETE_BOOK:
       const bookDeleted = {
         count: state.books.count,
@@ -149,6 +153,23 @@ const rootReducer = (state = initialState, action) => {
       }
     case GET_BOOKS_BY_NAME:
       return { ...state, booksSearch: action.payload }
+    case GET_CART_USER:
+      return { ...state, cart: action.payload }
+    case UPDATE_QUANTITY:
+      const { id, quantity, price } = action.payload
+      const updatedCart = state.cart.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            quantity: quantity,
+            price: price,
+          }
+        }
+        return item
+      })
+      return { ...state, cart: updatedCart }
+    case DELETE_CART:
+      return { ...state, cart: action.payload }
     default:
       return state
   }

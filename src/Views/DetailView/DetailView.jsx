@@ -4,6 +4,7 @@ import { getBookById } from '../../redux/actions/actionGet'
 import styles from './detail.module.css' // Importa los estilos CSS
 import { useParams } from 'react-router-dom'
 import { getGenres } from '../../redux/actions/actionGet'
+import axios from 'axios'
 
 function DetailView() {
   const { id } = useParams()
@@ -24,6 +25,13 @@ function DetailView() {
     })
 
     return genreNames?.join(', ')
+  }
+
+  const handleCart = async () => {
+    const idUser = JSON.parse(localStorage.getItem('user'))
+    const userId = idUser.id
+    await axios.post(`/cart/add/${userId}`, { bookId: id })
+    console.log('Se guardo en el carrito')
   }
 
   return (
@@ -153,7 +161,9 @@ function DetailView() {
         </div>
       </div>
 
-      <div style={{ height: '40vh' }}></div>
+      <div style={{ height: '40vh' }}>
+        <button onClick={handleCart}>Añadir al carrito</button>
+      </div>
     </div>
   )
 }

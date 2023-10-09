@@ -32,7 +32,7 @@ const AdminDashboardView = () => {
 
   return (
     <div>
-      <div className={`${style.panel} row`}>
+      <div className={`${style.panel} row`} style={{ marginRight: '0' }}>
         {/* Perfil admin Lista de opciones*/}
         <div className={`${style.profilePanel} col-2`}>
           <div className={`${style.menu}`}>
@@ -133,7 +133,7 @@ const AdminDashboardView = () => {
                   &nbsp; Libros
                 </Link>
               </li>
-        
+
               <li>
                 <Link
                   onClick={() => {
@@ -231,7 +231,7 @@ const AdminDashboardView = () => {
                   &nbsp; Ofertas
                 </Link>
               </li>
-              
+
               <li>
                 <Link
                   onClick={() => {
@@ -289,9 +289,9 @@ const AdminDashboardView = () => {
           <div className={`col-9 ${style.content}`}>
             <CrearLibroView />
           </div>
-        ) :componenteActual === 'D' ? (
+        ) : componenteActual === 'D' ? (
           <div className={`col-9 ${style.content}`}>
-            <PromocionLibroView/>
+            <PromocionLibroView />
           </div>
         ) : componenteActual === 'F' ? (
           <div className={`col-9 ${style.content}`}>

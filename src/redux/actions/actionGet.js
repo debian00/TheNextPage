@@ -15,6 +15,7 @@ import {
   STOP_BOOK,
   RESTORE_BOOK,
   GET_ALL_BOOKS_OFFER,
+  GET_CART_USER,
 } from '../types'
 
 export const getAllBooks = ({
@@ -250,4 +251,31 @@ export const getBookRestore = (id) => {
       console.log(error)
     }
   }
+}
+
+export const getCartUser = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios(`/cart/${id}`)
+    dispatch({
+      type: GET_CART_USER,
+      payload: data,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getUrlPayment = async (cart) => {
+  const { data } = await axios.post(`/pay/stripe/create-checkout-session`, {
+    items: cart,
+  })
+  if (data) {
+    var width = 500
+    var height = 600
+    const left = (screen.width - width) / 2
+    const top = (screen.height - height) / 2
+    const options = `width=${width}, height=${height}, left=${left}, top=${top}, location=no, toolbar=no`
+    window.open(data.url, '_blank', options)
+  }
+  console.log(data)
 }

@@ -2,8 +2,31 @@
 import { Link } from 'react-router-dom'
 import style from './CardShop.module.css'
 import { Trash } from '../../utils/Icons'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { updateQuantity } from '../../redux/actions/actionPatch'
+import { deleteCart } from '../../redux/actions/actionDelete'
 
-const CardShop = ({ title, image, price, id, author }) => {
+const CardShop = ({ title, image, quantity, price, id, author, userId }) => {
+  const [newQuantity, setNewQuantity] = useState(quantity)
+  const dispatch = useDispatch()
+
+  const plusQuantity = () => {
+    setNewQuantity(quantity + 1)
+    dispatch(updateQuantity(userId, id, quantity + 1)) // Disparar acción de Redux para actualizar el carrito
+  }
+
+  const minusQuantity = () => {
+    if (quantity > 1) {
+      setNewQuantity(quantity - 1)
+      dispatch(updateQuantity(userId, id, quantity - 1)) // Disparar acción de Redux para actualizar el carrito
+    }
+  }
+
+  const deleteBook = () => {
+    dispatch(deleteCart(userId, id))
+  }
+
   return (
     <div
       style={{
@@ -25,9 +48,7 @@ const CardShop = ({ title, image, price, id, author }) => {
         }}
       >
         <img
-          src={
-            'https://res.cloudinary.com/dkdounmsa/image/upload/v1695758724/Libros/wqvzgyradatr0vcb0466.webp'
-          }
+          src={image}
           style={{
             width: '140px',
             height: '160px',
@@ -82,15 +103,14 @@ const CardShop = ({ title, image, price, id, author }) => {
           </div>
           <div>
             <p style={{ textAlign: 'center', margin: '0' }}>Cantidad:</p>
-            <input
-              type="number"
-              min={1}
-              value={1}
-              className={style.inputNum}
-            ></input>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <button onClick={() => minusQuantity()}>Bajar</button>
+              <p>{quantity}</p>
+              <button onClick={() => plusQuantity()}>Subir</button>
+            </div>
           </div>
         </div>
-        <div className={style.trash}>
+        <div className={style.trash} onClick={deleteBook}>
           <Trash width={25}></Trash>
         </div>
       </div>
