@@ -16,7 +16,8 @@ export default function LoginAndRegister() {
   const navigate = useNavigate()
   const ref = useRef()
 
-  const token = JSON.parse(localStorage.getItem('token'))
+
+ /*  const token = JSON.parse(localStorage.getItem("token"));
   const entry = useCallback(() => {
     if (token) {
       navigate('/home')
@@ -26,15 +27,16 @@ export default function LoginAndRegister() {
   useEffect(() => {
     entry()
   }, [entry])
+ */
 
   const scrollToComponent = (componentId) => {
     scroller.scrollTo(componentId, {
       duration: 1000,
       delay: 350,
-      smooth: 'easeInOutQuart',
-      offset: -40,
-    })
-  }
+      smooth: "easeInOutQuart",
+      offset : 0
+    });
+  };
   const scroll = useCallback(() => {
     window.scrollTo({ top: 0 })
     scrollToComponent('book')
@@ -42,58 +44,34 @@ export default function LoginAndRegister() {
 
   useEffect(() => {
     scroll()
-  }, [])
+  }, []);
 
-  return (
-    <div className="index">
-      <div className="container" id="book" style={{ marginLeft: '600px' }}>
-        <HTMLFlipBook
-          ref={ref}
-          className="book-container book"
-          clickEventForward={false}
-          startPage={1}
-          useMouseEvents={false}
-          maxShadowOpacity={0}
-          disableFlipByClick={true}
-          width={630}
-          height={810}
-          maxHeight={1000}
-          maxWidth={1200}
-          usePortrait={false}
-        >
-          <div className={`demoPage1 left page `} number={3} key={3}>
-            <div
-              className={`d-flex  flex-column  align-items-center justify-content-center ${style.imagen1}`}
-            >
-              <h1
-                style={{
-                  color: 'white',
-                  fontSize: '50px',
-                  marginTop: '0px !important',
-                }}
-              >
-                ¡Hola! Tanto tiempo
-              </h1>
-              <h1 style={{ color: 'white', fontSize: '50px' }}>
-                Te extrañamos en
-              </h1>
-              <div
-                style={{
-                  marginTop: '80px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
-              >
-                <Logo width={'100px'} height={'90px'} color={'white'}></Logo>
-                <h3 style={{ color: 'white', margin: '20px' }}>
-                  {' '}
-                  The Next Page
-                </h3>
-              </div>
-            </div>
+
+
+
+
+
+ 
+  return ( 
+  <div className="index" >
+
+    <div className="container"id="book"  >
+    <HTMLFlipBook  ref={ref} className="book-container book"  clickEventForward={false}  startPage={1} useMouseEvents={false} maxShadowOpacity={1} disableFlipByClick={true} width={550} height={750} maxHeight={1000} maxWidth={1200} usePortrait={false}>
+
+    
+
+      <div className={`demoPage1 left page `} number={3} key={3} >
+
+        <div  className={`d-flex  flex-column  align-items-center justify-content-center ${style.imagen1}`}>
+           <h1 style={{color : "white"  ,fontSize : "50px", marginTop : "0px !important"}}>¡Hola! Tanto tiempo</h1>
+           <h1 style={{color : "white"  ,fontSize : "50px"}}>Te extrañamos en</h1> 
+          <div style={{marginTop :  "80px" ,display: "flex", justifyContent : "center" , flexDirection : "column", alignItems : "center"}}>
+           <Logo width={"100px"} height={"90px"} color={"white"} ></Logo>
+        <h3  style={{color : "white", margin :"20px"}}> The Next Page</h3>
+
           </div>
+        </div>
+      </div>
 
           <div key={4} number={4} className="demoPage2 right page">
             <Login ref={ref} />

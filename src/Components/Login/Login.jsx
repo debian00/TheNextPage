@@ -1,37 +1,44 @@
 import React , {useRef, useState} from "react";
 import { useForm } from "react-hook-form";
 import style from "./Login.module.css"
-import { getLogin } from "../../redux/actions/actionPost";
+import { getLogin , handleGoogleLogin, handleGitHubLogin } from "../../redux/actions/actionPost";
 import { Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../../Views/Login&Register/Login&Register.css"
 import "react-bootstrap"
 
-const Login = React.forwardRef((props,ref ) => {
 
-    
-    const {register , formState : {errors},watch , handleSubmit } = useForm();
-    const [modal ,setModal] = useState({access : false, body : ""});
+
+const Login = React.forwardRef((props,ref ) => {
+  
+  
+  const {register , formState : {errors},watch , handleSubmit } = useForm();
+  const [modal ,setModal] = useState({access : false, body : ""});
     const navigate = useNavigate() 
+
+
 
    const onSubmit = handleSubmit((data) =>  {
        getLogin(data, setModal, navigate)
        
    })
 
-    const handleNextPage = () => {
-        if(ref.current) {
-            ref.current.pageFlip().flipNext("bottom")
-        }
+   const handleNextPage = () => {
+     if(ref.current) {
+       ref.current.pageFlip().flipNext("bottom")
+      }
     }
-
-
-
+    
+    
+    
+        
+        
+        
     return (
     <div ref={ref} 
         
       >
-        <div style={{padding : "10px" , height : "100%"}} className={style.form}>
+        <div style={{ height : "100%"}} className={style.form}>
             <form onSubmit={onSubmit}  >
                 <fieldset className={` d-flex flex-column justify-content-center align-items-center text-center ${style.formLogin}`} >
                     <legend className={style.legend}>Logueate</legend>
@@ -112,10 +119,11 @@ const Login = React.forwardRef((props,ref ) => {
                     <hr></hr>
                     <div className = " d-flex flex-column justify-content-around align-items-center">
                         <span className={style.span}>No estas registrado? <span  className={style.spanLink}  onClick={() => handleNextPage()}>Regístrate aqui</span></span>
+                        <p>o </p>
                         
-                        <p >o </p>
-                        
-                        <button type="button" className={style.buton}>Accede con Google</button>
+                        <button type="button" className={style.butonGoogle} onClick={() => handleGoogleLogin(setModal , navigate)}></button>
+                        <button type="button" className={style.buton} onClick={() => handleGitHubLogin()}>Accede con GitHub</button>
+
                     </div>
                     </div>
                 </fieldset>

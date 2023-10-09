@@ -8,7 +8,7 @@ import { Modal } from "react-bootstrap";
 
 const Register2 = React.forwardRef((props, ref) => {
 
-    const {register , formState : {errors},watch , handleSubmit, setValue , setError } = useForm()
+    const {register , formState : {errors},watch ,clearErrors, handleSubmit, setValue , setError } = useForm()
     const [modal ,setModal] = useState({access : false, body : ""});
     const navigate = useNavigate() 
 
@@ -48,19 +48,17 @@ const handleDelete = () => {
     if (!file.type.includes("image")) {
       setError("profilePic",{ type: "validate", message: "Solo se permiten imágenes" })
         setTimeout(() => {
-          setError("profilePic",{ type: "validate", message: ""})
+          clearErrors("profilePic")
         }, [2000]);
       return;
     } else {
   
         
-        const imageURL = URL.createObjectURL(new Blob([file]));
-        setValue("profilePic" , imageURL)
-        
         const fileData = new FormData();
         fileData.append("file", file);
         fileData.append("upload_preset", "Imagenes");
         fileData.append("cloud_name", "dkdounmsa");
+
         const fetched = await fetch(`https://api.cloudinary.com/v1_1/dkdounmsa/image/upload`, {
             method : "post" , 
             body : fileData
@@ -68,6 +66,7 @@ const handleDelete = () => {
   
         const url = await fetched.json()
         setValue("profilePic" , url.secure_url);
+        console.log(watch());
         return
         }
     };

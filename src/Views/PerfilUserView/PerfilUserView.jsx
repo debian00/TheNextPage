@@ -225,9 +225,16 @@ const PerfilUserdView = () => {
           <div className={`col-9 ${style.content}`}>
             <ComprasView />
           </div>
-        ) : (
-          <h1>No hay nada</h1>
-        )}
+        ) : 
+          componenteActual === "E" ? (
+            <div>
+               <h5>Estas seguro que quieres salir?</h5>
+               <div>
+                 <button type='button' onClick={() => {localStorage.removeItem("token"), localStorage.removeItem("user")}}>Si</button>
+                 <button type='button'>No </button>
+                 </div>
+            </div>
+         ) : null}
       </div>
     </div>
   )
