@@ -89,7 +89,7 @@ const handleDelete = () => {
 
     return(
         <form onSubmit={onSubmit}>
-        < div className={`d-flex  flex-column  align-items-center justify-content-center ${style.fieldset}`}>
+        <div className={`d-flex  flex-column  align-items-center justify-content-center ${style.fieldset}`}>
     <div className={` ${style.ima} d-flex flex-row  align-items-center justify-content-center`} >
 
       <div
@@ -354,7 +354,7 @@ const handleDelete = () => {
                 <div>
                 <div className="d-flex flex-row">
                 <p className={style.span}>Te equivocaste en algo? </p>
-                  <p onClick={handleBack}>Volver atras ৲</p>
+                  <p onClick={handleBack} className={style.spanLink} > Volver atras ৲</p>
                 </div>
                     <div className="d-flex justify-content-center">
                         <button type="submit"  className={style.label1}>Registrarse</button>
