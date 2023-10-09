@@ -70,19 +70,21 @@ const Checkout = () => {
         </div>
       </div>
       <div className={style.finalPrice}>
-        {cart.map((ele) => {
-          return (
-            <div key={ele.id}>
-              <CardCheckout
-                image={ele.book.images[0]}
-                title={ele.book.title}
-                quantity={ele.quantity}
-                sellPrice={ele.book.sellPrice}
-                price={ele.price}
-              />
-            </div>
-          )
-        })}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {cart.map((ele) => {
+            return (
+              <div key={ele.id}>
+                <CardCheckout
+                  image={ele.book.images[0]}
+                  title={ele.book.title}
+                  quantity={ele.quantity}
+                  sellPrice={ele.book.sellPrice}
+                  price={ele.price}
+                />
+              </div>
+            )
+          })}
+        </div>
         <div
           style={{
             width: '100%',

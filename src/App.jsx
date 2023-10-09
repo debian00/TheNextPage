@@ -19,12 +19,15 @@ import ForgotPassword from './Views/ForgotPassword/ForgotPassword'
 import ResetPassword from './Views/ForgotPassword/ResetPassword'
 import Checkout from './Views/Checkout/Checkout'
 import PromocionesView from './Views/PromocionesView/PromocionesView'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 //import ChatBot from "./Components/Chatbot/Chatbot"
 
 function App() {
   return (
     <>
       <Navbar />
+      <ToastContainer position="bottom-right"></ToastContainer>
       <Routes>
         <Route
           path="/"

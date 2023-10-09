@@ -162,6 +162,7 @@ function DetailView() {
       </div>
 
       <div style={{ height: '40vh' }}>
+        <div className={styles.card}></div>
         <button onClick={handleCart}>Añadir al carrito</button>
       </div>
     </div>
