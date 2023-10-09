@@ -15,7 +15,7 @@ function ResetPassword() {
           axios.post(`http://localhost:3001/reset-password/${id}/${token}`, { password })
             .then(res => {
               if (res.data.Status === "Success") {
-                navigate('/checkIn');
+                navigate('/check');
               } else {
                 // Si la respuesta no es "Success", podrías mostrar un mensaje de error.
                 alert('Error al restablecer la contraseña');
