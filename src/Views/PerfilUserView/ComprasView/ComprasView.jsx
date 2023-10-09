@@ -46,7 +46,6 @@ const ComprasView = () => {
     bookId: '0f382f38-f02b-4a7b-aa3c-aed39e842884',
     })
   }
-
   console.log('mis reseñas', myReviews)
   const dispatch = useDispatch()
   const id = '4cfe720f-52ff-43ad-9b20-c202714de892'
