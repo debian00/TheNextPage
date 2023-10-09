@@ -21,7 +21,7 @@ import Checkout from './Views/Checkout/Checkout'
 import PromocionesView from './Views/PromocionesView/PromocionesView'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-//import ChatBot from "./Components/Chatbot/Chatbot"
+import ChatBot from "./Components/Chatbot/Chatbot"
 import NotFound from './Views/NotFound/NotFound'
 import Success from './Views/Success/Success'
 import Cancelled from './Views/Success/Cancelled'
@@ -37,6 +37,7 @@ function App() {
           element={
             <>
               <HomeView />
+              <ChatBot/>
               <Footer />
             </>
           }
@@ -171,6 +172,16 @@ function App() {
             <>
               <PromocionesView />
               <Footer />
+            </>
+          }
+        />
+         <Route
+          path="/chatbot"
+          element={
+            <>              
+              <ChatBot/>
+              <Footer />
+             
             </>
           }
         />
