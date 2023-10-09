@@ -177,7 +177,7 @@ const Navbar = () => {
                 id="dropdown"
               >
                 {' '}
-                {user.name}
+                {user.userName}
               </p>
             </>
           ) : (

@@ -22,6 +22,7 @@ import PromocionesView from './Views/PromocionesView/PromocionesView'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 //import ChatBot from "./Components/Chatbot/Chatbot"
+import NotFound from "./Views/NotFound/NotFound"
 
 function App() {
   return (
@@ -149,6 +150,15 @@ function App() {
           element={
             <>
               <PromocionesView />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <>
+              <NotFound />
               <Footer />
             </>
           }
