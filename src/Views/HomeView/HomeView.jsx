@@ -1,14 +1,15 @@
 // import React from 'react'
 import { Suspense } from 'react'
 import CardHome from '../../Components/CardHome/CardHome'
-import principal from '../../assets/imghome/banner.jpg'
+import principal from '../../assets/imghome/THE NEXT PAGE.png'
 import style from './HomeView.module.css'
 import Carrousel from './Carrousel/Carrousel'
 
 const HomeView = () => {
   return (
-    <div>
+    <div style={{ background: '#f7f7f7' }}>
       {/* Imagen principal del Home */}
+
       <img
         src={principal}
         alt=""
@@ -16,11 +17,54 @@ const HomeView = () => {
           width: '100%',
           height: '60vh',
           objectFit: 'cover',
-          objectPosition: 'center -400px',
+          objectPosition: 'center 80%',
+          position: 'relative',
         }}
       />
       {/* Seccion de Novedades y Tendencias */}
       <Suspense fallback={<p>Loading</p>}>
+        <section
+          style={{
+            paddingInline: '50px',
+            paddingTop: '20px',
+          }}
+        >
+          <div
+            style={{
+              marginTop: '20px',
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '20px',
+              border: '2px solid rgb(215 215 215)',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+            >
+              <h3 style={{ margin: '0', fontSize: '22px', fontWeight: 'bold' }}>
+                Nuestras novedades!
+              </h3>
+              <p
+                style={{
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  margin: '0',
+                }}
+              >
+                Ver mas
+              </p>
+            </div>
+            <p style={{ color: '#92779E', textAlign: 'left', width: '60%' }}>
+              Aquí encontrarás las últimas tendencias, historias emocionantes y
+              conocimientos que te inspirarán. Sumérgete en un mundo de
+              descubrimientos literarios y deja que tu imaginación vuele alto.
+            </p>
+            <CardHome order="createdAtDesc"></CardHome>
+          </div>
+        </section>
         <section
           style={{
             paddingInline: '50px',
@@ -48,7 +92,6 @@ const HomeView = () => {
               <p
                 style={{
                   alignItems: 'center',
-                  display: 'center',
                   textAlign: 'center',
                   margin: '0',
                 }}
@@ -139,6 +182,26 @@ const HomeView = () => {
           </div>
         </section>
       </Suspense>
+      <section className={style.triangle}></section>
+      {/* <section
+        className={style.triangleEnd}
+        style={{ height: '70vh', background: '#95659f' }}
+      >
+        <div className={style.news}>
+          <div className={style.letter}>
+            <div>
+              <h2>Suscribete a nuestro newsletter.</h2>
+              <p>
+                Entérate antes de nuestros descuentos, novedades y artículos de
+                interés!
+              </p>
+            </div>
+            <div></div>
+            <div></div>
+          </div>
+          <div></div>
+        </div>
+      </section> */}
     </div>
   )
 }

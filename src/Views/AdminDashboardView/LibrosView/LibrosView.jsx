@@ -2,17 +2,30 @@
 import { useDispatch, useSelector } from 'react-redux'
 import style from './librosview.module.css'
 import { useEffect, useState } from 'react'
-import { getAllBooksCopy } from '../../../redux/actions/actionGet'
+import {
+  getBookByAvailability,
+  getBookPause,
+  getBookRestore,
+} from '../../../redux/actions/actionGet'
 // import { updateBook } from '../../../redux/actions/actionPut'
 import axios from 'axios'
+import { deleteBookById } from '../../../redux/actions/actionDelete'
+import Card from '../../../Components/CardIndividual/Card'
+import { CheckWithLine, Delete, Pencil, Stop } from '../../../utils/Icons'
+import { updateBook } from '../../../redux/actions/actionPut'
+import { showSuccessNotification } from '../../../utils/Toast'
 
 const Librosview = () => {
   //Hook para traer todos los libros
   const allBooks = useSelector((state) => state.books)
+
   console.log(allBooks)
   //Estado para manejar el modal
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  //Estado para el formulario
+
+  const dispatch = useDispatch()
+
+  //! EDITADO ------------------------
+
   const [form, setForm] = useState({
     id: '',
     title: '',
@@ -37,36 +50,61 @@ const Librosview = () => {
     stock: '',
   })
 
-  const dispatch = useDispatch()
-  //Funcion para recortar la cantinda de letras en la descripcion
-  const descripctionCut = (descripcion) => {
-    if (descripcion.length > 90) {
-      const newDescription = descripcion.split('').slice(0, 80).join('')
-      return <div>{newDescription}</div>
-    }
-    return <div>{descripcion}</div>
-  }
-  //Funcion para recortar la cantinda de letras en la descripcion
-  const tittleCut = (title) => {
-    if (title.length > 20) {
-      const newTittle = title.split('').slice(0, 20).join('')
-      return <div>{newTittle}</div>
-    }
-    return <div>{title}</div>
-  }
-  //Funcion para enviar la info
   const handleUpdate = async (e) => {
     e.preventDefault()
-    await axios.put(`/books/update/${form.id}`, form)
+    dispatch(updateBook(form, form.id))
   }
-  //Funcion para manejar los campos
+
   const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     })
   }
-  //Funcio para manejar la imagen de la portada
+
+  //! --------------------- NO TOCAR --
+
+  //? BORRADO LOGICO -----------------------
+
+  //* Funcion para eliminar el libro
+  const handleDeleteBook = (e, id) => {
+    e.preventDefault()
+    const confirmed = window.confirm(
+      '¿Estás seguro que quieres eliminar este libro?'
+    )
+    if (confirmed) {
+      dispatch(deleteBookById(id))
+      showSuccessNotification('¡Operación exitosa!')
+    }
+  }
+  //* Funcion para suspender el libro
+  const handlePauseBook = (e, id) => {
+    e.preventDefault()
+    console.log('otro id para editar', id)
+    const confirmed = window.confirm(
+      '¿Estás seguro que quieres suspender este libro?'
+    )
+    if (confirmed) {
+      showSuccessNotification('¡Operación exitosa!')
+      dispatch(getBookPause(id))
+    }
+  }
+  //* Funcion para restaurar el libro
+  const handleRestoreBook = (e, id) => {
+    e.preventDefault()
+    console.log('otro id para restaurar', id)
+    const confirmed = window.confirm(
+      '¿Estás seguro que quieres restaurar este libro?'
+    )
+    if (confirmed) {
+      showSuccessNotification('¡Operación exitosa!')
+      dispatch(getBookRestore(id))
+    }
+  }
+
+  //? ----------------------- NO TOCAR ---
+
+  //! EDITADO (IMAGEN) -----------------------
   const handleDrop = (event) => {
     event.preventDefault()
     const file = event.dataTransfer.files[0]
@@ -96,55 +134,95 @@ const Librosview = () => {
       setForm({ ...form, images: data.secure_url })
     }
   }
-  //Funcion para eliminar la imagen seleccionada
+
   const handleDelete = () => {
     setForm({ ...form, images: '' })
   }
-  //Paginado
-  const scrollToTop = () => {
-    window.scrollTo({ behavior: 'smooth', top: 0 })
+
+  //! ----------------------- NO TOCAR ----
+
+  //Filtrado combinado
+  const [filter, setFilter] = useState({
+    page: 1,
+    availability: 'true',
+    order: 'titleAsc',
+    title: '',
+  })
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Para una transición suave
+    })
+  }
+  //Funcion para ver cual estan disponibles
+  const handleFilter = (e) => {
+    const { value, name } = e.target
+    const newFilter = { ...filter, [name]: value, page: 1 }
+    setFilter(newFilter)
   }
 
-  const [currentPage, setCurrentPage] = useState(0)
   const totalProp = Math.ceil(allBooks.count / 10)
 
   const nextHandler = () => {
     scrollToTop()
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalProp - 1))
+    setFilter((prevFilter) => {
+      const nextPage = prevFilter.page + 1
+      return { ...prevFilter, page: Math.min(nextPage, totalProp) }
+    })
   }
 
   const prevHandler = () => {
     scrollToTop()
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 0))
+    setFilter((prevFilter) => {
+      const prevPage = prevFilter.page - 1
+      return { ...prevFilter, page: Math.max(prevPage, 1) }
+    })
   }
 
   useEffect(() => {
-    dispatch(getAllBooksCopy(currentPage))
-  }, [currentPage, dispatch])
+    dispatch(getBookByAvailability(filter))
+  }, [filter, dispatch])
 
   //Manejo ciclo de vida del componente con useEffect
-  useEffect(() => {
-    dispatch(getAllBooksCopy())
-  }, [])
 
   return (
     <div>
-      {/* <div className={style.miNavbar}>
+      <div className={style.miNavbar}>
         <div className="row">
-          <div className="col-3">
-            <select className={style.select}>
-              <option value="opcion1">Filtros Autor</option>
-              <option value="opcion2">Opción 2</option>
-              <option value="opcion3">Opción 3</option>
-              <option value="opcion4">Opción 4</option>
+          <div className="col-2">
+            <select
+              onChange={handleFilter}
+              name="availability"
+              className={style.select}
+            >
+              <option value={'true'}>Disponible</option>
+              <option value={'false'}>No Disponible</option>
             </select>
           </div>
-          <div className="col-3">
-            <select className={style.select}>
-              <option value="opcion1">Filtros Libros</option>
-              <option value="opcion2">Opción 2</option>
-              <option value="opcion3">Opción 3</option>
-              <option value="opcion4">Opción 4</option>
+          <div className="col-4">
+            <select
+              className={style.select}
+              name="order"
+              onChange={handleFilter}
+            >
+              <option value={'titleAsc'} name={'order'}>
+                Ordernar A-Z
+              </option>
+              <option value={'titleDesc'} name={'order'}>
+                Ordernar Z-A
+              </option>
+              <option value={'stockAsc'} name={'order'}>
+                Ordernar Stock menor - mayor
+              </option>
+              <option value={'stockDesc'} name={'order'}>
+                Ordernar Stock mayor - menor
+              </option>
+              <option value={'createdAtAsc'} name={'order'}>
+                Ordernar Fecha libro creacion menor - mayor
+              </option>
+              <option value={'createdAtDesc'} name={'order'}>
+                Ordernar Fecha libro creacion mayor - menor
+              </option>
             </select>
           </div>
           <div className="col-6">
@@ -152,37 +230,31 @@ const Librosview = () => {
               type="text"
               id="myInput"
               className={style.myInput}
-              name="search"
+              name={'title'}
+              onChange={handleFilter}
               placeholder="🔍   Search for names.."
             />
           </div>
         </div>
-      </div> */}
+      </div>
       <div className={style.cardCont}>
         {allBooks?.rows?.map((ele) => (
-          <div className={style.card} key={ele.id}>
-            <div className={style.cardImg}>
-              <div className={style.img}>
-                <img
-                  style={{ width: '110px', height: '150px' }}
-                  src={ele.images}
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className={style.cardTitle}>{tittleCut(ele.title)}</div>
-            <div className={style.cardSubtitle}>
-              {descripctionCut(ele.description)}
-            </div>
-            <hr className={style.cardDivider} />
-            <div className={style.cardFooter}>
-              <div className={style.cardPrice}>
-                <span>$</span> {ele.sellPrice}
-              </div>
+          <div key={ele.id} className={style.individualCard}>
+            <Card
+              title={ele.title}
+              image={ele.images[0]}
+              price={ele.sellPrice}
+              id={ele.id}
+              author={ele.author}
+              availability={ele.availability}
+            ></Card>
+            <div className={style.buttonsEdit}>
               <button
-                className={style.cardBtn}
+                disabled={!ele.availability}
+                id={style.edit}
+                data-bs-target="#exampleModalXl"
+                data-bs-toggle="modal"
                 onClick={() => {
-                  setIsModalOpen(true)
                   setForm({
                     id: ele.id,
                     title: ele.title,
@@ -196,48 +268,54 @@ const Librosview = () => {
                   })
                 }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="7"
-                  height="9"
-                  fill="currentColor"
-                  className="bi bi-pencil-fill"
-                  viewBox="0 0 16 16"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModalXl"
-                >
-                  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                </svg>
+                <Pencil width={30} />
               </button>
               <button
+                disabled={!ele.availability}
+                id={style.delete}
                 type="button"
-                className="btn btn-outline-danger"
-                style={{ height: '35px' }}
+                onClick={(e) => {
+                  handleDeleteBook(e, ele.id)
+                }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="35"
-                  height="15"
-                  //    color='black'
-                  color="black"
-                  className="bi bi-file-excel"
-                  viewBox="0 7 16 4"
-                >
-                  <path d="M5.18 4.616a.5.5 0 0 1 .704.064L8 7.219l2.116-2.54a.5.5 0 1 1 .768.641L8.651 8l2.233 2.68a.5.5 0 0 1-.768.64L8 8.781l-2.116 2.54a.5.5 0 0 1-.768-.641L7.349 8 5.116 5.32a.5.5 0 0 1 .064-.704z"></path>
-                </svg>
+                <Delete width={30} />
               </button>
+
+              {ele.availability ? (
+                <button
+                  id={style.stop}
+                  type="button"
+                  onClick={(e) => {
+                    handlePauseBook(e, ele.id)
+                  }}
+                  disabled={!ele.availability}
+                >
+                  <Stop width={30} />
+                </button>
+              ) : (
+                <button
+                  disabled={ele.availability}
+                  type="button"
+                  id={style.restore}
+                  onClick={(e) => {
+                    handleRestoreBook(e, ele.id)
+                  }}
+                >
+                  <CheckWithLine width={30} />
+                </button>
+              )}
             </div>
           </div>
         ))}
       </div>
       <div className={style.buttonContainer}>
-        <button onClick={prevHandler} className={style.button}>
+        <button onClick={() => prevHandler()} className={style.button}>
           PREV
         </button>
         <p>
-          Pagina {currentPage + 1} de {totalProp}
+          Pagina {filter.page} de {totalProp}
         </p>
-        <button onClick={nextHandler} className={style.button}>
+        <button onClick={() => nextHandler()} className={style.button}>
           NEXT
         </button>
       </div>
@@ -246,7 +324,6 @@ const Librosview = () => {
         id="exampleModalXl"
         aria-labelledby="exampleModalXlLabel"
         aria-hidden="true"
-        style={{ display: isModalOpen ? 'block' : 'none' }}
       >
         <div className="modal-dialog modal-xl">
           <div className="modal-content ">
@@ -493,7 +570,11 @@ const Librosview = () => {
                         </div>
                         <div className="row justify-content-center d-flex">
                           <div className="col-12 mt-3">
-                            <button type="submit" className="btn btn-primary" aria-label="Close">
+                            <button
+                              type="submit"
+                              className="btn btn-primary"
+                              aria-label="Close"
+                            >
                               Editar Libro
                             </button>
                           </div>

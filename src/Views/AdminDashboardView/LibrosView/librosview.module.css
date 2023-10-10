@@ -2,256 +2,104 @@
   display: flex;
   margin-top: 1rem;
   flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en filas */
-  justify-content: space-between; /* Distribuye las tarjetas horizontalmente */
-
+  justify-content: space-evenly; /* Distribuye las tarjetas horizontalmente */
   width: 100%; /* Opcional: Limita el ancho del contenedor para que no se extienda demasiado */
 }
-.card {
-    --font-color: #111;
-    --font-color-sub: #7e7e7e;
-    --bg-color: #ded8d7;
-    --main-color: #111;
-    --main-focus: #2d8cf0;
-    width: calc(30% - 2rem);
-    margin-bottom: 1rem;
-    height: 370px;
-    background: var(--bg-color);
-
-    box-shadow: 4px 4px var(--main-color);
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 20px;
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 1); 
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-  
-  .card:last-child {
-    justify-content: flex-end;
-  }
-  .cardImg {
-    /* clear and add new css */
-  transition: all 0.5s;
+.individualCard {
   display: flex;
+  position: relative;
+}
+
+.miNavbar {
+  margin-top: 10px;
   justify-content: center;
 }
-
-.cardImg .img {
-  /* delete */
-  box-shadow: 0px 6px 14px rgb(0, 0, 0, 1); 
-  transform: scale(1);
-  position: relative;
-  /* box-sizing: border-box; */
-  width: 110px;
-  height: 150px;
-  border: 2px solid black;
-  /* background-color: #228b22; */
-  /* background-image: linear-gradient(to top,transparent 10px,rgba(0,0,0,0.3) 10px,rgba(0,0,0,0.3) 13px,transparent 13px); */
+.myInput {
+  background-position: 10px 12px; /* Position the search icon */
+  box-shadow: 3px 5px 7px 10px rgba(196, 196, 196, 0.664);
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  border-radius: 15px;
+  margin-bottom: 15px; /* Add some space below the input */
+  background-color: #59415b;
+  display: flex;
+  justify-content: center;
+  color: white;
 }
-.cardImg .img::before {
-    /* delete */
-     /* content: ''; */
-     position: absolute;
-     width: 65px;
-     height: 110px;
-     margin-left: -32.5px;
-     left: 50%;
-     bottom: -4px;
-     background-repeat: no-repeat;
-     /* background-image: radial-gradient(ellipse at center,rgba(0,0,0,0.7) 30%,transparent 30%),linear-gradient(to top,transparent 17px,rgba(0,0,0,0.3) 17px,rgba(0,0,0,0.3) 20px,transparent 20px),linear-gradient(to right,black 2px,transparent 2px),linear-gradient(to left,black 2px,transparent 2px),linear-gradient(to top,black 2px,#228b22 2px); */
-     /* background-size: 60% 10%,100% 100%,100% 65%,100% 65%,100% 50%; */
-     /* background-position: center 3px,center bottom,center bottom,center bottom,center bottom; */
-     border-radius: 0 0 4px 4px;
-     z-index: 2;
-   }
-   .cardImg .img::after {
-    /* delete */
-     content: '';
-     position: absolute;
-     box-sizing: border-box;
-     width: 28px;
-     height: 28px;
-     margin-left: -14px;
-     left: 50%;
-     top: -13px;
-     background-repeat: no-repeat;
-     /* background-image: linear-gradient(80deg,#ffc0cb 45%,transparent 45%),linear-gradient(-175deg,#ffc0cb 45%,transparent 45%),linear-gradient(80deg,rgba(0,0,0,0.2) 51%,rgba(0,0,0,0) 51%),linear-gradient(-175deg,rgba(0,0,0,0.2) 51%,rgba(0,0,0,0) 51%),radial-gradient(circle at center,#ffa6b6 45%,rgba(0,0,0,0.2) 45%,rgba(0,0,0,0.2) 52%,rgba(0,0,0,0) 52%),linear-gradient(45deg,rgba(0,0,0,0) 48%,rgba(0,0,0,0.2) 48%,rgba(0,0,0,0.2) 52%,rgba(0,0,0,0) 52%),linear-gradient(65deg,rgba(0,0,0,0) 48%,rgba(0,0,0,0.2) 48%,rgba(0,0,0,0.2) 52%,rgba(0,0,0,0) 52%),linear-gradient(22deg,rgba(0,0,0,0) 48%,rgba(0,0,0,0.2) 48%,rgba(0,0,0,0.2) 54%,rgba(0,0,0,0) 54%); */
-     /* background-size: 100% 100%,100% 100%,100% 100%,100% 100%,100% 100%,100% 75%,100% 95%,100% 60%;
-     background-position: center center;
-     border-top-left-radius: 120px;
-     border-top-right-radius: 10px;
-     border-bottom-left-radius: 10px;
-     border-bottom-right-radius: 70px; */
-     /* border-top: 2px solid black;
-     border-left: 2px solid black;
-     transform: rotate(45deg); */
-     z-index: 1;
-   }
-   .cardTitle {
-    padding-top: 7px;
-    font-size: 20px;
-    font-weight: 500;
-    text-align: center;
-    color: var(--font-color);
-  }
-  
-  .cardSubtitle {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--font-color-sub);
-  }
-  
-  .cardDivider {
-    width: 100%;
-    border: 1px solid var(--main-color);
-    border-radius: 50px;
-  }
-  .miNavbar{
-    margin-top: 10px;
-    justify-content: center;
-  }
-  .myInput {
-    background-position: 10px 12px; /* Position the search icon */
-    box-shadow: 3px 5px 7px 10px rgba(196, 196, 196, 0.664);
-    width: 100%; /* Full-width */
-    font-size: 16px; /* Increase font-size */
-    padding: 12px 20px 12px 40px; /* Add some padding */
-    border: 1px solid #ddd; /* Add a grey border */
-    border-radius: 15px;
-    margin-bottom: 15px; /* Add some space below the input */
-    background-color: #59415b;
-    display: flex;
-    justify-content: center;
-    color: white;
-  }
-  .myInput::placeholder {
-    color: white; /* Cambia el color del placeholder a blanco */
-  }
-  .select {
-    width: 100%; /* Ancho del select */
-    height: 50px;
-    padding: 10px; /* Espaciado interior */
-    font-size: 16px; /* Tamaño de fuente */
-    border: 1px solid #ccc; /* Borde */
-    border-radius: 5px; /* Borde redondeado */
-    outline: none; /* Elimina el contorno predeterminado en algunos navegadores */
+.myInput::placeholder {
+  color: white; /* Cambia el color del placeholder a blanco */
+}
+.select {
+  width: 100%; /* Ancho del select */
+  height: 50px;
+  padding: 10px; /* Espaciado interior */
+  font-size: 16px; /* Tamaño de fuente */
+  border: 1px solid #ccc; /* Borde */
+  border-radius: 5px; /* Borde redondeado */
+  outline: none; /* Elimina el contorno predeterminado en algunos navegadores */
 }
 
-
-  .botonCrear{
-    width: 100%;
-    height: 50px;
-  }
-  .cardFooter {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .cardPrice {
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--font-color);
-  }
-  
-  .cardPrice span {
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--font-color-sub);
-  }
-
-  .cardBtn {
-    height: 35px;
-    background: var(--bg-color);
-    border: 2px solid var(--main-color);
-    border-radius: 5px;
-    padding: 0 15px;
-    transition: all 0.3s;
-  }
-  
-  .cardBtn svg {
-    width: 100%;
-    height: 100%;
-    fill: var(--main-color);
-    transition: all 0.3s;
-  }
-  
-  .cardImg:hover {
-    transform: translateY(-3px);
-  }
-  .cardBtn:hover {
-    border: 2px solid var(--main-focus);
-  }
-  
-  .cardBtn:hover svg {
-    fill: var(--main-focus);
-  }
-  
-  .cardBtn:active {
-    transform: translateY(3px);
-  }
-  .buton { 
-    position: absolute;
-   /*  bottom: 80.5%;
+.buton {
+  position: absolute;
+  /*  bottom: 80.5%;
     left: 91%; */
-    top : 0;
-    right : 0;
-    transform: translate(-0%, 0%);
-    z-index: 2;
-    background-color: rgb(35, 90, 163);
-    color: #ffffff;
-    border: none;
-    padding: 5px 5px;
-    border-top-left-radius: none !important;
-   /*  border-radius: 3px; */
-    cursor: pointer;
-    /* margin-top: 20px; */
-    width: 53px;
-    transition: background-color 0.3s ease;
-  
+  top: 0;
+  right: 0;
+  transform: translate(-0%, 0%);
+  z-index: 2;
+  background-color: rgb(35, 90, 163);
+  color: #ffffff;
+  border: none;
+  padding: 5px 5px;
+  border-top-left-radius: none !important;
+  /*  border-radius: 3px; */
+  cursor: pointer;
+  /* margin-top: 20px; */
+  width: 53px;
+  transition: background-color 0.3s ease;
 }
 
 .buton:hover {
-    background-color: rgb(19, 60, 113);
+  background-color: rgb(19, 60, 113);
 }
-.click{
-    color:blue;
-    cursor: pointer;
+.click {
+  color: blue;
+  cursor: pointer;
 }
 
-.inputfile{
-    background-color: #59415b;
-    border-radius: 15px;
-    padding: 5px;
-    color: white;
-    margin-top: 10px;
-    margin: 15px;
+.inputfile {
+  background-color: #59415b;
+  border-radius: 15px;
+  padding: 5px;
+  color: white;
+  margin-top: 10px;
+  margin: 15px;
 }
 .inputfile + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  display: inline-block;
 }
 .inputfile:focus + label,
 .inputfile + label:hover {
-    background-color: red;
+  background-color: red;
 }
 .customFade .modalOpen {
   overflow: hidden;
   opacity: 1;
   transition: opacity 0.3s ease;
 }
-.buttonContainer{
+.buttonContainer {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
 
-.buttonContainer p{
+.buttonContainer p {
   text-align: center;
   /* align-items: center; */
   align-content: center;
@@ -259,7 +107,7 @@
   /* margin: auto 0; */
 }
 
-.button{
+.button {
   padding: 10px 15px;
   border: 2px solid transparent;
   background-color: #091f44;
@@ -269,9 +117,56 @@
   transition: background-color 0.3s ease;
 }
 
-.button:hover{
+.button:hover {
   position: relative;
   background-color: #051229;
   border: 2px solid transparent;
   color: #f4f4f4;
+}
+
+.buttonsEdit {
+  position: absolute;
+  bottom: 30px;
+  width: 84%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  background: #e4e4e4;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  box-shadow:
+    0 -10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 -4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.buttonsEdit button {
+  transition: transform 0.2s ease;
+  border: none;
+  background-color: #e4e4e4;
+  padding: 5px;
+  border-radius: 2px;
+  color: #b4b4b4;
+}
+.buttonsEdit button:hover {
+  transform: translateY(-10px);
+}
+
+.buttonsEdit #edit:hover {
+  color: #5ca7d6;
+}
+.buttonsEdit #restore:hover {
+  color: #5cd66a;
+}
+.buttonsEdit #stop:hover {
+  color: #d6d25c;
+}
+.buttonsEdit #delete:hover {
+  color: #d65c5c;
+}
+
+.individualCard:hover .buttonsEdit {
+  opacity: 1;
 }

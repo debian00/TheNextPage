@@ -1,10 +1,20 @@
 
 .inputs {
+    margin-left : 10px;
     border : none;
-    border-bottom:1px solid blue ;
+    border-bottom:3px solid  rgb(123, 26, 153) ;
     background-color: transparent;
     border-radius: 5px;
+   height: 40px;
+   width: 230px;
+  
 }
+
+.inputs:active,
+.inputs:focus {
+  border : none !important
+}
+
 .inputfile {
 	width: 0.1px;
 	height: 0.1px;
@@ -16,17 +26,16 @@
 .label {
   
     padding: 10px !important;
-    height: 45px !important;
-    text-align: center;
-    font-size: 15px;
+    font-size: 20px;
     color: #091f44 !important;
-    background-color:aliceblue ;
-    display: inline-block;
-    border-radius: 15px;
+   font-size: 20px;
+   
 }
 
+/*  */
 .span {
-  font-size: 25px;
+  font-size: 22px;
+
 }
 .span:hover {
   color: rgb(90, 16, 90);
@@ -35,7 +44,7 @@
 .buton { 
 
  
-  
+  margin: 10px;
   background-color: rgb(140, 82, 158);
   color: #ffffff;
   border: none;
@@ -48,15 +57,67 @@
   width: 200px;
   box-shadow: #06142d;
   transition: background-color 0.3s ease;
+}
+.butonGoogle { 
+
+ background : url("./googleButton.png");
+ background-position: center;
+ background-size: cover;
+ background-repeat: no-repeat;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 58px;
+  width: 250px;
+  box-shadow:  #06142d;
+  border : none;
+ 
 
 }
+.butonGoogle:hover {
+  transition: background 0.5s ease;
+  background: url("./buttonGoogle.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 
+}
+.butonlogin { 
+
+ 
+  margin: 10px;
+  background-color: rgb(140, 82, 158);
+  color: #ffffff;
+  border: none;
+  padding: 5px 5px;
+  border-top-left-radius: none !important;
+  border-radius: 5px;
+  cursor: pointer;
+  /* margin-top: 20px; */
+ height: 50px;
+  width:300px;
+  box-shadow: #06142d;
+  transition: background-color 0.3s ease;
+
+}
+.butonlogin:hover {
+  background-color: #562c66f6;
+}
+
+.spanLink{
+  cursor: pointer;
+  color: rgb(140, 82, 158);
+  font-size: 22px;
+
+}
+.spanLink:hover {
+color: #562c66f6;
+}
 .buton:hover {
   background-color: rgb(110, 19, 113);
 }
-.label:focus, 
-.label:hover {
-    background-color: rgba(209, 209, 209, 0.699);
+
+.spans:hover {
+  color : rgb(23, 3, 41)
 }
 
 .inputfile + label {
@@ -78,11 +139,45 @@
   /* border-width: 3px; */
   color: rgba(79, 79, 79, 0.33);
 }
+/* .form {
+  box-shadow: 33px 3px 56px -9px rgba(0,0,0,0.6) inset;
+-webkit-box-shadow: 33px 3px 56px -9px rgba(0,0,0,0.6) inset;
+-moz-box-shadow: 33px 3px 56px -9px rgba(0,0,0,0.6) inset;
+} */
 
 .legend {
   padding: 10px;
   font-size: 60px;
+  margin-bottom : 50px
 }
+ 
  .formLogin {
-  height :inherit;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+   padding : 30px;
+  border-radius: 15px;
+  
  }
+ .iconPassword {
+  padding :5px;
+  margin-left : 2px;
+  background-color: transparent;
+  border : none
+}
+
+.icon{
+  
+  background-color: transparent;
+}
+
+
+.iconPassword:hover{
+   
+    padding :5px;
+  border : 0.4px solid rgb(140, 82, 158);
+  border-radius: 3px;
+}

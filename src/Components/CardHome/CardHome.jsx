@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Card from '../CardIndividual/Card'
 
-const CardHome = ({ books, author }) => {
+const CardHome = ({ books, author, order }) => {
   const [book, setBook] = useState([])
 
   const fetchBook = async () => {
@@ -11,8 +11,11 @@ const CardHome = ({ books, author }) => {
       let allBooks = []
       const { data } = await axios.get(`/books?page=1&size=10&title=${books}`)
       setBook(data.rows)
-    } else {
+    } else if (author) {
       const { data } = await axios.get(`/books?page=1&size=10&author=${author}`)
+      setBook(data.rows)
+    } else if (order) {
+      const { data } = await axios.get(`/books?page=1&size=10&order=${order}`)
       setBook(data.rows)
     }
   }
@@ -37,6 +40,7 @@ const CardHome = ({ books, author }) => {
             price={ele.sellPrice}
             id={ele.id}
             author={ele.author}
+            availability={ele.availability}
           ></Card>
         )
       })}

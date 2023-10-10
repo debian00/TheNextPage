@@ -1,0 +1,39 @@
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.trash svg {
+  color: rgb(244, 66, 66);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.trash svg:hover {
+  color: rgb(176, 30, 30);
+  transform: rotate(-20deg);
+}
+
+.inputNum {
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.quantity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.quantity button {
+  background: rgb(226, 226, 226);
+  border: 1px solid rgba(187, 187, 187, 0.752);
+  padding-block: 5px;
+  padding-inline: 15px;
+  border-radius: 10px;
+}
+.quantity p {
+  margin: auto 0;
+}

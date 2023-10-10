@@ -10,6 +10,13 @@ import {
   GET_ALL_BOOKS_COPY,
   GET_BOOKS_BY_NAME,
   GET_ALL_AUTHORS,
+  GET_BOOK_BY_AVAILABILITY,
+  GET_BOOK_BY_NAME_AUTHOR,
+  STOP_BOOK,
+  RESTORE_BOOK,
+  GET_ALL_BOOKS_OFFER,
+  GET_REVIEW_BY_ID,
+  GET_CART_USER,
 } from '../types'
 
 export const getAllBooks = ({
@@ -42,6 +49,38 @@ export const getAllBooks = ({
   }
 }
 
+export const getBookByAvailability = ({ page, availability, order, title }) => {
+  return async (dispatch) => {
+    try {
+      if (!title) title = ''
+      const { data } = await axios(
+        `/books?page=${page}&size=10&availability=${availability}&order=${order}&title=${title}`
+      )
+      dispatch({
+        type: GET_BOOK_BY_AVAILABILITY,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getBookByNameAuthor = (author) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(`/books?author=${author}`)
+      const bookNames = data.rows.map((book) => book.title)
+      dispatch({
+        type: GET_BOOK_BY_NAME_AUTHOR,
+        payload: bookNames,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 export const getAllBooksCopy = (page) => {
   return async (dispatch) => {
     try {
@@ -56,12 +95,40 @@ export const getAllBooksCopy = (page) => {
   }
 }
 
+export const getAllBooksOffer = (forSale) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(`/books?forSale=${forSale}`)
+      return dispatch({
+        type: GET_ALL_BOOKS_OFFER,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 export const getBookById = (id) => {
   return async (dispatch) => {
     try {
       const { data } = await axios('/books/' + id)
       return dispatch({
         type: GET_BOOK_BY_ID,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getReview = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios('/review/' + id)
+      return dispatch({
+        type: GET_REVIEW_BY_ID,
         payload: data,
       })
     } catch (error) {
@@ -115,11 +182,11 @@ export const getAllUsers = () => {
 export const getBooksSearch = (search) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios('/books/search?title=' + search)
+      const { data } = await axios('/books?title=' + search)
       console.log(data.title)
       dispatch({
         type: GET_BOOKS_NAME,
-        payload: data,
+        payload: data.rows,
       })
     } catch (error) {
       console.log(error)
@@ -169,4 +236,61 @@ export const getGenres = () => {
       console.log(error)
     }
   }
+}
+
+export const getBookPause = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios('/books/pause/' + id)
+      dispatch({
+        type: STOP_BOOK,
+        payload: id,
+      })
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getBookRestore = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios('/books/restore/' + id)
+      dispatch({
+        type: RESTORE_BOOK,
+        payload: id,
+      })
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getCartUser = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios(`/cart/${id}`)
+    dispatch({
+      type: GET_CART_USER,
+      payload: data,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getUrlPayment = async (cart) => {
+  const { data } = await axios.post(`/pay/stripe/create-checkout-session`, {
+    items: cart,
+  })
+  if (data) {
+    var width = 500
+    var height = 600
+    const left = (screen.width - width) / 2
+    const top = (screen.height - height) / 2
+    const options = `width=${width}, height=${height}, left=${left}, top=${top}, location=no, toolbar=no`
+    window.open(data.url, '_blank', options)
+  }
+  console.log(data)
 }

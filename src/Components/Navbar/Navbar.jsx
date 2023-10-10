@@ -1,7 +1,8 @@
 // import React from 'react'
 import style from './navbar.module.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {
+  Cart,
   Facebook,
   Instagram,
   Logo,
@@ -19,24 +20,35 @@ import { getGenres } from '../../redux/actions/actionGet'
 
 const Navbar = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const [fixed, setFixed] = useState(false)
   const [dropdown, setDropdown] = useState(false)
   const genres = useSelector((state) => state.genres)
-  const dropdownRef = useRef(null);
-  const dispatch = useDispatch();
-  const token = localStorage.getItem("token")
-
+  const dropdownRef = useRef(null)
+  const dispatch = useDispatch()
+  const token = localStorage.getItem('token')
+  const user = JSON.parse(localStorage.getItem('user'))
 
   useEffect(() => {
     dispatch(getGenres())
   }, [])
 
+  const handleDrop = () => {
+    setDropdown(true)
+  }
   const handleScroll = () => {
-    if (window.scrollY > 50) {
+    if (window.scrollY > 80) {
       setFixed(true)
     } else {
       setFixed(false)
     }
+  }
+
+  const logOut = () => {
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+    setDropdown(false)
+    navigate('/')
   }
 
   const handleClickOutside = (event) => {
@@ -58,14 +70,6 @@ const Navbar = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
-
-  const handleDrop = () => {
-    if (dropdown) {
-      setDropdown(false)
-    } else {
-      setDropdown(true)
-    }
-  }
 
   const handleSubmit = (e) => {
     navigate(`/catalogue?genre=${e}`)
@@ -128,13 +132,15 @@ const Navbar = () => {
         </div>
       </nav>
       <nav
-        className={style.downNav}
         style={{
           background: '#6f5475',
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
+          width: '100%',
+          transition: 'all 0.3s ease',
         }}
+        className={`${style.downNav}`}
       >
         <div>
           <ul>
@@ -149,48 +155,75 @@ const Navbar = () => {
             </li>
             <li>
               <Link to="/faq">FAQ</Link>
-            </li>            
+            </li>
           </ul>
         </div>
         <SearchBar></SearchBar>
         <div className={style.profile}>
-          <Link
-            to={'/admindashboard'}
-            // id="dropdown"
-            // onClick={handleDrop}
-            // style={{
-            //   color: '#AAEEC4',
-            //   fontFamily: "'Avenir'",
-            //   cursor: 'pointer',
-            // }}
-          >
-            ADMIN
-          </Link>
-          <Link>INGRESAR</Link>
-          <Profile width={40}></Profile>
-          
-        {token 
-        ? <><Link to="/userPanel"> MI PERFIL</Link></>
-        : <><Link to="/check">INGRESAR</Link>
-          <Profile width={40}></Profile></>
-          }  
-          
+          {token ? (
+            <>
+              <img
+                style={{
+                  borderRadius: '990px',
+                  width: '50px',
+                  height: '50px',
+                  objectFit: 'cover',
+                }}
+                src={user.profilePic}
+              ></img>
+              <p
+                onClick={handleDrop}
+                style={{ cursor: 'pointer' }}
+                id="dropdown"
+              >
+                {' '}
+                {user.userName}
+              </p>
+            </>
+          ) : (
+            <>
+              <Link to="/check">INGRESAR</Link>
+              <Profile width={40}></Profile>
+            </>
+          )}
+          {user ? (
+            <Link to={`/shoppingCart/${user.id}`}>
+              <Cart width={40}></Cart>
+            </Link>
+          ) : (
+            <Link to={`/check`}>
+              <Cart width={40}></Cart>
+            </Link>
+          )}
         </div>
       </nav>
-      <div
-        ref={dropdownRef}
-        className={`${style.dropdown} ${dropdown ? style.open : ''}`}
-      >
-        <ul>
-          {genres?.map((ele) => {
-            return (
-              <li onClick={() => handleSubmit(ele.id)} key={ele.id}>
-                {ele.name}
+      {user && token && (
+        <div
+          ref={dropdownRef}
+          className={`${style.dropdown} ${
+            dropdown && user.userType == 'user'
+              ? style.open
+              : dropdown && user.userType == 'admin'
+              ? style.openAdmin
+              : ''
+          }`}
+        >
+          <ul>
+            <li>
+              <Link to={`/userpanel/${user.id}`}>Mi perfil</Link>
+            </li>
+            {user.userType == 'admin' && (
+              <li>
+                <Link to={'/admindashboard'}>Admin</Link>
               </li>
-            )
-          })}
-        </ul>
-      </div>
+            )}
+
+            <li onClick={logOut} style={{ color: '#d65555' }}>
+              Salir
+            </li>
+          </ul>
+        </div>
+      )}
     </>
   )
 }

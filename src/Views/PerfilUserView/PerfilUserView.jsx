@@ -7,30 +7,29 @@ import FavoritosView from './FavoritosView/FavoritosView'
 import ComprasView from './ComprasView/ComprasView'
 import ReseñasView from './ReseñasView/ReseñasView'
 
-
 const PerfilUserdView = () => {
-  //Manejo de componentes 
-  const [componenteActual, setComponenteActual] = useState('A');
-  
+  //Manejo de componentes
+  const [componenteActual, setComponenteActual] = useState('A')
+
   //Manejo de color del perfil usuario
-  const [color, setColor] = useState('#59415b');
-  const [selectedLink, setSelectedLink] = useState(null);
+  const [color, setColor] = useState('#59415b')
+  const [selectedLink, setSelectedLink] = useState(null)
 
   //Manejar la opcion seleccionada mediante color
-  const handleSelect = (linkName)=>{
-    setComponenteActual(linkName);
-    setColor('#59415b');
-    setSelectedLink(linkName);
+  const handleSelect = (linkName) => {
+    setComponenteActual(linkName)
+    setColor('#59415b')
+    setSelectedLink(linkName)
   }
   useEffect(() => {
     setSelectedLink('A')
-    setColor("#59415b");
-  },[])
+    setColor('#59415b')
+  }, [])
   return (
     <div>
-      <div className="row">
+      <div className={`${style.panel} row`}>
         {/* Perfil usuario Lista de opciones*/}
-        <div className={`col-2`}>
+        <div className={`${style.profilePanel} col-2`}>
           <div className={`${style.menu}`}>
             <div className={style.profile}>
               <img src={perfil} alt="Foto de perfil" />
@@ -38,22 +37,28 @@ const PerfilUserdView = () => {
             <h4>Nombre Usuario</h4>
             <ul className={style.menuList}>
               <li>
-                <a onClick={()=> {handleSelect('A')}} href="#" style={{
-                      display: "flex",
-                      alignItems: "center",
-                      borderRadius: "15px",
-                      height: "70px",
-                      width: "100%",
-                      paddingInline: "5px",
-                      backgroundColor: selectedLink === "A" ? color : "white",
-                      color: selectedLink === "A" ? "white" : "black", 
-                    }}>
+                <a
+                  onClick={() => {
+                    handleSelect('A')
+                  }}
+                  href="#"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    borderRadius: '15px',
+                    height: '70px',
+                    width: '100%',
+                    paddingInline: '5px',
+                    backgroundColor: selectedLink === 'A' ? color : 'white',
+                    color: selectedLink === 'A' ? 'white' : 'black',
+                  }}
+                >
                   {' '}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'A' ? 'white' : 'black'}
                     className="bi bi-person-fill-gear"
                     viewBox="0 0 16 16"
                   >
@@ -63,21 +68,27 @@ const PerfilUserdView = () => {
                 </a>
               </li>
               <li>
-                <a onClick={()=> {handleSelect('B')}} href="#" style={{
-                      display: "flex",
-                      alignItems: "center",
-                      borderRadius: "15px",
-                      height: "70px",
-                      width: "100%",
-                      paddingInline: "5px",
-                      backgroundColor: selectedLink === "B" ? color : "white",
-                      color: selectedLink === "B" ? "white" : "black", 
-                    }}>
+                <a
+                  onClick={() => {
+                    handleSelect('B')
+                  }}
+                  href="#"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    borderRadius: '15px',
+                    height: '70px',
+                    width: '100%',
+                    paddingInline: '5px',
+                    backgroundColor: selectedLink === 'B' ? color : 'white',
+                    color: selectedLink === 'B' ? 'white' : 'black',
+                  }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'B' ? 'white' : 'black'}
                     className="bi bi-bookmark-heart-fill"
                     viewBox="0 0 16 16"
                   >
@@ -87,46 +98,68 @@ const PerfilUserdView = () => {
                 </a>
               </li>
               <li>
-                <a onClick={()=> {handleSelect('C')}} href="#" style={{
-                      display: "flex",
-                      alignItems: "center",
-                      borderRadius: "15px",
-                      height: "70px",
-                      width: "100%",
-                      paddingInline: "5px",
-                      backgroundColor: selectedLink === "C" ? color : "white",
-                      color: selectedLink === "C" ? "white" : "black", 
-                    }}>
+                <a
+                  onClick={() => {
+                    handleSelect('C')
+                  }}
+                  href="#"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    borderRadius: '15px',
+                    height: '70px',
+                    width: '100%',
+                    paddingInline: '5px',
+                    backgroundColor: selectedLink === 'C' ? color : 'white',
+                    color: selectedLink === 'C' ? 'white' : 'black',
+                  }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'C' ? 'white' : 'black'}
                     className="bi bi-layout-text-window-reverse"
                     viewBox="0 0 16 16"
                   >
                     <path d="M13 6.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5zm0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5zm-.5 2.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1h5z" />
                     <path d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM2 1a1 1 0 0 0-1 1v1h14V2a1 1 0 0 0-1-1H2zM1 4v10a1 1 0 0 0 1 1h2V4H1zm4 0v11h9a1 1 0 0 0 1-1V4H5z" />
                   </svg>{' '}
-                  &nbsp; Mis reseñas
+                  &nbsp; Mis reseñas &nbsp;
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill={selectedLink === 'C' ? 'white' : "#d82424"}
+                    className="bi bi-bell-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+                  </svg>
                 </a>
               </li>
               <li>
-                <a onClick={()=> {handleSelect('D')}} href="#" style={{
-                      display: "flex",
-                      alignItems: "center",
-                      borderRadius: "15px",
-                      height: "70px",
-                      width: "100%",
-                      paddingInline: "5px",
-                      backgroundColor: selectedLink === "D" ? color : "white",
-                      color: selectedLink === "D" ? "white" : "black", 
-                    }}>
+                <a
+                  onClick={() => {
+                    handleSelect('D')
+                  }}
+                  href="#"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    borderRadius: '15px',
+                    height: '70px',
+                    width: '100%',
+                    paddingInline: '5px',
+                    backgroundColor: selectedLink === 'D' ? color : 'white',
+                    color: selectedLink === 'D' ? 'white' : 'black',
+                  }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'D' ? 'white' : 'black'}
                     className="bi bi-bag-fill"
                     viewBox="0 0 16 16"
                   >
@@ -136,21 +169,27 @@ const PerfilUserdView = () => {
                 </a>
               </li>
               <li>
-                <a onClick={()=> {handleSelect('E')}} href="#" style={{
-                      display: "flex",
-                      alignItems: "center",
-                      borderRadius: "15px",
-                      height: "70px",
-                      width: "100%",
-                      paddingInline: "5px",
-                      backgroundColor: selectedLink === "E" ? color : "white",
-                      color: selectedLink === "E" ? "white" : "black", 
-                    }}>
+                <a
+                  onClick={() => {
+                    handleSelect('E')
+                  }}
+                  href="#"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    borderRadius: '15px',
+                    height: '70px',
+                    width: '100%',
+                    paddingInline: '5px',
+                    backgroundColor: selectedLink === 'E' ? color : 'white',
+                    color: selectedLink === 'E' ? 'white' : 'black',
+                  }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
                     height="35"
-                    fill="black"
+                    fill={selectedLink === 'E' ? 'white' : 'black'}
                     className="bi bi-box-arrow-right"
                     viewBox="0 0 16 16"
                   >
@@ -170,29 +209,32 @@ const PerfilUserdView = () => {
           </div>
         </div>
         {/* Contenido del usuario */}
-        {
-          componenteActual === "A" ?(
-            <div className={`col-9 ${style.content}`}>
-             
-              <EditarPerfilView/>
+        {componenteActual === 'A' ? (
+          <div className={`col-9 ${style.content}`}>
+            <EditarPerfilView />
+          </div>
+        ) : componenteActual === 'B' ? (
+          <div className={`col-9 ${style.content}`}>
+            <FavoritosView />
+          </div>
+        ) : componenteActual === 'C' ? (
+          <div className={`col-9 ${style.content}`}>
+            <ReseñasView />
+          </div>
+        ) : componenteActual === 'D' ? (
+          <div className={`col-9 ${style.content}`}>
+            <ComprasView />
+          </div>
+        ) : 
+          componenteActual === "E" ? (
+            <div>
+               <h5>Estas seguro que quieres salir?</h5>
+               <div>
+                 <button type='button' onClick={() => {localStorage.removeItem("token"), localStorage.removeItem("user")}}>Si</button>
+                 <button type='button'>No </button>
+                 </div>
             </div>
-          ): componenteActual === "B"? (
-            <div className={`col-9 ${style.content}`}>
-             
-              <FavoritosView/>
-            </div>
-          ): componenteActual === "C"? (
-            <div className={`col-9 ${style.content}`}>
-             
-              <ReseñasView/>
-            </div>
-          ) :  componenteActual === "D"? (
-            <div className={`col-9 ${style.content}`}>
-             
-              <ComprasView/>
-            </div>
-          ):<h1>No hay nada</h1>
-        }
+         ) : null}
       </div>
     </div>
   )

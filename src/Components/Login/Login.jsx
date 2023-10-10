@@ -1,46 +1,112 @@
 import React , {useRef, useState} from "react";
 import { useForm } from "react-hook-form";
 import style from "./Login.module.css"
-import { getLogin } from "../../redux/actions/actionPost";
+import { getLogin , handleGoogleLogin, handleGitHubLogin } from "../../redux/actions/actionPost";
 import { Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../../Views/Login&Register/Login&Register.css"
+import "react-bootstrap"
+
+
 
 const Login = React.forwardRef((props,ref ) => {
-
-    
-    const {register , formState : {errors},watch , handleSubmit } = useForm();
-    const [modal ,setModal] = useState({access : false, body : ""});
+  
+  
+  const {register , formState : {errors},watch , handleSubmit } = useForm();
+  const [modal ,setModal] = useState({access : false, body : ""});
     const navigate = useNavigate() 
+    const [passwordType, setPasswordType] = useState(false);
+   
+
+
 
    const onSubmit = handleSubmit((data) =>  {
        getLogin(data, setModal, navigate)
        
    })
 
-    const handleNextPage = () => {
-        if(ref.current) {
-            ref.current.pageFlip().flipNext("bottom")
-        }
+   const handleNextPage = () => {
+     if(ref.current) {
+       ref.current.pageFlip().flipNext("bottom")
+      }
     }
-
-
-
+    
+    
+  
+  
+    const handleHide = (e) => {
+      const icon = e.target.id;
+  
+      if (icon === "hide1") {
+        if (passwordType) {
+          setPasswordType(false);
+        } else {
+          setPasswordType(true);
+        }
+      } else if (icon === "hide2") {
+        if (passwordType2) {
+          setPasswordType2(false);
+        } else {
+          setPasswordType2(true);
+        }
+      }
+    };
+  
+    const iconVisible = (
+      <svg
+        style={{pointerEvents : "none"}}
+        onClick={handleHide}
+        xmlns="http://www.w3.org/2000/svg"
+        id="hide1"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-eye-fill"
+        viewBox="0 0 16 16"
+      >
+        <path  id="hide1" onClick={handleHide} d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+        <path  id="hide1" onClick={handleHide} d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+      </svg>
+    );
+  
+    const iconInvisible = (
+      <svg
+        onClick={handleHide}
+        xmlns="http://www.w3.org/2000/svg"
+        id="hide1"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-eye-slash-fill"
+        viewBox="0 0 16 16"
+      >
+        <path
+         id="hide1"
+          d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"
+          onClick={handleHide}
+        />
+        <path
+         id="hide1"
+          d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"
+          onClick={handleHide}
+        />
+      </svg>
+    );
+  
+        
+        
+        
     return (
-    <div className="demoPage1" ref={ref} style={{
-        background: "url('./utils/paper1.png')",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
+    <div ref={ref} 
         
-        
-      }}>
-        <div className={style.formLogin}>
-            <form onSubmit={onSubmit} className={` d-flex flex-column justify-content-center align-items-center ${style.formLogin}`}>
-                <fieldset>
+      >
+        <div style={{ height : "100%"}} className={style.form}>
+            <form onSubmit={onSubmit}  >
+                <fieldset className={` d-flex flex-column justify-content-center align-items-center text-center ${style.formLogin}`} >
                     <legend className={style.legend}>Logueate</legend>
-                    <div className="input">
-                        <label htmlFor="email">EMAIL : </label>
+                    <div className="d-flex ">
+                      <div className=" d-flex flex-row mb-4">
+                        <label htmlFor="email" className={style.label}>EMAIL : </label>
                         <input  
                         className={style.inputs}
                          placeholder="Escribe tu email aqui"
@@ -56,9 +122,11 @@ const Login = React.forwardRef((props,ref ) => {
                          })}
                         >
                         </input> 
-                        
+                      </div>
+                        <div className="d-flex flex-row">
+
                             {errors.email ? (
-                            <p
+                              <p
                             style={{
                                 color: "red",
                                 fontSize: "15px",
@@ -75,16 +143,30 @@ const Login = React.forwardRef((props,ref ) => {
 
                             </div>
                     
+                              </div>
                       
                    
                     <div>
-                        <label htmlFor="password">PASSWORD : </label>
-                        <input {...register("password" , {
+                        <label htmlFor="password" className={style.label} >PASSWORD : </label>
+                        <input className={style.inputs} {...register("password" , {
                             required : {
                                 value:true,
                                 message : "Escibe tu contraseña"
                             }
-                        })} placeholder="Escribe tu email aqui"></input>
+                        })} placeholder="Tu contraseña aqui..."  
+                        type={passwordType ? "text" : "password"}>
+                        </input>
+                        
+                        <button
+                        class={style.iconPassword}
+                        id="hide1"
+                        type="button"
+                        onClick={(e) => handleHide(e)}
+                        >
+
+                        {passwordType ? iconVisible : iconInvisible}
+
+                        </button>
 
                         {errors.password ? (
                             <p
@@ -102,18 +184,19 @@ const Login = React.forwardRef((props,ref ) => {
                             <p style={{ visibility: "hidden" }}> &nbsp; </p>
                             )}
                     </div>
-                    <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
+                    <Link to="/forgot-password"><span style={{ fontSize: "20px",cursor: "pointer", color: "black" }}>¿Olvidaste tu contraseña? <span className={style.spanLink} >Haz click aqui! </span></span></Link>
                     <div className = "d-flex flex-column justify-content-center align-items-center">
                     <div className = "m-1">
-                        <button type="submit">Enviar</button>
+                        <button type="submit" className={style.butonlogin}>Enviar</button>
                     </div>
                     <hr></hr>
-                    <div className = "m-1 d-flex flex-column justify-content-around align-items-center">
-                        <span className={style.span}>No estas registrado? <span style={{ cursor: "pointer", color: "blueviolet" }} onClick={() => handleNextPage()}>Regístrate aqui</span></span>
-                        <br></br>
-                        <p className={style.span}>o </p>
-                        <br></br>
-                        <button type="button" className={style.buton}>Accede con Google</button>
+                    <div className = " d-flex flex-column justify-content-around align-items-center">
+                        <span className={style.span}>No estas registrado? <span  className={style.spanLink}  onClick={() => handleNextPage()}>Regístrate aqui</span></span>
+                        <p>o </p>
+                        
+                        <button type="button" className={style.butonGoogle} onClick={() => handleGoogleLogin(setModal , navigate)}></button>
+                        <button type="button" className={style.buton} onClick={() => handleGitHubLogin()}>Accede con GitHub</button>
+
                     </div>
                     </div>
                 </fieldset>

@@ -1,65 +1,69 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../../redux/actions/actionGet";
-
-
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllUsers } from '../../redux/actions/actionGet'
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState()
 
-    const [email, setEmail] = useState();
+  const allUsers = useSelector((state) => state.users)
+  console.log('infoUsers', allUsers)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  
+  useEffect(() => {
+    dispatch(getAllUsers())
+  }, [dispatch])
 
-    const allUsers = useSelector((state) => state.users)
-    console.log('infoUsers',allUsers);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
 
-    axios.defaults.withCredentials = true;
-    const handleSubmitBack = () => {
-      navigate('/checkIn');
-    }
-    const handleSubmit = async (e) => {
-    e.preventDefault();
+  axios.defaults.withCredentials = true
+  const handleSubmitBack = () => {
+    navigate('/check')
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       const existEmail = allUsers.find((user) => user.email === email)
       if (existEmail) {
-        const response = await axios.post('http://localhost:3001/forgot-password', { email });
-        if (response.data.Status === "Success") {
-            alert("Email enviado, revisa tu bandeja de entrada!")
-            navigate('/checkIn');
+        const response = await axios.post(
+          'http://localhost:3001/forgot-password',
+          { email }
+        )
+        if (response.data.Status === 'Success') {
+          alert('Email enviado, revisa tu bandeja de entrada!')
+          navigate('/check')
         }
-      }else{
+      } else {
         alert('Email no registrado en la bdd')
         return
       }
     } catch (error) {
-        console.error(error);
+      console.error(error)
     }
+  }
 
-    
-    useEffect(() => {
-      dispatch(getAllUsers())
-    },[])
-};
-
-    return(
-        <div className="d-flex justify-content-center align-items-center bg-secondary vh-100"
-        style={{
-          background:
-            "linear-gradient(45deg, rgba(29,88,148,1) 7%, rgba(186,38,224,1) 100%)",
-          border: "none",
-          width: "100vw",
-          display: "flex",
-          padding: "50px",
-          paddingInline: "10%",
-          paddingBlock: "5%",
-          position: "relative",
-          margin: "auto",
-        }}
-        
-        >
-      <div className="bg-white p-3 rounded w-30" style={{ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 1)' }}>
+  return (
+    <div
+      className="d-flex justify-content-center align-items-center bg-secondary vh-100"
+      style={{
+        background:
+          'linear-gradient(45deg, rgb(146, 119, 158) 7%, rgb(165, 138, 165) 100%) ',
+        border: 'none',
+        width: '100vw',
+        display: 'flex',
+        padding: '50px',
+        paddingInline: '10%',
+        paddingBlock: '5%',
+        position: 'relative',
+        margin: 'auto',
+      }}
+    >
+      <div
+        className="bg-white p-3 rounded w-30"
+        style={{ boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 1)' }}
+      >
         <h4>¿Olvidaste tu contraseña?</h4>
         <form onSubmit={handleSubmit}>
           <div className="mb-3 mt-3">
@@ -75,11 +79,11 @@ const ForgotPassword = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div style={{justifyContent: "center", display:"flex"}}>
+          <div style={{ justifyContent: 'center', display: 'flex' }}>
             <button
               type="submit"
               className="btn btn-success rounded-15"
-              style={{ marginRight: "5px"}}
+              style={{ marginRight: '5px' }}
             >
               Enviar
             </button>
@@ -91,11 +95,10 @@ const ForgotPassword = () => {
               Cancelar
             </button>
           </div>
-          </form>
-        
+        </form>
       </div>
     </div>
-    )
+  )
 }
 
-export default ForgotPassword;
+export default ForgotPassword

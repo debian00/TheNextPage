@@ -12,6 +12,17 @@ import {
   GET_BOOKS_BY_NAME,
   UPDATE_BOOK,
   GET_ALL_AUTHORS,
+  GET_BOOK_BY_AVAILABILITY,
+  GET_BOOK_BY_NAME_AUTHOR,
+  GET_BOOK_BY_OFFER,
+  DELETE_BOOK,
+  STOP_BOOK,
+  RESTORE_BOOK,
+  GET_ALL_BOOKS_OFFER,
+  GET_REVIEW_BY_ID,
+  GET_CART_USER,
+  UPDATE_QUANTITY,
+  DELETE_CART,
 } from './types'
 
 const initialState = {
@@ -19,10 +30,13 @@ const initialState = {
   genres: [],
   detail: [],
   bookById: [],
+  reviews: [],
   authors: [],
   users: [],
   searchs: [],
   booksSearch: [],
+  bookNameAuthor: [],
+  cart: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -45,14 +59,18 @@ const rootReducer = (state = initialState, action) => {
       }
     case GET_ALL_BOOKS_COPY:
       return { ...state, books: action.payload }
-
+    case GET_ALL_BOOKS_OFFER:
+      return { ...state, books: action.payload }
+    case GET_BOOK_BY_AVAILABILITY:
+      return { ...state, books: action.payload }
+    case GET_BOOK_BY_NAME_AUTHOR:
+      return { ...state, bookNameAuthor: action.payload }
     case GET_BOOK_BY_ID:
       return { ...state, bookById: action.payload }
-    // case GET_AUTHOR_NAME:
-    //   return {
-    //     ...state,
-    //     searchs: [...action.payload.map((ele) => ele.name)],
-    //   }
+    case GET_REVIEW_BY_ID:
+      return { ...state, reviews: action.payload }
+    case GET_BOOK_BY_OFFER:
+      return { ...state, books: action.payload }
     case GET_BOOKS_NAME:
       return {
         ...state,
@@ -77,10 +95,85 @@ const rootReducer = (state = initialState, action) => {
     case ADMIN_TO_USER:
       return { ...state, users: action.payload }
 
+    case DELETE_BOOK:
+      const bookDeleted = {
+        count: state.books.count,
+        rows: state.books.rows.filter((book) => book.id !== action.payload),
+      }
+      return {
+        ...state,
+        books: bookDeleted,
+      }
+    case UPDATE_BOOK:
+      const bookUpdate = {
+        count: state.books.count,
+        rows: state.books.rows.map((book) =>
+          book.id === action.payload.id ? action.payload : book
+        ),
+      }
+      return {
+        ...state,
+        books: bookUpdate,
+      }
+    case STOP_BOOK:
+      const stopedBook = state.books.rows.map((book) => {
+        if (book.id === action.payload) {
+          return {
+            ...book,
+            availability: false,
+          }
+        }
+        return book
+      })
+
+      const booksWithAvailabilityChanged = {
+        count: state.books.count,
+        rows: stopedBook,
+      }
+
+      return {
+        ...state,
+        books: booksWithAvailabilityChanged,
+      }
+    case RESTORE_BOOK:
+      const restoreBook = state.books.rows.map((book) => {
+        if (book.id === action.payload) {
+          return {
+            ...book,
+            availability: true,
+          }
+        }
+        return book
+      })
+
+      const bookRestored = {
+        count: state.books.count,
+        rows: restoreBook,
+      }
+
+      return {
+        ...state,
+        books: bookRestored,
+      }
     case GET_BOOKS_BY_NAME:
       return { ...state, booksSearch: action.payload }
-    case UPDATE_BOOK:
-      return { ...state, books: action.payload }
+    case GET_CART_USER:
+      return { ...state, cart: action.payload }
+    case UPDATE_QUANTITY:
+      const { id, quantity, price } = action.payload
+      const updatedCart = state.cart.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            quantity: quantity,
+            price: price,
+          }
+        }
+        return item
+      })
+      return { ...state, cart: updatedCart }
+    case DELETE_CART:
+      return { ...state, cart: action.payload }
     default:
       return state
   }

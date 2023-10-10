@@ -3,7 +3,7 @@
 .nav {
   display: flex;
   flex-direction: row;
-  background-color: #6f5475;
+  background-color: #9750d8;
   padding: 20px;
   width: 100%;
   justify-content: space-between;
@@ -36,7 +36,7 @@
   padding: 5px 10px;
   text-align: center;
 
-  background-color: #6f5475;
+  background-color: #892be2;
   color: #fff;
   border-radius: 15px;
 }
@@ -45,8 +45,9 @@
   padding-top: 5px;
 }
 
-.nav.active {
+.downNav.fixed {
   background-color: #aaeec4;
+  top: 0;
   position: fixed;
 }
 
@@ -71,7 +72,6 @@
   font-size: 3em;
   font-family: 'Avenir', sans-serif;
   font-weight: 50;
-  background-color: #6f5475;
 }
 
 .socialMedia {
@@ -107,7 +107,7 @@
 
 .downNav {
   z-index: 5;
-  padding: 10px;
+  padding: 20px;
   padding-inline: 20px;
   align-items: center;
 }
@@ -123,7 +123,7 @@
 }
 
 .downNav ul li a,
-svg {
+.downNav svg {
   text-decoration: none;
   color: #cccfce;
   font-family: 'Avenir', sans-serif;
@@ -148,36 +148,45 @@ svg {
 }
 
 .dropdown {
-  background-color: #6f5475;
+  background-color: #ececec;
   display: flex;
   flex-direction: column;
-  justify-content: left;
+  justify-content: center;
   position: absolute;
   height: 0;
   z-index: 3;
   overflow: hidden;
-
   width: 200px;
-  left: 26px;
+  right: 60px;
   transition: height 0.5s ease;
   border-radius: 0 0 5px 5px;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 .dropdown.open {
-  height: 200px;
+  height: 90px;
+}
+.dropdown.openAdmin {
+  height: 130px;
 }
 
-.dropdown li {
+.dropdown li,
+.dropdown a {
   list-style: none;
-  color: #aaeec4;
+  color: #101010;
   text-align: center;
   font-family: 'Avenir', sans-serif;
   padding: 8px;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.dropdown ul li:hover {
-  background-color: #aaeec4;
-  color: #555f5d;
+.dropdown ul li:hover,
+.dropdown ul li:hover a {
+  background-color: #6f5475;
+  color: #f0f0f0 !important;
+}
+
+ul {
+  padding-left: 0 !important;
 }
