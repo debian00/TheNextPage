@@ -9,12 +9,22 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import {getAllBooksOffer } from '../../redux/actions/actionGet'
 import Card from '../../Components/CardIndividual/Card'
+import axios from 'axios'
+import { showSuccessNotification } from '../../utils/Toast'
 
 const PromocionesView = () => {
   const allBooks = useSelector((state) => state.books)
   console.log('Libros', allBooks);
   const filtrado = allBooks?.rows?.filter((ele) => ele.forSale === true);
+  const handleCart = async (e, id) => {
+    e.preventDefault();
+    const idUser = JSON.parse(localStorage.getItem('user'))
+    const userId = idUser.id
+    await axios.post(`/cart/add/${userId}`, { bookId: id })
+    showSuccessNotification('¡Se añadio al carrito con exito!')
 
+    console.log('Se guardo en el carrito')
+  }
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getAllBooksOffer(true))
@@ -49,10 +59,11 @@ const PromocionesView = () => {
                 forSale={ele.forSale}
               ></Card>
                <div className={style.buttonsEdit}>
-                {/* Quitar oferta */}
+                
                 <button
                   type="button"
                   className={style.cardBtn}
+                  onClick={(e)=> handleCart(e, ele.id)}
                 >
                   <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                   <path d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z"></path>
@@ -62,26 +73,6 @@ const PromocionesView = () => {
                 </svg>
                 </button> 
 
-                {/* Dar oferta */}
-                {/* <button
-                  type="button"
-                  // onClick={(e) => handlePromocion(e, ele.id)}
-                  className="btn btn-success"
-                  style={{ marginLeft: '0.5rem' }}
-                  disabled={ele.forSale}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    fill="currentColor"
-                    className="bi bi-tags"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"></path>
-                    <path d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"></path>
-                  </svg>
-                </button> */}
               </div> 
             </div>
           ))}
