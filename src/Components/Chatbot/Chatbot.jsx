@@ -94,7 +94,7 @@ function Chatbot() {
   return (
     <ThemeProvider theme={theme}>
       <ChatBot
-        headerTitle="Travel Bot"
+        headerTitle="Library Assistant"
         steps={steps}
         {...config}
         
