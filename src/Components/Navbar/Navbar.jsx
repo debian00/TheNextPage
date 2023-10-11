@@ -94,7 +94,9 @@ const Navbar = () => {
             position: 'relative',
           }}
         >
+          <Link to="/">
           <Logo color={fixed ? 'CCCFCE' : '#CCCFCE'} width={'35'} />
+          </Link>
           <div className={style.verticalBar}></div>
           <h3 className={style.logoName}>The Next Page Library</h3>
         </div>
@@ -148,7 +150,7 @@ const Navbar = () => {
               <Link to={'/'}>INICIO</Link>
             </li>
             <li>
-              <Link to="/catalogue">CATALOGO</Link>
+              <Link to="/catalogue">CATÁLOGO</Link>
             </li>
             <li>
               <Link to="/aboutus">NOSOTROS</Link>
