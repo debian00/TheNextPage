@@ -1,6 +1,6 @@
 // import React from 'react';
 import style from './perfiluserview.module.css'
-import perfil from '../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
+// import perfil from '../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
 import EditarPerfilView from './EditarPerfilView/EditarPerfilView'
 import { useEffect, useState } from 'react'
 import FavoritosView from './FavoritosView/FavoritosView'
@@ -10,6 +10,8 @@ import ReseñasView from './ReseñasView/ReseñasView'
 const PerfilUserdView = () => {
   //Manejo de componentes
   const [componenteActual, setComponenteActual] = useState('A')
+  const token = localStorage.getItem('token')
+  const user = JSON.parse(localStorage.getItem('user'))
 
   //Manejo de color del perfil usuario
   const [color, setColor] = useState('#59415b')
@@ -31,10 +33,18 @@ const PerfilUserdView = () => {
         {/* Perfil usuario Lista de opciones*/}
         <div className={`${style.profilePanel} col-2`}>
           <div className={`${style.menu}`}>
-            <div className={style.profile}>
-              <img src={perfil} alt="Foto de perfil" />
-            </div>
-            <h4>Nombre Usuario</h4>
+          {token ? (
+              <div>
+              <div className={style.profile}>
+                <img src={user.profilePic} alt="Foto de perfil" />
+              </div>
+              <div>
+
+                <h4>{user.userName}</h4>
+              </div>
+
+              </div>
+            ) : null}
             <ul className={style.menuList}>
               <li>
                 <a

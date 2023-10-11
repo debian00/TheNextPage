@@ -9,10 +9,16 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import perfil from '../../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
+// import perfil from '../../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
 import style from './editarperfilview.module.css'
 
+
 const EditarPerfilView = () => {
+
+  const token = localStorage.getItem('token')
+  const user = JSON.parse(localStorage.getItem('user'))
+
+
   return (
     <div>
         <Row>
@@ -22,16 +28,17 @@ const EditarPerfilView = () => {
                 <h5 className="title">Editar Perfil</h5>
               </CardHeader>
               <CardBody >
+                {token ? (
                 <Form >
                   <Row className={style.containerImagen}>
                     <Col
                       md="12"
                       className="d-flex justify-content-center align-items-center "
                     >
-                      <h1 className={style.firma}>King</h1>
+                      <h1 className={style.firma}>{user.userName}</h1>
                       <FormGroup>
                         <img
-                          src={perfil}
+                          src={user.profilePic}
                           alt=""
                           style={{
                             borderRadius: "50%",
@@ -55,7 +62,7 @@ const EditarPerfilView = () => {
                           name="userName"
                           placeholder="Nombre Usuario"
                           type="text"
-                          
+                          value={user.userName}
                           disabled
                         />
                       </FormGroup>
@@ -70,6 +77,7 @@ const EditarPerfilView = () => {
                           name="fullName"
                           placeholder="Nombre Completo"
                           type="text"
+                          value={user.name}
                           
                         />
                       </FormGroup>
@@ -81,7 +89,7 @@ const EditarPerfilView = () => {
                           name="nationality"
                           placeholder="Correo"
                           type="text"
-                          
+                          value={user.email}
                         />
                       </FormGroup>
                     </Col>
@@ -95,7 +103,7 @@ const EditarPerfilView = () => {
                           name="phoneNumber"
                           placeholder="Número Teléfono"
                           type="text"
-                          
+                          value={user.phoneNumber}
                         />
                       </FormGroup>
                     </Col>
@@ -106,7 +114,7 @@ const EditarPerfilView = () => {
                           name="birthDate"
                           placeholder="Fecha Cumpleaños"
                           type="text"
-                          
+                          value={user.birthDate}
                         />
                       </FormGroup>
                     </Col>
@@ -122,6 +130,8 @@ const EditarPerfilView = () => {
                     </Col>
                   </Row>
                 </Form>
+
+                ): null}
               </CardBody>
             </Card>
           </Col>
