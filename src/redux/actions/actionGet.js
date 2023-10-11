@@ -7,6 +7,7 @@ import {
   GET_BOOK_BY_ID,
   GET_ALL_USERS,
   SEARCH_USER_BY_NAME,
+  SEARCH_AUTHOR_BY_NAME,
   GET_ALL_BOOKS_COPY,
   GET_BOOKS_BY_NAME,
   GET_ALL_AUTHORS,
@@ -182,11 +183,11 @@ export const getAllUsers = () => {
 export const getBooksSearch = (search) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios('/books/search?title=' + search)
+      const { data } = await axios('/books?title=' + search)
       console.log(data.title)
       dispatch({
         type: GET_BOOKS_NAME,
-        payload: data,
+        payload: data.rows,
       })
     } catch (error) {
       console.log(error)
@@ -216,6 +217,22 @@ export const searchUserByName = (name, email) => {
       const { data } = await axios(`/users/search?name=${name}&email=${email}`)
       return dispatch({
         type: SEARCH_USER_BY_NAME,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const searchAuthorByName = (name) => {
+  if (!name) name = ''
+
+  return async function (dispatch) {
+    try {
+      const { data } = await axios(`/author/search?name=${name}`)
+      return dispatch({
+        type: SEARCH_AUTHOR_BY_NAME,
         payload: data,
       })
     } catch (error) {

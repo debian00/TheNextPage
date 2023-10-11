@@ -1,10 +1,5 @@
 
-.inputs {
-  border: none;
-  border-bottom: 1px solid blue;
-  background-color: transparent;
-  border-radius: 5px;
-}
+
 .inputfile {
   width: 0.1px;
   height: 0.1px;
@@ -63,16 +58,14 @@
 }
 
 .hr {
-  border-bottom: 2px;
+  
   width: 100%;
- margin : 30px;
- margin-top : 10px !important; 
   color: rgba(118, 50, 145, 0.973);
 }
 
 
 .inputs {
-  margin-left : 10px;
+ 
   border : none;
   border-bottom:3px solid  rgb(123, 26, 153) ;
   background-color: transparent;
@@ -131,15 +124,15 @@ border :  3px solid rgb(123, 26, 153) !important
   -webkit-box-shadow: 0px 10px 7px -3px rgba(0,0,0,0.41);
   -moz-box-shadow: 0px 10px 7px -3px rgba(0,0,0,0.41);
   box-shadow: 0px 10px 7px -3px rgba(0,0,0,0.41);
-  margin-bottom: 20px;
+  
   padding : 30px
 }
 
 
 .inputs {
-  margin-left : 10px;
+  
   border : none;
-  border-bottom:3px solid  rgb(123, 26, 153) ;
+  border-bottom: 3px solid  rgb(123, 26, 153) ;
   background-color: transparent;
   border-radius: 5px;
  height: 40px;
@@ -147,7 +140,6 @@ border :  3px solid rgb(123, 26, 153) !important
 }
 
 .inputs:hover {
-
 border :  3px solid rgb(123, 26, 153) !important
 }
 
@@ -190,7 +182,7 @@ border :  3px solid rgb(123, 26, 153) !important
 .butonlogin { 
 
  
-  margin: 10px;
+ 
   background-color: rgb(140, 82, 158);
   color: #ffffff;
   border: none;
@@ -214,6 +206,7 @@ border :  3px solid rgb(123, 26, 153) !important
   cursor: pointer;
   color: rgb(140, 82, 158);
   font-size: 22px;
+  margin-left: 5px;
 
 }
 .spanLink:hover {
@@ -261,3 +254,28 @@ border-radius: 15px;
   margin-bottom : 50px
 }
  
+.iconPassword {
+  padding :5px;
+  margin-left : 2px;
+  background-color: transparent;
+  border : none
+}
+
+.icon{
+  
+  background-color: transparent;
+}
+.iconPassword2 {
+  padding :5px;
+  margin-left : 2px;
+  background-color: transparent;
+  border : none
+}
+
+.iconPassword:hover, 
+  .iconPassword2:hover {
+   
+    padding :5px;
+  border : 0.4px solid rgb(140, 82, 158);
+  border-radius: 3px;
+}

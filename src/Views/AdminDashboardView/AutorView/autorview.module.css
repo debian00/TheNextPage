@@ -1,3 +1,23 @@
+.miNavbar {
+  margin-top: 10px;
+  justify-content: center;
+}
+.myInput {
+  background-position: 10px 12px; /* Position the search icon */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #6f5475; /* Add a grey border */
+  border-radius: 15px;
+  margin-bottom: 15px; /* Add some space below the input */
+  background-color: #a58aa5;
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+.myInput::placeholder {
+  color: white; /* Cambia el color del placeholder a blanco */
+}
 .buttonContainer{
     display: flex;
     justify-content: center;
@@ -40,10 +60,30 @@
     font-size: 1em;
     font-weight: 250;
     font-family: 'Montserrat', sans-serif;
+    
   }
   
   .buttonAgr:hover {
     background: #6f5475;
+    color: white;
+    font-size: 1.2em;
+  }
+  .buttonVerList{
+    width: 150px;
+    height: 40px;
+    border: 3px solid #545575;
+    border-radius: 45px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: #464e74;
+    color: white;
+    font-size: 1em;
+    font-weight: 250;
+    font-family: 'Montserrat', sans-serif;
+
+  }
+  .buttonVerList:hover {
+    background: #264891;
     color: white;
     font-size: 1.2em;
   }
