@@ -44,8 +44,7 @@ const PerfilUserdView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    borderRadius: '15px',
+                    alignItems: 'center',                   
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -76,8 +75,7 @@ const PerfilUserdView = () => {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    borderRadius: '15px',
-                    height: '70px',
+                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'B' ? color : 'white',
@@ -105,8 +103,7 @@ const PerfilUserdView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    borderRadius: '15px',
+                    alignItems: 'center',                   
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -146,8 +143,7 @@ const PerfilUserdView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    borderRadius: '15px',
+                    alignItems: 'center',                    
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -176,8 +172,7 @@ const PerfilUserdView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    borderRadius: '15px',
+                    alignItems: 'center',                
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
