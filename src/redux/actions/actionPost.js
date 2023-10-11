@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
-//mport  {auth}  from "./firebase.js";
-//import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import  {auth}  from "./firebase.js";
+import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { UNSAFE_DataRouterContext } from 'react-router';
 
 export const createBook = (form) => {

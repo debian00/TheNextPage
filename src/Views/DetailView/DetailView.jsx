@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getBookById } from '../../redux/actions/actionGet'
 import styles from './detail.module.css' // Importa los estilos CSS
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getGenres } from '../../redux/actions/actionGet'
 import axios from 'axios'
 import { MercadoPago, Stripe } from '../../utils/Icons'
@@ -12,7 +12,7 @@ function DetailView() {
   const { id } = useParams()
   const bookData = useSelector((state) => state.bookById)
   const genres = useSelector((state) => state.genres)
-  console.log('trae los géneros', genres)
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -30,13 +30,19 @@ function DetailView() {
   }
 
   const handleCart = async () => {
-    const idUser = JSON.parse(localStorage.getItem('user'))
-    const userId = idUser.id
-    await axios.post(`/cart/add/${userId}`, { bookId: id })
-    showSuccessNotification('¡Se añadio al carrito con exito!')
-
-    console.log('Se guardo en el carrito')
-  }
+    const isLoggedIn = !!localStorage.getItem('token');
+    if (!isLoggedIn) {
+      alert('Debes iniciar sesión para agregar productos al carrito.');
+      navigate('/check')
+      return;
+    }
+    const idUser = JSON.parse(localStorage.getItem('user'));
+    const userId = idUser.id;
+    await axios.post(`/cart/add/${userId}`, { bookId: id });
+    showSuccessNotification('¡Se añadió al carrito con éxito!');
+    console.log('Se guardó en el carrito');
+  };
+  
 
   return (
     <div>

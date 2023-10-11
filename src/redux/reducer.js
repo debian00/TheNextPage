@@ -5,6 +5,7 @@ import {
   GET_ALL_USERS,
   GET_BOOK_BY_ID,
   SEARCH_USER_BY_NAME,
+  SEARCH_AUTHOR_BY_NAME,
   USER_TO_ADMIN,
   GET_ALL_GENRES,
   GET_BOOKS_NAME,
@@ -174,6 +175,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, cart: updatedCart }
     case DELETE_CART:
       return { ...state, cart: action.payload }
+    case SEARCH_AUTHOR_BY_NAME:
+      return { ...state, authors: action.payload }
     default:
       return state
   }
