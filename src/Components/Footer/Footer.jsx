@@ -1,5 +1,5 @@
 import styles from "../Footer/footer.module.css"
-
+import {NavLink} from "react-router-dom"
 function Footer() {
   return (
   <div>
@@ -9,16 +9,20 @@ function Footer() {
       <div className={styles['footer-col']}>
         <h4>The Next Page</h4>
         <ul>
+        <NavLink className={styles.NavLink} to="/aboutus">
           <li><a href="#">Sobre Nosotros</a></li>
-          <li><a href="#">Nuestros servicios</a></li>
+          </NavLink>       
+          <NavLink className={styles.NavLink} to="/privacy-policy">
           <li><a href="#">Politica de privacidad</a></li>
+          </NavLink>
+          <NavLink className={styles.NavLink} to="/faq">
           <li><a href="#">Preguntas frequentes</a></li>
+          </NavLink>
         </ul>
       </div>
       <div className={styles['footer-col']}>
         <h4>Ayuda</h4>
-        <ul>
-          <li><a href="#">Envíos</a></li>
+        <ul>          
           <li><a href="#">Devoluciones</a></li>
           <li><a href="#">Estatus de mi orden</a></li>
           <li><a href="#">Opciones de pago</a></li>
