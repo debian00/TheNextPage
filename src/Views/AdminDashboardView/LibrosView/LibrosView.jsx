@@ -14,10 +14,13 @@ import Card from '../../../Components/CardIndividual/Card'
 import { CheckWithLine, Delete, Pencil, Stop } from '../../../utils/Icons'
 import { updateBook } from '../../../redux/actions/actionPut'
 import { showSuccessNotification } from '../../../utils/Toast'
+import Swal from 'sweetalert2'
 
 const Librosview = () => {
   //Hook para traer todos los libros
   const allBooks = useSelector((state) => state.books)
+
+  
 
   console.log(allBooks)
   //Estado para manejar el modal
@@ -53,6 +56,8 @@ const Librosview = () => {
   const handleUpdate = async (e) => {
     e.preventDefault()
     dispatch(updateBook(form, form.id))
+    showSuccessNotification('Libro editado con exito!')
+    
   }
 
   const handleChange = (e) => {
@@ -68,38 +73,59 @@ const Librosview = () => {
 
   //* Funcion para eliminar el libro
   const handleDeleteBook = (e, id) => {
-    e.preventDefault()
-    const confirmed = window.confirm(
-      '¿Estás seguro que quieres eliminar este libro?'
-    )
-    if (confirmed) {
-      dispatch(deleteBookById(id))
-      showSuccessNotification('¡Operación exitosa!')
-    }
+    Swal.fire({
+      title: '¿Estás seguro que quieres eliminar este libro?',
+      text: 'Esta acción es irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteBookById(id))
+        showSuccessNotification('¡Operación exitosa!')
+      }
+    });
+
   }
   //* Funcion para suspender el libro
   const handlePauseBook = (e, id) => {
     e.preventDefault()
-    console.log('otro id para editar', id)
-    const confirmed = window.confirm(
-      '¿Estás seguro que quieres suspender este libro?'
-    )
-    if (confirmed) {
-      showSuccessNotification('¡Operación exitosa!')
-      dispatch(getBookPause(id))
-    }
+    Swal.fire({
+      title: '¿Estás seguro que quieres suspender este libro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, suspender',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(getBookPause(id))
+        showSuccessNotification('¡Operación exitosa!');
+      }
+    });
   }
   //* Funcion para restaurar el libro
   const handleRestoreBook = (e, id) => {
     e.preventDefault()
-    console.log('otro id para restaurar', id)
-    const confirmed = window.confirm(
-      '¿Estás seguro que quieres restaurar este libro?'
-    )
-    if (confirmed) {
-      showSuccessNotification('¡Operación exitosa!')
-      dispatch(getBookRestore(id))
-    }
+    Swal.fire({
+      title: '¿Estás seguro que quieres restaurar este libro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, restaurar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Realiza la acción de restaurar el libro aquí
+        showSuccessNotification('¡Operación exitosa!');
+        dispatch(getBookRestore(id))
+      }
+    });
   }
 
   //? ----------------------- NO TOCAR ---
@@ -573,10 +599,11 @@ const Librosview = () => {
                             <button
                               type="submit"
                               className="btn btn-primary"
-                              aria-label="Close"
+                              data-bs-dismiss="modal"
                             >
                               Editar Libro
                             </button>
+    
                           </div>
                         </div>
                       </div>

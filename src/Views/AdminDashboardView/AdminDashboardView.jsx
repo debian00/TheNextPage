@@ -1,6 +1,6 @@
 // import React from 'react'
 import style from './admindashboard.module.css'
-import perfil from '../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
+// import perfil from '../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
 
 import { useEffect, useState } from 'react'
 import UsersView from './UsersView/UsersView'
@@ -13,6 +13,9 @@ import EstadisticasView from './EstadisticasView/EstadisticasView'
 const AdminDashboardView = () => {
   //Manejo de componentes
   const [componenteActual, setComponenteActual] = useState('A')
+  const token = localStorage.getItem('token')
+  const user = JSON.parse(localStorage.getItem('user'))
+  console.log('inforusres', user)
 
   //Manejo de color del perfil usuario
   const [color, setColor] = useState('#59415b')
@@ -35,10 +38,16 @@ const AdminDashboardView = () => {
         {/* Perfil admin Lista de opciones*/}
         <div className={`${style.profilePanel} col-2`}>
           <div className={`${style.menu}`}>
-            <div className={style.profile}>
-              <img src={perfil} alt="Foto de perfil" />
-            </div>
-            <h4>Nombre Admin</h4>
+            {token ? (
+              <div>
+                <div className={style.profile}>
+                  <img src={user.profilePic} alt="Foto de perfil" />
+                </div>
+                <div>
+                  <h4>{user.userName}</h4>
+                </div>
+              </div>
+            ) : null}
             <ul className={style.menuList}>
               <li>
                 <Link
@@ -200,44 +209,6 @@ const AdminDashboardView = () => {
                     <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
                   </svg>{' '}
                   &nbsp; Ofertas
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  onClick={() => {
-                    handleSelect('G')
-                  }}
-                  href="#"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    borderRadius: '15px',
-                    height: '70px',
-                    width: '100%',
-                    paddingInline: '5px',
-                    backgroundColor: selectedLink === 'G' ? color : 'white',
-                    color: selectedLink === 'G' ? 'white' : 'black',
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="35"
-                    height="35"
-                    fill={selectedLink === 'G' ? 'white' : 'black'}
-                    className="bi bi-box-arrow-right"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
-                    />
-                  </svg>{' '}
-                  &nbsp; Salir
                 </Link>
               </li>
             </ul>

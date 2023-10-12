@@ -12,6 +12,9 @@ import {
 import { deleteUserById } from '../../../redux/actions/actionDelete'
 import style from './usersview.module.css'
 import { postPromotion } from '../../../redux/actions/actionPost'
+import { showSuccessNotification, showErrorNotification } from '../../../utils/Toast'
+
+import Swal from 'sweetalert2'
 
 const UsersView = () => {
   //Estado para traer todos los usuarios
@@ -24,33 +27,61 @@ const UsersView = () => {
   //Funcion para suspender usuario
   const handlePauseUser = (e, id) => {
     e.preventDefault()
-    const confirmed = window.confirm(
-      '¿Estás seguro que quieres suspender este usuario?'
-    )
-    if (confirmed) {
-      setRefresh(getAllUsers())
-      dispatch(stopUserById(id))
-    }
+    Swal.fire({
+      title: '¿Estás seguro que quieres suspender este usuario?',
+      text: 'Esta acción no se puede deshacer.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, suspender',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setRefresh(getAllUsers())
+        dispatch(stopUserById(id))
+        showSuccessNotification('Usuario suspendido con exito!')
+      }
+    })
   }
   //Funcion para reactivaar usuario
   const handlerRestoreUser = (e, id) => {
     e.preventDefault()
-    const confirmed = window.confirm('¿Deseas reactivar este usuario?')
-    if (confirmed) {
-      setRefresh(getAllUsers())
-      dispatch(restoreUserById(id))
-    }
+    Swal.fire({
+      title: '¿Deseas reactivar este usuario?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, reactivar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setRefresh(getAllUsers())
+        dispatch(restoreUserById(id))
+        showSuccessNotification('Usuario activado con exito!')
+      }
+    })
   }
   //Funcion para eliminar usuario
   const handleDelete = (e, id) => {
     e.preventDefault()
-    const confirmed = window.confirm(
-      '¿Estás seguro que quieres eliminar este usuario?'
-    )
-    if (confirmed) {
-      setRefresh(getAllUsers())
-      dispatch(deleteUserById(id))
-    }
+    Swal.fire({
+      title: '¿Estás seguro que quieres eliminar este usuario?',
+      text: 'Esta acción es irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setRefresh(getAllUsers())
+        dispatch(deleteUserById(id))
+        showSuccessNotification('Usuario eliminado con exito!')
+      }
+    })
   }
 
   //Funcion para buscar por nombre y email
@@ -61,33 +92,74 @@ const UsersView = () => {
 
   //Funcion para dar permisos de admin al usuario
   const handlerUserToAdmin = (e, id) => {
-    const confirmed = window.confirm(
-      '¿Estas seguro que quieres cambiar el rol a admin?'
-    )
-    if (confirmed) {
-      setRefresh(getAllUsers())
-      dispatch(userToAdmin(id))
-    }
+    e.preventDefault();
+    Swal.fire({
+      title: '¿Estás seguro que quieres cambiar el rol a admin?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, cambiar rol a admin',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          // Realiza la acción para cambiar el rol a admin aquí
+          setRefresh(getAllUsers());
+          dispatch(userToAdmin(id));
+          showSuccessNotification('Rol cambiado con éxito a admin.');
+        } catch (error) {
+          showErrorNotification('Error al cambiar el rol a admin. Inténtalo de nuevo.');
+        }
+      }
+    });
   }
 
   //Funcion para pasar de usuario a admin
   const handlerAdminToUser = (e, id) => {
-    const confirmed = window.confirm(
-      '¿Estas seguro que quieres cambiar el rol a usuario?'
-    )
-    if (confirmed) {
-      setRefresh(getAllUsers())
-      dispatch(adminToUser(id))
-    }
+    e.preventDefault();
+    Swal.fire({
+      title: '¿Estás seguro que quieres cambiar el rol a usuario?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, cambiar rol a usuario',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          // Realiza la acción para cambiar el rol a usuario aquí
+          setRefresh(getAllUsers());
+          dispatch(adminToUser(id));
+          showSuccessNotification('Rol cambiado con éxito a usuario.');
+        } catch (error) {
+          showErrorNotification('Error al cambiar el rol a usuario. Inténtalo de nuevo.');
+        }
+      }
+    });
   }
   //Funcion para enviar las promociones
   const handleSendMessage = (email) => {
-    const confirmed = window.confirm(
-      '¿Deseas enviar esta promocion al usuario?'
-    )
-    if (confirmed) {
-    dispatch(postPromotion(email))
-    }
+    Swal.fire({
+      title: '¿Deseas enviar esta promoción al usuario?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, enviar promoción',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          // Realiza la acción para enviar la promoción aquí
+          dispatch(postPromotion(email));
+          showSuccessNotification('Promoción enviada con éxito.');
+        } catch (error) {
+          showErrorNotification('Error al enviar la promoción. Inténtalo de nuevo.');
+        }
+      }
+    });
   }
 
   //Ciclo de vida del componente con el useEffect
@@ -244,7 +316,11 @@ const UsersView = () => {
                 <td
                   style={{ backgroundColor: ele.hide ? '#edd55e' : '#9bdb92' }}
                 >
-                  <button type="button" className="btn btn-info" onClick={() => handleSendMessage(ele.email)}>
+                  <button
+                    type="button"
+                    className="btn btn-info"
+                    onClick={() => handleSendMessage(ele.email)}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -255,7 +331,6 @@ const UsersView = () => {
                     >
                       <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zm6 4v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7h6zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9H2.5z"></path>
                     </svg>
-                    
                   </button>
                 </td>
                 {/* Acciones */}
