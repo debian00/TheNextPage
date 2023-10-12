@@ -191,7 +191,7 @@ const Navbar = () => {
               <Cart width={40}></Cart>
             </Link>
           ) : (
-            <Link to={`/check`}>
+            <Link to={`/shoppingCart`}>
               <Cart width={40}></Cart>
             </Link>
           )}

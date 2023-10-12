@@ -6,6 +6,7 @@ import {
   signInWithPopup,
 } from 'firebase/auth'
 import { UNSAFE_DataRouterContext } from 'react-router'
+import { showSuccessNotification } from '../../utils/Toast.jsx'
 
 export const createBook = (form) => {
   const { images } = form
@@ -179,5 +180,24 @@ export const createReviews = (form) => {
     } catch (error) {
       console.log(error.response.data.error)
     }
+  }
+}
+
+export const cartAnonymous = (id, allBooks) => {
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart')) || []
+  const bookLocal = allBooks.find((ele) => ele.id == id)
+  const existingBook = cartFromLocalStorage.find(
+    (book) => book.id === bookLocal.id
+  )
+  const bookObj = {
+    isLocal: true,
+    quantity: 1,
+    price: bookLocal.sellPrice,
+    book: bookLocal,
+  }
+
+  if (!existingBook) {
+    cartFromLocalStorage.push(bookObj)
+    localStorage.setItem('cart', JSON.stringify(cartFromLocalStorage))
   }
 }

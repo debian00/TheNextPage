@@ -7,19 +7,50 @@ import { useDispatch } from 'react-redux'
 import { updateQuantity } from '../../redux/actions/actionPatch'
 import { deleteCart } from '../../redux/actions/actionDelete'
 
-const CardShop = ({ title, image, quantity, price, id, author, userId }) => {
+const CardShop = ({
+  isLocal,
+  title,
+  image,
+  quantity,
+  price,
+  id,
+  author,
+  userId,
+  setAllCart,
+}) => {
   const [newQuantity, setNewQuantity] = useState(quantity)
   const dispatch = useDispatch()
 
   const plusQuantity = () => {
-    setNewQuantity(quantity + 1)
-    dispatch(updateQuantity(userId, id, quantity + 1)) // Disparar acción de Redux para actualizar el carrito
+    if (isLocal == true) {
+      const localBook = JSON.parse(localStorage.getItem('cart'))
+      const findBook = localBook.findIndex((ele) => ele.book.id == id)
+
+      localBook[findBook].quantity += 1
+      localBook[findBook].price = localBook[findBook].quantity * price
+      localStorage.setItem('cart', JSON.stringify(localBook))
+      setAllCart(localBook)
+    } else {
+      setNewQuantity(quantity + 1)
+      dispatch(updateQuantity(userId, id, quantity + 1)) // Disparar acción de Redux para actualizar el carrito
+    }
   }
 
   const minusQuantity = () => {
-    if (quantity > 1) {
-      setNewQuantity(quantity - 1)
-      dispatch(updateQuantity(userId, id, quantity - 1)) // Disparar acción de Redux para actualizar el carrito
+    if (quantity >= 1) {
+      if (isLocal == true) {
+        const localBook = JSON.parse(localStorage.getItem('cart'))
+        const findBook = localBook.findIndex((ele) => ele.book.id == id)
+
+        localBook[findBook].quantity -= 1
+        localBook[findBook].price = localBook[findBook].quantity * price
+
+        localStorage.setItem('cart', JSON.stringify(localBook))
+        setAllCart(localBook)
+      } else {
+        setNewQuantity(quantity - 1)
+        dispatch(updateQuantity(userId, id, quantity - 1)) // Disparar acción de Redux para actualizar el carrito
+      }
     }
   }
 

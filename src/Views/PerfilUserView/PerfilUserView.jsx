@@ -10,7 +10,9 @@ import ReseñasView from './ReseñasView/ReseñasView'
 const PerfilUserdView = () => {
   //Manejo de componentes
   const [componenteActual, setComponenteActual] = useState('A')
-
+  const { id, profilePic, userName, mail } = JSON.parse(
+    localStorage.getItem('user')
+  )
   //Manejo de color del perfil usuario
   const [color, setColor] = useState('#59415b')
   const [selectedLink, setSelectedLink] = useState(null)
@@ -32,9 +34,9 @@ const PerfilUserdView = () => {
         <div className={`${style.profilePanel} col-2`}>
           <div className={`${style.menu}`}>
             <div className={style.profile}>
-              <img src={perfil} alt="Foto de perfil" />
+              <img src={profilePic} alt="Foto de perfil" />
             </div>
-            <h4>Nombre Usuario</h4>
+            <h4>{userName}</h4>
             <ul className={style.menuList}>
               <li>
                 <a
@@ -44,7 +46,7 @@ const PerfilUserdView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',                   
+                    alignItems: 'center',
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -75,7 +77,7 @@ const PerfilUserdView = () => {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                     height: '70px',
+                    height: '70px',
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'B' ? color : 'white',
@@ -103,7 +105,7 @@ const PerfilUserdView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',                   
+                    alignItems: 'center',
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -127,7 +129,7 @@ const PerfilUserdView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
-                    fill={selectedLink === 'C' ? 'white' : "#d82424"}
+                    fill={selectedLink === 'C' ? 'white' : '#d82424'}
                     className="bi bi-bell-fill"
                     viewBox="0 0 16 16"
                   >
@@ -143,7 +145,7 @@ const PerfilUserdView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',                    
+                    alignItems: 'center',
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -172,7 +174,7 @@ const PerfilUserdView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',                
+                    alignItems: 'center',
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -220,16 +222,23 @@ const PerfilUserdView = () => {
           <div className={`col-9 ${style.content}`}>
             <ComprasView />
           </div>
-        ) : 
-          componenteActual === "E" ? (
+        ) : componenteActual === 'E' ? (
+          <div>
+            <h5>Estas seguro que quieres salir?</h5>
             <div>
-               <h5>Estas seguro que quieres salir?</h5>
-               <div>
-                 <button type='button' onClick={() => {localStorage.removeItem("token"), localStorage.removeItem("user")}}>Si</button>
-                 <button type='button'>No </button>
-                 </div>
+              <button
+                type="button"
+                onClick={() => {
+                  localStorage.removeItem('token'),
+                    localStorage.removeItem('user')
+                }}
+              >
+                Si
+              </button>
+              <button type="button">No </button>
             </div>
-         ) : null}
+          </div>
+        ) : null}
       </div>
     </div>
   )
