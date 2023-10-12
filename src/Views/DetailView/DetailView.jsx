@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { getGenres } from '../../redux/actions/actionGet'
 import axios from 'axios'
 import { MercadoPago, Stripe } from '../../utils/Icons'
-import { showSuccessNotification } from '../../utils/Toast'
+import { showSuccessNotification,showErrorNotification } from '../../utils/Toast'
 
 function DetailView() {
   const { id } = useParams()
@@ -32,7 +32,7 @@ function DetailView() {
   const handleCart = async () => {
     const isLoggedIn = !!localStorage.getItem('token');
     if (!isLoggedIn) {
-      alert('Debes iniciar sesión para agregar productos al carrito.');
+      showErrorNotification('Debes iniciar sesión para agregar productos al carrito.');
       navigate('/check')
       return;
     }
