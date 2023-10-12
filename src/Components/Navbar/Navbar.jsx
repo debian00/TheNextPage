@@ -38,7 +38,7 @@ const Navbar = () => {
       setCart(JSON.parse(localStorage.getItem('cart')))
     }
     dispatch(getGenres())
-  }, [localStorage])
+  }, [localStorage.getItem('cart')])
 
   useEffect(() => {
     if (user) {
@@ -64,6 +64,8 @@ const Navbar = () => {
   }
 
   const logOut = () => {
+    const localdata = JSON.parse(localStorage.getItem('cart'))
+    setCart(localdata)
     localStorage.removeItem('user')
     localStorage.removeItem('token')
     setDropdown(false)

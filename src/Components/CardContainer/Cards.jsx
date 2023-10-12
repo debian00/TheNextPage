@@ -8,9 +8,11 @@ import {
 import Card from '../CardIndividual/Card'
 import style from './Cards.module.css'
 import axios from 'axios'
-import { cartAnonymous } from '../../redux/actions/actionPost'
+import { cartAnonymous, postCart } from '../../redux/actions/actionPost'
+import { useDispatch } from 'react-redux'
 const Cards = ({ allBooks }) => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleCart = async (id) => {
     const isLoggedIn = localStorage.getItem('token')
@@ -20,7 +22,7 @@ const Cards = ({ allBooks }) => {
     } else {
       const idUser = JSON.parse(localStorage.getItem('user'))
       const userId = idUser.id
-      await axios.post(`/cart/add/${userId}`, { bookId: id })
+      dispatch(postCart(userId, id))
       showSuccessNotification('¡Se añadió al carrito con éxito!')
     }
     console.log('Se guardó en el carrito')

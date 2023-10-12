@@ -31,7 +31,7 @@ export const deleteCart = (id, bookId) => async (dispatch) => {
     const { data } = await axios.delete(`/cart/delete/${id}/${bookId}`)
     dispatch({
       type: DELETE_CART,
-      payload: data,
+      payload: bookId,
     })
   } catch (error) {
     console.log(error)
