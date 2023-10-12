@@ -5,6 +5,9 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getBookByOffer } from '../../../redux/actions/actionPatch'
 import Card from '../../../Components/CardIndividual/Card'
+import Swal from 'sweetalert2';
+import { showSuccessNotification, showErrorNotification } from '../../../utils/Toast'
+
 
 const PromocionLibroView = () => {
   //Hook para traer todos los libros
@@ -22,23 +25,53 @@ const PromocionLibroView = () => {
 
   //Funcion para dar la promocion
   const handlePromocion = async (e, id) => {
-    console.log('LLego el id', id)
-
-    e.preventDefault()
-    const confirmed = window.confirm('¿Deseas poner este libro en oferta?')
-    if (confirmed) {
-      await axios.patch(`/books/forSale/` + id)
-      dispatch(getBookByOffer())
-    }
-  }
+    console.log('Llegó el id', id);
+  
+    e.preventDefault();
+  
+    // Utiliza SweetAlert en lugar de window.confirm
+    Swal.fire({
+      title: '¿Deseas poner este libro en oferta?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // Realiza tu acción si se confirma la promoción
+          await axios.patch(`/books/forSale/` + id);
+          dispatch(getBookByOffer());
+          showSuccessNotification('Oferta enviada con exito!')
+        } catch (error) {
+          // Maneja errores aquí si es necesario
+          showErrorNotification('Error al poner el libro en oferta:', error);
+        }
+      }
+    });
+  };
   //Funcion para quitar la promocion
   const handleDeletePromocion = async(e, id) => {
-    e.preventDefault()
-    const confirmed = window.confirm('¿Estas seguro que quieres quitar la oferta de este libro?')
-    if (confirmed) {
-      await axios.patch(`/books/fullPrice/` + id)
-      dispatch(getBookByOffer())
-    }
+    e.preventDefault();
+    Swal.fire({
+      title: '¿Estás seguro que quieres quitar la oferta de este libro?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // Realiza tu acción si se confirma quitar la oferta
+          await axios.patch(`/books/fullPrice/` + id);
+          dispatch(getBookByOffer());
+          showSuccessNotification('Oferta quitada con exito!')
+        } catch (error) {
+          // Maneja errores aquí si es necesario
+          showErrorNotification('Error al quitar la oferta del libro:', error);
+        }
+      }
+    });
   }
   //Funcion para ordenar
   const handleOrder = (e) => {

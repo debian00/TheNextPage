@@ -1,52 +1,54 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAllBooksCopy, getAuthors } from '../../../redux/actions/actionGet'
-import style from './autorview.module.css'
-import { postAuthor } from '../../../redux/actions/actionPost'
-import axios from 'axios'
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {getAuthors, searchAuthorByName } from '../../../redux/actions/actionGet';
+import style from './autorview.module.css';
+import { postAuthor } from '../../../redux/actions/actionPost';
+import { showSuccessNotification, showErrorNotification } from '../../../utils/Toast'
+import axios from 'axios';
+import Swal from 'sweetalert2'
 
 const AutorView = () => {
   // Traer todos los autores
-  const Authors = useSelector((state) => state.authors)
-  const allAuthors = Authors.slice().sort((a, b) => a.name.localeCompare(b.name));
-  const allBooks = useSelector((state) => state.books)
+  const Authors = useSelector((state) => state.authors);
+  const allAuthors = Authors.slice().sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 
-  console.log('Libros', allBooks)
-  console.log('Autores', allAuthors)
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
 
   // Estado local para rastrear si cada autor está en modo de edición o no
-  const [isEditing, setIsEditing] = useState({})
+  const [isEditing, setIsEditing] = useState({});
+  const [authorBooks, setAuthorBooks] = useState({});
 
   // Estado local para rastrear el contenido editado del campo de entrada de texto
-  const [editedName, setEditedName] = useState({})
+  const [editedName, setEditedName] = useState({});
   const [authorName, setAuthorName] = useState('');
+  const [showAuthorBooks, setShowAuthorBooks] = useState({});
+
   // Manejar el cambio en el contenido editado del campo de entrada de texto
   const handleNameChange = (event, authorId) => {
-    const newName = event.target.value
-    setEditedName((prevNames) => ({ ...prevNames, [authorId]: newName }))
-  }
+    const newName = event.target.value;
+    setEditedName((prevNames) => ({ ...prevNames, [authorId]: newName }));
+  };
   const handleSaveAuthor = async (authorId) => {
     // Obtener el nuevo nombre editado del autor
-    const newAuthorName = editedName[authorId]
+    const newAuthorName = editedName[authorId];
 
     try {
-      await axios.put(`/author/update/${authorId}`, {name:newAuthorName})
-      // await dispatch(updateAuthor({ id: authorId, name: newAuthorName }))
+      await axios.put(`/author/update/${authorId}`, { name: newAuthorName });
+      showSuccessNotification('Libro editado con exito!')
     } catch (error) {
-      console.error('Error al actualizar el autor:', error)
+      showErrorNotification('Error al actualizar el autor:', error);
     }
 
     // Deshabilitar el modo de edición para el autor
-    setIsEditing((prevEditing) => ({ ...prevEditing, [authorId]: false }))
-  }
-  //Funcion para crear autor
- 
+    setIsEditing((prevEditing) => ({ ...prevEditing, [authorId]: false }));
+  };
+  //Función para crear autor
+
   const handlerCreateAutor = () => {
     // Verifica si el nombre del autor no está vacío antes de crearlo
     if (authorName.trim() !== '') {
-      console.log('Nombre escrio',authorName);
       dispatch(postAuthor(authorName));
       // Cierra el modal
       document.getElementById('exampleModal2').click();
@@ -54,57 +56,113 @@ const AutorView = () => {
       setAuthorName('');
     }
   };
-  //Funcion para eliminar
-  const handleDelete = async(e, id) => {
+  //Función para eliminar
+  const handleDelete = async (e, id) => {
     e.preventDefault();
-    const confirmed = window.confirm(
-      '¿Estás seguro que quieres eliminar este libro?'
-    )
-    if (confirmed) {
-    await axios.delete('/author/delete/' + id)
-    dispatch(getAuthors())
+    Swal.fire({
+      title: '¿Estás seguro que quieres eliminar este libro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // Realiza la eliminación del libro aquí
+          await axios.delete('/author/delete/' + id);
+          // Por ejemplo, puedes actualizar la lista de autores después de la eliminación
+          dispatch(getAuthors());
+          showSuccessNotification('¡Libro eliminado exitosamente!');
+        } catch (error) {
+          showErrorNotification('Error al eliminar el libro. Inténtalo de nuevo.');
+        }
+      }
+    });
+  };
+  // Función para traer los libros del autor
+  const handleAuthor = async (author) => {
+    try {
+      const { data } = await axios.get(`/books?page=1&size=10&author=${author}`);
+      const bookNames = data?.rows?.map((book) => book.title);
+      setAuthorBooks((prevAuthorBooks) => ({
+        ...prevAuthorBooks,
+        [author]: bookNames,
+      }));
+    } catch (error) {
+      showErrorNotification('Error al obtener los libros del autor:', error);
     }
+  };
+  //Funcion para buscar por nombre de autor
+  const handlerInputChange = async (event) => {
+    const newName = event.target.value
+    dispatch(searchAuthorByName(newName))
   }
+
+  // Función para alternar la visibilidad de la lista de libros
+  const toggleAuthorBooks = (author) => {
+    setShowAuthorBooks((prevShowAuthorBooks) => ({
+      ...prevShowAuthorBooks,
+      [author]: !prevShowAuthorBooks[author],
+    }));
+  };
+
   // Paginado
-  const itemsPerPage = 10
-  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Calcular el índice del primer y último autor en la página actual
-  const indexOfLastAuthor = currentPage * itemsPerPage
-  const indexOfFirstAuthor = indexOfLastAuthor - itemsPerPage
+  const indexOfLastAuthor = currentPage * itemsPerPage;
+  const indexOfFirstAuthor = indexOfLastAuthor - itemsPerPage;
 
   // Obtener los autores para la página actual
   const currentAuthors = allAuthors?.slice(
     indexOfFirstAuthor,
     indexOfLastAuthor
-  )
+  );
 
   // Calcular el número total de páginas
-  const totalAuthors = allAuthors.length
-  const totalPages = Math.ceil(totalAuthors / itemsPerPage)
+  const totalAuthors = allAuthors.length;
+  const totalPages = Math.ceil(totalAuthors / itemsPerPage);
 
   // Ciclo de vida del componente
   useEffect(() => {
-    dispatch(getAuthors())
-    dispatch(getAllBooksCopy())
-  }, [dispatch])
+    dispatch(getAuthors());
+  }, [dispatch]);
 
   // Manejar el cambio de página
   const handlePageChange = (newPage) => {
-    setCurrentPage(newPage)
-  }
+    setCurrentPage(newPage);
+  };
 
   return (
     <div>
-      <div className="d-flex justify-content-end m-2">
-        <button
-          className={style.buttonAgr}
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal2"
-          data-bs-whatever="@mdo"
-        >
-          Agregar 🧑🏽‍🔬
-        </button>
+      <div className={style.miNavbar}>
+        <div className="row">
+          <div className='col-6'>
+          <input
+              type="text"
+              id="myInput"
+              className={style.myInput}
+              name="search"
+              onChange={(e) => handlerInputChange(e)}
+              placeholder="🔍   Buscar por nombre.."
+            />
+
+          </div>
+          <div className='col-6 d-flex justify-content-end'>
+            <button
+              className={style.buttonAgr}
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal2"
+              data-bs-whatever="@mdo"
+            >
+              Agregar 🧑🏽‍🔬
+            </button>
+
+          </div>
+        </div>
       </div>
       <table className="table table-bordered" style={{ borderRadius: '10px' }}>
         <thead style={{ borderRadius: '10px' }}>
@@ -149,12 +207,28 @@ const AutorView = () => {
                 </td>
                 {/* Libros relacionados */}
                 <td>
-                  <select>
-                    <option value="">Libros publicados</option>
-                  </select>
+                  <button
+                    className={style.buttonVerList}
+                    onClick={() =>{ toggleAuthorBooks(ele.name), handleAuthor(ele.name)}}
+                  >
+                    Ver Libros 📚
+                  </button>
+                  {showAuthorBooks[ele.name] && (
+                    authorBooks[ele.name] ? (
+                      authorBooks[ele.name].length > 0 ? (
+                        <ul>
+                          {authorBooks[ele.name].map((bookName, index) => (
+                            <li key={index}>📘{bookName}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p>No hay libros del autor</p>
+                      )
+                    ) : null
+                  )}
                 </td>
-                {/*Editar Autor */}
-                <td>
+                 {/*Editar Autor */}
+                 <td>
                   <button
                     className={style.buttonEdi}
                     onClick={() =>
@@ -168,10 +242,15 @@ const AutorView = () => {
                     Editar 🧑🏽‍🔬
                   </button>
                 </td>
-                
+
                 {/*Eliminar Autor */}
                 <td>
-                  <button className={style.buttonEli} onClick={(e) => handleDelete(e,ele.id)}>Eliminar 🧑🏽‍🔬</button>
+                  <button
+                    className={style.buttonEli}
+                    onClick={(e) => handleDelete(e, ele.id)}
+                  >
+                    Eliminar 🧑🏽‍🔬
+                  </button>
                 </td>
               </tr>
             ))
@@ -257,7 +336,7 @@ const AutorView = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AutorView
+export default AutorView;

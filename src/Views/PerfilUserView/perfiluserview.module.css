@@ -41,14 +41,21 @@
 
 .menuList {
   list-style: none;
-  padding: 20px;
+  padding: 10px;
+  margin-left: 10px;
   background-color: #e8e8e8;
+
 }
 
 .menuList li {
   padding: 5px;
 }
 
+.menuList a {
+  text-decoration: none;
+  color: #000000;
+  transition: background-color 0.3s; /* Agregar transición para suavizar el efecto */
+}
 .menuList a {
   text-decoration: none;
   color: #000000;
