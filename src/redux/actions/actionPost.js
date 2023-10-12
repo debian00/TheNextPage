@@ -187,8 +187,9 @@ export const cartAnonymous = (id, allBooks) => {
   const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart')) || []
   const bookLocal = allBooks.find((ele) => ele.id == id)
   const existingBook = cartFromLocalStorage.find(
-    (book) => book.id === bookLocal.id
+    (book) => book.book.id === bookLocal.id
   )
+  console.log(existingBook)
   const bookObj = {
     isLocal: true,
     quantity: 1,
@@ -198,6 +199,9 @@ export const cartAnonymous = (id, allBooks) => {
 
   if (!existingBook) {
     cartFromLocalStorage.push(bookObj)
+    localStorage.setItem('cart', JSON.stringify(cartFromLocalStorage))
+  } else {
+    existingBook.quantity++
     localStorage.setItem('cart', JSON.stringify(cartFromLocalStorage))
   }
 }

@@ -16,7 +16,7 @@ import { useEffect, useRef, useState } from 'react'
 import SearchBar from './SearchBar/SearchBar'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { getGenres } from '../../redux/actions/actionGet'
+import { getCartUser, getGenres } from '../../redux/actions/actionGet'
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -28,10 +28,29 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const token = localStorage.getItem('token')
   const user = JSON.parse(localStorage.getItem('user'))
+  const [cart, setCart] = useState(0)
+  const cartUser = useSelector((state) => state.cart)
 
   useEffect(() => {
+    if (user) {
+      dispatch(getCartUser(user.id))
+    } else if (localStorage.getItem('cart')) {
+      setCart(JSON.parse(localStorage.getItem('cart')))
+    }
     dispatch(getGenres())
-  }, [])
+  }, [localStorage])
+
+  useEffect(() => {
+    if (user) {
+      setCart(cartUser)
+    }
+  }, [cartUser])
+  useEffect(() => {
+    if (localStorage.getItem('cart')) {
+      const localdata = JSON.parse(localStorage.getItem('cart'))
+      setCart(localdata)
+    }
+  }, [localStorage.getItem('cart')])
 
   const handleDrop = () => {
     setDropdown(true)
@@ -186,15 +205,20 @@ const Navbar = () => {
               <Profile width={40}></Profile>
             </>
           )}
-          {user ? (
-            <Link to={`/shoppingCart/${user.id}`}>
-              <Cart width={40}></Cart>
-            </Link>
-          ) : (
-            <Link to={`/shoppingCart`}>
-              <Cart width={40}></Cart>
-            </Link>
-          )}
+          <div className={style.cart}>
+            {user ? (
+              <Link to={`/shoppingCart/${user.id}`}>
+                <Cart width={40}></Cart>
+              </Link>
+            ) : (
+              <Link to={`/shoppingCart`}>
+                <Cart width={40}></Cart>
+              </Link>
+            )}
+            {cart.length > 0 && (
+              <div className={style.cartLength}>{cart.length}</div>
+            )}
+          </div>
         </div>
       </nav>
       {user && token && (

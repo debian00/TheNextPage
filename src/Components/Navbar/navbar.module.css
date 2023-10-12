@@ -190,3 +190,24 @@
 ul {
   padding-left: 0 !important;
 }
+
+.cart,
+.cart svg {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.cartLength {
+  position: absolute;
+  padding: 1px 8px;
+  right: 10px;
+  top: -10px;
+  color: #f0f0f0;
+  border-radius: 50%;
+  background-color: #e22b2b;
+}
+
+.cart:hover svg {
+  transform: rotate(-15deg);
+}
