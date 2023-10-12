@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { getCartUser } from './../../redux/actions/actionGet'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { deleteAllCart } from '../../redux/actions/actionDelete'
 
 const Shopping = () => {
   const { id } = useParams()
@@ -29,13 +30,22 @@ const Shopping = () => {
     } else if (localStorage.getItem('cart')) {
       setAllCart(JSON.parse(localStorage.getItem('cart')))
     }
-  }, [id, localStorage])
+  }, [id, localStorage.getItem('cart')])
 
   useEffect(() => {
     if (id) {
       setAllCart(cartUser)
     }
   }, [cartUser])
+
+  const deleteAllCarts = () => {
+    if (id) {
+      dispatch(deleteAllCart(id))
+    } else {
+      localStorage.setItem('cart', JSON.stringify([]))
+      setAllCart(JSON.parse(localStorage.getItem('cart')))
+    }
+  }
 
   return (
     <div className={style.container}>
@@ -44,7 +54,7 @@ const Shopping = () => {
           <button id={style.shop}>
             <Bag width={20} /> Seguir comprando
           </button>
-          <button id={style.reset}>
+          <button id={style.reset} onClick={() => deleteAllCarts()}>
             {' '}
             <Trash width={20}></Trash> Restablecer carrito
           </button>

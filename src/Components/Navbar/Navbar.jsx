@@ -46,11 +46,11 @@ const Navbar = () => {
     }
   }, [cartUser])
   useEffect(() => {
-    if (localStorage.getItem('cart')) {
+    if (localStorage.getItem('cart') && !user) {
       const localdata = JSON.parse(localStorage.getItem('cart'))
       setCart(localdata)
     }
-  }, [localStorage.getItem('cart')])
+  }, [localStorage.getItem('cart'), cart])
 
   const handleDrop = () => {
     setDropdown(true)

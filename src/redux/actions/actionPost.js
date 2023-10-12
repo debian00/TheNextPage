@@ -208,9 +208,5 @@ export const cartAnonymous = (id, allBooks) => {
 }
 
 export const postCart = (userId, bookId) => async (dispatch) => {
-  const { data } = await axios.post(`/cart/${userId}`, { bookId })
-  dispatch({
-    type: POST_CART,
-    payload: data,
-  })
+  const { data } = await axios.post(`/cart/add/${userId}`, { bookId })
 }
