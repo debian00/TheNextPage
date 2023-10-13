@@ -24,6 +24,8 @@ import {
   GET_CART_USER,
   UPDATE_QUANTITY,
   DELETE_CART,
+  POST_CART,
+  DELETE_ALL_CART,
 } from './types'
 
 const initialState = {
@@ -174,9 +176,19 @@ const rootReducer = (state = initialState, action) => {
       })
       return { ...state, cart: updatedCart }
     case DELETE_CART:
-      return { ...state, cart: action.payload }
+      return {
+        ...state,
+        cart: state.cart.filter((ele) => ele.book.id !== action.payload),
+      }
+    case DELETE_ALL_CART:
+      return {
+        ...state,
+        cart: [],
+      }
     case SEARCH_AUTHOR_BY_NAME:
       return { ...state, authors: action.payload }
+    case POST_CART:
+      return { ...state, cart: state.cart.push(action.payload) }
     default:
       return state
   }

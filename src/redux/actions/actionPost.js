@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth'
 import { UNSAFE_DataRouterContext } from 'react-router'
 import { showSuccessNotification } from '../../utils/Toast.jsx'
+import { POST_CART } from '../types.js'
 
 export const createBook = (form) => {
   const { images } = form
@@ -103,7 +104,7 @@ export const getLogin = async (login, setModal, navigate, provider) => {
         localStorage.setItem('user', JSON.stringify(data.data)),
         setTimeout(() => {
           setModal({ access: false })
-          navigate('/home')
+          window.location.pathname = 'home'
         }, 1500))
       : setModal({ access: true, body: data.msg })
     setTimeout(() => {
@@ -229,4 +230,8 @@ export const cartAnonymous = (id, allBooks) => {
     existingBook.quantity++
     localStorage.setItem('cart', JSON.stringify(cartFromLocalStorage))
   }
+}
+
+export const postCart = (userId, bookId) => async (dispatch) => {
+  const { data } = await axios.post(`/cart/add/${userId}`, { bookId })
 }
