@@ -17,6 +17,9 @@ import SearchBar from './SearchBar/SearchBar'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { getCartUser, getGenres } from '../../redux/actions/actionGet'
+import {  signOut } from 'firebase/auth'
+import { auth } from '../../redux/actions/firebase.js'
+
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -55,6 +58,8 @@ const Navbar = () => {
   const handleDrop = () => {
     setDropdown(true)
   }
+  
+  
   const handleScroll = () => {
     if (window.scrollY > 80) {
       setFixed(true)
@@ -63,7 +68,7 @@ const Navbar = () => {
     }
   }
 
-  const logOut = () => {
+  const logOut = async () => {
     const localdata = JSON.parse(localStorage.getItem('cart'))
     setCart(localdata)
     localStorage.removeItem('user')
@@ -180,6 +185,7 @@ const Navbar = () => {
           </ul>
         </div>
         <SearchBar></SearchBar>
+       
         <div className={style.profile}>
           {token ? (
             <>
