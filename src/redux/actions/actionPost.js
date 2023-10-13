@@ -130,8 +130,8 @@ export const handleGoogleLogin = async (setModal, navigate) => {
   try {
     const provider = new GoogleAuthProvider()
     const result = await signInWithPopup(auth, provider)
-
-    console.log(result)
+/* if(( result.user.providerData[0]?.providerId !== "google.com")) */
+    
     const userInfo = result._tokenResponse
 
     const obj = {
@@ -157,6 +157,7 @@ export const handleGitHubLogin = async  (setModal, navigate) => {
  
 
     const provider = new  GithubAuthProvider();
+  
     if(auth.currentUser === null || auth.currentUser?.providerData.filter(p => p.providerId === "github.com") ) {
 
           const result = await signInWithPopup(auth, provider)

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import FavoritosView from './FavoritosView/FavoritosView'
 import ComprasView from './ComprasView/ComprasView'
 import ReseñasView from './ReseñasView/ReseñasView'
-import { getAuth, signOut } from 'firebase/auth'
+import {  signOut } from 'firebase/auth'
 import { auth } from '../../redux/actions/firebase.js'
 import { useNavigate } from 'react-router-dom'
 
@@ -22,6 +22,7 @@ const PerfilUserdView = () => {
 
   
   const LogOut = async () => {
+     await signOut(auth);
     localStorage.removeItem('token'),
     localStorage.removeItem('user')
     navigate("/home")

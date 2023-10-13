@@ -18,7 +18,8 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { getCartUser, getGenres } from '../../redux/actions/actionGet'
 import { NavLink } from 'react-router-dom'
-
+import { signOut } from 'firebase/auth'
+import { auth } from '../../redux/actions/firebase'
 
 
 const Navbar = () => {
@@ -68,13 +69,19 @@ const Navbar = () => {
     }
   }
 
-  const logOut =  () => {
-    const localdata = JSON.parse(localStorage.getItem('cart'))
-    setCart(localdata)
-    localStorage.removeItem('user')
-    localStorage.removeItem('token')
-    setDropdown(false)
-    navigate('/')
+  const logOut = async (auth) => {
+    try {
+      const localdata = JSON.parse(localStorage.getItem('cart'))
+      await signOut(auth)
+      setCart(localdata)
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      setDropdown(false)
+      navigate('/')
+      
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleClickOutside = (event) => {
@@ -252,7 +259,7 @@ const Navbar = () => {
               </li>
             )}
 
-            <li onClick={logOut} style={{ color: '#d65555' }}>
+            <li onClick={() => logOut(auth)} style={{ color: '#d65555' }}>
               Salir
             </li>
           </ul>
