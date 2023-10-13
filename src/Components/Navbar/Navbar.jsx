@@ -18,8 +18,7 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { getCartUser, getGenres } from '../../redux/actions/actionGet'
 import { NavLink } from 'react-router-dom'
-import {  signOut } from 'firebase/auth'
-import { auth } from '../../redux/actions/firebase.js'
+
 
 
 const Navbar = () => {
@@ -69,7 +68,7 @@ const Navbar = () => {
     }
   }
 
-  const logOut = async () => {
+  const logOut =  () => {
     const localdata = JSON.parse(localStorage.getItem('cart'))
     setCart(localdata)
     localStorage.removeItem('user')
@@ -226,9 +225,9 @@ const Navbar = () => {
                 <Cart width={40}></Cart>
               </Link>
             )}
-            {cart.length > 0 && (
+            {cart?.length > 0 ? (
               <div className={style.cartLength}>{cart.length}</div>
-            )}
+            ) : null }
           </div>
         </div>
       </nav>
