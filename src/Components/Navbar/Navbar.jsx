@@ -17,6 +17,7 @@ import SearchBar from './SearchBar/SearchBar'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { getCartUser, getGenres } from '../../redux/actions/actionGet'
+import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -115,7 +116,9 @@ const Navbar = () => {
             position: 'relative',
           }}
         >
+          <NavLink to="/home">
           <Logo color={fixed ? 'CCCFCE' : '#CCCFCE'} width={'35'} />
+          </NavLink>
           <div className={style.verticalBar}></div>
           <h3 className={style.logoName}>The Next Page Library</h3>
         </div>
