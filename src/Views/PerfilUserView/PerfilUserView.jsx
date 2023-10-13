@@ -6,17 +6,27 @@ import { useEffect, useState } from 'react'
 import FavoritosView from './FavoritosView/FavoritosView'
 import ComprasView from './ComprasView/ComprasView'
 import ReseñasView from './ReseñasView/ReseñasView'
-
+import { getAuth, signOut } from 'firebase/auth'
+import { auth } from '../../redux/actions/firebase.js'
+import { useNavigate } from 'react-router-dom'
 const PerfilUserdView = () => {
   //Manejo de componentes
   const [componenteActual, setComponenteActual] = useState('A')
   const token = localStorage.getItem('token')
   const user = JSON.parse(localStorage.getItem('user'))
-
+  const navigate = useNavigate()
   //Manejo de color del perfil usuario
   const [color, setColor] = useState('#59415b')
   const [selectedLink, setSelectedLink] = useState(null)
 
+  
+  const LogOut = async () => {
+     await signOut(auth);
+     
+    localStorage.removeItem('token'),
+    localStorage.removeItem('user')
+    navigate("/home")
+  }
   //Manejar la opcion seleccionada mediante color
   const handleSelect = (linkName) => {
     setComponenteActual(linkName)
@@ -24,6 +34,7 @@ const PerfilUserdView = () => {
     setSelectedLink(linkName)
   }
   useEffect(() => {
+    console.log(auth);
     setSelectedLink('A')
     setColor('#59415b')
   }, [])
@@ -234,10 +245,9 @@ const PerfilUserdView = () => {
             <div>
               <button
                 type="button"
-                onClick={() => {
-                  localStorage.removeItem('token'),
-                    localStorage.removeItem('user')
-                }}
+                onClick={
+                    LogOut
+                }
               >
                 Si
               </button>

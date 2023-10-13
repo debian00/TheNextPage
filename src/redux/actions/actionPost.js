@@ -4,6 +4,8 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
+  linkWithPopup,
+
 } from 'firebase/auth'
 import { UNSAFE_DataRouterContext } from 'react-router'
 import { showSuccessNotification } from '../../utils/Toast.jsx'
@@ -82,12 +84,21 @@ export const CreateUser = async (register, setModal, navigate) => {
   }
 }
 
-export const getLogin = async (login, setModal, navigate) => {
+export const getLogin = async (login, setModal, navigate, provider) => {
   try {
+
     const { data } = await axios.post('/login', login)
-    console.log('si login ')
+    console.log(provider)
     data.success
-      ? (setModal({ access: true, body: data.data }),
+      ? ( provider ?
+         (setModal({ access: true, body: provider }),
+        localStorage.setItem('token', data.token),
+        localStorage.setItem('user', JSON.stringify(provider)),
+        setTimeout(() => {
+          setModal({ access: false })
+          navigate('/home')
+        }, 1500)) 
+        : setModal({ access: true, body: data.data }),
         localStorage.setItem('token', data.token),
         localStorage.setItem('user', JSON.stringify(data.data)),
         setTimeout(() => {
@@ -124,7 +135,7 @@ export const handleGoogleLogin = async (setModal, navigate) => {
     }
 
     try {
-      await getLogin(obj, setModal, navigate)
+      await getLogin(obj, setModal, navigate, obj)
     } catch (error) {
       await CreateUser(obj, setModal, navigate)
     }
@@ -133,45 +144,59 @@ export const handleGoogleLogin = async (setModal, navigate) => {
   }
 }
 
-export const handleGitHubLogin = async (setModal, navigate) => {
+export const handleGitHubLogin = async  (setModal, navigate) => {
   try {
-    const provider = new GithubAuthProvider()
-    const result = await signInWithPopup(auth, provider)
+    console.log(auth);
+   
+    const provider = new  GithubAuthProvider();
+    if(auth.currentUser?.providerData.filter(p => p.providerId === "github.com")) {
+      const obj = {
+        userName: auth.currentUser.providerData[1].displayName,
+        profilePic: auth.currentUser.providerData[1].photoURL,
+        email: auth.currentUser.providerData[1].email,
+        fullName: auth.currentUser.providerData[1].fullName,
+        password: 'AAdsadsad1321321',
+      }
+      await getLogin(obj, setModal, navigate, obj);
+     
 
-    const userInfo = result._tokenResponse
+    } else {
+      try {
+        const resul = await signInWithPopup(auth, provider)
+        const userInfo = resul._tokenResponse
+
     const obj = {
-      screenName: userInfo.displayName,
+      userName: userInfo.displayName,
       profilePic: userInfo.photoUrl,
       email: userInfo.email,
       fullName: userInfo.fullName,
       password: 'AAdsadsad1321321',
     }
-    console.log(obj)
-    /*   try {
-            await getLogin(obj , setModal , navigate);
-        } catch (error) {
-            await CreateUser(obj , setModal,navigate)
-        } */
-    /*    try {
-            await getLogin(obj , setModal , navigate);
+        await getLogin(obj, setModal, navigate, obj)
+        console.log(resul);
+        
+      
 
-        } catch (error) {
 
-            await CreateUser(obj , setModal,navigate) ;
-        } */
+      } catch (error) {
+        
+        const result = await linkWithPopup(auth.currentUser, provider);
+          // Accounts successfully linked.
+          const userInfo = result._tokenResponse
+    
+      
+          const user = result.user;
+          // ...
+          console.log(user);
+      }
+
+    }
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    
 
-    /*  if(error.code === "auth/account-exists-with-different-credential") {
-            setModal({access : true, body : "Ya iniciaste sesion con la misma cuenta, en otro dominio (Google)"})
-
-            setTimeout(() => {
-                setModal({access : false})
-            }, 1500)
-        }       */
   }
-}
-
+};
 export const createReviews = (form) => {
   return async () => {
     try {

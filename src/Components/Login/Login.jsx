@@ -4,7 +4,7 @@ import style from './Login.module.css'
 import {
   getLogin,
   handleGoogleLogin,
-  handleGitHubLogin,
+  handleGitHubLogin
 } from '../../redux/actions/actionPost'
 import { Modal } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
@@ -257,7 +257,7 @@ const Login = React.forwardRef((props, ref) => {
                 <button
                   type="button"
                   className={style.buton}
-                  onClick={() => handleGitHubLogin()}
+                  onClick={() => handleGitHubLogin(setModal, navigate)}
                 >
                   Accede con GitHub
                 </button>
