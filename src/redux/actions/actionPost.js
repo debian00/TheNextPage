@@ -88,7 +88,6 @@ export const getLogin = async (login, setModal, navigate, provider) => {
   try {
     const { data } = await axios.post('/login', login)
     var finalUser
-
     data.success
       ? provider
         ? ((finalUser = Object.assign({}, data.data, provider)),
@@ -125,7 +124,7 @@ export const handleGoogleLogin = async (setModal, navigate) => {
     const provider = new GoogleAuthProvider()
     const result = await signInWithPopup(auth, provider)
     /* if(( result.user.providerData[0]?.providerId !== "google.com")) */
-
+    console.log(result)
     const userInfo = result._tokenResponse
 
     const obj = {
@@ -135,11 +134,18 @@ export const handleGoogleLogin = async (setModal, navigate) => {
       fullName: userInfo.fullName,
       password: 'AAdsadsad1321321',
     }
+    console.log(userInfo, obj)
 
     try {
-      await getLogin(obj, setModal, navigate, obj)
+      const { data } = await axios('/users')
+      const userExists = data.some((user) => user.email === obj.email)
+      if (userExists) {
+        await getLogin(obj, setModal, navigate, obj)
+      } else {
+        await CreateUser(obj, setModal, navigate, obj)
+      }
     } catch (error) {
-      await CreateUser(obj, setModal, navigate, obj)
+      console.log(error)
     }
   } catch (error) {
     console.log(error)
@@ -157,7 +163,6 @@ export const handleGitHubLogin = async (setModal, navigate) => {
       )
     ) {
       const result = await signInWithPopup(auth, provider)
-
       const obj = {
         userName: result._tokenResponse.screenName,
         profilePic: result._tokenResponse.photoUrl,
