@@ -336,7 +336,10 @@ export const getUrlPayment = (cart, id) => async (dispatch) => {
               }
             })
             await axios.post('/sale/create', { itemsMapped })
-            console.log('i', itemsMapped)
+            const { data } = await axios.post(`/invoice/generate/${id}`, {
+              items: cart,
+            })
+            console.log('i', data)
             await axios.delete(`/cart/deleteAll/${id}`)
             dispatch({
               type: DELETE_ALL_CART,
@@ -344,7 +347,7 @@ export const getUrlPayment = (cart, id) => async (dispatch) => {
             })
             clearInterval(checkPaymentInterval)
             paymentWindow.close()
-            window.location.pathname = '/success'
+            // window.location.pathname = '/success'
             console.log('Pago completado con éxito')
           }
         } catch (error) {

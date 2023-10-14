@@ -205,9 +205,7 @@ const CardReview = ({
                 </div>
                 <button
                   className={style.post}
-                  onClick={() => {
-                    submitReview
-                  }}
+                  onClick={submitReview}
                   data-bs-dismiss="modal"
                   data-bs-target={`exampleModal-${id}`}
                 >
