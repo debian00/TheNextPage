@@ -141,7 +141,7 @@ body {
   letter-spacing: 3px;
   color: var(--dark-text);
   margin-top: calc(var(--baseline) * 5);
-  margin-bottom: calc(var(--baseline) * 2);
+  margin-bottom: 5px;
 }
 
 .page__content-author {
@@ -154,7 +154,7 @@ body {
   border-bottom: 1px solid var(--dark-text);
   display: inline-block;
   padding: calc(var(--baseline) / 2) calc(var(--baseline) / 5);
-  margin-bottom: calc(var(--baseline) * 6);
+  margin-bottom: 5px;
 }
 
 .page__content-credits {
