@@ -87,23 +87,26 @@ export const CreateUser = async (register, setModal, navigate) => {
 export const getLogin = async (login, setModal, navigate, provider) => {
   try {
     const { data } = await axios.post('/login', login)
-    console.log(provider)
+    var finalUser
+
     data.success
-      ? (provider
-          ? (setModal({ access: true, body: provider }),
-            localStorage.setItem('token', data.token),
-            localStorage.setItem('user', JSON.stringify(provider)),
-            setTimeout(() => {
-              setModal({ access: false })
-              navigate('/home')
-            }, 1500))
-          : setModal({ access: true, body: data.data }),
-        localStorage.setItem('token', data.token),
-        localStorage.setItem('user', JSON.stringify(data.data)),
-        setTimeout(() => {
-          setModal({ access: false })
-          window.location.pathname = 'home'
-        }, 1500))
+      ? provider
+        ? ((finalUser = Object.assign({}, data.data, provider)),
+          setModal({ access: true, body: provider }),
+          localStorage.setItem('token', data.token),
+          localStorage.setItem('user', JSON.stringify(finalUser)),
+          setTimeout(() => {
+            navigate('/home')
+            setModal({ access: false })
+          }, 1500),
+          console.log(finalUser))
+        : (setModal({ access: true, body: data.data }),
+          localStorage.setItem('token', data.token),
+          localStorage.setItem('user', JSON.stringify(data.data)),
+          setTimeout(() => {
+            navigate('/home')
+            setModal({ access: false })
+          }, 1500))
       : setModal({ access: true, body: data.msg })
     setTimeout(() => {
       setModal({ access: false })
@@ -121,8 +124,8 @@ export const handleGoogleLogin = async (setModal, navigate) => {
   try {
     const provider = new GoogleAuthProvider()
     const result = await signInWithPopup(auth, provider)
+    /* if(( result.user.providerData[0]?.providerId !== "google.com")) */
 
-    console.log(result)
     const userInfo = result._tokenResponse
 
     const obj = {
@@ -136,7 +139,7 @@ export const handleGoogleLogin = async (setModal, navigate) => {
     try {
       await getLogin(obj, setModal, navigate, obj)
     } catch (error) {
-      await CreateUser(obj, setModal, navigate)
+      await CreateUser(obj, setModal, navigate, obj)
     }
   } catch (error) {
     console.log(error)
@@ -145,45 +148,44 @@ export const handleGoogleLogin = async (setModal, navigate) => {
 
 export const handleGitHubLogin = async (setModal, navigate) => {
   try {
-    console.log(auth)
-
     const provider = new GithubAuthProvider()
+
     if (
+      auth.currentUser === null ||
       auth.currentUser?.providerData.filter(
         (p) => p.providerId === 'github.com'
       )
     ) {
+      const result = await signInWithPopup(auth, provider)
+
       const obj = {
-        userName: auth.currentUser.providerData[1].displayName,
-        profilePic: auth.currentUser.providerData[1].photoURL,
-        email: auth.currentUser.providerData[1].email,
-        fullName: auth.currentUser.providerData[1].fullName,
+        userName: result._tokenResponse.screenName,
+        profilePic: result._tokenResponse.photoUrl,
+        email: result._tokenResponse.email,
+        fullName: result._tokenResponse.fullName,
         password: 'AAdsadsad1321321',
       }
-      await getLogin(obj, setModal, navigate, obj)
-    } else {
+
       try {
-        const resul = await signInWithPopup(auth, provider)
-        const userInfo = resul._tokenResponse
-
-        const obj = {
-          userName: userInfo.displayName,
-          profilePic: userInfo.photoUrl,
-          email: userInfo.email,
-          fullName: userInfo.fullName,
-          password: 'AAdsadsad1321321',
-        }
         await getLogin(obj, setModal, navigate, obj)
-        console.log(resul)
       } catch (error) {
-        const result = await linkWithPopup(auth.currentUser, provider)
-        // Accounts successfully linked.
-        const userInfo = result._tokenResponse
-
-        const user = result.user
-        // ...
-        console.log(user)
+        await CreateUser(obj, setModal, navigate, obj)
       }
+    }
+
+    const result2 = await linkWithPopup(auth.currentUser, provider)
+
+    const obj = {
+      userName: result2._tokenResponse.screenName,
+      profilePic: result2._tokenResponse.photoUrl,
+      email: result2._tokenResponse.email,
+      fullName: result2._tokenResponse.fullName,
+      password: 'AAdsadsad1321321',
+    }
+    try {
+      await getLogin(obj, setModal, navigate, obj)
+    } catch (error) {
+      await CreateUser(obj, setModal, navigate, obj)
     }
   } catch (error) {
     console.log(error)

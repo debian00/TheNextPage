@@ -17,6 +17,10 @@ import SearchBar from './SearchBar/SearchBar'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { getCartUser, getGenres } from '../../redux/actions/actionGet'
+import { NavLink } from 'react-router-dom'
+import { signOut } from 'firebase/auth'
+import { auth } from '../../redux/actions/firebase'
+
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -55,6 +59,8 @@ const Navbar = () => {
   const handleDrop = () => {
     setDropdown(true)
   }
+  
+  
   const handleScroll = () => {
     if (window.scrollY > 80) {
       setFixed(true)
@@ -63,13 +69,19 @@ const Navbar = () => {
     }
   }
 
-  const logOut = () => {
-    const localdata = JSON.parse(localStorage.getItem('cart'))
-    setCart(localdata)
-    localStorage.removeItem('user')
-    localStorage.removeItem('token')
-    setDropdown(false)
-    navigate('/')
+  const logOut = async (auth) => {
+    try {
+      const localdata = JSON.parse(localStorage.getItem('cart'))
+      await signOut(auth)
+      setCart(localdata)
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      setDropdown(false)
+      navigate('/')
+      
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleClickOutside = (event) => {
@@ -115,7 +127,9 @@ const Navbar = () => {
             position: 'relative',
           }}
         >
+          <NavLink to="/home">
           <Logo color={fixed ? 'CCCFCE' : '#CCCFCE'} width={'35'} />
+          </NavLink>
           <div className={style.verticalBar}></div>
           <h3 className={style.logoName}>The Next Page Library</h3>
         </div>
@@ -180,6 +194,7 @@ const Navbar = () => {
           </ul>
         </div>
         <SearchBar></SearchBar>
+       
         <div className={style.profile}>
           {token ? (
             <>
@@ -217,9 +232,9 @@ const Navbar = () => {
                 <Cart width={40}></Cart>
               </Link>
             )}
-            {cart.length > 0 && (
+            {cart?.length > 0 ? (
               <div className={style.cartLength}>{cart.length}</div>
-            )}
+            ) : null }
           </div>
         </div>
       </nav>
@@ -244,7 +259,7 @@ const Navbar = () => {
               </li>
             )}
 
-            <li onClick={logOut} style={{ color: '#d65555' }}>
+            <li onClick={() => logOut(auth)} style={{ color: '#d65555' }}>
               Salir
             </li>
           </ul>

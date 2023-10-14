@@ -6,9 +6,10 @@ import { useEffect, useState } from 'react'
 import FavoritosView from './FavoritosView/FavoritosView'
 import ComprasView from './ComprasView/ComprasView'
 import ReseñasView from './ReseñasView/ReseñasView'
-import { getAuth, signOut } from 'firebase/auth'
+import {  signOut } from 'firebase/auth'
 import { auth } from '../../redux/actions/firebase.js'
 import { useNavigate } from 'react-router-dom'
+
 const PerfilUserdView = () => {
   //Manejo de componentes
   const [componenteActual, setComponenteActual] = useState('A')
@@ -22,7 +23,6 @@ const PerfilUserdView = () => {
   
   const LogOut = async () => {
      await signOut(auth);
-     
     localStorage.removeItem('token'),
     localStorage.removeItem('user')
     navigate("/home")
@@ -220,6 +220,13 @@ const PerfilUserdView = () => {
                 </a>
               </li>
             </ul>
+            <div>
+              {auth.currentUser ? 
+              (<span> Tu cuenta está asociada con :</span>
+                )
+              : null
+              }
+            </div>
           </div>
         </div>
         {/* Contenido del usuario */}
