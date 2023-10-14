@@ -390,3 +390,15 @@ export const getUserById = (id) => async (dispatch) => {
     console.log(error)
   }
 }
+
+export const getReviewByUser = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios(`/review/user/${id}`)
+    return dispatch({
+      type: GET_REVIEW_BY_ID,
+      payload: data,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}

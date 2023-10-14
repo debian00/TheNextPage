@@ -1,97 +1,53 @@
-import { useState } from 'react';
-import style from './reseñasview.module.css';
-import { useDispatch } from 'react-redux';
-import { createReviews } from '../../../redux/actions/actionPost';
+import { useState } from 'react'
+import style from './reseñasview.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { createReviews } from '../../../redux/actions/actionPost'
+import { useEffect } from 'react'
+import { getReviewByUser } from '../../../redux/actions/actionGet'
+import CardReview from '../../../Components/CardReview/CardReview'
+import ReviewCard from '../../../Components/Review/ReviewCard'
+import Card from './../../../Components/CardIndividual/Card'
 
 const ReseñasView = () => {
-  const [review, setReview] = useState({
-    score: 0, // Valor inicial de la calificación
-    comment: '',
-    userId: '78bc0cce-1af4-44bc-a241-b9faf018c686',
-    bookId: '0f382f38-f02b-4a7b-aa3c-aed39e842884',
-  });
-  console.log('Reviews', review);
+  const { id } = JSON.parse(localStorage.getItem('user'))
+  const userReview = useSelector((state) => state.reviews)
   const dispatch = useDispatch()
 
-  const handleCommentChange = (e) => {
-    setReview({ ...review, comment: e.target.value });
-  };
-
-  const handleRatingChange = (e) => {
-    const newScore = parseInt(e.target.value); // Convierte el valor del input en un entero
-    setReview({ ...review, score: newScore });
-  };
-
-  const handlePostReview = () => {
-    dispatch(createReviews(review))
-    alert('Su reseña fue enviada con exito!')
-    // Luego puedes restablecer el formulario si lo deseas
-    setReview({
-      score: 0,
-      comment: '',
-      userId: '',
-      bookId: '',
-    });
-  };
+  useEffect(() => {
+    dispatch(getReviewByUser(id))
+  }, [])
 
   return (
     <div className={style.container}>
-      <div className={style.postCard}>
-        <textarea
-          placeholder="¿Danos tu opinión sobre el libro?"
-          value={review.comment}
-          onChange={handleCommentChange}
-        ></textarea>
-        <hr />
-        <h3>Nombre del Libro</h3>
-        <div className={style.rating}>
-          <input
-            value="5"
-            name="rate"
-            id="star5"
-            type="radio"
-            onChange={handleRatingChange}
-          />
-          <label title="text" htmlFor="star5"></label>
-          <input
-            value="4"
-            name="rate"
-            id="star4"
-            type="radio"
-            onChange={handleRatingChange}
-          />
-          <label title="text" htmlFor="star4"></label>
-          <input
-            value="3"
-            name="rate"
-            id="star3"
-            type="radio"
-            onChange={handleRatingChange}
-          />
-          <label title="text" htmlFor="star3"></label>
-          <input
-            value="2"
-            name="rate"
-            id="star2"
-            type="radio"
-            onChange={handleRatingChange}
-          />
-          <label title="text" htmlFor="star2"></label>
-          <input
-            value="1"
-            name="rate"
-            id="star1"
-            type="radio"
-            onChange={handleRatingChange}
-          />
-          <label title="text" htmlFor="star1"></label>
-        </div>
-        <button className={style.post} onClick={handlePostReview}>
-          Enviar
-        </button>
+      <div
+        style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+        }}
+      >
+        {userReview.map((ele) => {
+          return (
+            <div key={ele.id} className={style.review}>
+              <div className={style.card}>
+                <img src={ele.book.images}></img>
+              </div>
+              <div className={style.reviewCard}>
+                <ReviewCard
+                  comment={ele.comment}
+                  score={ele.score}
+                  price={ele.price}
+                  quantity={ele.quantity}
+                  userId={id}
+                />
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ReseñasView;
+export default ReseñasView

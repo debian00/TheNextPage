@@ -1,3 +1,4 @@
+/* eslint-disable no-duplicate-case */
 /* eslint-disable no-case-declarations */
 import {
   ADMIN_TO_USER,
@@ -204,6 +205,9 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, sale: action.payload }
     case GET_USER_BY_ID:
       return { ...state, user: action.payload }
+
+    case GET_REVIEW_BY_ID:
+      return { ...state, reviews: action.payload }
     default:
       return state
   }
