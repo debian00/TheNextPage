@@ -5,12 +5,16 @@ import { Trash } from './../../utils/Icons'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { getCartUser } from './../../redux/actions/actionGet'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { deleteAllCart } from '../../redux/actions/actionDelete'
 
 const Shopping = () => {
   const { id } = useParams()
-  const allCart = useSelector((state) => state.cart)
+  const cartUser = useSelector((state) => state.cart)
+  const [allCart, setAllCart] = useState([])
+
+  // const allCart = useSelector((state) => state.cart)
   console.log(allCart)
   const priceTotal = () => {
     let price = 0
@@ -21,8 +25,27 @@ const Shopping = () => {
   }
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getCartUser(id))
-  }, [id])
+    if (id) {
+      dispatch(getCartUser(id))
+    } else if (localStorage.getItem('cart')) {
+      setAllCart(JSON.parse(localStorage.getItem('cart')))
+    }
+  }, [id, localStorage.getItem('cart')])
+
+  useEffect(() => {
+    if (id) {
+      setAllCart(cartUser)
+    }
+  }, [cartUser])
+
+  const deleteAllCarts = () => {
+    if (id) {
+      dispatch(deleteAllCart(id))
+    } else {
+      localStorage.setItem('cart', JSON.stringify([]))
+      setAllCart(JSON.parse(localStorage.getItem('cart')))
+    }
+  }
 
   return (
     <div className={style.container}>
@@ -31,12 +54,12 @@ const Shopping = () => {
           <button id={style.shop}>
             <Bag width={20} /> Seguir comprando
           </button>
-          <button id={style.reset}>
+          <button id={style.reset} onClick={() => deleteAllCarts()}>
             {' '}
             <Trash width={20}></Trash> Restablecer carrito
           </button>
         </div>
-        {allCart.map((ele) => {
+        {allCart?.map((ele) => {
           return (
             <div style={style.card} key={ele.id}>
               <CardShop
@@ -47,6 +70,8 @@ const Shopping = () => {
                 image={ele.book.images[0]}
                 id={ele.book.id}
                 quantity={ele.quantity}
+                isLocal={ele.isLocal}
+                setAllCart={setAllCart}
               />
             </div>
           )
@@ -97,12 +122,21 @@ const Shopping = () => {
             <h3>{Math.round(priceTotal() * 1.1)}</h3>
           </div>
         </div>
-        <Link to={`/checkout/${id}`} style={{ width: '100%' }}>
-          <button className={style.pago} style={{ width: '100%' }}>
-            <Check width={20} />
-            Completar el pago
-          </button>
-        </Link>
+        {id ? (
+          <Link to={`/checkout/${id}`} style={{ width: '100%' }}>
+            <button className={style.pago} style={{ width: '100%' }}>
+              <Check width={20} />
+              Completar el pago
+            </button>
+          </Link>
+        ) : (
+          <Link to={`/check`} style={{ width: '100%' }}>
+            <button className={style.pago} style={{ width: '100%' }}>
+              <Check width={20} />
+              Completar el pago
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   )

@@ -15,7 +15,7 @@ const Checkout = () => {
   }, [id])
 
   const handlePayment = () => {
-    getUrlPayment(cart)
+    dispatch(getUrlPayment(cart, id))
   }
 
   const priceTotal = () => {

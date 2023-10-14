@@ -4,8 +4,9 @@ import CardHome from '../../Components/CardHome/CardHome'
 import principal from '../../assets/imghome/THE NEXT PAGE.png'
 import style from './HomeView.module.css'
 import Carrousel from './Carrousel/Carrousel'
-
+import { auth } from '../../redux/actions/firebase.js'
 const HomeView = () => {
+  console.log(auth);
   return (
     <div style={{ background: '#f7f7f7' }}>
       {/* Imagen principal del Home */}

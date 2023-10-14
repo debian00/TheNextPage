@@ -21,10 +21,11 @@ import Checkout from './Views/Checkout/Checkout'
 import PromocionesView from './Views/PromocionesView/PromocionesView'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import ChatBot from "./Components/Chatbot/Chatbot"
+import ChatBot from './Components/Chatbot/Chatbot'
 import NotFound from './Views/NotFound/NotFound'
 import Success from './Views/Success/Success'
 import Cancelled from './Views/Success/Cancelled'
+import NovedadesView  from './Views/NovedadesView/NovedadesView'
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
           element={
             <>
               <HomeView />
-              <ChatBot/>
+              <ChatBot />
               <Footer />
             </>
           }
@@ -65,6 +66,7 @@ function App() {
           element={
             <>
               <PerfilUserdView />
+              <ChatBot />
               <Footer />
             </>
           }
@@ -74,6 +76,7 @@ function App() {
           element={
             <>
               <AdminDashboardView />
+              <ChatBot />
               <Footer />
             </>
           }
@@ -83,6 +86,7 @@ function App() {
           element={
             <>
               <HomeView />
+              <ChatBot />
               <Footer />
             </>
           }
@@ -92,6 +96,7 @@ function App() {
           element={
             <>
               <HomeView />
+              <ChatBot />
               <Footer />
             </>
           }
@@ -101,6 +106,7 @@ function App() {
           element={
             <>
               <DetailView />
+              <ChatBot />
               <Footer />
             </>
           }
@@ -109,7 +115,9 @@ function App() {
           path="/catalogue"
           element={
             <>
+            
               <CatalogueView />
+              <ChatBot />
               <Footer />
             </>
           }
@@ -119,7 +127,8 @@ function App() {
           element={
             <>
               <LoginAndRegister />
-              <Footer />
+              <ChatBot />
+              <Footer />              
             </>
           }
         />
@@ -129,7 +138,8 @@ function App() {
           element={
             <>
               <AboutUs />
-              <Footer />
+              <ChatBot />
+              <Footer />              
             </>
           }
         />
@@ -139,11 +149,22 @@ function App() {
             <>
               <FAQ />
               <Footer />
+              <ChatBot />
             </>
           }
         />
         <Route
           path="/shoppingCart/:id"
+          element={
+            <>
+              {/* <ChatBot/> */}
+              <Shopping></Shopping>
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/shoppingCart"
           element={
             <>
               {/* <ChatBot/> */}
@@ -171,17 +192,27 @@ function App() {
           element={
             <>
               <PromocionesView />
+              <ChatBot />
               <Footer />
             </>
           }
         />
-         <Route
+        <Route
           path="/chatbot"
           element={
-            <>              
-              <ChatBot/>
+            <>
+              <ChatBot />
               <Footer />
-             
+            </>
+          }
+        />
+          <Route
+          path="/novedades"
+          element={
+            <>
+            <NovedadesView/>
+              <ChatBot />
+              <Footer />
             </>
           }
         />

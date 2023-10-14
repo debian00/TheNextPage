@@ -2,10 +2,7 @@
 
 @import url('https://fonts.cdnfonts.com/css/avenir');
 
-body{
-  line-height: 1.5;
-  font-family: 'Avenir', sans-serif;
-}
+
 *{
   margin:0;
   padding:0;
@@ -96,6 +93,40 @@ ul{
   .footer-col{
     width: 100%;
 }
+}
+.NavLink{
+text-decoration: none !important;
+
+}
+.socialMedia {
+  margin: auto 5px;
+  position: relative;
+}
+
+.socialMedia ul {
+  list-style: none;
+}
+
+.socialMedia ul li:not(.line) {
+  padding-block: 35px;
+  padding-inline: 5px;
+}
+.line {
+  margin-inline: 10px;
+  border-right: 0.1px solid #aaeec4;
+  height: 42px;
+  margin: auto 0;
+}
+
+.socialMedia ul li:hover {
+  background: #aaeec4;
+}
+.socialMedia ul li svg {
+  cursor: pointer;
+  color: #cccfce;
+}
+.socialMedia ul li:hover svg {
+  color: #555f5d;
 }
 
 

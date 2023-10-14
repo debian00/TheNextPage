@@ -181,3 +181,6 @@ color: #562c66f6;
   border : 0.4px solid rgb(140, 82, 158);
   border-radius: 3px;
 }
+.inputs:active {
+  border : none !important
+}

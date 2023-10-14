@@ -44,7 +44,6 @@
   padding: 10px;
   margin-left: 10px;
   background-color: #e8e8e8;
-
 }
 
 .menuList li {
@@ -64,5 +63,5 @@
 
 .panel {
   padding: 30px;
-  margin-right: 0;
+  margin-right: 0 !important;
 }

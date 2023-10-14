@@ -1,3 +1,4 @@
+/* eslint-disable no-duplicate-case */
 /* eslint-disable no-case-declarations */
 import {
   ADMIN_TO_USER,
@@ -24,6 +25,10 @@ import {
   GET_CART_USER,
   UPDATE_QUANTITY,
   DELETE_CART,
+  POST_CART,
+  DELETE_ALL_CART,
+  GET_SALE_BY_USER,
+  GET_USER_BY_ID,
 } from './types'
 
 const initialState = {
@@ -34,10 +39,12 @@ const initialState = {
   reviews: [],
   authors: [],
   users: [],
+  user: [],
   searchs: [],
   booksSearch: [],
   bookNameAuthor: [],
   cart: [],
+  sale: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -174,9 +181,33 @@ const rootReducer = (state = initialState, action) => {
       })
       return { ...state, cart: updatedCart }
     case DELETE_CART:
-      return { ...state, cart: action.payload }
+      return {
+        ...state,
+        cart: state.cart.filter((ele) => ele.book.id !== action.payload),
+      }
+    case DELETE_ALL_CART:
+      return {
+        ...state,
+        cart: [],
+      }
     case SEARCH_AUTHOR_BY_NAME:
       return { ...state, authors: action.payload }
+    case POST_CART:
+      return {
+        ...state,
+        cart:
+          action.payload.quantity > 1
+            ? [...state.cart]
+            : [...state.cart, action.payload],
+      }
+
+    case GET_SALE_BY_USER:
+      return { ...state, sale: action.payload }
+    case GET_USER_BY_ID:
+      return { ...state, user: action.payload }
+
+    case GET_REVIEW_BY_ID:
+      return { ...state, reviews: action.payload }
     default:
       return state
   }
