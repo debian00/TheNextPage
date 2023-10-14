@@ -336,10 +336,10 @@ export const getUrlPayment = (cart, id) => async (dispatch) => {
               }
             })
             await axios.post('/sale/create', { itemsMapped })
-            const { data } = await axios.post(`/invoice/generate/${id}`, {
-              items: cart,
-            })
-            console.log('i', data)
+            // const { data } = await axios.post(`/invoice/generate/${id}`, {
+            //   items: cart,
+            // })
+            // console.log('i', data)
             await axios.delete(`/cart/deleteAll/${id}`)
             dispatch({
               type: DELETE_ALL_CART,
