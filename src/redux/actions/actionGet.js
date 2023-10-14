@@ -18,6 +18,9 @@ import {
   GET_ALL_BOOKS_OFFER,
   GET_REVIEW_BY_ID,
   GET_CART_USER,
+  DELETE_ALL_CART,
+  GET_SALE_BY_USER,
+  GET_USER_BY_ID,
 } from '../types'
 
 export const getAllBooks = ({
@@ -297,17 +300,93 @@ export const getCartUser = (id) => async (dispatch) => {
   }
 }
 
-export const getUrlPayment = async (cart) => {
+export const getUrlPayment = (cart, id) => async (dispatch) => {
   const { data } = await axios.post(`/pay/stripe/create-checkout-session`, {
     items: cart,
   })
-  if (data) {
+  if (data && data.url) {
     var width = 500
     var height = 600
     const left = (screen.width - width) / 2
     const top = (screen.height - height) / 2
     const options = `width=${width}, height=${height}, left=${left}, top=${top}, location=no, toolbar=no`
-    window.open(data.url, '_blank', options)
+    const paymentWindow = window.open(data.url, '_blank', options)
+
+    const checkoutChecked = async () => {
+      if (!paymentWindow.closed) {
+        try {
+          const response = await axios(
+            `/pay/stripe/check-session-status?session_id=${data.id}`
+          )
+          if (
+            response.data &&
+            response.data.session &&
+            response.data.session.payment_status === 'paid'
+          ) {
+            const date = new Date()
+            const itemsMapped = cart.map((ele) => {
+              return {
+                userId: id,
+                bookId: ele.book.id,
+                purchaseDate: date.toISOString(),
+                totalPrice: ele.price,
+                quantity: ele.quantity,
+                paymentMethod: 'Tarjeta de débito',
+                cartId: ele.id,
+              }
+            })
+            await axios.post('/sale/create', { itemsMapped })
+            console.log('i', itemsMapped)
+            await axios.delete(`/cart/deleteAll/${id}`)
+            dispatch({
+              type: DELETE_ALL_CART,
+              payload: [],
+            })
+            clearInterval(checkPaymentInterval)
+            paymentWindow.close()
+            window.location.pathname = '/success'
+            console.log('Pago completado con éxito')
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+
+    checkoutChecked()
+
+    const checkPaymentInterval = setInterval(checkoutChecked, 3000)
+
+    window.addEventListener('beforeunload', () => {
+      clearInterval(checkPaymentInterval)
+      if (!paymentWindow.closed) {
+        paymentWindow.close()
+      }
+    })
   }
-  console.log(data)
+}
+
+export const getSaleByUser = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios(`/sale/user/${id}`)
+    console.log(data)
+    return dispatch({
+      type: GET_SALE_BY_USER,
+      payload: data,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getUserById = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios(`/users/${id}`)
+    return dispatch({
+      type: GET_USER_BY_ID,
+      payload: data,
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }

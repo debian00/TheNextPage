@@ -5,11 +5,10 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   linkWithPopup,
-
 } from 'firebase/auth'
 import { UNSAFE_DataRouterContext } from 'react-router'
 import { showSuccessNotification } from '../../utils/Toast.jsx'
-import { POST_CART } from '../types.js'
+import { POST_CART, POST_REVIEW } from '../types.js'
 
 export const createBook = (form) => {
   const { images } = form
@@ -87,36 +86,31 @@ export const CreateUser = async (register, setModal, navigate) => {
 
 export const getLogin = async (login, setModal, navigate, provider) => {
   try {
-
     const { data } = await axios.post('/login', login)
-    var finalUser;
+    var finalUser
 
     data.success
-    ? ( provider ?
-        (finalUser = Object.assign({}, data.data , provider),
-       
-         setModal({ access: true, body: provider }),
-        localStorage.setItem('token', data.token),
-        localStorage.setItem('user', JSON.stringify(finalUser)),
-        setTimeout(() => {
-         navigate("/home")
-          setModal({ access: false })
-          
-        }, 1500), 
-        console.log(finalUser))
+      ? provider
+        ? ((finalUser = Object.assign({}, data.data, provider)),
+          setModal({ access: true, body: provider }),
+          localStorage.setItem('token', data.token),
+          localStorage.setItem('user', JSON.stringify(finalUser)),
+          setTimeout(() => {
+            navigate('/home')
+            setModal({ access: false })
+          }, 1500),
+          console.log(finalUser))
         : (setModal({ access: true, body: data.data }),
-        localStorage.setItem('token', data.token),
-        localStorage.setItem('user', JSON.stringify(data.data)),
-        setTimeout(() => {
-          navigate("/home")
-          setModal({ access: false })
-          
-        }, 1500)))
-
+          localStorage.setItem('token', data.token),
+          localStorage.setItem('user', JSON.stringify(data.data)),
+          setTimeout(() => {
+            navigate('/home')
+            setModal({ access: false })
+          }, 1500))
       : setModal({ access: true, body: data.msg })
     setTimeout(() => {
       setModal({ access: false })
-    }, 1500) 
+    }, 1500)
   } catch (error) {
     setModal({ access: true, body: error.response.data })
     setTimeout(() => {
@@ -130,8 +124,8 @@ export const handleGoogleLogin = async (setModal, navigate) => {
   try {
     const provider = new GoogleAuthProvider()
     const result = await signInWithPopup(auth, provider)
-/* if(( result.user.providerData[0]?.providerId !== "google.com")) */
-    
+    /* if(( result.user.providerData[0]?.providerId !== "google.com")) */
+
     const userInfo = result._tokenResponse
 
     const obj = {
@@ -152,58 +146,51 @@ export const handleGoogleLogin = async (setModal, navigate) => {
   }
 }
 
-export const handleGitHubLogin = async  (setModal, navigate) => {
+export const handleGitHubLogin = async (setModal, navigate) => {
   try {
- 
+    const provider = new GithubAuthProvider()
 
-    const provider = new  GithubAuthProvider();
-  
-    if(auth.currentUser === null || auth.currentUser?.providerData.filter(p => p.providerId === "github.com") ) {
+    if (
+      auth.currentUser === null ||
+      auth.currentUser?.providerData.filter(
+        (p) => p.providerId === 'github.com'
+      )
+    ) {
+      const result = await signInWithPopup(auth, provider)
 
-          const result = await signInWithPopup(auth, provider)
+      const obj = {
+        userName: result._tokenResponse.screenName,
+        profilePic: result._tokenResponse.photoUrl,
+        email: result._tokenResponse.email,
+        fullName: result._tokenResponse.fullName,
+        password: 'AAdsadsad1321321',
+      }
 
-          const obj = {
-            userName: result._tokenResponse.screenName,
-            profilePic: result._tokenResponse.photoUrl,
-            email: result._tokenResponse.email,
-            fullName: result._tokenResponse.fullName,
-            password: 'AAdsadsad1321321',
-          }  
-  
-          try {  
-            await getLogin(obj, setModal, navigate, obj)
-          
-          } catch (error) {
+      try {
+        await getLogin(obj, setModal, navigate, obj)
+      } catch (error) {
+        await CreateUser(obj, setModal, navigate, obj)
+      }
+    }
 
-          await CreateUser(obj, setModal, navigate, obj)
-          }
-        } 
+    const result2 = await linkWithPopup(auth.currentUser, provider)
 
-          const result2 = await linkWithPopup(auth.currentUser, provider);
-
-          const obj = {
-            userName: result2._tokenResponse.screenName,
-            profilePic: result2._tokenResponse.photoUrl,
-            email: result2._tokenResponse.email,
-            fullName: result2._tokenResponse.fullName,
-            password: 'AAdsadsad1321321',
-          }  
-              try {  
-                  await getLogin(obj, setModal, navigate, obj)
-                
-              } catch (error) {
-
-                await CreateUser(obj, setModal, navigate, obj)
-              }
-     
-      
-
-    }   catch (error) {   
-    console.log(error);
-    
-
+    const obj = {
+      userName: result2._tokenResponse.screenName,
+      profilePic: result2._tokenResponse.photoUrl,
+      email: result2._tokenResponse.email,
+      fullName: result2._tokenResponse.fullName,
+      password: 'AAdsadsad1321321',
+    }
+    try {
+      await getLogin(obj, setModal, navigate, obj)
+    } catch (error) {
+      await CreateUser(obj, setModal, navigate, obj)
+    }
+  } catch (error) {
+    console.log(error)
   }
-};
+}
 export const createReviews = (form) => {
   return async () => {
     try {
@@ -240,4 +227,18 @@ export const cartAnonymous = (id, allBooks) => {
 
 export const postCart = (userId, bookId) => async (dispatch) => {
   const { data } = await axios.post(`/cart/add/${userId}`, { bookId })
+  console.log(data)
+  return dispatch({
+    type: POST_CART,
+    payload: data,
+  })
+}
+
+export const postReview = (review) => async (dispatch) => {
+  const { data } = await axios.post('review/create', review)
+  console.log(data)
+  return dispatch({
+    type: POST_REVIEW,
+    payload: data,
+  })
 }

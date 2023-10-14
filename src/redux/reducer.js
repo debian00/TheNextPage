@@ -26,6 +26,8 @@ import {
   DELETE_CART,
   POST_CART,
   DELETE_ALL_CART,
+  GET_SALE_BY_USER,
+  GET_USER_BY_ID,
 } from './types'
 
 const initialState = {
@@ -36,10 +38,12 @@ const initialState = {
   reviews: [],
   authors: [],
   users: [],
+  user: [],
   searchs: [],
   booksSearch: [],
   bookNameAuthor: [],
   cart: [],
+  sale: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -188,7 +192,18 @@ const rootReducer = (state = initialState, action) => {
     case SEARCH_AUTHOR_BY_NAME:
       return { ...state, authors: action.payload }
     case POST_CART:
-      return { ...state, cart: state.cart.push(action.payload) }
+      return {
+        ...state,
+        cart:
+          action.payload.quantity > 1
+            ? [...state.cart]
+            : [...state.cart, action.payload],
+      }
+
+    case GET_SALE_BY_USER:
+      return { ...state, sale: action.payload }
+    case GET_USER_BY_ID:
+      return { ...state, user: action.payload }
     default:
       return state
   }
