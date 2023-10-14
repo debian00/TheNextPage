@@ -337,3 +337,29 @@ input[type='radio']:checked + .book__page {
   width: 75%;
   border: 2px solid rgb(216, 215, 217);
 }
+
+.reseñas {
+  justify-content: left;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  background-color: transparent;
+  border-radius: 5px;
+  width: 100%;
+}
+.reseñas h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.contReseña {
+  margin-top: 20px;
+  /* position: relative; */
+  padding: 10px;
+  width: 100%;
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}

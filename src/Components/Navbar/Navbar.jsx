@@ -28,7 +28,7 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const token = localStorage.getItem('token')
   const user = JSON.parse(localStorage.getItem('user'))
-  const [cart, setCart] = useState(0)
+  const [cart, setCart] = useState([])
   const cartUser = useSelector((state) => state.cart)
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Navbar = () => {
       const localdata = JSON.parse(localStorage.getItem('cart'))
       setCart(localdata)
     }
-  }, [localStorage.getItem('cart'), cart])
+  }, [localStorage.getItem('cart')])
 
   const handleDrop = () => {
     setDropdown(true)

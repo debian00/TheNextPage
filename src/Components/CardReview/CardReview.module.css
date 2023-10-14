@@ -1,0 +1,146 @@
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.trash svg {
+  color: rgb(244, 66, 66);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.trash svg:hover {
+  color: rgb(176, 30, 30);
+  transform: rotate(-20deg);
+}
+
+.inputNum {
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.quantity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.quantity button {
+  background: rgb(226, 226, 226);
+  border: 1px solid rgba(187, 187, 187, 0.752);
+  padding-block: 5px;
+  padding-inline: 15px;
+  border-radius: 10px;
+}
+.quantity p {
+  margin: auto 0;
+}
+
+.customFade {
+  display: flex;
+  margin: 0 auto;
+  width: 30%;
+}
+
+.postCard {
+  width: 260px !important;
+  height: 340px;
+  background: #e4e4e4;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.2),
+    0 4px 6px -4px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  width: calc(30% - 2rem);
+  margin-bottom: 1rem;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.postCard textarea {
+  resize: none;
+  width: 100%;
+  height: 40%;
+  padding: 5px;
+  font-family: Sans-serif;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  color: #000000;
+}
+
+/* .postCard h3 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+} */
+
+hr {
+  border: 1px solid #6f5475;
+  width: 100%;
+  border-radius: 10em;
+}
+.buttonRow {
+  margin-top: 7px;
+  margin-bottom: 3px;
+}
+.buttonRow button {
+  border-radius: 10px;
+  border: none;
+  width: 77px;
+  height: 58px;
+  font-family: Sans-serif;
+  color: #fff;
+  box-shadow: 0px 4px 4px #bdbdbd;
+  transition: all 0.3s ease-in-out;
+}
+
+.post {
+  width: 100%;
+  padding: 10px;
+  margin-top: 7px;
+  border: none;
+  border-radius: 11px;
+  font-size: 18px;
+  font-family: Sans-serif;
+  color: #fff;
+  background: #924eaf;
+  transition: 0.3s ease-out;
+}
+
+.rating:not(:checked) > input {
+  position: absolute;
+  appearance: none;
+}
+
+.rating:not(:checked) > label {
+  float: right;
+  cursor: pointer;
+  font-size: 30px;
+  color: #666;
+}
+
+.rating:not(:checked) > label:before {
+  content: '★';
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #e58e09;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #ff9e0b;
+}
+
+.rating > input:checked ~ label {
+  color: #ffa723;
+}

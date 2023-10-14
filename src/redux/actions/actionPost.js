@@ -5,11 +5,10 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   linkWithPopup,
-
 } from 'firebase/auth'
 import { UNSAFE_DataRouterContext } from 'react-router'
 import { showSuccessNotification } from '../../utils/Toast.jsx'
-import { POST_CART } from '../types.js'
+import { POST_CART, POST_REVIEW } from '../types.js'
 
 export const createBook = (form) => {
   const { images } = form
@@ -87,19 +86,18 @@ export const CreateUser = async (register, setModal, navigate) => {
 
 export const getLogin = async (login, setModal, navigate, provider) => {
   try {
-
     const { data } = await axios.post('/login', login)
     console.log(provider)
     data.success
-      ? ( provider ?
-         (setModal({ access: true, body: provider }),
-        localStorage.setItem('token', data.token),
-        localStorage.setItem('user', JSON.stringify(provider)),
-        setTimeout(() => {
-          setModal({ access: false })
-          navigate('/home')
-        }, 1500)) 
-        : setModal({ access: true, body: data.data }),
+      ? (provider
+          ? (setModal({ access: true, body: provider }),
+            localStorage.setItem('token', data.token),
+            localStorage.setItem('user', JSON.stringify(provider)),
+            setTimeout(() => {
+              setModal({ access: false })
+              navigate('/home')
+            }, 1500))
+          : setModal({ access: true, body: data.data }),
         localStorage.setItem('token', data.token),
         localStorage.setItem('user', JSON.stringify(data.data)),
         setTimeout(() => {
@@ -145,12 +143,16 @@ export const handleGoogleLogin = async (setModal, navigate) => {
   }
 }
 
-export const handleGitHubLogin = async  (setModal, navigate) => {
+export const handleGitHubLogin = async (setModal, navigate) => {
   try {
-    console.log(auth);
-   
-    const provider = new  GithubAuthProvider();
-    if(auth.currentUser?.providerData.filter(p => p.providerId === "github.com")) {
+    console.log(auth)
+
+    const provider = new GithubAuthProvider()
+    if (
+      auth.currentUser?.providerData.filter(
+        (p) => p.providerId === 'github.com'
+      )
+    ) {
       const obj = {
         userName: auth.currentUser.providerData[1].displayName,
         profilePic: auth.currentUser.providerData[1].photoURL,
@@ -158,46 +160,35 @@ export const handleGitHubLogin = async  (setModal, navigate) => {
         fullName: auth.currentUser.providerData[1].fullName,
         password: 'AAdsadsad1321321',
       }
-      await getLogin(obj, setModal, navigate, obj);
-     
-
+      await getLogin(obj, setModal, navigate, obj)
     } else {
       try {
         const resul = await signInWithPopup(auth, provider)
         const userInfo = resul._tokenResponse
 
-    const obj = {
-      userName: userInfo.displayName,
-      profilePic: userInfo.photoUrl,
-      email: userInfo.email,
-      fullName: userInfo.fullName,
-      password: 'AAdsadsad1321321',
-    }
+        const obj = {
+          userName: userInfo.displayName,
+          profilePic: userInfo.photoUrl,
+          email: userInfo.email,
+          fullName: userInfo.fullName,
+          password: 'AAdsadsad1321321',
+        }
         await getLogin(obj, setModal, navigate, obj)
-        console.log(resul);
-        
-      
-
-
+        console.log(resul)
       } catch (error) {
-        
-        const result = await linkWithPopup(auth.currentUser, provider);
-          // Accounts successfully linked.
-          const userInfo = result._tokenResponse
-    
-      
-          const user = result.user;
-          // ...
-          console.log(user);
-      }
+        const result = await linkWithPopup(auth.currentUser, provider)
+        // Accounts successfully linked.
+        const userInfo = result._tokenResponse
 
+        const user = result.user
+        // ...
+        console.log(user)
+      }
     }
   } catch (error) {
-    console.log(error);
-    
-
+    console.log(error)
   }
-};
+}
 export const createReviews = (form) => {
   return async () => {
     try {
@@ -234,4 +225,18 @@ export const cartAnonymous = (id, allBooks) => {
 
 export const postCart = (userId, bookId) => async (dispatch) => {
   const { data } = await axios.post(`/cart/add/${userId}`, { bookId })
+  console.log(data)
+  return dispatch({
+    type: POST_CART,
+    payload: data,
+  })
+}
+
+export const postReview = (review) => async (dispatch) => {
+  const { data } = await axios.post('review/create', review)
+  console.log(data)
+  return dispatch({
+    type: POST_REVIEW,
+    payload: data,
+  })
 }

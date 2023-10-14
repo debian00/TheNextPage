@@ -25,16 +25,18 @@ const SearchBar = () => {
     }
   }
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  })
+  // useEffect(() => {
+  //   document.addEventListener('mousedown', handleClickOutside)
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside)
+  //   }
+  // }, [])
 
-  useEffect(() => {
-    dispatch(getBooksSearch(search))
-  }, [dispatch, search])
+  // useEffect(() => {
+  //   if (search.length > 0) {
+  //     dispatch(getBooksSearch(search))
+  //   }
+  // }, [])
 
   const handleOnClose = () => {
     setVisible(true)
