@@ -274,7 +274,7 @@ input[type='radio']:checked + .book__page {
   margin-bottom: 5px;
 }
 .info p span {
-  font-family: 'Roboto';
+  font-family: 'Avenir, sans-serif';
   font-size: 16px;
   color: #6f5475;
   height: fit-content;
