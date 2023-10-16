@@ -6,7 +6,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { getGenres } from '../../redux/actions/actionGet'
 import axios from 'axios'
 import { MercadoPago, Stripe } from '../../utils/Icons'
-import { showSuccessNotification } from '../../utils/Toast'
+import {
+  showErrorNotification,
+  showSuccessNotification,
+} from '../../utils/Toast'
+import ReviewCard from '../../Components/Review/ReviewCard'
 
 function DetailView() {
   const { id } = useParams()
@@ -30,19 +34,18 @@ function DetailView() {
   }
 
   const handleCart = async () => {
-    const isLoggedIn = !!localStorage.getItem('token');
+    const isLoggedIn = !!localStorage.getItem('token')
     if (!isLoggedIn) {
-      alert('Debes iniciar sesión para agregar productos al carrito.');
+      showErrorNotification('¡Debes iniciar sesion!')
       navigate('/check')
-      return;
+      return
     }
-    const idUser = JSON.parse(localStorage.getItem('user'));
-    const userId = idUser.id;
-    await axios.post(`/cart/add/${userId}`, { bookId: id });
-    showSuccessNotification('¡Se añadió al carrito con éxito!');
-    console.log('Se guardó en el carrito');
-  };
-  
+    const idUser = JSON.parse(localStorage.getItem('user'))
+    const userId = idUser.id
+    await axios.post(`/cart/add/${userId}`, { bookId: id })
+    showSuccessNotification('¡Se añadió al carrito con éxito!')
+    console.log('Se guardó en el carrito')
+  }
 
   return (
     <div>
@@ -214,7 +217,24 @@ function DetailView() {
             </div>
           </div>
         </div>
-        <div></div>
+        <div className={styles.reseñas}>
+          <h2>Reseñas de nuestros clientes</h2>
+          {bookData.Reviews ? (
+            bookData.Reviews?.map((ele) => {
+              return (
+                <ReviewCard
+                  id={ele.id}
+                  key={ele.id}
+                  comment={ele.comment}
+                  score={ele.score}
+                  userId={ele.userId}
+                />
+              )
+            })
+          ) : (
+            <p>Sin reseñas para este libro, se el primero en darle una!</p>
+          )}
+        </div>
       </div>
     </div>
   )

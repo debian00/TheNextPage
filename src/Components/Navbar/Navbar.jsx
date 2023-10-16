@@ -16,7 +16,11 @@ import { useEffect, useRef, useState } from 'react'
 import SearchBar from './SearchBar/SearchBar'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { getGenres } from '../../redux/actions/actionGet'
+import { getCartUser, getGenres } from '../../redux/actions/actionGet'
+import { NavLink } from 'react-router-dom'
+import { signOut } from 'firebase/auth'
+import { auth } from '../../redux/actions/firebase'
+
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -28,14 +32,35 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const token = localStorage.getItem('token')
   const user = JSON.parse(localStorage.getItem('user'))
+  const [cart, setCart] = useState([])
+  const cartUser = useSelector((state) => state.cart)
 
   useEffect(() => {
+    if (user) {
+      dispatch(getCartUser(user.id))
+    } else if (localStorage.getItem('cart')) {
+      setCart(JSON.parse(localStorage.getItem('cart')))
+    }
     dispatch(getGenres())
-  }, [])
+  }, [localStorage.getItem('cart')])
+
+  useEffect(() => {
+    if (user) {
+      setCart(cartUser)
+    }
+  }, [cartUser])
+  useEffect(() => {
+    if (localStorage.getItem('cart') && !user) {
+      const localdata = JSON.parse(localStorage.getItem('cart'))
+      setCart(localdata)
+    }
+  }, [localStorage.getItem('cart')])
 
   const handleDrop = () => {
     setDropdown(true)
   }
+  
+  
   const handleScroll = () => {
     if (window.scrollY > 80) {
       setFixed(true)
@@ -44,11 +69,19 @@ const Navbar = () => {
     }
   }
 
-  const logOut = () => {
-    localStorage.removeItem('user')
-    localStorage.removeItem('token')
-    setDropdown(false)
-    navigate('/')
+  const logOut = async (auth) => {
+    try {
+      const localdata = JSON.parse(localStorage.getItem('cart'))
+      await signOut(auth)
+      setCart(localdata)
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      setDropdown(false)
+      navigate('/')
+      
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleClickOutside = (event) => {
@@ -94,7 +127,9 @@ const Navbar = () => {
             position: 'relative',
           }}
         >
+          <NavLink to="/home">
           <Logo color={fixed ? 'CCCFCE' : '#CCCFCE'} width={'35'} />
+          </NavLink>
           <div className={style.verticalBar}></div>
           <h3 className={style.logoName}>The Next Page Library</h3>
         </div>
@@ -159,6 +194,7 @@ const Navbar = () => {
           </ul>
         </div>
         <SearchBar></SearchBar>
+       
         <div className={style.profile}>
           {token ? (
             <>
@@ -186,15 +222,20 @@ const Navbar = () => {
               <Profile width={40}></Profile>
             </>
           )}
-          {user ? (
-            <Link to={`/shoppingCart/${user.id}`}>
-              <Cart width={40}></Cart>
-            </Link>
-          ) : (
-            <Link to={`/check`}>
-              <Cart width={40}></Cart>
-            </Link>
-          )}
+          <div className={style.cart}>
+            {user ? (
+              <Link to={`/shoppingCart/${user.id}`}>
+                <Cart width={40}></Cart>
+              </Link>
+            ) : (
+              <Link to={`/shoppingCart`}>
+                <Cart width={40}></Cart>
+              </Link>
+            )}
+            {cart?.length > 0 ? (
+              <div className={style.cartLength}>{cart.length}</div>
+            ) : null }
+          </div>
         </div>
       </nav>
       {user && token && (
@@ -218,7 +259,7 @@ const Navbar = () => {
               </li>
             )}
 
-            <li onClick={logOut} style={{ color: '#d65555' }}>
+            <li onClick={() => logOut(auth)} style={{ color: '#d65555' }}>
               Salir
             </li>
           </ul>

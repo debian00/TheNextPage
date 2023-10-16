@@ -29,6 +29,7 @@
     "reactstrap": "^9.2.0",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
+    "sweetalert2": "^11.7.32",
     "vite-plugin-rewrite-all": "^1.0.1"
   },
   "devDependencies": {

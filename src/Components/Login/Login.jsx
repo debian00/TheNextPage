@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react/display-name */
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import style from './Login.module.css'
@@ -12,6 +14,7 @@ import '../../Views/Login&Register/Login&Register.css'
 import 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers } from '../../redux/actions/actionGet'
+import Swal from 'sweetalert2'
 
 const Login = React.forwardRef((props, ref) => {
   const users = useSelector((state) => state.users)
@@ -29,17 +32,31 @@ const Login = React.forwardRef((props, ref) => {
 
   const onSubmit = handleSubmit((data) => {
     console.log('info papa', data.email)
-    console.log('Usuairo', users);
+    console.log('Usuario', users)
     const existUser = users.find((user) => user.email === data.email)
-    console.log('puede pasar el usuraio',existUser);
-    if(!existUser){
-      alert('El usuario no se encuentra registrado en el sistema')
+    console.log('puede pasar el usuario', existUser)
+
+    if (!existUser) {
+      // Muestra un SweetAlert para indicar que el usuario no se encuentra registrado
+      Swal.fire({
+        icon: 'error',
+        title: 'Usuario no registrado',
+        text: 'El usuario no se encuentra registrado en el sistema',
+      })
       return
     }
+
     if (existUser.hide) {
-      alert('El usuario se encuentra suspendido')
+      // Muestra un SweetAlert para indicar que el usuario está suspendido
+      Swal.fire({
+        icon: 'error',
+        title: 'Usuario suspendido',
+        text: 'El usuario se encuentra suspendido',
+      })
       return
     }
+
+    // Si no se cumple ninguna de las condiciones anteriores, realiza el inicio de sesión
     getLogin(data, setModal, navigate)
   })
 
@@ -242,7 +259,7 @@ const Login = React.forwardRef((props, ref) => {
                 <button
                   type="button"
                   className={style.buton}
-                  onClick={() => handleGitHubLogin()}
+                  onClick={() => handleGitHubLogin(setModal, navigate)}
                 >
                   Accede con GitHub
                 </button>
@@ -256,6 +273,7 @@ const Login = React.forwardRef((props, ref) => {
                   <Modal.Title>Registrado con éxito✅</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                  {console.log(modal.body)}
                   <div>
                     <h3>Bienvenido</h3>
                     <div

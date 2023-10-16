@@ -57,3 +57,17 @@
     'Precio Stock'
     'Descripcion Descripcion';
 }
+
+.genres {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  gap: 10px;
+}
+
+.genres p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0;
+}

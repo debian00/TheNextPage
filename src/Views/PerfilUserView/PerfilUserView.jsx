@@ -1,20 +1,30 @@
 // import React from 'react';
 import style from './perfiluserview.module.css'
-import perfil from '../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
+// import perfil from '../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
 import EditarPerfilView from './EditarPerfilView/EditarPerfilView'
 import { useEffect, useState } from 'react'
 import FavoritosView from './FavoritosView/FavoritosView'
 import ComprasView from './ComprasView/ComprasView'
 import ReseñasView from './ReseñasView/ReseñasView'
+import { signOut } from 'firebase/auth'
+import { auth } from '../../redux/actions/firebase.js'
+import { useNavigate } from 'react-router-dom'
 
 const PerfilUserdView = () => {
   //Manejo de componentes
   const [componenteActual, setComponenteActual] = useState('A')
-
+  const token = localStorage.getItem('token')
+  const user = JSON.parse(localStorage.getItem('user'))
+  const navigate = useNavigate()
   //Manejo de color del perfil usuario
   const [color, setColor] = useState('#59415b')
   const [selectedLink, setSelectedLink] = useState(null)
 
+  const LogOut = async () => {
+    await signOut(auth)
+    localStorage.removeItem('token'), localStorage.removeItem('user')
+    navigate('/home')
+  }
   //Manejar la opcion seleccionada mediante color
   const handleSelect = (linkName) => {
     setComponenteActual(linkName)
@@ -22,6 +32,7 @@ const PerfilUserdView = () => {
     setSelectedLink(linkName)
   }
   useEffect(() => {
+    console.log(auth)
     setSelectedLink('A')
     setColor('#59415b')
   }, [])
@@ -31,10 +42,16 @@ const PerfilUserdView = () => {
         {/* Perfil usuario Lista de opciones*/}
         <div className={`${style.profilePanel} col-2`}>
           <div className={`${style.menu}`}>
-            <div className={style.profile}>
-              <img src={perfil} alt="Foto de perfil" />
-            </div>
-            <h4>Nombre Usuario</h4>
+            {token ? (
+              <div>
+                <div className={style.profile}>
+                  <img src={user.profilePic} alt="Foto de perfil" />
+                </div>
+                <div>
+                  <h4>{user.userName}</h4>
+                </div>
+              </div>
+            ) : null}
             <ul className={style.menuList}>
               <li>
                 <a
@@ -44,7 +61,7 @@ const PerfilUserdView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',                   
+                    alignItems: 'center',
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -75,7 +92,7 @@ const PerfilUserdView = () => {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                     height: '70px',
+                    height: '70px',
                     width: '100%',
                     paddingInline: '5px',
                     backgroundColor: selectedLink === 'B' ? color : 'white',
@@ -103,7 +120,7 @@ const PerfilUserdView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',                   
+                    alignItems: 'center',
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -127,7 +144,7 @@ const PerfilUserdView = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
-                    fill={selectedLink === 'C' ? 'white' : "#d82424"}
+                    fill={selectedLink === 'C' ? 'white' : '#d82424'}
                     className="bi bi-bell-fill"
                     viewBox="0 0 16 16"
                   >
@@ -143,7 +160,7 @@ const PerfilUserdView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',                    
+                    alignItems: 'center',
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -172,7 +189,7 @@ const PerfilUserdView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',                
+                    alignItems: 'center',
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -220,16 +237,17 @@ const PerfilUserdView = () => {
           <div className={`col-9 ${style.content}`}>
             <ComprasView />
           </div>
-        ) : 
-          componenteActual === "E" ? (
+        ) : componenteActual === 'E' ? (
+          <div>
+            <h5>Estas seguro que quieres salir?</h5>
             <div>
-               <h5>Estas seguro que quieres salir?</h5>
-               <div>
-                 <button type='button' onClick={() => {localStorage.removeItem("token"), localStorage.removeItem("user")}}>Si</button>
-                 <button type='button'>No </button>
-                 </div>
+              <button type="button" onClick={LogOut}>
+                Si
+              </button>
+              <button type="button">No </button>
             </div>
-         ) : null}
+          </div>
+        ) : null}
       </div>
     </div>
   )

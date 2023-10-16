@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {getAuthors, searchAuthorByName } from '../../../redux/actions/actionGet';
 import style from './autorview.module.css';
 import { postAuthor } from '../../../redux/actions/actionPost';
+import { showSuccessNotification, showErrorNotification } from '../../../utils/Toast'
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 const AutorView = () => {
   // Traer todos los autores
@@ -34,9 +36,9 @@ const AutorView = () => {
 
     try {
       await axios.put(`/author/update/${authorId}`, { name: newAuthorName });
-      // await dispatch(updateAuthor({ id: authorId, name: newAuthorName }))
+      showSuccessNotification('Libro editado con exito!')
     } catch (error) {
-      console.error('Error al actualizar el autor:', error);
+      showErrorNotification('Error al actualizar el autor:', error);
     }
 
     // Deshabilitar el modo de edición para el autor
@@ -57,13 +59,27 @@ const AutorView = () => {
   //Función para eliminar
   const handleDelete = async (e, id) => {
     e.preventDefault();
-    const confirmed = window.confirm(
-      '¿Estás seguro que quieres eliminar este libro?'
-    );
-    if (confirmed) {
-      await axios.delete('/author/delete/' + id);
-      dispatch(getAuthors());
-    }
+    Swal.fire({
+      title: '¿Estás seguro que quieres eliminar este libro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // Realiza la eliminación del libro aquí
+          await axios.delete('/author/delete/' + id);
+          // Por ejemplo, puedes actualizar la lista de autores después de la eliminación
+          dispatch(getAuthors());
+          showSuccessNotification('¡Libro eliminado exitosamente!');
+        } catch (error) {
+          showErrorNotification('Error al eliminar el libro. Inténtalo de nuevo.');
+        }
+      }
+    });
   };
   // Función para traer los libros del autor
   const handleAuthor = async (author) => {
@@ -75,7 +91,7 @@ const AutorView = () => {
         [author]: bookNames,
       }));
     } catch (error) {
-      console.error('Error al obtener los libros del autor:', error);
+      showErrorNotification('Error al obtener los libros del autor:', error);
     }
   };
   //Funcion para buscar por nombre de autor
