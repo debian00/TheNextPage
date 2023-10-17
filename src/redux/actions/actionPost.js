@@ -154,46 +154,53 @@ export const handleGoogleLogin = async (setModal, navigate) => {
 
 export const handleGitHubLogin = async (setModal, navigate) => {
   try {
-    const provider = new GithubAuthProvider()
+ 
 
-    if (
-      auth.currentUser === null ||
-      auth.currentUser?.providerData.filter(
-        (p) => p.providerId === 'github.com'
-      )
-    ) {
-      const result = await signInWithPopup(auth, provider)
-      const obj = {
-        userName: result._tokenResponse.screenName,
-        profilePic: result._tokenResponse.photoUrl,
-        email: result._tokenResponse.email,
-        fullName: result._tokenResponse.fullName,
-        password: 'AAdsadsad1321321',
-      }
+    const provider = new  GithubAuthProvider();
+  
+    if(auth.currentUser === null || auth.currentUser?.providerData.filter(p => p.providerId === "github.com") ) {
 
-      try {
-        await getLogin(obj, setModal, navigate, obj)
-      } catch (error) {
-        await CreateUser(obj, setModal, navigate, obj)
-      }
-    }
+          const result = await signInWithPopup(auth, provider)
 
-    const result2 = await linkWithPopup(auth.currentUser, provider)
+          const obj = {
+            userName: result._tokenResponse.screenName,
+            profilePic: result._tokenResponse.photoUrl,
+            email: result._tokenResponse.email,
+            fullName: result._tokenResponse.fullName,
+            password: 'AAdsadsad1321321',
+          }  
+  
+          try {  
+            await getLogin(obj, setModal, navigate, obj)
+          
+          } catch (error) {
 
-    const obj = {
-      userName: result2._tokenResponse.screenName,
-      profilePic: result2._tokenResponse.photoUrl,
-      email: result2._tokenResponse.email,
-      fullName: result2._tokenResponse.fullName,
-      password: 'AAdsadsad1321321',
-    }
-    try {
-      await getLogin(obj, setModal, navigate, obj)
-    } catch (error) {
-      await CreateUser(obj, setModal, navigate, obj)
-    }
-  } catch (error) {
-    console.log(error)
+          await CreateUser(obj, setModal, navigate, obj)
+          }
+        } else {
+
+        const result2 = await linkWithPopup(auth.currentUser, provider);
+
+        const obj = {
+          userName: result2._tokenResponse.screenName,
+          profilePic: result2._tokenResponse.photoUrl,
+          email: result2._tokenResponse.email,
+          fullName: result2._tokenResponse.fullName,
+          password: 'AAdsadsad1321321',
+        }  
+            try {  
+                await getLogin(obj, setModal, navigate, obj)
+              
+            } catch (error) {
+
+              await CreateUser(obj, setModal, navigate, obj)
+            }
+        }
+        }
+      catch (error) {   
+    console.log(error);
+    
+
   }
 }
 export const createReviews = (form) => {
@@ -247,3 +254,13 @@ export const postReview = (review) => async (dispatch) => {
     payload: data,
   })
 }
+
+export const createContact = async (form) => {
+  try {
+    const { data } = await axios.post("/contact/", form);
+    alert("Enviado con exito", data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+

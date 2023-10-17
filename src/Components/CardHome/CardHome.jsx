@@ -2,7 +2,10 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Card from '../CardIndividual/Card'
-
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import Slider from 'react-slick'
+import style from './CardHome.module.css'
 const CardHome = ({ books, author, order }) => {
   const [book, setBook] = useState([])
 
@@ -22,16 +25,17 @@ const CardHome = ({ books, author, order }) => {
   useEffect(() => {
     fetchBook()
   }, [books])
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+  }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'left',
-        alignContent: 'center',
-      }}
-    >
-      {book?.slice(0, 5)?.map((ele) => {
+    <Slider {...settings} className={style.slider}>
+      {book?.map((ele) => {
         return (
           <Card
             key={ele.id}
@@ -44,7 +48,7 @@ const CardHome = ({ books, author, order }) => {
           ></Card>
         )
       })}
-    </div>
+    </Slider>
   )
 }
 

@@ -1,4 +1,6 @@
+@import url("https://fonts.cdnfonts.com/css/avenir");
 
+font-family: 'Avenir, sans-serif';
 
 .inputfile {
   width: 0.1px;
@@ -7,6 +9,7 @@
   overflow: hidden !important;
   position: relative;
   z-index: -1;
+
 }
 
 .buton {
@@ -24,6 +27,8 @@
   width: 40px;
   box-shadow: 0  3px 15px 1px  #06142d;
   transition: background-color 0.3s ease;
+  font-family: 'Avenir, sans-serif';
+
 }
 
 .buton:hover {
@@ -33,11 +38,13 @@
 
 
 .inputfile + label {
-  font-size: 1.25em;
+  font-size: 1em;
   font-weight: 700;
   color: white;
   background-color: black;
   display: inline-block;
+  font-family: 'Avenir, sans-serif';
+
 }
 
 .inputfile:focus + label,
@@ -47,10 +54,11 @@
 
 .label {
   
-  padding: 10px !important;
-  font-size: 20px;
+  padding: 10px !important; 
   color: #091f44 !important;
- font-size: 20px;
+ font-size: 1em;
+ font-family: 'Avenir, sans-serif';
+
  
 }
 .space {
@@ -81,7 +89,7 @@ border :  3px solid rgb(123, 26, 153) !important
 .label1 {
   width: 220px;
   padding: 10px !important;
-  font-size: 20px;
+  font-size: 1.2em;
   color: #1b0944 !important;
   font-size: 20px;
  background-color: rgb(230, 221, 221);
@@ -91,6 +99,8 @@ border :  3px solid rgb(123, 26, 153) !important
  height: 45px !important;
  text-align: center;
  margin-bottom: 40px;
+ font-family: 'Avenir, sans-serif';
+
 }
 .label1:focus,
 .label1:hover {
@@ -100,7 +110,7 @@ border :  3px solid rgb(123, 26, 153) !important
 .label2 {
   width: 140px;
   padding: 10px !important;
-  font-size: 20px;
+  font-size: 1.2em;
   color: #1b0944 !important;
   font-size: 20px;
  background-color: rgb(230, 221, 221);
@@ -137,6 +147,8 @@ border :  3px solid rgb(123, 26, 153) !important
   border-radius: 5px;
  height: 40px;
  width: 230px;
+ font-family: 'Avenir, sans-serif';
+
 }
 
 .inputs:hover {
@@ -176,8 +188,10 @@ border :  3px solid rgb(123, 26, 153) !important
   box-shadow: 0 5px 15px 1px rgba(0, 0, 0, 0.671);
 }
 .span {
-  font-size: 22px;
-  margin : 0
+  font-size: 1em;
+  margin : 0;
+  font-family: 'Avenir, sans-serif';
+
 }
 .butonlogin { 
 
@@ -195,6 +209,7 @@ border :  3px solid rgb(123, 26, 153) !important
   width:300px;
   box-shadow: #06142d;
   transition: background-color 0.3s ease;
+  font-family: 'Avenir, sans-serif';
 
 }
 .butonlogin:hover {
@@ -205,8 +220,10 @@ border :  3px solid rgb(123, 26, 153) !important
 .spanLink{
   cursor: pointer;
   color: rgb(140, 82, 158);
-  font-size: 22px;
+  font-size: 1.2em;
   margin-left: 5px;
+  font-family: 'Avenir, sans-serif';
+
 
 }
 .spanLink:hover {

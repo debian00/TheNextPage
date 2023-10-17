@@ -117,6 +117,7 @@ const Navbar = () => {
           justifyContent: 'space-between',
           zIndex: '5',
           backgroundColor: '#6f5475',
+          
         }}
       >
         <div
@@ -174,6 +175,7 @@ const Navbar = () => {
           justifyContent: 'space-between',
           width: '100%',
           transition: 'all 0.3s ease',
+          
         }}
         className={`${style.downNav}`}
       >
@@ -183,10 +185,16 @@ const Navbar = () => {
               <Link to={'/'}>INICIO</Link>
             </li>
             <li>
-              <Link to="/catalogue">CATALOGO</Link>
+              <Link to="/catalogue">CATÁLOGO</Link>
             </li>
             <li>
-              <Link to="/aboutus">NOSOTROS</Link>
+              <Link to="/promociones">PROMOCIONES</Link>
+            </li>
+            <li>
+              <Link to="/novedades">NOVEDADES</Link>
+            </li>
+            <li>
+              <Link to="/aboutus">CONTACTO</Link>
             </li>
             <li>
               <Link to="/faq">FAQ</Link>

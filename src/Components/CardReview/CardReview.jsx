@@ -125,6 +125,7 @@ const CardReview = ({
           </div>
           <div>
             <button
+              className={style.button}
               data-bs-target={`#exampleModal-${id}`}
               data-bs-toggle="modal"
             >

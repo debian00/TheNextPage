@@ -139,7 +139,7 @@ const {register ,
              
 
                 <div>
-                    <label className={style.label}>Email : </label>
+                    <label className={style.label}>EMAIL: </label>
                     <input className={style.inputs}
                     {...register("email" , {
                         required : {
@@ -170,7 +170,7 @@ const {register ,
 
                 </div>
                 <div>
-                    <label className={style.label}> Contraseña </label> 
+                    <label className={style.label}>CONTRASEÑA: </label> 
                     <input className={style.inputs}
                     
                     {...register("password" , {

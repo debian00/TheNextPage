@@ -65,3 +65,12 @@
   padding: 30px;
   margin-right: 0 !important;
 }
+.btn{
+width: 100px;
+height: 25px;
+border-color: #000000;
+border-width: 1px;
+border-style: solid;
+
+
+}

@@ -29,6 +29,10 @@ import {
   DELETE_ALL_CART,
   GET_SALE_BY_USER,
   GET_USER_BY_ID,
+  GET_ALL_FAVORITES,
+  UPDATE_USER,
+  GET_ALL_CONTACT,
+  DELETE_MESSAGE,
 } from './types'
 
 const initialState = {
@@ -45,6 +49,9 @@ const initialState = {
   bookNameAuthor: [],
   cart: [],
   sale: [],
+  favorites: [],
+  userUpdate :{},
+  contact:[],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -94,6 +101,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         authors: action.payload,
       }
+    case GET_ALL_FAVORITES:
+      return{
+        ...state,
+        favorites: action.payload
+      }
     case GET_ALL_USERS:
       return { ...state, users: action.payload }
     case SEARCH_USER_BY_NAME:
@@ -112,6 +124,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         books: bookDeleted,
       }
+    case DELETE_MESSAGE: 
+    return{
+      ...state,
+      contact: state.contact.filter((contact) => contact.id !== action.payload)
+    }
     case UPDATE_BOOK:
       const bookUpdate = {
         count: state.books.count,
@@ -122,6 +139,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         books: bookUpdate,
+      }
+    case UPDATE_USER:
+      return{
+        ...state,
+        userUpdate: action.payload
       }
     case STOP_BOOK:
       const stopedBook = state.books.rows.map((book) => {
@@ -208,7 +230,9 @@ const rootReducer = (state = initialState, action) => {
 
     case GET_REVIEW_BY_ID:
       return { ...state, reviews: action.payload }
-    default:
+    case GET_ALL_CONTACT:
+        return {...state, contact: action.payload}
+      default:
       return state
   }
 }

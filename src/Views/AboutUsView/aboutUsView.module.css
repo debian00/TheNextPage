@@ -5,7 +5,6 @@
   background-color: #ded8d7;
   display: flex;
   flex-direction: row;
-  background-image: url('../../assets/imgaboutus/AboutUsBg.jpg');
 }
 .title {
   color: #ded8d7;
@@ -20,6 +19,9 @@
 .content {
   display: flex;
   justify-content: center;
+}
+.conten2{
+  background-color: #ded8d7;
 }
 .card {
   --font-color: #000000;
@@ -41,7 +43,7 @@
   font-family: 'Avenir', sans-serif;
 }
 .texto {
-  color: #ded8d7;
+  color: #000000;
   font-size: 1.3em;
   margin-left: 70px;
   letter-spacing: 3px;

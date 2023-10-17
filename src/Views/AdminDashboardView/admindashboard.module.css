@@ -41,7 +41,8 @@
 
 .menuList {
   list-style: none;
-  padding: 20px;
+  padding: 10px;
+  margin-left: 10px;
   background-color: #e8e8e8;
 }
 
@@ -54,12 +55,13 @@
   color: #000000;
   transition: background-color 0.3s; /* Agregar transición para suavizar el efecto */
 }
+.menuList a {
+  text-decoration: none;
+  color: #000000;
+  transition: background-color 0.3s; /* Agregar transición para suavizar el efecto */
+}
 
 .panel {
   padding: 30px;
-  margin-right: 0;
-}
-
-.content {
-  flex: 1 !important;
+  margin-right: 0 !important;
 }

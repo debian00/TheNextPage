@@ -21,6 +21,8 @@ import {
   DELETE_ALL_CART,
   GET_SALE_BY_USER,
   GET_USER_BY_ID,
+  GET_ALL_FAVORITES,
+  GET_ALL_CONTACT
 } from '../types'
 
 export const getAllBooks = ({
@@ -98,6 +100,7 @@ export const getAllBooksCopy = (page) => {
     }
   }
 }
+
 
 export const getAllBooksOffer = (forSale) => {
   return async (dispatch) => {
@@ -347,7 +350,7 @@ export const getUrlPayment = (cart, id) => async (dispatch) => {
             })
             clearInterval(checkPaymentInterval)
             paymentWindow.close()
-            // window.location.pathname = '/success'
+            window.location.pathname = '/success'
             console.log('Pago completado con éxito')
           }
         } catch (error) {
@@ -405,3 +408,30 @@ export const getReviewByUser = (id) => async (dispatch) => {
     console.log(error)
   }
 }
+
+export const getAllFavs = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(`/favorites/${id}`)
+      return dispatch({
+        type: GET_ALL_FAVORITES,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+export const getAllContact = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(`/contact/`);
+      return dispatch({
+        type: GET_ALL_CONTACT,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
