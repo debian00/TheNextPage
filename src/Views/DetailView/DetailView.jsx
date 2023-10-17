@@ -1,27 +1,35 @@
-import { useEffect } from 'react'
+import { useEffect,} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getBookById } from '../../redux/actions/actionGet'
+import { getAllFavs, getBookById } from '../../redux/actions/actionGet'
 import styles from './detail.module.css' // Importa los estilos CSS
 import { useNavigate, useParams } from 'react-router-dom'
 import { getGenres } from '../../redux/actions/actionGet'
 import axios from 'axios'
-import { MercadoPago, Stripe } from '../../utils/Icons'
+import { Favorite, MercadoPago, Stripe } from '../../utils/Icons'
 import {
   showErrorNotification,
   showSuccessNotification,
 } from '../../utils/Toast'
 import ReviewCard from '../../Components/Review/ReviewCard'
+import { addFavorite } from '../../redux/actions/actionPut'
 
 function DetailView() {
   const { id } = useParams()
   const bookData = useSelector((state) => state.bookById)
   const genres = useSelector((state) => state.genres)
+  const allFavs = useSelector((state) => state.favorites)
+  console.log(allFavs)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  // const [color, setColor] = useState('currentColor')
+
   useEffect(() => {
+    const idUser = JSON.parse(localStorage.getItem('user'))
+    const userId = idUser.id
     dispatch(getBookById(id))
     dispatch(getGenres())
+    dispatch(getAllFavs(userId))
   }, [dispatch, id])
 
   const getGenreName = (genreId) => {
@@ -31,6 +39,33 @@ function DetailView() {
     })
 
     return genreNames?.join(', ')
+  }
+
+  const handleAddFav = async (e, bookId) => {
+    e.preventDefault()
+    const isLoggedIn = !!localStorage.getItem('token')
+    if (!isLoggedIn) {
+      showErrorNotification('¡Debes iniciar sesion!')
+      navigate('/check')
+      return
+    }
+    const idUser = JSON.parse(localStorage.getItem('user'))
+    const userId = idUser.id
+
+    const isBookInFavs = allFavs?.some((fav) => fav === bookId)
+    if (isBookInFavs) {
+      // setColor('blue')
+      showErrorNotification('¡El libro ya se encuentra en favoritos!')
+    } else {
+      try {
+        await dispatch(addFavorite(userId, bookId))
+        dispatch(getAllFavs(userId))
+        showSuccessNotification('¡Se añadió a favoritos con éxito!')
+        // setColor('blue')
+      } catch (error) {
+        showErrorNotification('Ocurrió un error al agregar a favoritos.')
+      }
+    }
   }
 
   const handleCart = async () => {
@@ -121,7 +156,7 @@ function DetailView() {
                     className={`page__content-credits ${styles['page__content-credits']}`}
                   >
                     PRECIO DE VENTA
-                    <span>$ {bookData.sellPrice} </span>
+                    <span> $ {bookData.sellPrice} </span>
                   </p>
 
                   <div
@@ -206,7 +241,22 @@ function DetailView() {
                 <p>{bookData.description}</p>
               </div>
             </div>
-            <div className={styles.checkout}>
+            <div
+              className={styles.checkout}
+              onClick={(e) => handleAddFav(e, bookData.id)}
+            >
+              <div className={styles.icons}>
+                {allFavs?.some((fav) => fav === bookData.id) ? (
+                  <div>
+                    <Favorite width={30} fill="blue" />
+                  </div>
+                ) : (
+                  <div>
+                    <Favorite width={30} fill="currentColor" />
+                  </div>
+                )}
+              </div>
+
               <h3>${bookData.sellPrice}</h3>
               <button onClick={handleCart}>Añadir al carrito</button>
               <div className={styles.method}>

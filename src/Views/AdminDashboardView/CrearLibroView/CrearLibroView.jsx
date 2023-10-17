@@ -117,7 +117,7 @@ const CrearLibroView = () => {
   )
   return (
     <div>
-      <h1>Componente Crear Libro</h1>
+      <h1>Agregar un nuevo libro</h1>
       <form onSubmit={handleSubmit}>
         <div className={` card mb-12`}>
           <div className={` row g-0`} style={{ margin: '0' }}>

@@ -1,60 +1,46 @@
 // import React from 'react';
+import Contacts from './Contacts/Contatcs'
 import style from './aboutUsView.module.css'
+import imagenAbout from '../../assets/imgaboutus/AboutImg.png'
 
 const AboutUs = () => {
   return (
     <div className={style.about}>
-      <h2 className={style.title}>The Next Page</h2>
       <div className={`row ${style.content}`}>
-        <div className={`col-12 ${style.card}`}>
+        <div className={`col-4 `}>
+          <img src={imagenAbout} alt="" />
+        </div>
+        <div className={`col-8 ${style.conten2}`}>
+        <h2 style={{fontWeight: 'bold', justifyContent:'center', display:"flex", marginTop:"1rem"}}>
+               SOBRE NOSOTROS
+              </h2>
           <p className={style.texto}>
             The Next Page es una librería en línea apasionada por la literatura,
             comprometida con conectar amantes de la lectura con historias
-            inspiradoras y conocimientos profundos.
+            inspiradoras y conocimientos profundos.Nuestra misión es conectar a
+            amantes de la lectura con historias inspiradoras y conocimientos
+            profundos. Creemos que los libros tienen el poder de transformar
+            vidas, abrir mentes y ampliar horizontes. En The Next Page, no solo
+            vendemos libros, sino que también fomentamos un sentido de comunidad
+            en torno a la literatura. 
+          </p>
+          <p className={style.texto}>
+            The Next Page es un lugar donde la pasión por la literatura se
+            combina con el compromiso de brindar a nuestros clientes una
+            experiencia de lectura inigualable. Nuestra librería en línea es el
+            hogar de historias inspiradoras, conocimientos profundos y una
+            comunidad de amantes de la lectura que comparten la misma pasión.
+            Nos enorgullece ser su destino literario de confianza y esperamos
+            seguir inspirándolos a medida que exploran las páginas de los libros
+            que ofrecemos. ¡Únase a nosotros en esta apasionante aventura
+            literaria!
           </p>
         </div>
-        <div className={`col-12 ${style.card}`}>
-          <form action="#">
-            <label htmlFor="customerName">
-              NOMBRE <em>&#x2a;</em>
-            </label>
-            <input
-              id="customerName"
-              name="customerName"
-              required=""
-              type="text"
-            />
-            <label htmlFor="customerEmail">
-              EMAIL <em>&#x2a;</em>
-            </label>
-            <input
-              id="customerEmail"
-              name="customerEmail"
-              required=""
-              type="email"
-            />
-            <label htmlFor="customerPhone">TELÉFONO</label>
-            <input
-              id="customerPhone"
-              name="customerPhone"
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-              type="tel"
-            />
-            <label htmlFor="orderNumber">NÚMERO DE ORDEN</label>
-            <input id="orderNumber" name="orderNumber" type="text" />
-            <label htmlFor="customerNote">
-              TU MENSAJE: <em>&#x2a;</em>
-            </label>
-            <textarea
-              id="customerNote"
-              name="customerNote"
-              required=""
-              rows="4"
-            ></textarea>
-            <h3>Por favor proporciona toda la informacion necesaria.</h3>
-
-            <button id="customerOrder">Enviar</button>
-          </form>
+        {/* <div className={`col-4 ${style.card}`}>
+         
+        </div> */}
+        <div className={`col-12 `}>
+          <Contacts />
         </div>
       </div>
     </div>
