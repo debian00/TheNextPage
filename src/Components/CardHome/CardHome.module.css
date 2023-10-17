@@ -1,0 +1,12 @@
+.slider button::before {
+  color: rgb(191, 104, 220);
+  font-size: 30px;
+}
+
+.slider .slick-list {
+  margin-right: 20px;
+}
+
+.slider .slick-initialized {
+  right: 5px;
+}

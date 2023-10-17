@@ -117,6 +117,7 @@ const Navbar = () => {
           justifyContent: 'space-between',
           zIndex: '5',
           backgroundColor: '#6f5475',
+          
         }}
       >
         <div
@@ -174,6 +175,7 @@ const Navbar = () => {
           justifyContent: 'space-between',
           width: '100%',
           transition: 'all 0.3s ease',
+          
         }}
         className={`${style.downNav}`}
       >
