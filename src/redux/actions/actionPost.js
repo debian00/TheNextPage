@@ -198,9 +198,7 @@ export const handleGitHubLogin = async (setModal, navigate) => {
      
         }
 
-      
-
-    }   catch (error) {   
+      catch (error) {   
     console.log(error);
     
 
