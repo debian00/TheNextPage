@@ -1,0 +1,15 @@
+.contReseña {
+  margin-top: 20px;
+  /* position: relative; */
+  padding: 10px;
+  width: 100%;
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contReseña img {
+  width: 50px;
+  border-radius: 50%;
+}

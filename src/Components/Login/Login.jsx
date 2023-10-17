@@ -1,10 +1,12 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react/display-name */
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import style from './Login.module.css'
 import {
   getLogin,
   handleGoogleLogin,
-  handleGitHubLogin
+  handleGitHubLogin,
 } from '../../redux/actions/actionPost'
 import { Modal } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
@@ -12,7 +14,7 @@ import '../../Views/Login&Register/Login&Register.css'
 import 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers } from '../../redux/actions/actionGet'
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
 
 const Login = React.forwardRef((props, ref) => {
   const users = useSelector((state) => state.users)
@@ -29,34 +31,34 @@ const Login = React.forwardRef((props, ref) => {
   const [passwordType, setPasswordType] = useState(false)
 
   const onSubmit = handleSubmit((data) => {
-    console.log('info papa', data.email);
-    console.log('Usuario', users);
-    const existUser = users.find((user) => user.email === data.email);
-    console.log('puede pasar el usuario', existUser);
-  
+    console.log('info papa', data.email)
+    console.log('Usuario', users)
+    const existUser = users.find((user) => user.email === data.email)
+    console.log('puede pasar el usuario', existUser)
+
     if (!existUser) {
       // Muestra un SweetAlert para indicar que el usuario no se encuentra registrado
       Swal.fire({
         icon: 'error',
         title: 'Usuario no registrado',
         text: 'El usuario no se encuentra registrado en el sistema',
-      });
-      return;
+      })
+      return
     }
-  
+
     if (existUser.hide) {
       // Muestra un SweetAlert para indicar que el usuario está suspendido
       Swal.fire({
         icon: 'error',
         title: 'Usuario suspendido',
         text: 'El usuario se encuentra suspendido',
-      });
-      return;
+      })
+      return
     }
-  
+
     // Si no se cumple ninguna de las condiciones anteriores, realiza el inicio de sesión
-    getLogin(data, setModal, navigate);
-  });
+    getLogin(data, setModal, navigate)
+  })
 
   const handleNextPage = () => {
     if (ref.current) {
@@ -140,7 +142,7 @@ const Login = React.forwardRef((props, ref) => {
           <fieldset
             className={` d-flex flex-column justify-content-center align-items-center text-center ${style.formLogin}`}
           >
-            <legend className={style.legend}>Logueate</legend>
+            <legend className={style.legend}>Login</legend>
             <div className="d-flex ">
               <div className=" d-flex flex-row mb-4">
                 <label htmlFor="email" className={style.label}>
@@ -190,10 +192,10 @@ const Login = React.forwardRef((props, ref) => {
                 {...register('password', {
                   required: {
                     value: true,
-                    message: 'Escibe tu contraseña',
+                    message: 'Escribe tu contraseña',
                   },
                 })}
-                placeholder="Tu contraseña aqui..."
+                placeholder="Tu contraseña aquí..."
                 type={passwordType ? 'text' : 'password'}
               ></input>
 
@@ -224,10 +226,10 @@ const Login = React.forwardRef((props, ref) => {
             </div>
             <Link to="/forgot-password">
               <span
-                style={{ fontSize: '20px', cursor: 'pointer', color: 'black' }}
+                style={{ fontSize: '1em', cursor: 'pointer', color: 'black' }}
               >
                 ¿Olvidaste tu contraseña?{' '}
-                <span className={style.spanLink}>Haz click aqui! </span>
+                <span className={style.spanLink}>Haz click aquí </span>
               </span>
             </Link>
             <div className="d-flex flex-column justify-content-center align-items-center">
@@ -244,7 +246,7 @@ const Login = React.forwardRef((props, ref) => {
                     className={style.spanLink}
                     onClick={() => handleNextPage()}
                   >
-                    Regístrate aqui
+                    Regístrate aquí
                   </span>
                 </span>
                 <p>o </p>
@@ -271,6 +273,7 @@ const Login = React.forwardRef((props, ref) => {
                   <Modal.Title>Registrado con éxito✅</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                  {console.log(modal.body)}
                   <div>
                     <h3>Bienvenido</h3>
                     <div
@@ -309,7 +312,7 @@ const Login = React.forwardRef((props, ref) => {
             <div class="justify-self-center align-self-center">
               <Modal show={modal}>
                 <Modal.Header>
-                  <Modal.Title>Algo salio mal❌</Modal.Title>
+                  <Modal.Title>Algo salió mal❌</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   <div>

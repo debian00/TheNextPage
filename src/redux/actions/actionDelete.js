@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { DELETE_ALL_CART, DELETE_BOOK, DELETE_CART } from '../types'
+import { DELETE_ALL_CART, DELETE_BOOK, DELETE_CART ,DELETE_MESSAGE } from '../types'
 
 export const deleteUserById = (id) => {
   return async () => {
@@ -48,3 +48,17 @@ export const deleteAllCart = (id) => async (dispatch) => {
     console.log(error)
   }
 }
+export const deleteMessageById = (id) => {
+  return async (dispatch) => {
+    try {
+      // Realiza la solicitud de eliminación al servidor
+      await axios.delete(`/contact/${id}`);
+      dispatch({
+        type:DELETE_MESSAGE,
+        payload: id
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};

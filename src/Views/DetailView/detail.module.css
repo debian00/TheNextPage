@@ -27,6 +27,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .container {
   display: flex;
   padding-top: 120px;
@@ -141,7 +142,7 @@ body {
   letter-spacing: 3px;
   color: var(--dark-text);
   margin-top: calc(var(--baseline) * 5);
-  margin-bottom: calc(var(--baseline) * 2);
+  margin-bottom: 5px;
 }
 
 .page__content-author {
@@ -154,7 +155,7 @@ body {
   border-bottom: 1px solid var(--dark-text);
   display: inline-block;
   padding: calc(var(--baseline) / 2) calc(var(--baseline) / 5);
-  margin-bottom: calc(var(--baseline) * 6);
+  margin-bottom: 5px;
 }
 
 .page__content-credits {
@@ -274,7 +275,7 @@ input[type='radio']:checked + .book__page {
   margin-bottom: 5px;
 }
 .info p span {
-  font-family: 'Roboto';
+  font-family: 'Avenir, sans-serif';
   font-size: 16px;
   color: #6f5475;
   height: fit-content;
@@ -324,6 +325,29 @@ input[type='radio']:checked + .book__page {
 .checkout svg {
   color: #6f5475;
 }
+.icons{
+  display: flex;
+  justify-content: end;
+}
+.icons div {
+  border: 2px solid blueviolet;
+  width: 12%;
+  justify-content: center;
+  display: flex;
+  border-radius: 50%;
+  margin-right: 5px;
+  padding-inline: 8px;
+  padding-block: 7px;
+  transition: background-color 0.3s ease;
+}
+.icons svg {
+  transition: color 0.3s ease;
+  color: blueviolet;
+}
+
+.icons div:hover svg {
+  color: blue;
+}
 
 .method {
   margin-top: 20px;
@@ -336,4 +360,30 @@ input[type='radio']:checked + .book__page {
   flex-direction: column;
   width: 75%;
   border: 2px solid rgb(216, 215, 217);
+}
+
+.reseñas {
+  justify-content: left;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  background-color: transparent;
+  border-radius: 5px;
+  width: 100%;
+}
+.reseñas h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.contReseña {
+  margin-top: 20px;
+  /* position: relative; */
+  padding: 10px;
+  width: 100%;
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
 }

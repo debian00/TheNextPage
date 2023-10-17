@@ -5,11 +5,10 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   linkWithPopup,
-
 } from 'firebase/auth'
 import { UNSAFE_DataRouterContext } from 'react-router'
 import { showSuccessNotification } from '../../utils/Toast.jsx'
-import { POST_CART } from '../types.js'
+import { POST_CART, POST_REVIEW } from '../types.js'
 
 export const createBook = (form) => {
   const { images } = form
@@ -87,36 +86,30 @@ export const CreateUser = async (register, setModal, navigate) => {
 
 export const getLogin = async (login, setModal, navigate, provider) => {
   try {
-
     const { data } = await axios.post('/login', login)
-    var finalUser;
-
+    var finalUser
     data.success
-    ? ( provider ?
-        (finalUser = Object.assign({}, data.data , provider),
-       
-         setModal({ access: true, body: provider }),
-        localStorage.setItem('token', data.token),
-        localStorage.setItem('user', JSON.stringify(finalUser)),
-        setTimeout(() => {
-         navigate("/home")
-          setModal({ access: false })
-          
-        }, 1500), 
-        console.log(finalUser))
+      ? provider
+        ? ((finalUser = Object.assign({}, data.data, provider)),
+          setModal({ access: true, body: provider }),
+          localStorage.setItem('token', data.token),
+          localStorage.setItem('user', JSON.stringify(finalUser)),
+          setTimeout(() => {
+            navigate('/home')
+            setModal({ access: false })
+          }, 1500),
+          console.log(finalUser))
         : (setModal({ access: true, body: data.data }),
-        localStorage.setItem('token', data.token),
-        localStorage.setItem('user', JSON.stringify(data.data)),
-        setTimeout(() => {
-          navigate("/home")
-          setModal({ access: false })
-          
-        }, 1500)))
-
+          localStorage.setItem('token', data.token),
+          localStorage.setItem('user', JSON.stringify(data.data)),
+          setTimeout(() => {
+            navigate('/home')
+            setModal({ access: false })
+          }, 1500))
       : setModal({ access: true, body: data.msg })
     setTimeout(() => {
       setModal({ access: false })
-    }, 1500) 
+    }, 1500)
   } catch (error) {
     setModal({ access: true, body: error.response.data })
     setTimeout(() => {
@@ -130,8 +123,8 @@ export const handleGoogleLogin = async (setModal, navigate) => {
   try {
     const provider = new GoogleAuthProvider()
     const result = await signInWithPopup(auth, provider)
-/* if(( result.user.providerData[0]?.providerId !== "google.com")) */
-    
+    /* if(( result.user.providerData[0]?.providerId !== "google.com")) */
+    console.log(result)
     const userInfo = result._tokenResponse
 
     const obj = {
@@ -141,18 +134,25 @@ export const handleGoogleLogin = async (setModal, navigate) => {
       fullName: userInfo.fullName,
       password: 'AAdsadsad1321321',
     }
+    console.log(userInfo, obj)
 
     try {
-      await getLogin(obj, setModal, navigate, obj)
+      const { data } = await axios('/users')
+      const userExists = data.some((user) => user.email === obj.email)
+      if (userExists) {
+        await getLogin(obj, setModal, navigate, obj)
+      } else {
+        await CreateUser(obj, setModal, navigate, obj)
+      }
     } catch (error) {
-      await CreateUser(obj, setModal, navigate, obj)
+      console.log(error)
     }
   } catch (error) {
     console.log(error)
   }
 }
 
-export const handleGitHubLogin = async  (setModal, navigate) => {
+export const handleGitHubLogin = async (setModal, navigate) => {
   try {
  
 
@@ -177,7 +177,7 @@ export const handleGitHubLogin = async  (setModal, navigate) => {
 
           await CreateUser(obj, setModal, navigate, obj)
           }
-        } else {
+        } 
 
           const result2 = await linkWithPopup(auth.currentUser, provider);
   
@@ -205,7 +205,7 @@ export const handleGitHubLogin = async  (setModal, navigate) => {
     
 
   }
-};
+}
 export const createReviews = (form) => {
   return async () => {
     try {
@@ -242,4 +242,28 @@ export const cartAnonymous = (id, allBooks) => {
 
 export const postCart = (userId, bookId) => async (dispatch) => {
   const { data } = await axios.post(`/cart/add/${userId}`, { bookId })
+  console.log(data)
+  return dispatch({
+    type: POST_CART,
+    payload: data,
+  })
 }
+
+export const postReview = (review) => async (dispatch) => {
+  const { data } = await axios.post('review/create', review)
+  console.log(data)
+  return dispatch({
+    type: POST_REVIEW,
+    payload: data,
+  })
+}
+
+export const createContact = async (form) => {
+  try {
+    const { data } = await axios.post("/contact/", form);
+    alert("Enviado con exito", data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+

@@ -1,29 +1,50 @@
 // import React from 'react';
+import Contacts from './Contacts/Contatcs'
 import style from './aboutUsView.module.css'
+import imagenAbout from '../../assets/imgaboutus/AboutImg.png'
 
 const AboutUs = () => {
   return (
-  
-
     <div className={style.about}>
-    <h2 className={style.title}>The Next Page</h2>
-    <div className={`row ${style.content}`} >
-      <div className={`col-12 ${style.card}`} >
-        <p className={style.texto}>The Next Page es una librería en línea apasionada por la literatura, comprometida con conectar amantes de la lectura con historias inspiradoras y conocimientos profundos.</p>
-        <p className={style.texto}>Nacimos de la pasión compartida por la lectura, creando una plataforma global para explorar y adquirir una amplia gama de libros.</p>
-        <p className={style.texto}>Creemos que los libros enriquecen nuestras vidas y amplían horizontes, ofreciendo una selección cuidadosamente curada en diversos géneros y una comunidad de lectores apasionados.</p>
-        <p className={style.texto}>Nuestra plataforma es segura y fácil de navegar, colaboramos con editores y autores destacados, y te invitamos a unirte a nuestra comunidad de lectores. ¡Descubre tu próxima aventura literaria en The Next Page!</p>
-      </div>
-      <div className={`col-12 ${style.card}`} >
-        <p className={style.texto}>The Next Page es una librería en línea apasionada por la literatura, comprometida con conectar amantes de la lectura con historias inspiradoras y conocimientos profundos.</p>
-        <p className={style.texto}>Nacimos de la pasión compartida por la lectura, creando una plataforma global para explorar y adquirir una amplia gama de libros.</p>
-        <p className={style.texto}>Creemos que los libros enriquecen nuestras vidas y amplían horizontes, ofreciendo una selección cuidadosamente curada en diversos géneros y una comunidad de lectores apasionados.</p>
-        <p className={style.texto}>Nuestra plataforma es segura y fácil de navegar, colaboramos con editores y autores destacados, y te invitamos a unirte a nuestra comunidad de lectores. ¡Descubre tu próxima aventura literaria en The Next Page!</p>
+      <div className={`row ${style.content}`}>
+        <div className={`col-4 `}>
+          <img src={imagenAbout} alt="" />
+        </div>
+        <div className={`col-8 ${style.conten2}`}>
+        <h2 style={{fontWeight: 'bold', justifyContent:'center', display:"flex", marginTop:"1rem"}}>
+               SOBRE NOSOTROS
+              </h2>
+          <p className={style.texto}>
+            The Next Page es una librería en línea apasionada por la literatura,
+            comprometida con conectar amantes de la lectura con historias
+            inspiradoras y conocimientos profundos.Nuestra misión es conectar a
+            amantes de la lectura con historias inspiradoras y conocimientos
+            profundos. Creemos que los libros tienen el poder de transformar
+            vidas, abrir mentes y ampliar horizontes. En The Next Page, no solo
+            vendemos libros, sino que también fomentamos un sentido de comunidad
+            en torno a la literatura. 
+          </p>
+          <p className={style.texto}>
+            The Next Page es un lugar donde la pasión por la literatura se
+            combina con el compromiso de brindar a nuestros clientes una
+            experiencia de lectura inigualable. Nuestra librería en línea es el
+            hogar de historias inspiradoras, conocimientos profundos y una
+            comunidad de amantes de la lectura que comparten la misma pasión.
+            Nos enorgullece ser su destino literario de confianza y esperamos
+            seguir inspirándolos a medida que exploran las páginas de los libros
+            que ofrecemos. ¡Únase a nosotros en esta apasionante aventura
+            literaria!
+          </p>
+        </div>
+        {/* <div className={`col-4 ${style.card}`}>
+         
+        </div> */}
+        <div className={`col-12 `}>
+          <Contacts />
+        </div>
       </div>
     </div>
-  </div>
-  
-  );
+  )
 }
 
-export default AboutUs;
+export default AboutUs

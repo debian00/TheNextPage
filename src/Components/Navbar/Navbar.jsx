@@ -32,7 +32,7 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const token = localStorage.getItem('token')
   const user = JSON.parse(localStorage.getItem('user'))
-  const [cart, setCart] = useState(0)
+  const [cart, setCart] = useState([])
   const cartUser = useSelector((state) => state.cart)
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const Navbar = () => {
       const localdata = JSON.parse(localStorage.getItem('cart'))
       setCart(localdata)
     }
-  }, [localStorage.getItem('cart'), cart])
+  }, [localStorage.getItem('cart')])
 
   const handleDrop = () => {
     setDropdown(true)
@@ -185,10 +185,16 @@ const Navbar = () => {
               <Link to={'/'}>INICIO</Link>
             </li>
             <li>
-              <Link to="/catalogue">CATALOGO</Link>
+              <Link to="/catalogue">CATÁLOGO</Link>
             </li>
             <li>
-              <Link to="/aboutus">NOSOTROS</Link>
+              <Link to="/promociones">PROMOCIONES</Link>
+            </li>
+            <li>
+              <Link to="/novedades">NOVEDADES</Link>
+            </li>
+            <li>
+              <Link to="/aboutus">CONTACTO</Link>
             </li>
             <li>
               <Link to="/faq">FAQ</Link>

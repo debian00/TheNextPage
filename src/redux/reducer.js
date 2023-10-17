@@ -1,3 +1,4 @@
+/* eslint-disable no-duplicate-case */
 /* eslint-disable no-case-declarations */
 import {
   ADMIN_TO_USER,
@@ -26,6 +27,12 @@ import {
   DELETE_CART,
   POST_CART,
   DELETE_ALL_CART,
+  GET_SALE_BY_USER,
+  GET_USER_BY_ID,
+  GET_ALL_FAVORITES,
+  UPDATE_USER,
+  GET_ALL_CONTACT,
+  DELETE_MESSAGE,
 } from './types'
 
 const initialState = {
@@ -36,10 +43,15 @@ const initialState = {
   reviews: [],
   authors: [],
   users: [],
+  user: [],
   searchs: [],
   booksSearch: [],
   bookNameAuthor: [],
   cart: [],
+  sale: [],
+  favorites: [],
+  userUpdate :{},
+  contact:[],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -89,6 +101,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         authors: action.payload,
       }
+    case GET_ALL_FAVORITES:
+      return{
+        ...state,
+        favorites: action.payload
+      }
     case GET_ALL_USERS:
       return { ...state, users: action.payload }
     case SEARCH_USER_BY_NAME:
@@ -107,6 +124,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         books: bookDeleted,
       }
+    case DELETE_MESSAGE: 
+    return{
+      ...state,
+      contact: state.contact.filter((contact) => contact.id !== action.payload)
+    }
     case UPDATE_BOOK:
       const bookUpdate = {
         count: state.books.count,
@@ -117,6 +139,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         books: bookUpdate,
+      }
+    case UPDATE_USER:
+      return{
+        ...state,
+        userUpdate: action.payload
       }
     case STOP_BOOK:
       const stopedBook = state.books.rows.map((book) => {
@@ -188,8 +215,24 @@ const rootReducer = (state = initialState, action) => {
     case SEARCH_AUTHOR_BY_NAME:
       return { ...state, authors: action.payload }
     case POST_CART:
-      return { ...state, cart: state.cart.push(action.payload) }
-    default:
+      return {
+        ...state,
+        cart:
+          action.payload.quantity > 1
+            ? [...state.cart]
+            : [...state.cart, action.payload],
+      }
+
+    case GET_SALE_BY_USER:
+      return { ...state, sale: action.payload }
+    case GET_USER_BY_ID:
+      return { ...state, user: action.payload }
+
+    case GET_REVIEW_BY_ID:
+      return { ...state, reviews: action.payload }
+    case GET_ALL_CONTACT:
+        return {...state, contact: action.payload}
+      default:
       return state
   }
 }

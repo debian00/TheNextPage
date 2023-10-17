@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import FavoritosView from './FavoritosView/FavoritosView'
 import ComprasView from './ComprasView/ComprasView'
 import ReseñasView from './ReseñasView/ReseñasView'
-import {  signOut } from 'firebase/auth'
+import { signOut } from 'firebase/auth'
 import { auth } from '../../redux/actions/firebase.js'
 import { useNavigate } from 'react-router-dom'
 
@@ -20,12 +20,10 @@ const PerfilUserdView = () => {
   const [color, setColor] = useState('#59415b')
   const [selectedLink, setSelectedLink] = useState(null)
 
-  
   const LogOut = async () => {
-     await signOut(auth);
-    localStorage.removeItem('token'),
-    localStorage.removeItem('user')
-    navigate("/home")
+    await signOut(auth)
+    localStorage.removeItem('token'), localStorage.removeItem('user')
+    navigate('/home')
   }
   //Manejar la opcion seleccionada mediante color
   const handleSelect = (linkName) => {
@@ -222,13 +220,6 @@ const PerfilUserdView = () => {
                 </a>
               </li>
             </ul>
-            <div>
-              {auth.currentUser ? 
-              (<span> Tu cuenta está asociada con :</span>
-                )
-              : null
-              }
-            </div>
           </div>
         </div>
         {/* Contenido del usuario */}
@@ -250,17 +241,12 @@ const PerfilUserdView = () => {
           </div>
         ) : componenteActual === 'E' ? (
           <div>
-            <h5>Estas seguro que quieres salir?</h5>
+            <h5>Estás seguro que quieres salir?</h5>
             <div>
-              <button
-                type="button"
-                onClick={
-                    LogOut
-                }
-              >
+              <button className={style.btn} type="button" onClick={LogOut}>
                 Si
               </button>
-              <button type="button">No </button>
+              <button className={style.btn} type="button">No </button>
             </div>
           </div>
         ) : null}
