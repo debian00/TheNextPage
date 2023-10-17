@@ -11,10 +11,32 @@ import {
 } from 'reactstrap'
 // import perfil from '../../../assets/imghome/pngtree-user-vector-avatar-png-image_1541962.jpg'
 import style from './editarperfilview.module.css'
+import { useDispatch } from 'react-redux'
+import { updateUser } from '../../../redux/actions/actionPut'
+import { useState } from 'react'
 
 const EditarPerfilView = () => {
   const token = localStorage.getItem('token')
   const user = JSON.parse(localStorage.getItem('user'))
+  const dispatch = useDispatch()
+
+  const [form, setForm] = useState({
+    id:user.id,
+    fullName: user.name,
+    email: user.email,
+    phoneNumber: user.phoneNumber,
+    birthDate: user.birthDate,
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateUser(form, form.id))
+  };
 
   return (
     <div>
@@ -73,7 +95,8 @@ const EditarPerfilView = () => {
                           name="fullName"
                           placeholder="Nombre Completo"
                           type="text"
-                          value={user.name}
+                          value={form.fullName}
+                          onChange={(e) => handleInputChange(e)}
                         />
                       </FormGroup>
                     </Col>
@@ -81,10 +104,11 @@ const EditarPerfilView = () => {
                       <FormGroup>
                         <label>Correo</label>
                         <Input
-                          name="nationality"
+                          name="email"
                           placeholder="Correo"
                           type="text"
-                          value={user.email}
+                          value={form.email}
+                          onChange={(e) => handleInputChange(e)}
                         />
                       </FormGroup>
                     </Col>
@@ -97,7 +121,8 @@ const EditarPerfilView = () => {
                           name="phoneNumber"
                           placeholder="Número Teléfono"
                           type="text"
-                          value={user.phoneNumber}
+                          value={form.phoneNumber}
+                          onChange={(e) => handleInputChange(e)}
                         />
                       </FormGroup>
                     </Col>
@@ -108,7 +133,8 @@ const EditarPerfilView = () => {
                           name="birthDate"
                           placeholder="Fecha Cumpleaños"
                           type="text"
-                          value={user.birthDate}
+                          value={form.birthDate}
+                          onChange={(e) => handleInputChange(e)}
                         />
                       </FormGroup>
                     </Col>
@@ -116,7 +142,7 @@ const EditarPerfilView = () => {
                   <Row>
                     <Col md="12 d-flex justify-content-center align-items-center">
                       <FormGroup>
-                        <button type="submit" className={style.buttons}>
+                        <button type="submit" onClick={handleSubmit} className={style.buttons}>
                           Editar
                         </button>
                       </FormGroup>
