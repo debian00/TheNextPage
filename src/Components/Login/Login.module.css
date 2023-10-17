@@ -1,4 +1,7 @@
 
+
+@import url('https://fonts.cdnfonts.com/css/avenir');
+
 .inputs {
     margin-left : 10px;
     border : none;
@@ -7,6 +10,7 @@
     border-radius: 5px;
    height: 40px;
    width: 230px;
+   font-family: 'Avenir, sans-serif';
   
 }
 
@@ -26,15 +30,17 @@
 .label {
   
     padding: 10px !important;
-    font-size: 20px;
-    color: #091f44 !important;
-   font-size: 20px;
+    font-size: 1em;  
+      color: #091f44 !important;
+   
+   font-family: 'Avenir, sans-serif';
    
 }
 
 /*  */
 .span {
-  font-size: 22px;
+  font-size: 1em;
+  font-family: 'Avenir, sans-serif';
 
 }
 .span:hover {
@@ -57,6 +63,7 @@
   width: 200px;
   box-shadow: #06142d;
   transition: background-color 0.3s ease;
+  font-family: 'Avenir, sans-serif';
 }
 .butonGoogle { 
 
@@ -97,6 +104,7 @@
   width:300px;
   box-shadow: #06142d;
   transition: background-color 0.3s ease;
+  font-family: 'Avenir, sans-serif';
 
 }
 .butonlogin:hover {
@@ -106,7 +114,8 @@
 .spanLink{
   cursor: pointer;
   color: rgb(140, 82, 158);
-  font-size: 22px;
+  font-size: 1em;
+  font-family: 'Avenir, sans-serif';
 
 }
 .spanLink:hover {
@@ -160,6 +169,7 @@ color: #562c66f6;
     height: 100%;
    padding : 30px;
   border-radius: 15px;
+  font-family: 'Avenir, sans-serif';
   
  }
  .iconPassword {

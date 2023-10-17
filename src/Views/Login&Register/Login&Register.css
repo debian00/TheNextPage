@@ -1,6 +1,9 @@
+@import url("https://fonts.cdnfonts.com/css/avenir");
+
 .App {
-    font-family: sans-serif;
-    text-align: center;
+  font-family: 'Avenir, sans-serif';
+  text-align: center;
+  
   }
   
   
@@ -64,8 +67,7 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
     width: 530px;
-    height: 780px;
-    
+    height: 780px;    
     border-radius: 10px;
     display: flex;
     justify-content: center;

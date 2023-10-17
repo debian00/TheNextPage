@@ -58,8 +58,7 @@ const AdminDashboardView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    borderRadius: '15px',
+                    alignItems: 'center',              
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -92,8 +91,7 @@ const AdminDashboardView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    borderRadius: '15px',
+                    alignItems: 'center',                    
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -122,8 +120,7 @@ const AdminDashboardView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    borderRadius: '15px',
+                    alignItems: 'center',                   
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -154,8 +151,7 @@ const AdminDashboardView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    borderRadius: '15px',
+                    alignItems: 'center',                    
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
@@ -189,8 +185,7 @@ const AdminDashboardView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    borderRadius: '15px',
+                    alignItems: 'center',                    
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',

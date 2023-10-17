@@ -63,11 +63,10 @@ export default function LoginAndRegister() {
       <div className={`demoPage1 left page `} number={3} key={3} >
 
         <div  className={`d-flex  flex-column  align-items-center justify-content-center ${style.imagen1}`}>
-           <h1 style={{color : "white"  ,fontSize : "50px", marginTop : "0px !important"}}>¡Hola! Tanto tiempo</h1>
-           <h1 style={{color : "white"  ,fontSize : "50px"}}>Te extrañamos en</h1> 
+         
           <div style={{marginTop :  "80px" ,display: "flex", justifyContent : "center" , flexDirection : "column", alignItems : "center"}}>
-           <Logo width={"100px"} height={"90px"} color={"white"} ></Logo>
-        <h3  style={{color : "white", margin :"20px"}}> The Next Page</h3>
+           <Logo width={"200px"} height={"180px"} color={"white"} ></Logo>
+        <h2  style={{color : "white", margin :"20px"}}> The Next Page</h2>
 
           </div>
         </div>

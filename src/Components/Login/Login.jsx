@@ -142,7 +142,7 @@ const Login = React.forwardRef((props, ref) => {
           <fieldset
             className={` d-flex flex-column justify-content-center align-items-center text-center ${style.formLogin}`}
           >
-            <legend className={style.legend}>Logueate</legend>
+            <legend className={style.legend}>Login</legend>
             <div className="d-flex ">
               <div className=" d-flex flex-row mb-4">
                 <label htmlFor="email" className={style.label}>
@@ -192,10 +192,10 @@ const Login = React.forwardRef((props, ref) => {
                 {...register('password', {
                   required: {
                     value: true,
-                    message: 'Escibe tu contraseña',
+                    message: 'Escribe tu contraseña',
                   },
                 })}
-                placeholder="Tu contraseña aqui..."
+                placeholder="Tu contraseña aquí..."
                 type={passwordType ? 'text' : 'password'}
               ></input>
 
@@ -226,10 +226,10 @@ const Login = React.forwardRef((props, ref) => {
             </div>
             <Link to="/forgot-password">
               <span
-                style={{ fontSize: '20px', cursor: 'pointer', color: 'black' }}
+                style={{ fontSize: '1em', cursor: 'pointer', color: 'black' }}
               >
                 ¿Olvidaste tu contraseña?{' '}
-                <span className={style.spanLink}>Haz click aqui! </span>
+                <span className={style.spanLink}>Haz click aquí </span>
               </span>
             </Link>
             <div className="d-flex flex-column justify-content-center align-items-center">
@@ -246,7 +246,7 @@ const Login = React.forwardRef((props, ref) => {
                     className={style.spanLink}
                     onClick={() => handleNextPage()}
                   >
-                    Regístrate aqui
+                    Regístrate aquí
                   </span>
                 </span>
                 <p>o </p>
@@ -312,7 +312,7 @@ const Login = React.forwardRef((props, ref) => {
             <div class="justify-self-center align-self-center">
               <Modal show={modal}>
                 <Modal.Header>
-                  <Modal.Title>Algo salio mal❌</Modal.Title>
+                  <Modal.Title>Algo salió mal❌</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   <div>
