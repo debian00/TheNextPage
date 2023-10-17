@@ -14,7 +14,7 @@ export const updateBook = (form, id) => {
     }
   }
 }
-export const updateUser = (form, id) => {
+export const updateUser = (id, form) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(`/users/update/${id}`, form)

@@ -13,19 +13,20 @@ import {
 import style from './editarperfilview.module.css'
 import { useDispatch } from 'react-redux'
 import { updateUser } from '../../../redux/actions/actionPut'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const EditarPerfilView = () => {
   const token = localStorage.getItem('token')
   const user = JSON.parse(localStorage.getItem('user'))
   const dispatch = useDispatch()
-
+  console.log('userasas', user);
   const [form, setForm] = useState({
-    id:user.id,
-    fullName: user.name,
-    email: user.email,
-    phoneNumber: user.phoneNumber,
-    birthDate: user.birthDate,
+    id:'',
+    userName :'',
+    fullName:"",
+    email: "",
+    phoneNumber: "",
+    birthDate: "",
   });
 
   const handleInputChange = (event) => {
@@ -35,8 +36,20 @@ const EditarPerfilView = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUser(form, form.id))
+    console.log("Datos que se van a enviar:", form, user.id);
+    dispatch(updateUser(user.id, form))
   };
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    setForm({
+      userName: user.userName,
+      fullName:user.name,
+      email:user.email,
+      phoneNumber: user.phoneNumber,
+      birthDate:user.birthDate,
+    })
+  },[])
 
   return (
     <div>
@@ -48,7 +61,7 @@ const EditarPerfilView = () => {
             </CardHeader>
             <CardBody>
               {token ? (
-                <Form>
+                <Form onSubmit={handleSubmit}>
                   <Row className={style.containerImagen}>
                     <Col
                       md="12"
@@ -81,7 +94,8 @@ const EditarPerfilView = () => {
                           name="userName"
                           placeholder="Nombre Usuario"
                           type="text"
-                          value={user.userName}
+                          value={form.userName}
+                          onChange={(e) => handleInputChange(e)}
                           disabled
                         />
                       </FormGroup>
@@ -142,7 +156,7 @@ const EditarPerfilView = () => {
                   <Row>
                     <Col md="12 d-flex justify-content-center align-items-center">
                       <FormGroup>
-                        <button type="submit" onClick={handleSubmit} className={style.buttons}>
+                        <button type="submit" className={style.buttons}>
                           Editar
                         </button>
                       </FormGroup>
