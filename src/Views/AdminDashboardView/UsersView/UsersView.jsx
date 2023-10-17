@@ -188,7 +188,7 @@ const UsersView = () => {
             <th scope="col">Email</th>
             <th scope="col">Tipo usuario</th>
             <th scope="col">Cambiar rol a</th>
-            <th scope="col">Promocion</th>
+            <th scope="col">Promoción</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
