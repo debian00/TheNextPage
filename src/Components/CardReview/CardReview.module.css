@@ -144,3 +144,11 @@ hr {
 .rating > input:checked ~ label {
   color: #ffa723;
 }
+
+.button {
+  padding: 5px;
+  border: none;
+  background: #924eaf;
+  color: #fff;
+  border-radius: 5px;
+}

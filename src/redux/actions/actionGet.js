@@ -347,7 +347,7 @@ export const getUrlPayment = (cart, id) => async (dispatch) => {
             })
             clearInterval(checkPaymentInterval)
             paymentWindow.close()
-            // window.location.pathname = '/success'
+            window.location.pathname = '/success'
             console.log('Pago completado con éxito')
           }
         } catch (error) {
