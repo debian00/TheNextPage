@@ -34,10 +34,12 @@ const PerfilUserdView = () => {
     setSelectedLink(linkName)
   }
   useEffect(() => {
-    console.log(auth);
     setSelectedLink('A')
     setColor('#59415b')
   }, [])
+
+
+  
   return (
     <div>
       <div className={`${style.panel} row`}>

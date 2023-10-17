@@ -177,10 +177,10 @@ export const handleGitHubLogin = async  (setModal, navigate) => {
 
           await CreateUser(obj, setModal, navigate, obj)
           }
-        } 
+        } else {
 
           const result2 = await linkWithPopup(auth.currentUser, provider);
-
+  
           const obj = {
             userName: result2._tokenResponse.screenName,
             profilePic: result2._tokenResponse.photoUrl,
@@ -192,10 +192,12 @@ export const handleGitHubLogin = async  (setModal, navigate) => {
                   await getLogin(obj, setModal, navigate, obj)
                 
               } catch (error) {
-
+  
                 await CreateUser(obj, setModal, navigate, obj)
               }
      
+        }
+
       
 
     }   catch (error) {   
