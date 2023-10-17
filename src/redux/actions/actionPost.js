@@ -177,27 +177,26 @@ export const handleGitHubLogin = async (setModal, navigate) => {
 
           await CreateUser(obj, setModal, navigate, obj)
           }
-        } 
+        } else {
 
-          const result2 = await linkWithPopup(auth.currentUser, provider);
-  
-          const obj = {
-            userName: result2._tokenResponse.screenName,
-            profilePic: result2._tokenResponse.photoUrl,
-            email: result2._tokenResponse.email,
-            fullName: result2._tokenResponse.fullName,
-            password: 'AAdsadsad1321321',
-          }  
-              try {  
-                  await getLogin(obj, setModal, navigate, obj)
-                
-              } catch (error) {
-  
-                await CreateUser(obj, setModal, navigate, obj)
-              }
-     
+        const result2 = await linkWithPopup(auth.currentUser, provider);
+
+        const obj = {
+          userName: result2._tokenResponse.screenName,
+          profilePic: result2._tokenResponse.photoUrl,
+          email: result2._tokenResponse.email,
+          fullName: result2._tokenResponse.fullName,
+          password: 'AAdsadsad1321321',
+        }  
+            try {  
+                await getLogin(obj, setModal, navigate, obj)
+              
+            } catch (error) {
+
+              await CreateUser(obj, setModal, navigate, obj)
+            }
         }
-
+        }
       catch (error) {   
     console.log(error);
     
