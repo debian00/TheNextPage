@@ -22,7 +22,7 @@ import {
   GET_SALE_BY_USER,
   GET_USER_BY_ID,
   GET_ALL_FAVORITES,
-  GET_ALL_CONTACT
+  GET_ALL_CONTACT,
 } from '../types'
 
 export const getAllBooks = ({
@@ -100,7 +100,6 @@ export const getAllBooksCopy = (page) => {
     }
   }
 }
-
 
 export const getAllBooksOffer = (forSale) => {
   return async (dispatch) => {
@@ -308,8 +307,8 @@ export const getUrlPayment = (cart, id) => async (dispatch) => {
     items: cart,
   })
   if (data && data.url) {
-    var width = 500
-    var height = 600
+    const width = 500
+    const height = 600
     const left = (screen.width - width) / 2
     const top = (screen.height - height) / 2
     const options = `width=${width}, height=${height}, left=${left}, top=${top}, location=no, toolbar=no`
@@ -372,6 +371,64 @@ export const getUrlPayment = (cart, id) => async (dispatch) => {
   }
 }
 
+export const getUrlPaymentMercadoPago = (cart, id) => async (dispatch) => {
+  const { data } = await axios.post(`/pay/mercadoPago/create-order`, {
+    items: cart,
+  })
+
+  if (data && data.init_point) {
+    const width = 500
+    const height = 600
+    const left = (screen.width - width) / 2
+    const top = (screen.height - height) / 2
+    const options = `width=${width}, height=${height}, left=${left}, top=${top}, location=no, toolbar=no`
+    const paymentWindow = window.open(data.init_point, '_blank', options)
+    const checkoutChecked = async () => {
+      if (paymentWindow.closed) {
+        try {
+          const date = new Date()
+          const itemsMapped = cart.map((ele) => {
+            return {
+              userId: id,
+              bookId: ele.book.id,
+              purchaseDate: date.toISOString(),
+              totalPrice: ele.price,
+              quantity: ele.quantity,
+              paymentMethod: 'Tarjeta de crédito', // O el método de pago que corresponda
+              cartId: ele.id,
+            }
+          })
+
+          await axios.post('/sale/create', { itemsMapped })
+          await axios.delete(`/cart/deleteAll/${id}`)
+          dispatch({
+            type: DELETE_ALL_CART,
+            payload: [],
+          })
+
+          clearInterval(checkPaymentInterval)
+          paymentWindow.close()
+          window.location.pathname = '/success'
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+    checkoutChecked()
+
+    const checkPaymentInterval = setInterval(checkoutChecked, 3000)
+
+    window.addEventListener('beforeunload', () => {
+      clearInterval(checkPaymentInterval)
+      if (!paymentWindow.closed) {
+        paymentWindow.close()
+      }
+    })
+  }
+
+  console.log(data)
+}
+
 export const getSaleByUser = (id) => async (dispatch) => {
   try {
     const { data } = await axios(`/sale/user/${id}`)
@@ -425,13 +482,13 @@ export const getAllFavs = (id) => {
 export const getAllContact = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`/contact/`);
+      const { data } = await axios(`/contact/`)
       return dispatch({
         type: GET_ALL_CONTACT,
         payload: data,
-      });
+      })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
-};
+  }
+}
