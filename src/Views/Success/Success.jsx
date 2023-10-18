@@ -1,17 +1,20 @@
-import styles from './Success.module.css';
+import styles from './Success.module.css'
 
 const Cancelled = () => {
- return (
+  return (
     <div className={styles.body}>
-    <div className={styles.card}>
-      <div className={styles.circle}>
-        <i className={styles.checkmark}>x</i>
+      <div className={styles.card}>
+        <div className={styles.circle}>
+          <i className={styles.checkmark}>✓</i>
+        </div>
+        <h1 className={styles.success}>Exitoso</h1>
+        <p className={styles.text}>
+          Pago realizado con
+          <br /> exito!
+        </p>
       </div>
-      <h1 className={styles.success}>Exitoso</h1> 
-      <p className={styles.text}>Pago realiza con<br/> exito!</p>
     </div>
-    </div>
- );
-};
+  )
+}
 
-export default Cancelled;
+export default Cancelled
