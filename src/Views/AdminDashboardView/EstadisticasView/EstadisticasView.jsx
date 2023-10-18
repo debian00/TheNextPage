@@ -8,7 +8,8 @@ const EstadisticasView = () => {
   return (
     <div>
             {/* Aquí las gráficas (un componente por cada uno). */}
-            <h1 className=" text-center font-monospace fw-bold lh-base">Estadisticas The Next Page</h1>
+            <h1 className=" text-center fw-bold lh-base" style={{  fontFamily: 'Avenir, sans-serif', backgroundColor: '#6F5475', borderColor: "#6F5475", color: '#ffffff' }} >Mis métricas</h1>
+
             <div>
                 <p className="m-2"><b>Ventas Mensuales </b>Gráfico de líneas</p>
                 <div className="bg-light mx-auto px-2 border border-2 border-primary" style={{width:"450px", height:"230px"}}>

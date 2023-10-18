@@ -50,7 +50,6 @@ const initialState = {
   cart: [],
   sale: [],
   favorites: [],
-  userUpdate :{},
   contact:[],
 }
 
@@ -143,7 +142,9 @@ const rootReducer = (state = initialState, action) => {
     case UPDATE_USER:
       return{
         ...state,
-        userUpdate: action.payload
+        users: state.users.map((user) => 
+        user.id === action.payload.id ? action.payload : user) 
+        
       }
     case STOP_BOOK:
       const stopedBook = state.books.rows.map((book) => {

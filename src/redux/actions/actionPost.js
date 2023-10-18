@@ -49,7 +49,7 @@ export const postGenre = (name) => {
 export const postPromotion = (email) => {
   return async () => {
     try {
-      const { data } = await axios.post('/sendmail', { to: email })
+      const { data } = await axios.post('/sendpromotion', { to: email })
       console.log(data)
     } catch (error) {
       console.log(error.response.data.error)
