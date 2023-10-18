@@ -254,13 +254,15 @@ export const postReview = (review) => async (dispatch) => {
     payload: data,
   })
 }
+export const createContact = (form) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post("/contact/", form);
+      console.log(data);
 
-export const createContact = async (form) => {
-  try {
-    const { data } = await axios.post("/contact/", form);
-    alert("Enviado con exito", data);
-  } catch (error) {
-    console.error(error);
-  }
+    } catch (error) {
+      console.error(error);
+  
+    }
+  };
 };
-

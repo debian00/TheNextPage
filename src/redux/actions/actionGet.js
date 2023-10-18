@@ -23,6 +23,7 @@ import {
   GET_USER_BY_ID,
   GET_ALL_FAVORITES,
   GET_ALL_CONTACT,
+  GET_ALL_SALE,
 } from '../types'
 
 export const getAllBooks = ({
@@ -87,10 +88,11 @@ export const getBookByNameAuthor = (author) => {
   }
 }
 
-export const getAllBooksCopy = (page) => {
+export const getAllBooksCopy = (page, order) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`/books?page=${page}`)
+      if (!order) order = ''
+      const { data } = await axios(`/books?page=${page}&size=100&order=${order}`)
       return dispatch({
         type: GET_ALL_BOOKS_COPY,
         payload: data,
@@ -439,6 +441,21 @@ export const getSaleByUser = (id) => async (dispatch) => {
     })
   } catch (error) {
     console.log(error)
+  }
+}
+
+
+export const getAllSale = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(`/sale/`)
+      return dispatch({
+        type: GET_ALL_SALE,
+        payload: data,
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

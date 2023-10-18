@@ -33,6 +33,7 @@ import {
   UPDATE_USER,
   GET_ALL_CONTACT,
   DELETE_MESSAGE,
+  GET_ALL_SALE,
 } from './types'
 
 const initialState = {
@@ -75,6 +76,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, books: action.payload }
     case GET_ALL_BOOKS_OFFER:
       return { ...state, books: action.payload }
+    case GET_ALL_SALE:
+      return {...state, sale :action.payload}
     case GET_BOOK_BY_AVAILABILITY:
       return { ...state, books: action.payload }
     case GET_BOOK_BY_NAME_AUTHOR:

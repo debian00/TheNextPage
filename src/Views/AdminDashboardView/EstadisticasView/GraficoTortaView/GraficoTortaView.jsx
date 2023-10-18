@@ -10,11 +10,11 @@ var options = {
 };
 
 var data = {
-    labels: ['Aventura', 'Biografia', 'Drama', 'Epica', 'Fabula'],
+    labels: ['Ciencia Ficcion', 'Fantasía', 'Novela', 'Terror', 'Aventura'],
     datasets: [
         {
-            label: 'Popularidad en Navidad',
-            data: [35, 20, 20, 15, 10],
+            label: 'Popularidad en Libros!',
+            data: [10 , 9, 18 , 3 , 4],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(255, 206, 86, 0.2)',

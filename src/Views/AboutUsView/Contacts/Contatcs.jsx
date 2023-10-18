@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import style from './contacts.module.css'
 import { useDispatch } from 'react-redux';
 import { createContact } from '../../../redux/actions/actionPost';
-
+import { showSuccessNotification, showErrorNotification } from '../../../utils/Toast'
 
 const Contacts = () => {
   const [visible, setVisible] = useState(false)
@@ -18,49 +18,56 @@ const Contacts = () => {
 
   const [errors, setErrors] = useState({})
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    // Realiza validaciones de los campos del formulario
-    const validationErrors = {}
-    if (!contact.name) {
-      validationErrors.name = 'El nombre es obligatorio.'
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      // Realiza validaciones de los campos del formulario
+      const validationErrors = {};
+      if (!contact.name) {
+        validationErrors.name = 'El nombre es obligatorio.';
+      }
+      if (!contact.lastname) {
+        validationErrors.lastname = 'El apellido es obligatorio.';
+      }
+      if (!contact.phone) {
+        validationErrors.phone = 'El teléfono es obligatorio.';
+      }
+      if (!contact.email) {
+        validationErrors.email = 'El correo electrónico es obligatorio.';
+      } else if (!/^\S+@\S+\.\S+$/.test(contact.email)) {
+        validationErrors.email = 'Ingrese un correo electrónico válido.';
+      }
+      if (!contact.message) {
+        validationErrors.message = 'El mensaje es obligatorio.';
+      }
+  
+      // Si hay errores, muestra los mensajes de error
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+      } else {
+        // No hay errores, puedes enviar el formulario
+        showSuccessNotification('Solicitud enviada con éxito!');
+        await dispatch(createContact(contact));
+        // Restablece el formulario
+        setContact({
+          name: '',
+          lastname: '',
+          phone: '',
+          email: '',
+          message: '',
+        });
+  
+        // Limpia los errores
+        setErrors({});
+      }
+    } catch (error) {
+      // Manejar cualquier error que ocurra durante el proceso
+      console.error('Error al enviar la solicitud:', error);
+      showErrorNotification('Ocurrió un error al enviar la solicitud.');
     }
-    if (!contact.lastname) {
-      validationErrors.lastname = 'El apellido es obligatorio.'
-    }
-    if (!contact.phone) {
-      validationErrors.phone = 'El teléfono es obligatorio.'
-    }
-    if (!contact.email) {
-      validationErrors.email = 'El correo electrónico es obligatorio.'
-    } else if (!/^\S+@\S+\.\S+$/.test(contact.email)) {
-      validationErrors.email = 'Ingrese un correo electrónico válido.'
-    }
-    if (!contact.message) {
-      validationErrors.message = 'El mensaje es obligatorio.'
-    }
-    //
-    // Si hay errores, muestra los mensajes de error
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors)
-    } else {
-      // No hay errores, puedes enviar el formulario
-      dispatch(createContact(contact));
-
-      // Restablece el formulario
-      setContact({
-        name: '',
-        lastname: '',
-        phone: '',
-        email: '',
-        message: '',
-      })
-
-      // Limpia los errores
-      setErrors({})
-    }
-  }
+  };
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target
