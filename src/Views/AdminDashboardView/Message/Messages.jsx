@@ -50,7 +50,7 @@ const Message = () => {
     <div>
       <div>
         <div className={style.name}>
-        <h1 className=" text-center font-monospace fw-bold lh-base">Mensajes de usuarios</h1>
+        <h1 className=" text-center fw-bold lh-base" style={{  fontFamily: 'Avenir, sans-serif', backgroundColor: '#6F5475', borderColor: "#6F5475", color: '#ffffff' }} >Mensajes de usuarios</h1>
         </div>
 
         <div className={style.cardsCont}>
@@ -126,7 +126,7 @@ const Message = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">
-                Send message
+                Enviar mensaje
               </h1>
               <button
                 type="button"
@@ -166,7 +166,7 @@ const Message = () => {
                 data-bs-dismiss="modal"
                 aria-label="Close"
               >
-                Close
+                Cerrar
               </button>
               <button
                 aria-label="Close"
@@ -185,7 +185,7 @@ const Message = () => {
                   }
                 }}
               >
-                Send message
+                Enviar mensaje
               </button>
             </div>
           </div>

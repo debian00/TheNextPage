@@ -2,7 +2,11 @@ import { Link, useParams } from 'react-router-dom'
 import { Stripe, Warning } from '../../utils/Icons'
 import style from './Checkout.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCartUser, getUrlPayment } from '../../redux/actions/actionGet'
+import {
+  getCartUser,
+  getUrlPayment,
+  getUrlPaymentMercadoPago,
+} from '../../redux/actions/actionGet'
 import CardCheckout from '../../Components/CardCheckout/CardCheckout'
 import { useEffect } from 'react'
 import svgStripe from '../../assets/png/2560px-Stripe_Logo,_revised_2016.svg.png'
@@ -16,6 +20,10 @@ const Checkout = () => {
 
   const handlePayment = () => {
     dispatch(getUrlPayment(cart, id))
+  }
+
+  const handleMercadoPago = () => {
+    dispatch(getUrlPaymentMercadoPago(cart, id))
   }
 
   const priceTotal = () => {
@@ -58,6 +66,9 @@ const Checkout = () => {
             <label>Metodo de pago</label>
 
             <button onClick={() => handlePayment()}>
+              <Stripe width={80} />
+            </button>
+            <button onClick={() => handleMercadoPago()}>
               <Stripe width={80} />
             </button>
           </div>
