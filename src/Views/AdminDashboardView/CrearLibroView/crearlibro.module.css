@@ -6,7 +6,7 @@
   right: 0;
   transform: translate(-0%, 0%);
   z-index: 2;
-  background-color: rgb(35, 90, 163);
+  background-color:#6F5475 ;
   color: #ffffff;
   border: none;
   padding: 5px 5px;
@@ -71,3 +71,10 @@
   text-overflow: ellipsis;
   margin: 0;
 }
+
+.btn btn-primary{
+  background-color: #6F5475;
+  color: #ffffff;
+
+}
+
