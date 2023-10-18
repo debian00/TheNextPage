@@ -67,7 +67,7 @@ const ReviewCard = ({ id, score, comment, userId }) => {
               margin: 'auto',
             }}
           >
-            {user.userName}
+            {user?.userName}
           </p>
         </div>
         <p>{comment}</p>

@@ -84,7 +84,6 @@ export default function LinesChart() {
         scales: {
             y: {
                 min: 0,
-                max: 10,
             },
             x: {
                 ticks: { color: 'rgb(255, 99, 132)' }
