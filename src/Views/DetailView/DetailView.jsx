@@ -1,4 +1,4 @@
-import { useEffect,} from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllFavs, getBookById } from '../../redux/actions/actionGet'
 import styles from './detail.module.css' // Importa los estilos CSS
@@ -24,13 +24,7 @@ function DetailView() {
 
   // const [color, setColor] = useState('currentColor')
 
-  useEffect(() => {
-    const idUser = JSON.parse(localStorage.getItem('user'))
-    const userId = idUser.id
-    dispatch(getBookById(id))
-    dispatch(getGenres())
-    dispatch(getAllFavs(userId))
-  }, [dispatch, id])
+ 
 
   const getGenreName = (genreId) => {
     const genreNames = genreId.genre?.map((id) => {
@@ -42,6 +36,7 @@ function DetailView() {
   }
 
   const handleAddFav = async (e, bookId) => {
+    console.log('Envoia', bookId)
     e.preventDefault()
     const isLoggedIn = !!localStorage.getItem('token')
     if (!isLoggedIn) {
@@ -49,15 +44,16 @@ function DetailView() {
       navigate('/check')
       return
     }
-    const idUser = JSON.parse(localStorage.getItem('user'))
-    const userId = idUser.id
-
-    const isBookInFavs = allFavs?.some((fav) => fav === bookId)
-    if (isBookInFavs) {
+    console.log('Mis libros', allFavs);
+    const isBookInFavs = allFavs?.some((fav) => fav.id === bookId);
+    console.log('Esta el libro en favoritos', isBookInFavs);
+    if (isBookInFavs ) {
       // setColor('blue')
       showErrorNotification('¡El libro ya se encuentra en favoritos!')
     } else {
       try {
+        const idUser = JSON.parse(localStorage.getItem('user'))
+        const userId = idUser.id
         await dispatch(addFavorite(userId, bookId))
         dispatch(getAllFavs(userId))
         showSuccessNotification('¡Se añadió a favoritos con éxito!')
@@ -81,6 +77,14 @@ function DetailView() {
     showSuccessNotification('¡Se añadió al carrito con éxito!')
     console.log('Se guardó en el carrito')
   }
+
+  useEffect(() => {
+    const idUser = JSON.parse(localStorage.getItem('user'))
+    const userId = idUser.id
+    dispatch(getBookById(id))
+    dispatch(getGenres())
+    dispatch(getAllFavs(userId))
+  }, [dispatch, id])
 
   return (
     <div>
@@ -246,9 +250,9 @@ function DetailView() {
               onClick={(e) => handleAddFav(e, bookData.id)}
             >
               <div className={styles.icons}>
-                {allFavs?.some((fav) => fav === bookData.id) ? (
+                {allFavs?.some((fav) => fav.id === bookData.id) ? (
                   <div>
-                    <Favorite width={30} fill="blue" />
+                    <Favorite width={30} fill="red" />
                   </div>
                 ) : (
                   <div>

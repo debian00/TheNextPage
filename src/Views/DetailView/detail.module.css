@@ -330,8 +330,8 @@ input[type='radio']:checked + .book__page {
   justify-content: end;
 }
 .icons div {
-  border: 2px solid blueviolet;
-  width: 12%;
+  border: 2px solid rgb(95, 95, 95);
+  width: 35px;
   justify-content: center;
   display: flex;
   border-radius: 50%;
@@ -346,7 +346,7 @@ input[type='radio']:checked + .book__page {
 }
 
 .icons div:hover svg {
-  color: blue;
+  color: rgb(255, 0, 234);
 }
 
 .method {

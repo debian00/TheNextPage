@@ -5,6 +5,7 @@ import style from './message.module.css'
 import { deleteMessageById } from '../../../redux/actions/actionDelete'
 import { getAllContact } from '../../../redux/actions/actionGet'
 import { showSuccessNotification } from '../../../utils/Toast'
+import Swal from 'sweetalert2';
 
 const Message = () => {
   const contact = useSelector((state) => state.contact)
@@ -176,7 +177,11 @@ const Message = () => {
                   if (messageText.trim() !== '') {
                     handleSendMessage(idContact)
                   } else {
-                    alert('Por favor, ingrese un mensaje antes de enviar.')
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Error',
+                      text: 'Por favor, ingrese un mensaje antes de enviar.',
+                    });
                   }
                 }}
               >

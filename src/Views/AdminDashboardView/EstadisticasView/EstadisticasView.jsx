@@ -24,7 +24,7 @@ const EstadisticasView = () => {
             </div>
             <hr className="mt-3 mb-2"/>
             <div>
-                <p className="m-2"><b>Generos mas vendidos </b>Gráfico circular</p>
+                <p className="m-2"><b>Top 5 géneros más comunes que se encuentran en los libros. </b>Gráfico circular</p>
                 <div className="bg-light mx-auto border border-2 border-primary" style={{width:"450px", height:"250px"}}>
                     <div style={{width:"100%", height:"100%", padding:"10px 0"}}>
                         <Pies />                       
