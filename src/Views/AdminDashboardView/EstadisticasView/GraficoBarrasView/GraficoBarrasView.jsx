@@ -45,7 +45,7 @@ ChartJS.register(
 
 var misoptions = {
   responsive: true,
-  animation: false,
+  animation: true,
   plugins: {
     legend: {
       display: false,
@@ -54,7 +54,6 @@ var misoptions = {
   scales: {
     y: {
       min: 0,
-      max: 10,
     },
     x: {
       ticks: { color: 'rgba(0, 220, 195)' },
@@ -81,7 +80,7 @@ export default function Bars() {
   
     useEffect(() => {
       dispatch(getAllSale());
-      dispatch(getAllBooksCopy((1)));
+      dispatch(getAllBooksCopy());
     }, []);
   
     // Objeto para rastrear el recuento de cada libro
@@ -99,11 +98,14 @@ export default function Bars() {
   
     // Crear nuevos datos para el gráfico
     const labels = Object.keys(bookCounts); // IDs de los libros
+    console.log('Names', labels);
     const data = Object.values(bookCounts); // Recuentos de los libros
+    console.log('Info', data); 
     const labelsWithNames = labels.map((id) => {
       const book = allBooks?.rows?.find((book) => book.id === id);
       return book ? book.title : id;
     });
+    
   
     const newChartData = {
       labels: labelsWithNames,

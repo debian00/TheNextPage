@@ -247,9 +247,8 @@ function DetailView() {
             </div>
             <div
               className={styles.checkout}
-              onClick={(e) => handleAddFav(e, bookData.id)}
             >
-              <div className={styles.icons}>
+              <div className={styles.icons} onClick={(e) => handleAddFav(e, bookData.id)}>
                 {allFavs?.some((fav) => fav.id === bookData.id) ? (
                   <div>
                     <Favorite width={30} fill="red" />

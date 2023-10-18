@@ -92,6 +92,7 @@ export const getAllBooksCopy = (page, order) => {
   return async (dispatch) => {
     try {
       if (!order) order = ''
+      if (!page) page = ''
       const { data } = await axios(`/books?page=${page}&size=100&order=${order}`)
       return dispatch({
         type: GET_ALL_BOOKS_COPY,
