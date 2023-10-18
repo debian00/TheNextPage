@@ -25,7 +25,7 @@ const Message = () => {
 
     // Realiza una solicitud POST al servidor para enviar el correo electrónico
     await axios
-      .post('http://localhost:3001/sendmail', data) // Debes ajustar la URL de acuerdo a tu configuración de servidor
+      .post('https://the-next-page.vercel.app/sendmail', data) // Debes ajustar la URL de acuerdo a tu configuración de servidor
       .then((response) => {
         console.log(response.data)
         dispatch(deleteMessageById(id))

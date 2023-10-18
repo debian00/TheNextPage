@@ -28,7 +28,7 @@ const ForgotPassword = () => {
       const existEmail = allUsers.find((user) => user.email === email)
       if (existEmail) {
         const response = await axios.post(
-          'https://unisync-production.up.railway.app/forgot-password',
+          'https://unisync-production.up.railway.app/forgot-password/',
           { email }
         )
         if (response.data.Status === 'Success') {
