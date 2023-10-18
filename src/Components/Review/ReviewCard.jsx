@@ -60,14 +60,14 @@ const ReviewCard = ({ id, score, comment, userId }) => {
             marginBottom: '15px',
           }}
         >
-          <img src={user.profilePic}></img>
+          <img src={user?.profilePic}></img>
           <p
             style={{
               textAlign: 'center',
               margin: 'auto',
             }}
           >
-            {user.userName}
+            {user?.userName}
           </p>
         </div>
         <p>{comment}</p>

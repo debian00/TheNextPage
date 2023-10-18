@@ -110,7 +110,7 @@
 .button {
   padding: 10px 15px;
   border: 2px solid transparent;
-  background-color: #59415B;
+  background-color: #59415b;
   color: #f4f4f4;
   cursor: pointer;
   border-radius: 5px;
@@ -119,9 +119,9 @@
 
 .button:hover {
   position: relative;
-  background-color: #AAEEC4;
+  background-color: #aaeec4;
   border: 2px solid transparent;
-  color: #24262B;
+  color: #24262b;
 }
 
 .buttonsEdit {
@@ -134,7 +134,7 @@
   flex-direction: row;
   justify-content: center;
   gap: 15px;
-  background: #6F5475;
+  background: #e4e4e4;
   opacity: 0;
   transition: opacity 0.2s ease;
   box-shadow:

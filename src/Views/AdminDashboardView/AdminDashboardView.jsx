@@ -215,7 +215,7 @@ const AdminDashboardView = () => {
                   href="#"
                   style={{
                     display: 'flex',
-                    alignItems: 'center',                  
+                    alignItems: 'center',
                     height: '70px',
                     width: '100%',
                     paddingInline: '5px',
