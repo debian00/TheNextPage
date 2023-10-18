@@ -28,7 +28,7 @@ const ForgotPassword = () => {
       const existEmail = allUsers.find((user) => user.email === email)
       if (existEmail) {
         const response = await axios.post(
-          'http://localhost:3001/forgot-password',
+          'https://the-next-page.vercel.app/forgot-password',
           { email }
         )
         if (response.data.Status === 'Success') {
