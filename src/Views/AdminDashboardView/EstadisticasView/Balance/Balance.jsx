@@ -20,7 +20,7 @@ const Widget = ({ type }) => {
   const allSales = useSelector((state) => state.sale)
   const contact = useSelector((state) => state.contact);
   
-  const ventas = allSales?.map((ele) => parseFloat(ele.totalPrice))
+  const ventas = Array.isArray(allSales) ? allSales.map((ele) => parseFloat(ele.totalPrice)) : [];
   const sumaTotal = ventas?.reduce(
     (accumulator, currentValue) => accumulator + currentValue,
     0
