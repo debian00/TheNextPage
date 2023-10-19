@@ -21,7 +21,7 @@ const Widget = ({ type }) => {
   const contact = useSelector((state) => state.contact);
   
   const ventas = allSales?.map((ele) => parseFloat(ele.totalPrice))
-  const sumaTotal = ventas.reduce(
+  const sumaTotal = ventas?.reduce(
     (accumulator, currentValue) => accumulator + currentValue,
     0
   )
