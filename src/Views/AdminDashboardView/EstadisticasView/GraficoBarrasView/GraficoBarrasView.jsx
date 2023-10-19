@@ -109,7 +109,7 @@ export default function Bars() {
   const bookCounts = {};
 
   // Calcular el recuento de cada libro
-  librosten.forEach((sale) => {
+  librosten?.forEach((sale) => {
     const { bookId } = sale;
     if (bookCounts[bookId]) {
       bookCounts[bookId] += 1;
@@ -120,7 +120,7 @@ export default function Bars() {
 
   const labels = Object.keys(bookCounts);
   const data = Object.values(bookCounts);
-  const labelsWithNames = labels.map((id) => {
+  const labelsWithNames = labels?.map((id) => {
     const book = libros?.find((book) => book.id === id);
     return book ? book.title : id;
   });
