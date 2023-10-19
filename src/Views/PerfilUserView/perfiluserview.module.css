@@ -4,6 +4,7 @@
   --fuente-principal: 'Dela Gothic One', cursive;
 }
 .content {
+
   margin-left: 5rem;
 }
 .menu {
@@ -13,7 +14,7 @@
   color: #fff;
   background-color: #e8e8e8;
   overflow-y: auto;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.2);
   align-items: center; /* Para centrar verticalmente */
 }
 .profile {
@@ -61,10 +62,7 @@
   transition: background-color 0.3s; /* Agregar transición para suavizar el efecto */
 }
 
-.panel {
-  padding: 30px;
-  margin-right: 0 !important;
-}
+
 .btn{
 width: 100px;
 height: 25px;

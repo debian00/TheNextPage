@@ -36,7 +36,9 @@ const PerfilUserdView = () => {
     setColor('#59415b')
   }, [])
 
-
+useEffect(() => {
+  
+}, [user])
   
   return (
     <div>
