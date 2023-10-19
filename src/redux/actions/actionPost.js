@@ -287,9 +287,7 @@ export const sendPassword = (email) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('/forgot-password', { email })
-      if (response.data.Status === 'Success') {
-        alert('Email enviado, revisa tu bandeja de entrada!')
-      }
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
