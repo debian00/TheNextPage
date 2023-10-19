@@ -1,5 +1,11 @@
 import axios from 'axios'
-import { DELETE_ALL_CART, DELETE_BOOK, DELETE_CART ,DELETE_MESSAGE } from '../types'
+import {
+  DELETE_ALL_CART,
+  DELETE_BOOK,
+  DELETE_CART,
+  DELETE_MESSAGE,
+  DELETE_REVIEW,
+} from '../types'
 
 export const deleteUserById = (id) => {
   return async () => {
@@ -52,13 +58,21 @@ export const deleteMessageById = (id) => {
   return async (dispatch) => {
     try {
       // Realiza la solicitud de eliminación al servidor
-      await axios.delete(`/contact/${id}`);
+      await axios.delete(`/contact/${id}`)
       dispatch({
-        type:DELETE_MESSAGE,
-        payload: id
+        type: DELETE_MESSAGE,
+        payload: id,
       })
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
-};
+  }
+}
+
+export const deleteReview = (id) => async (dispatch) => {
+  axios.delete(`/review/delete/${id}`)
+  dispatch({
+    type: DELETE_REVIEW,
+    payload: id,
+  })
+}

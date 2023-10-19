@@ -5,6 +5,7 @@ import style from './message.module.css'
 import { deleteMessageById } from '../../../redux/actions/actionDelete'
 import { getAllContact } from '../../../redux/actions/actionGet'
 import { showSuccessNotification } from '../../../utils/Toast'
+import Swal from 'sweetalert2';
 
 const Message = () => {
   const contact = useSelector((state) => state.contact)
@@ -49,7 +50,7 @@ const Message = () => {
     <div>
       <div>
         <div className={style.name}>
-        <h1 className=" text-center font-monospace fw-bold lh-base">Mensajes de usuarios</h1>
+        <h1 className=" text-center fw-bold lh-base" style={{  fontFamily: 'Avenir, sans-serif', backgroundColor: '#6F5475', borderColor: "#6F5475", color: '#ffffff' }} >Mensajes de usuarios</h1>
         </div>
 
         <div className={style.cardsCont}>
@@ -125,7 +126,7 @@ const Message = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">
-                Send message
+                Enviar mensaje
               </h1>
               <button
                 type="button"
@@ -165,7 +166,7 @@ const Message = () => {
                 data-bs-dismiss="modal"
                 aria-label="Close"
               >
-                Close
+                Cerrar
               </button>
               <button
                 aria-label="Close"
@@ -176,11 +177,15 @@ const Message = () => {
                   if (messageText.trim() !== '') {
                     handleSendMessage(idContact)
                   } else {
-                    alert('Por favor, ingrese un mensaje antes de enviar.')
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Error',
+                      text: 'Por favor, ingrese un mensaje antes de enviar.',
+                    });
                   }
                 }}
               >
-                Send message
+                Enviar mensaje
               </button>
             </div>
           </div>

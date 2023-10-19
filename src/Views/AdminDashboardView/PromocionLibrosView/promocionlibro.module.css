@@ -132,7 +132,7 @@
 .button {
   padding: 10px 15px;
   border: 2px solid transparent;
-  background-color: #091f44;
+  background-color: #59415B;
   color: #f4f4f4;
   cursor: pointer;
   border-radius: 5px;
@@ -141,7 +141,7 @@
 
 .button:hover {
   position: relative;
-  background-color: #051229;
+  background-color: #AAEEC4;;
   border: 2px solid transparent;
-  color: #f4f4f4;
+  color: #24262B;
 }

@@ -35,6 +35,7 @@ const ReseñasView = () => {
               </div>
               <div className={style.reviewCard}>
                 <ReviewCard
+                  id={ele.id}
                   comment={ele.comment}
                   score={ele.score}
                   price={ele.price}

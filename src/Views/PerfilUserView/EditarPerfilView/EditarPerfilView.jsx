@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import style from './editarperfilview.module.css';
 import { useDispatch } from 'react-redux'
 import { updateUser } from '../../../redux/actions/actionPut'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Modal } from "react-bootstrap";
 
 

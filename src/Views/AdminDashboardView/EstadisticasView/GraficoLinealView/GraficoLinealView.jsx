@@ -10,6 +10,9 @@ import {
     Legend,
     Filler,
 } from 'chart.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getAllSale } from '../../../../redux/actions/actionGet';
 
 ChartJS.register(
     CategoryScale,
@@ -22,41 +25,71 @@ ChartJS.register(
     Filler
 );
 
-var beneficios = [0, 56, 20, 36, 80, 40, 30, -20, 25, 30, 12, 60];
-var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-
-var midata = {
-    labels: meses,
-    datasets: [ // Cada una de las líneas del gráfico
-        {
-            label: 'Beneficios',
-            data: beneficios,
-            tension: 0.5,
-            fill : true,
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            pointRadius: 5,
-            pointBorderColor: 'rgba(255, 99, 132)',
-            pointBackgroundColor: 'rgba(255, 99, 132)',
-        },
-        {
-            label: 'Otra línea',
-            data: [20, 25, 60, 65, 45, 10, 0, 25, 35, 7, 20, 25]
-        },
-    ],
-};
-
-var misoptions = {
-    scales : {
-        y : {
-            min : 0
-        },
-        x: {
-            ticks: { color: 'rgb(255, 99, 132)'}
-        }
-    }
-};
-
 export default function LinesChart() {
-    return <Line data={midata} options={misoptions}/>
+    const librosten = useSelector((state) => state.sale);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getAllSale());
+    }, []);
+
+    // Objeto para rastrear el recuento de IDs por mes
+    const idCountsByMonth = {
+        January: 0,
+        February: 0,
+        March: 0,
+        April: 0,
+        May: 0,
+        June: 0,
+        July: 0,
+        August: 0,
+        September: 0,
+        October: 0,
+        November: 0,
+        December: 0,
+    };
+
+    // Calcular el recuento de IDs por mes
+    librosten.forEach((venta) => {
+        const fechaCompra = new Date(venta.purchaseDate);
+        const mesCompra = fechaCompra.getMonth(); // Obtener el mes (0-11)
+        const nombreMes = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(0, mesCompra));
+
+        idCountsByMonth[nombreMes] += 1;
+    });
+
+    console.log('Recuento de IDs por mes:', idCountsByMonth);
+
+    // Convertir el objeto en un array para usarlo en la gráfica
+    const meses = Object.keys(idCountsByMonth);
+    const data = meses.map((mes) => idCountsByMonth[mes]);
+
+    var midata = {
+        labels: meses,
+        datasets: [
+            {
+                label: 'Ventas por mes',
+                data: data,
+                tension: 0,
+                fill: true,
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                pointRadius: 5,
+                pointBorderColor: 'rgba(255, 99, 132)',
+                pointBackgroundColor: 'rgba(255, 99, 132)',
+            },
+        ],
+    };
+
+    var misoptions = {
+        scales: {
+            y: {
+                min: 0,
+            },
+            x: {
+                ticks: { color: 'rgb(255, 99, 132)' }
+            }
+        }
+    };
+
+    return <Line data={midata} options={misoptions} />;
 }

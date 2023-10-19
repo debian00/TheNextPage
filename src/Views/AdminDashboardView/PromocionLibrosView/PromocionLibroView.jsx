@@ -5,9 +5,11 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getBookByOffer } from '../../../redux/actions/actionPatch'
 import Card from '../../../Components/CardIndividual/Card'
-import Swal from 'sweetalert2';
-import { showSuccessNotification, showErrorNotification } from '../../../utils/Toast'
-
+import Swal from 'sweetalert2'
+import {
+  showSuccessNotification,
+  showErrorNotification,
+} from '../../../utils/Toast'
 
 const PromocionLibroView = () => {
   //Hook para traer todos los libros
@@ -18,41 +20,31 @@ const PromocionLibroView = () => {
   //Filtrado combinado
   const [filter, setFilter] = useState({
     page: 1,
-    forSale: 'true',
     order: 'titleAsc',
     title: '',
   })
 
+  const [bookData, setBookData] = useState({})
+
   //Funcion para dar la promocion
   const handlePromocion = async (e, id) => {
-    console.log('Llegó el id', id);
-  
-    e.preventDefault();
-  
-    // Utiliza SweetAlert en lugar de window.confirm
-    Swal.fire({
-      title: '¿Deseas poner este libro en oferta?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'No',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          // Realiza tu acción si se confirma la promoción
-          await axios.patch(`/books/forSale/` + id);
-          dispatch(getBookByOffer());
-          showSuccessNotification('Oferta enviada con exito!')
-        } catch (error) {
-          // Maneja errores aquí si es necesario
-          showErrorNotification('Error al poner el libro en oferta:', error);
-        }
-      }
-    });
-  };
+    console.log('Llegó el id', id)
+
+    e.preventDefault()
+
+    try {
+      // Realiza tu acción si se confirma la promoción
+      await axios.patch(`/books/forSale/` + id, { porcentageDiscount: 70 })
+      dispatch(getBookByOffer())
+      showSuccessNotification('Oferta enviada con exito!')
+    } catch (error) {
+      // Maneja errores aquí si es necesario
+      showErrorNotification('Error al poner el libro en oferta:', error)
+    }
+  }
   //Funcion para quitar la promocion
-  const handleDeletePromocion = async(e, id) => {
-    e.preventDefault();
+  const handleDeletePromocion = async (e, id) => {
+    e.preventDefault()
     Swal.fire({
       title: '¿Estás seguro que quieres quitar la oferta de este libro?',
       icon: 'question',
@@ -63,15 +55,15 @@ const PromocionLibroView = () => {
       if (result.isConfirmed) {
         try {
           // Realiza tu acción si se confirma quitar la oferta
-          await axios.patch(`/books/fullPrice/` + id);
-          dispatch(getBookByOffer());
+          await axios.patch(`/books/fullPrice/` + id)
+          dispatch(getBookByOffer())
           showSuccessNotification('Oferta quitada con exito!')
         } catch (error) {
           // Maneja errores aquí si es necesario
-          showErrorNotification('Error al quitar la oferta del libro:', error);
+          showErrorNotification('Error al quitar la oferta del libro:', error)
         }
       }
-    });
+    })
   }
   //Funcion para ordenar
   const handleOrder = (e) => {
@@ -177,7 +169,12 @@ const PromocionLibroView = () => {
             ></Card>
             <div className={style.buttonsEdit}>
               {/* Quitar oferta */}
-              <button type="button" className="btn btn-danger" onClick={(e) => handleDeletePromocion(e, ele.id)} disabled={!ele.forSale}>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={(e) => handleDeletePromocion(e, ele.id)}
+                disabled={!ele.forSale}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="25"
@@ -194,10 +191,12 @@ const PromocionLibroView = () => {
               {/* Dar oferta */}
               <button
                 type="button"
-                onClick={(e) => handlePromocion(e, ele.id)}
+                onClick={() => setBookData(ele)}
                 className="btn btn-success"
                 style={{ marginLeft: '0.5rem' }}
                 disabled={ele.forSale}
+                data-bs-target={`#exampleModal-${ele.id}`}
+                data-bs-toggle="modal"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -225,6 +224,59 @@ const PromocionLibroView = () => {
         <button onClick={() => nextHandler()} className={style.button}>
           NEXT
         </button>
+      </div>
+      <div
+        className={`modal fade ${style.customFade}`}
+        id={`exampleModal-${bookData.id}`}
+        aria-labelledby={`exampleModalXlLabel-${bookData.id}`}
+        aria-hidden="true"
+      >
+        <div
+          className="modal-dialog modal-xl "
+          style={{
+            width: '50%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <div className="modal-content">
+            <div className="modal-header">
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                style={{ margin: '0' }}
+              ></button>
+            </div>
+            <div
+              className="modal-body"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <div className={style.postCard}>
+                <div>
+                  {[20, 35, 50, 65, 70].map((ele) => {
+                    return (
+                      <button key={ele} onClick={handlePromocion()}>
+                        {ele}
+                      </button>
+                    )
+                  })}
+                </div>
+                <hr />
+                <button className={style.post} data-bs-dismiss="modal">
+                  Enviar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

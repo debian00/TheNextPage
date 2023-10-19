@@ -3,6 +3,8 @@ import { useEffect } from 'react'
 import styles from './ReviewCard.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserById } from '../../redux/actions/actionGet'
+import { deleteReview } from '../../redux/actions/actionDelete'
+import { showSuccessNotification } from '../../utils/Toast'
 const ReviewCard = ({ id, score, comment, userId }) => {
   const user = useSelector((state) => state.user)
   console.log(user)
@@ -49,9 +51,14 @@ const ReviewCard = ({ id, score, comment, userId }) => {
   useEffect(() => {
     dispatch(getUserById(userId))
   }, [])
+
+  const handleDeleteReview = () => {
+    dispatch(deleteReview(id))
+    showSuccessNotification('La reseña se elimino con exito!')
+  }
   return (
     <div className={styles.contReseña}>
-      <div>
+      <div style={{ width: '100%' }}>
         <div
           style={{
             display: 'flex',
@@ -60,21 +67,44 @@ const ReviewCard = ({ id, score, comment, userId }) => {
             marginBottom: '15px',
           }}
         >
-          <img src={user.profilePic}></img>
-          <p
+          <div
             style={{
-              textAlign: 'center',
-              margin: 'auto',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '100%',
             }}
           >
-            {user.userName}
-          </p>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <img src={user?.profilePic}></img>
+              <p
+                style={{
+                  textAlign: 'center',
+                  margin: 'auto',
+                }}
+              >
+                {user?.userName}
+              </p>
+            </div>
+            <div>
+              {stars(Math.round(score))}
+              {noStars(Math.round(score))}
+            </div>
+          </div>
         </div>
         <p>{comment}</p>
-      </div>
-      <div>
-        {stars(Math.round(score))}
-        {noStars(Math.round(score))}
+        <div
+          style={{
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'end',
+            gap: '20px',
+          }}
+        >
+          <button onClick={handleDeleteReview} className={styles.buttons}>
+            Borrar
+          </button>
+        </div>
       </div>
     </div>
   )
