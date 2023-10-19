@@ -53,10 +53,7 @@ function Footer() {
           </NavLink>
           <NavLink to="/novedades" className={styles.NavLink}>
           <li><a href="#">Novedades</a></li>
-          </NavLink>
-          <NavLink to="/promociones"  className={styles.NavLink}>
-          <li><a href="#">Promociones</a></li>
-          </NavLink>
+          </NavLink>         
         </ul>
       </div>
       <div className={styles['footer-col']}>
