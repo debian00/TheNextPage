@@ -420,7 +420,7 @@ export const getUrlPaymentMercadoPago = (cart, id) => async (dispatch) => {
     }
     checkoutChecked()
 
-    const checkPaymentInterval = setInterval(checkoutChecked, 3000)
+    const checkPaymentInterval = setInterval(checkoutChecked, 1000)
 
     window.addEventListener('beforeunload', () => {
       clearInterval(checkPaymentInterval)
@@ -449,7 +449,7 @@ export const getSaleByUser = (id) => async (dispatch) => {
 export const getAllSale = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`/sale/`)
+      const { data } = await axios(`/sale`)
       return dispatch({
         type: GET_ALL_SALE,
         payload: data,

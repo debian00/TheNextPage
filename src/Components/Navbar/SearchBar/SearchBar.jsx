@@ -36,7 +36,7 @@ const SearchBar = () => {
     if (search.length > 0) {
       dispatch(getBooksSearch(search))
     }
-  }, [])
+  }, [search])
 
   const handleOnClose = () => {
     setVisible(true)
