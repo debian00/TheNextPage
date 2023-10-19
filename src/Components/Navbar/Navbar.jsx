@@ -186,10 +186,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link to="/catalogue">CATÁLOGO</Link>
-            </li>
-            <li>
-              <Link to="/promociones">PROMOCIONES</Link>
-            </li>
+            </li>          
             <li>
               <Link to="/novedades">NOVEDADES</Link>
             </li>
