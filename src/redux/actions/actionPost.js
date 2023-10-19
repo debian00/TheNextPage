@@ -134,7 +134,7 @@ export const handleGoogleLogin = async (setModal, navigate) => {
       profilePic: userInfo.photoUrl,
       email: userInfo.email,
       fullName: userInfo.fullName,
-      password: 'AAdsadsad1321321',
+      password: 'Armando123',
     }
     console.log(userInfo, obj)
 
