@@ -66,6 +66,10 @@ const NovedadesView = () => {
                 author={ele.author}
                 availability={ele.availability}
               ></Card>
+              <div onClick={(e) => handleCart(e, ele.id)} className={style.cart}>
+                <Cart width={20}></Cart>
+                <p>Agregar al carrito!</p>
+              </div>
               <div
                 style={{
                   position: 'absolute',
@@ -99,10 +103,6 @@ const NovedadesView = () => {
                 </p>
               </div>
               
-              <div onClick={(e) => handleCart(e, ele.id)} className={style.cart}>
-                <Cart width={20}></Cart>
-                <p>Agregar al carrito!</p>
-              </div>
             </div>
           ))}
         </div>
