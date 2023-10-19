@@ -2,6 +2,8 @@
 .cardCont {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  margin-right: 20px;
+  margin-left: 5px;
   margin-top: 20px;
 }
 .card {
@@ -19,8 +21,8 @@
   flex-direction: row;
   justify-content: center;
   bottom: 30px;
-  width: 63%;
-  left: 38%;
+  width: 84%;
+  left: 50%;
   transform: translate(-50%, 50%);
   background: #e4e4e4;
   opacity: 0;
@@ -138,9 +140,9 @@
   cursor: pointer;
   gap: 20px;
   justify-content: center;
-  left: 50%;
+  left: 38%;
   bottom: 40px;
-  width: 70%;
+  width: 64%;
   text-align: center;
   padding-block: 12px;
   align-items: center;
