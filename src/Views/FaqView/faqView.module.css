@@ -1,7 +1,7 @@
 @import url('https://fonts.cdnfonts.com/css/avenir');
 
 .wrap{
-  height:80vh;
+  height:100vh;
   background-image: url("../../assets/imgaboutus/AboutUsBg.jpg");
   background-size: cover; 
   background-position: center; 
@@ -26,6 +26,7 @@
     font-family: 'Avenir', sans-serif; 
     margin-top: 50px;
     color: #6F5475  ;
+    margin-bottom: 40px;
   }
   
   .faq-list {
