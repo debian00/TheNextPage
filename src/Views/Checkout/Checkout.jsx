@@ -14,7 +14,7 @@ const Checkout = () => {
   const { id } = useParams()
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
-  const [payment, setPayment] = useState('')
+  const [payment, setPayment] = useState('stripe')
   useEffect(() => {
     dispatch(getCartUser(id))
   }, [id])
