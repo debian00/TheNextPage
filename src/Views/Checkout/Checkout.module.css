@@ -78,6 +78,7 @@
   background-color: #ffffffca;
   border: 2px solid #6a63ff;
   color: #6a63ff;
+  margin-top: 20px;
 }
 .method button:hover {
   background-color: #6a63ff;
@@ -100,4 +101,8 @@
 
 .security p {
   font-size: 14px;
+}
+
+.mercadoPago svg {
+  padding: 5px;
 }
