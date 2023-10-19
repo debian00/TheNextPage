@@ -34,6 +34,7 @@ import {
   GET_ALL_CONTACT,
   DELETE_MESSAGE,
   GET_ALL_SALE,
+  DELETE_REVIEW,
 } from './types'
 
 const initialState = {
@@ -51,7 +52,7 @@ const initialState = {
   cart: [],
   sale: [],
   favorites: [],
-  contact:[],
+  contact: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -77,7 +78,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_ALL_BOOKS_OFFER:
       return { ...state, books: action.payload }
     case GET_ALL_SALE:
-      return {...state, sale :action.payload}
+      return { ...state, sale: action.payload }
     case GET_BOOK_BY_AVAILABILITY:
       return { ...state, books: action.payload }
     case GET_BOOK_BY_NAME_AUTHOR:
@@ -104,9 +105,9 @@ const rootReducer = (state = initialState, action) => {
         authors: action.payload,
       }
     case GET_ALL_FAVORITES:
-      return{
+      return {
         ...state,
-        favorites: action.payload
+        favorites: action.payload,
       }
     case GET_ALL_USERS:
       return { ...state, users: action.payload }
@@ -126,11 +127,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         books: bookDeleted,
       }
-    case DELETE_MESSAGE: 
-    return{
-      ...state,
-      contact: state.contact.filter((contact) => contact.id !== action.payload)
-    }
+    case DELETE_MESSAGE:
+      return {
+        ...state,
+        contact: state.contact.filter(
+          (contact) => contact.id !== action.payload
+        ),
+      }
     case UPDATE_BOOK:
       const bookUpdate = {
         count: state.books.count,
@@ -143,11 +146,11 @@ const rootReducer = (state = initialState, action) => {
         books: bookUpdate,
       }
     case UPDATE_USER:
-      return{
+      return {
         ...state,
-        users: state.users.map((user) => 
-        user.id === action.payload.id ? action.payload : user) 
-        
+        users: state.users.map((user) =>
+          user.id === action.payload.id ? action.payload : user
+        ),
       }
     case STOP_BOOK:
       const stopedBook = state.books.rows.map((book) => {
@@ -235,8 +238,13 @@ const rootReducer = (state = initialState, action) => {
     case GET_REVIEW_BY_ID:
       return { ...state, reviews: action.payload }
     case GET_ALL_CONTACT:
-        return {...state, contact: action.payload}
-      default:
+      return { ...state, contact: action.payload }
+    case DELETE_REVIEW:
+      return {
+        ...state,
+        reviews: state.reviews.filter((review) => review.id !== action.payload),
+      }
+    default:
       return state
   }
 }

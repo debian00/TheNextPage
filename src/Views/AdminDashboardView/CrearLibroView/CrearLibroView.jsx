@@ -117,7 +117,17 @@ const CrearLibroView = () => {
   )
   return (
     <div>
-             <h1 className=" text-center fw-bold lh-base" style={{  fontFamily: 'Avenir, sans-serif', backgroundColor: '#6F5475', borderColor: "#6F5475", color: '#ffffff' }} >Agregar un nuevo libro</h1>
+      <h1
+        className=" text-center fw-bold lh-base"
+        style={{
+          fontFamily: 'Avenir, sans-serif',
+          backgroundColor: '#6F5475',
+          borderColor: '#6F5475',
+          color: '#ffffff',
+        }}
+      >
+        Agregar un nuevo libro
+      </h1>
 
       <form onSubmit={handleSubmit}>
         <div className={` card mb-12`}>
@@ -263,7 +273,6 @@ const CrearLibroView = () => {
                       name="genre"
                       onChange={handleChange}
                       value={form.genre}
-                      required
                     >
                       <option value="">Selecciona un género</option>
                       {allGenres.map((ele) => (
@@ -375,7 +384,15 @@ const CrearLibroView = () => {
                 </div>
                 <div className="row justify-content-center d-flex">
                   <div className="col-12 mt-3">
-                    <button type="submit" className="btn btn-primary"style={{ backgroundColor: '#6F5475', borderColor: "#6F5475", color: '#ffffff' }}>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      style={{
+                        backgroundColor: '#6F5475',
+                        borderColor: '#6F5475',
+                        color: '#ffffff',
+                      }}
+                    >
                       Crear libro
                     </button>
                   </div>

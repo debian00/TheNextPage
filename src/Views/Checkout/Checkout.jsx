@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { Stripe, Warning } from '../../utils/Icons'
+import { MercadoPago, Stripe, Warning } from '../../utils/Icons'
 import style from './Checkout.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -8,15 +8,20 @@ import {
   getUrlPaymentMercadoPago,
 } from '../../redux/actions/actionGet'
 import CardCheckout from '../../Components/CardCheckout/CardCheckout'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import svgStripe from '../../assets/png/2560px-Stripe_Logo,_revised_2016.svg.png'
 const Checkout = () => {
   const { id } = useParams()
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
+  const [payment, setPayment] = useState('')
   useEffect(() => {
     dispatch(getCartUser(id))
   }, [id])
+
+  const paymentSetter = (e) => {
+    setPayment(e.target.value)
+  }
 
   const handlePayment = () => {
     dispatch(getUrlPayment(cart, id))
@@ -65,12 +70,22 @@ const Checkout = () => {
           <div className={style.method}>
             <label>Metodo de pago</label>
 
-            <button onClick={() => handlePayment()}>
-              <Stripe width={80} />
-            </button>
-            <button onClick={() => handleMercadoPago()}>
-              <Stripe width={80} />
-            </button>
+            <select onChange={paymentSetter} style={{ padding: '10px' }}>
+              <option value={'stripe'}>Stripe</option>
+              <option value={'mercadoPago'}>Mercado Pago</option>
+            </select>
+            {payment == 'stripe' ? (
+              <button onClick={() => handlePayment()} className={style.stripe}>
+                <Stripe width={80} />
+              </button>
+            ) : (
+              <button
+                className={style.mercadoPago}
+                onClick={() => handleMercadoPago()}
+              >
+                <MercadoPago width={120} />
+              </button>
+            )}
           </div>
           <div className={style.pago}>
             <p>
