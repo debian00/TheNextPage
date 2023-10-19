@@ -93,7 +93,9 @@ export const getAllBooksCopy = (page, order) => {
     try {
       if (!order) order = ''
       if (!page) page = ''
-      const { data } = await axios(`/books?page=${page}&size=100&order=${order}`)
+      const { data } = await axios(
+        `/books?page=${page}&size=100&order=${order}`
+      )
       return dispatch({
         type: GET_ALL_BOOKS_COPY,
         payload: data,
@@ -191,8 +193,7 @@ export const getAllUsers = () => {
 export const getBooksSearch = (search) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios('/books?title=' + search)
-      console.log(data.title)
+      const { data } = await axios('/books?page=1&size=10&title=' + search)
       dispatch({
         type: GET_BOOKS_NAME,
         payload: data.rows,
@@ -444,7 +445,6 @@ export const getSaleByUser = (id) => async (dispatch) => {
     console.log(error)
   }
 }
-
 
 export const getAllSale = () => {
   return async (dispatch) => {

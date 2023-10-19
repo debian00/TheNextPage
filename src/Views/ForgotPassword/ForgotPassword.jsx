@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers } from '../../redux/actions/actionGet'
 import { sendPassword } from '../../redux/actions/actionPost'
+import Swal from 'sweetalert2';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState()
@@ -28,10 +29,19 @@ const ForgotPassword = () => {
       const existEmail = allUsers.find((user) => user.email === email)
       if (existEmail) {
         await dispatch(sendPassword(email))
-        alert('Email enviado, revisa tu bandeja de entrada!')
+        Swal.fire({
+          icon: 'success', // Icono de éxito
+          title: 'Email enviado',
+          text: 'Revisa tu bandeja de entrada.',
+        });
         navigate('/check')
+
       } else {
-        alert('Email no registrado en la bdd')
+        Swal.fire({
+          icon: 'error', // Icono de error
+          title: 'Error',
+          text: 'Hubo un problema al enviar el email.',
+        });
         return
       }
     } catch (error) {

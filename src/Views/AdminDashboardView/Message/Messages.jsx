@@ -30,6 +30,7 @@ const Message = () => {
     showSuccessNotification('Email enviado con exito!')
 
     // Realiza una solicitud POST al servidor para enviar el correo electrónico
+
     // await axios
     //   .post('http://localhost:3001/sendmail', data) // Debes ajustar la URL de acuerdo a tu configuración de servidor
     //   .then((response) => {
@@ -45,6 +46,7 @@ const Message = () => {
     //     )
     //     // Maneja el error según sea necesario
     //   })
+
   }
 
   const dispatch = useDispatch()

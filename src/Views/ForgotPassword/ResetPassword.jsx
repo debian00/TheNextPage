@@ -19,6 +19,7 @@ function ResetPassword() {
           dispatch(sendNewPassword(id, token, password))
           navigate('/check');
          
+
         } else {
           alert('Contraseña muy corta');
         }
