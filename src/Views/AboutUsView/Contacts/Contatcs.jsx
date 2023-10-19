@@ -95,7 +95,7 @@ const Contacts = () => {
         <div className={style.info}>
           <h2>
             Contacta a nuestro{' '}
-            <span>equipo profesional para encontrar solucion a tus dudas</span>{' '}
+            <span>equipo profesional para encontrar solución a tus dudas</span>{' '}
           </h2>
           <div className={style.parrafo}>
             <p>
