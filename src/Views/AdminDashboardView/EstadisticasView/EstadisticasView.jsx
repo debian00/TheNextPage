@@ -35,7 +35,7 @@ const EstadisticasView = () => {
           className="bg-light mx-auto px-2 border border-2 border-primary"
           style={{ width: '450px', height: '230px' }}
         >
-          {/* <LinesChart /> */}
+          <LinesChart />
         </div>
       </div>
       <hr className="mt-3 mb-2" />
