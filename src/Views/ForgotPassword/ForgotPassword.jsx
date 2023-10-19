@@ -35,6 +35,7 @@ const ForgotPassword = () => {
           text: 'Revisa tu bandeja de entrada.',
         });
         navigate('/check')
+
       } else {
         Swal.fire({
           icon: 'error', // Icono de error
