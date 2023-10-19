@@ -48,15 +48,7 @@ const HomeView = () => {
               <h3 style={{ margin: '0', fontSize: '22px', fontWeight: 'bold' }}>
                 Nuestras novedades!
               </h3>
-              <p
-                style={{
-                  alignItems: 'center',
-                  textAlign: 'center',
-                  margin: '0',
-                }}
-              >
-                Ver mas
-              </p>
+             
             </div>
             <p style={{ color: '#92779E', textAlign: 'left', width: '60%' }}>
               Aquí encontrarás las últimas tendencias, historias emocionantes y
@@ -90,15 +82,7 @@ const HomeView = () => {
               <h3 style={{ margin: '0', fontSize: '22px', fontWeight: 'bold' }}>
                 Descubre Harry Potter
               </h3>
-              <p
-                style={{
-                  alignItems: 'center',
-                  textAlign: 'center',
-                  margin: '0',
-                }}
-              >
-                Ver mas
-              </p>
+              
             </div>
             <p style={{ color: '#92779E', textAlign: 'left' }}>
               Embárcate en las aventuras de Harry, Hermione y Ron en el mundo
@@ -125,16 +109,7 @@ const HomeView = () => {
               <h3 style={{ margin: '0', fontSize: '22px', fontWeight: 'bold' }}>
                 El señor de los anillos
               </h3>
-              <p
-                style={{
-                  alignItems: 'center',
-                  display: 'center',
-                  textAlign: 'center',
-                  margin: '0',
-                }}
-              >
-                Ver mas
-              </p>
+            
             </div>
             <p style={{ color: '#92779E', textAlign: 'left' }}>
               Explora tierras lejanas, encuentra personajes inolvidables y vive
@@ -163,16 +138,7 @@ const HomeView = () => {
               <h3 style={{ margin: '0', fontSize: '22px', fontWeight: 'bold' }}>
                 Lo mejor de Gabriel Garcia Marquez
               </h3>
-              <p
-                style={{
-                  alignItems: 'center',
-                  margin: '0',
-                  display: 'center',
-                  textAlign: 'center',
-                }}
-              >
-                Ver mas
-              </p>
+              
             </div>
             <p style={{ color: '#92779E', textAlign: 'left' }}>
               Explora tierras lejanas, encuentra personajes inolvidables y vive
