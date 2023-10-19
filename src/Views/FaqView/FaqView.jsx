@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import styles from "./faqView.module.css"; // Importa tus estilos CSS Modules
 
 
@@ -79,7 +79,19 @@ const FAQ = () => {
   return (
     <div className={styles["wrap"]}>
       <div className={styles["faq-container"]}>
-        <h1>Preguntas Frecuentes</h1>
+      <h1
+          style={{
+            marginTop: '3rem',
+            fontSize: '52px',
+            fontWeight: 'bold',
+            justifyContent: 'center',
+            display: 'flex',
+            marginBottom :'1rem',
+            color:'#161616',
+          }}
+        >
+          Preguntas Frecuentes
+        </h1>
         <div className="row">
           <div className="col-6">
             <ul className={styles["faq-list"]}>
