@@ -66,7 +66,11 @@ const NovedadesView = () => {
                 author={ele.author}
                 availability={ele.availability}
               ></Card>
-              <div onClick={(e) => handleCart(e, ele.id)} className={style.cart}>
+              <div
+                onClick={(e) => handleCart(e, ele.id)}
+                className={style.cart}
+                style={{ zIndex: '20' }}
+              >
                 <Cart width={20}></Cart>
                 <p>Agregar al carrito!</p>
               </div>
@@ -76,6 +80,7 @@ const NovedadesView = () => {
                   display: 'flex',
                   bottom: '20px',
                   width: '35%',
+                  zIndex: '1',
                   left: '10%',
                 }}
               >
@@ -102,7 +107,6 @@ const NovedadesView = () => {
                   {'  '}
                 </p>
               </div>
-              
             </div>
           ))}
         </div>

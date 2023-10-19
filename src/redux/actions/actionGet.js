@@ -420,7 +420,7 @@ export const getUrlPaymentMercadoPago = (cart, id) => async (dispatch) => {
     }
     checkoutChecked()
 
-    const checkPaymentInterval = setInterval(checkoutChecked, 3000)
+    const checkPaymentInterval = setInterval(checkoutChecked, 1000)
 
     window.addEventListener('beforeunload', () => {
       clearInterval(checkPaymentInterval)
