@@ -1,4 +1,4 @@
-import axios from 'axios'
+// import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import style from './message.module.css'
@@ -6,6 +6,7 @@ import { deleteMessageById } from '../../../redux/actions/actionDelete'
 import { getAllContact } from '../../../redux/actions/actionGet'
 import { showSuccessNotification } from '../../../utils/Toast'
 import Swal from 'sweetalert2';
+import { sendMessage } from '../../../redux/actions/actionPost'
 
 const Message = () => {
   const contact = useSelector((state) => state.contact)
@@ -23,22 +24,27 @@ const Message = () => {
       text: messageText, // Reemplaza esto con el contenido del mensaje
     }
 
+    dispatch(sendMessage(data))
+    dispatch(deleteMessageById(id))
+    dispatch(getAllContact())
+    showSuccessNotification('Email enviado con exito!')
+
     // Realiza una solicitud POST al servidor para enviar el correo electrónico
-    await axios
-      .post('http://localhost:3001/sendmail', data) // Debes ajustar la URL de acuerdo a tu configuración de servidor
-      .then((response) => {
-        console.log(response.data)
-        dispatch(deleteMessageById(id))
-        dispatch(getAllContact())
-        showSuccessNotification('Email enviado con exito!')
-      })
-      .catch((error) => {
-        console.error(
-          'Error al enviar el correo electrónico desde el frontend: ',
-          error
-        )
-        // Maneja el error según sea necesario
-      })
+    // await axios
+    //   .post('http://localhost:3001/sendmail', data) // Debes ajustar la URL de acuerdo a tu configuración de servidor
+    //   .then((response) => {
+    //     console.log(response.data)
+    //     dispatch(deleteMessageById(id))
+    //     dispatch(getAllContact())
+    //     showSuccessNotification('Email enviado con exito!')
+    //   })
+    //   .catch((error) => {
+    //     console.error(
+    //       'Error al enviar el correo electrónico desde el frontend: ',
+    //       error
+    //     )
+    //     // Maneja el error según sea necesario
+    //   })
   }
 
   const dispatch = useDispatch()

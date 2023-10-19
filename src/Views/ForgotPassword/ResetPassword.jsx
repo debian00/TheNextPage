@@ -1,30 +1,24 @@
 import { useState } from 'react';
 import {  useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { sendNewPassword } from '../../redux/actions/actionPost';
 
 function ResetPassword() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const { id, token } = useParams();
 
-    axios.defaults.withCredentials = true;
+    const dispatch = useDispatch();
+
+    // axios.defaults.withCredentials = true;
     const handleSubmit = (e) => {
         e.preventDefault();
       
         if (password.length >= 5) {
-          axios.post(`https://unisync-production.up.railway.app/reset-password/${id}/${token}`, { password })
-            .then(res => {
-              if (res.data.Status === "Success") {
-                navigate('/check');
-              } else {
-                // Si la respuesta no es "Success", podrías mostrar un mensaje de error.
-                alert('Error al restablecer la contraseña');
-              }
-            })
-            .catch(err => {
-              console.log(err);
-              alert('Error al realizar la solicitud');
-            });
+          dispatch(sendNewPassword(id, token, password))
+          navigate('/check');
+         
         } else {
           alert('Contraseña muy corta');
         }
