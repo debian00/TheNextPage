@@ -41,7 +41,7 @@
 .span {
   font-size: 1em;
   font-family: 'Avenir, sans-serif';
-
+  
 }
 .span:hover {
   color: rgb(90, 16, 90);
@@ -91,7 +91,7 @@
 .butonlogin { 
 
  
-  margin: 10px;
+  margin: 30px;
   background-color: rgb(140, 82, 158);
   color: #ffffff;
   border: none;

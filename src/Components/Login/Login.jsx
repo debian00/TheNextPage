@@ -6,7 +6,6 @@ import style from './Login.module.css'
 import {
   getLogin,
   handleGoogleLogin,
-  handleGitHubLogin,
 } from '../../redux/actions/actionPost'
 import { Modal } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
@@ -224,14 +223,16 @@ const Login = React.forwardRef((props, ref) => {
                 <p style={{ visibility: 'hidden' }}> &nbsp; </p>
               )}
             </div>
-            <Link to="/forgot-password">
+           
               <span
-                style={{ fontSize: '1em', cursor: 'pointer', color: 'black' }}
+                className={style.span}
               >
-                ¿Olvidaste tu contraseña?{' '}
-                <span className={style.spanLink}>Haz click aquí </span>
+                ¿Olvidaste tu contraseña?{' '} 
+                <Link to="/forgot-password">
+                <span className={style.spanLink}>Haz click aquí </span> 
+                </Link>
               </span>
-            </Link>
+           
             <div className="d-flex flex-column justify-content-center align-items-center">
               <div className="m-1">
                 <button type="submit" className={style.butonlogin}>
@@ -249,20 +250,14 @@ const Login = React.forwardRef((props, ref) => {
                     Regístrate aquí
                   </span>
                 </span>
-                <p>o </p>
+                <p> o </p>
 
                 <button
                   type="button"
                   className={style.butonGoogle}
                   onClick={() => handleGoogleLogin(setModal, navigate)}
                 ></button>
-                <button
-                  type="button"
-                  className={style.buton}
-                  onClick={() => handleGitHubLogin(setModal, navigate)}
-                >
-                  Accede con GitHub
-                </button>
+                
               </div>
             </div>
           </fieldset>

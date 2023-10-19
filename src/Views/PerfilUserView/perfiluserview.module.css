@@ -4,6 +4,7 @@
   --fuente-principal: 'Dela Gothic One', cursive;
 }
 .content {
+
   margin-left: 5rem;
 }
 .menu {
@@ -13,7 +14,7 @@
   color: #fff;
   background-color: #e8e8e8;
   overflow-y: auto;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.2);
   align-items: center; /* Para centrar verticalmente */
 }
 .profile {
@@ -61,10 +62,7 @@
   transition: background-color 0.3s; /* Agregar transición para suavizar el efecto */
 }
 
-.panel {
-  padding: 30px;
-  margin-right: 0 !important;
-}
+
 .btn{
 width: 100px;
 height: 25px;
@@ -73,4 +71,27 @@ border-width: 1px;
 border-style: solid;
 
 
+}
+.butonlogin { 
+
+ 
+ 
+  background-color: rgb(140, 82, 158);
+  color: #ffffff;
+  border: none;
+  padding: 5px 5px;
+  border-top-left-radius: none !important;
+  border-radius: 5px;
+  cursor: pointer;
+  /* margin-top: 20px; */
+ height: 50px;
+  width:100px;
+  margin-right : 90px;
+  box-shadow: #06142d;
+  transition: background-color 0.3s ease;
+  font-family: 'Avenir, sans-serif';
+
+}
+.butonlogin:hover {
+  background-color: #562c66f6;
 }

@@ -14,7 +14,7 @@ export const updateBook = (form, id) => {
     }
   }
 }
-export const updateUser = (id, form) => {
+export const updateUser = (form, id, setModal ) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(`/users/update/${id}`, form)
@@ -22,8 +22,22 @@ export const updateUser = (id, form) => {
         type: UPDATE_USER,
         payload: data,
       })
+      data.id 
+      ? setModal({ access: true, body: data })
+      : setModal({ access: false, body: data })
+      localStorage.removeItem("user");
+      localStorage.setItem('user', JSON.stringify(data))
+    
+    setTimeout(() => {
+      setModal(false)
+    }, 1500)
+    return
     } catch (error) {
-      console.log(error)
+      setModal({ access: true, body: error.response.data})
+      setTimeout(() => {
+        setModal({ access: false })
+      }, 1000)
+      return error
     }
   }
 }
