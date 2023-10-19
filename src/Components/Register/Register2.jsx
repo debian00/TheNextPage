@@ -82,9 +82,12 @@ const handleDelete = () => {
   
   
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-   /*  return localStorage.removeItem("registration") */
+
+    if(data.birthDate) {
+      data.birthDate.split('T')[0];
+    }
     await CreateUser(data, setModal, navigate) 
+    return localStorage.removeItem("registration")
   })
 
     return(

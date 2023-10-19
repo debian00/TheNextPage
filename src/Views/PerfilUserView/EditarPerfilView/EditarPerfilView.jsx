@@ -341,7 +341,7 @@ const EditarPerfilView = () => {
             </div>
             <div>
             <input className={style.inputsDer}
-            type="date" format="yyyy-mm-dd" {...register("birthDate" , {
+            type="date" format="yyyy-mm-dd"  {...register("birthDate" , {
               required : {
                 value : true,
                 message : "Se requiere fecha de nacimiento"
@@ -355,7 +355,7 @@ const EditarPerfilView = () => {
                   return "Tienes que ser mayor de edad"
                 } else if(age > 90) {
                   return "Revisa el año seleccionado "
-                } 
+                }
               }
             })}></input>
             {errors.birthDate ? (
