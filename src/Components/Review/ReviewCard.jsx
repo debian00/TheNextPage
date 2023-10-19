@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUserById } from '../../redux/actions/actionGet'
 import { deleteReview } from '../../redux/actions/actionDelete'
 import { showSuccessNotification } from '../../utils/Toast'
-const ReviewCard = ({ id, score, comment, userId }) => {
+const ReviewCard = ({ id, score, comment, userId, isPers }) => {
   const user = useSelector((state) => state.user)
   console.log(user)
   const dispatch = useDispatch()
@@ -93,18 +93,20 @@ const ReviewCard = ({ id, score, comment, userId }) => {
           </div>
         </div>
         <p>{comment}</p>
-        <div
-          style={{
-            display: 'flex',
-            width: '100%',
-            justifyContent: 'end',
-            gap: '20px',
-          }}
-        >
-          <button onClick={handleDeleteReview} className={styles.buttons}>
-            Borrar
-          </button>
-        </div>
+        {isPers && (
+          <div
+            style={{
+              display: 'flex',
+              width: '100%',
+              justifyContent: 'end',
+              gap: '20px',
+            }}
+          >
+            <button onClick={handleDeleteReview} className={styles.buttons}>
+              Borrar
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )

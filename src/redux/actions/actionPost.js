@@ -9,6 +9,7 @@ import {
 import { UNSAFE_DataRouterContext } from 'react-router'
 import { showSuccessNotification } from '../../utils/Toast.jsx'
 import { POST_CART, POST_REVIEW } from '../types.js'
+import { useNavigate } from 'react-router-dom'
 
 export const createBook = (form) => {
   const { images } = form
@@ -86,6 +87,7 @@ export const CreateUser = async (register, setModal, navigate) => {
 
 export const getLogin = async (login, setModal, navigate, provider) => {
   try {
+    console.log(login);
     const { data } = await axios.post('/login', login)
     var finalUser
     data.success
@@ -161,7 +163,7 @@ export const handleGitHubLogin = async (setModal, navigate) => {
     if(auth.currentUser === null || auth.currentUser?.providerData.filter(p => p.providerId === "github.com") ) {
 
           const result = await signInWithPopup(auth, provider)
-
+      
           const obj = {
             userName: result._tokenResponse.screenName,
             profilePic: result._tokenResponse.photoUrl,
@@ -169,7 +171,7 @@ export const handleGitHubLogin = async (setModal, navigate) => {
             fullName: result._tokenResponse.fullName,
             password: 'AAdsadsad1321321',
           }  
-  
+          console.log( "obj ",obj);
           try {  
             await getLogin(obj, setModal, navigate, obj)
           
@@ -199,6 +201,7 @@ export const handleGitHubLogin = async (setModal, navigate) => {
         }
       catch (error) {   
     console.log(error);
+    
     
 
   }
@@ -266,3 +269,40 @@ export const createContact = (form) => {
     }
   };
 };
+
+export const sendMessage = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('/sendmail', data)
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+
+
+export const sendPassword = (email) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('/forgot-password', { email })
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export const sendNewPassword = (id, token, password) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/reset-password/${id}/${token}`,{ password })
+      if (response.data.Status === 'Success') {
+        alert('Email enviado, revisa tu bandeja de entrada!')
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}

@@ -27,4 +27,149 @@
 
 .buttons:hover {
   background: #0e2f6a;
+ 
+}
+
+.row {
+  margin : 10px;
+  background-color: #e8e8e8;
+  box-shadow: 0 0 30px 0 rgb(70, 69, 69);
+
+}
+.photo {
+  background:
+  linear-gradient(to bottom, rgb(89, 65, 91), #7b2ba78a, #9151a579, #36133fb2),
+  url("./aaaaaaa.jpg");
+  background-position: center;
+  background-repeat: no-repeat;background-size: cover;
+  padding : 20px;
+  z-index: 1;
+}
+.body {
+  align-items:  center;
+  background-color: #e8e8e8;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden !important;
+  position: relative;
+  z-index: -1;
+
+}
+.inputfile + label {
+  font-size: 1em;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  display: inline-block;
+  font-family: 'Avenir, sans-serif';
+
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  background-color: red;
+}
+
+.label1 {
+  width: 40px;
+  padding: 7px !important;
+ background-color: rgb(140, 82, 158);
+ box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.719);
+ position: relative;
+ top: -50px;
+ left : -60px;
+ border-radius: 20px;
+ height: 40px !important;
+ text-align: center;
+ margin-bottom: 40px;
+ font-family: 'Avenir, sans-serif';
+
+}
+.label1:hover {
+  background-color: #bb78d6;
+  transition: background-color 0.3s ease;
+}
+.iconPassword {
+  padding :5px;
+  margin-left : 2px;
+  background-color: transparent;
+  border : none
+}
+
+.icon{
+  
+  background-color: transparent;
+}
+.iconPassword2 {
+  padding :5px;
+  margin-left : 2px;
+  background-color: transparent;
+  border : none
+}
+
+.iconPassword:hover, 
+  .iconPassword2:hover {
+   
+    padding :5px;
+  border : 0.4px solid rgb(140, 82, 158);
+  border-radius: 3px;
+}
+.inputs {
+  
+  border : none;
+  border-bottom: 3px solid  rgb(123, 26, 153) ;
+  background-color: transparent;
+  border-radius: 5px;
+ height: 40px;
+ width: 230px;
+  margin-top : 40px;
+ 
+
+}
+
+.inputs:hover {
+border :  3px solid rgb(123, 26, 153) !important
+}
+
+.inputsDer {
+  
+  border : none;
+  border-bottom: 3px solid  rgb(123, 26, 153) ;
+  background-color: transparent;
+  border-radius: 5px;
+ height: 40px;
+ width: 230px;
+  margin-top : 40px;
+  margin-left:  150px;
+
+}
+
+.inputsDer:hover {
+border :  3px solid rgb(123, 26, 153) !important
+}
+.butonlogin { 
+
+ 
+ 
+  background-color: rgb(140, 82, 158);
+  color: #ffffff;
+  border: none;
+  padding: 5px 5px;
+  border-top-left-radius: none !important;
+  border-radius: 5px;
+  cursor: pointer;
+  /* margin-top: 20px; */
+ height: 50px;
+  width:300px;
+  box-shadow: #06142d;
+  transition: background-color 0.3s ease;
+  font-family: 'Avenir, sans-serif';
+
+}
+.butonlogin:hover {
+  background-color: #562c66f6;
 }

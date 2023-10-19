@@ -41,6 +41,7 @@ const ReseñasView = () => {
                   price={ele.price}
                   quantity={ele.quantity}
                   userId={id}
+                  isPers={true}
                 />
               </div>
             </div>

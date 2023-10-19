@@ -9,6 +9,7 @@ import ReseñasView from './ReseñasView/ReseñasView'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../redux/actions/firebase.js'
 import { useNavigate } from 'react-router-dom'
+import { Modal } from 'react-bootstrap'
 
 const PerfilUserdView = () => {
   //Manejo de componentes
@@ -19,10 +20,13 @@ const PerfilUserdView = () => {
   //Manejo de color del perfil usuario
   const [color, setColor] = useState('#59415b')
   const [selectedLink, setSelectedLink] = useState(null)
+  const [showModal , setShowModal ] = useState(false)
+
 
   const LogOut = async () => {
     await signOut(auth)
     localStorage.removeItem('token'), localStorage.removeItem('user')
+    setShowModal(false)
     navigate('/home')
   }
   //Manejar la opcion seleccionada mediante color
@@ -36,7 +40,9 @@ const PerfilUserdView = () => {
     setColor('#59415b')
   }, [])
 
+useEffect(() => {
 
+}, [user])
   
   return (
     <div>
@@ -187,6 +193,7 @@ const PerfilUserdView = () => {
                 <a
                   onClick={() => {
                     handleSelect('E')
+                    setShowModal(true)
                   }}
                   href="#"
                   style={{
@@ -240,15 +247,25 @@ const PerfilUserdView = () => {
             <ComprasView />
           </div>
         ) : componenteActual === 'E' ? (
-          <div>
-            <h5>Estás seguro que quieres salir?</h5>
-            <div>
-              <button className={style.btn} type="button" onClick={LogOut}>
-                Si
-              </button>
-              <button className={style.btn} type="button">No </button>
-            </div>
-          </div>
+          <div class="justify-self-center align-self-center">
+          <Modal show={showModal}>
+            <Modal.Body>
+              <div className='d-flex flex-column justify-content-center align-items-center'>
+                <h3>Estas seguro de cerrar sesión ?</h3>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <div className='d-flex flex-row justify-content-center align-items-center' style={{height : "100px"}}>
+                <div>
+                <button type="button" onClick={LogOut} className={style.butonlogin}>Si</button>
+                </div>
+                <div>
+                <button type='button' onClick={() => {setShowModal(false)}} className={style.butonlogin}>No</button>
+                </div>
+              </div>
+            </Modal.Footer>
+          </Modal>
+        </div>
         ) : null}
       </div>
     </div>

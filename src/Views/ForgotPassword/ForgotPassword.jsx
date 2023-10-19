@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+// import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers } from '../../redux/actions/actionGet'
+import { sendPassword } from '../../redux/actions/actionPost'
+import Swal from 'sweetalert2';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState()
@@ -12,13 +14,12 @@ const ForgotPassword = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  
+
   useEffect(() => {
     dispatch(getAllUsers())
   }, [dispatch])
 
-
-  axios.defaults.withCredentials = true
+  // axios.defaults.withCredentials = true
   const handleSubmitBack = () => {
     navigate('/check')
   }
@@ -27,16 +28,20 @@ const ForgotPassword = () => {
     try {
       const existEmail = allUsers.find((user) => user.email === email)
       if (existEmail) {
-        const response = await axios.post(
-          'https://unisync-production.up.railway.app/forgot-password/',
-          { email }
-        )
-        if (response.data.Status === 'Success') {
-          alert('Email enviado, revisa tu bandeja de entrada!')
-          navigate('/check')
-        }
+        await dispatch(sendPassword(email))
+        Swal.fire({
+          icon: 'success', // Icono de éxito
+          title: 'Email enviado',
+          text: 'Revisa tu bandeja de entrada.',
+        });
+        navigate('/check')
+
       } else {
-        alert('Email no registrado en la bdd')
+        Swal.fire({
+          icon: 'error', // Icono de error
+          title: 'Error',
+          text: 'Hubo un problema al enviar el email.',
+        });
         return
       }
     } catch (error) {

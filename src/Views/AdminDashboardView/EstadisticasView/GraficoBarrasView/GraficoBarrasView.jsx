@@ -14,7 +14,9 @@ import {
 } from 'chart.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getAllBooksCopy, getAllSale } from '../../../../redux/actions/actionGet'
+import { getAllBooksCopy, getAllSale} from '../../../../redux/actions/actionGet'
+import axios from 'axios'
+import { useState } from 'react'
 
 ChartJS.register(
   CategoryScale,
@@ -71,53 +73,68 @@ var misoptions = {
 //     },
 //   ],
 // }
-
 export default function Bars() {
-    const librosten = useSelector((state) => state.sale);
-    const librosIdIgual = librosten.map((ele) => ele.bookId);
-    const allBooks = useSelector((state) => state.books);
-    const dispatch = useDispatch();
-  
-    useEffect(() => {
-      dispatch(getAllSale());
-      dispatch(getAllBooksCopy());
-    }, []);
-  
-    // Objeto para rastrear el recuento de cada libro
-    const bookCounts = {};
-    
-    // Calcular el recuento de cada libro
-    librosIdIgual.forEach((id) => {
-        if (bookCounts[id]) {
-            bookCounts[id] += 1;
-        } else {
-            bookCounts[id] = 1;
-        }
-    });
-    console.log('Libriyosss',bookCounts);
-  
-    // Crear nuevos datos para el gráfico
-    const labels = Object.keys(bookCounts); // IDs de los libros
-    console.log('Names', labels);
-    const data = Object.values(bookCounts); // Recuentos de los libros
-    console.log('Info', data); 
-    const labelsWithNames = labels.map((id) => {
-      const book = allBooks?.rows?.find((book) => book.id === id);
-      return book ? book.title : id;
-    });
-    
-  
-    const newChartData = {
-      labels: labelsWithNames,
-      datasets: [
-        {
-          label: 'Recuento de Libros',
-          data: data,
-          backgroundColor: 'rgba(0, 220, 195, 0.5)',
-        },
-      ],
-    };
-  
-    return <Bar data={newChartData} options={misoptions} />;
-  }
-  
+  const librosten = useSelector((state) => state.sale);
+  // const allBooks = useSelector((state) => state.books);
+  const dispatch = useDispatch();
+
+  const [libros, setLibros] = useState([]);
+  console.log('libros', libros);
+
+  const fetchBooks = async () => {
+    try {
+      const books = []; // Crear un arreglo para almacenar los resultados
+
+      for (let i = 0; i < 6; i++) {
+        // Realizar pedidos y obtener la data
+        const { data } = await axios.get(`/books?page=${i}`);
+        books.push(...data.rows);
+      }
+      setLibros(books);
+    } catch (error) {
+      console.error('Error al cargar libros:', error);
+    }
+  };
+
+  // Llama a fetchBooks para iniciar la carga de libros
+  useEffect(() => {
+    fetchBooks();
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllSale());
+    dispatch(getAllBooksCopy());
+  }, [dispatch]);
+
+  const bookCounts = {};
+
+  // Calcular el recuento de cada libro
+  librosten.forEach((sale) => {
+    const { bookId } = sale;
+    if (bookCounts[bookId]) {
+      bookCounts[bookId] += 1;
+    } else {
+      bookCounts[bookId] = 1;
+    }
+  });
+
+  const labels = Object.keys(bookCounts);
+  const data = Object.values(bookCounts);
+  const labelsWithNames = labels.map((id) => {
+    const book = libros.find((book) => book.id === id);
+    return book ? book.title : id;
+  });
+
+  const newChartData = {
+    labels: labelsWithNames,
+    datasets: [
+      {
+        label: 'Recuento de Libros',
+        data: data,
+        backgroundColor: 'rgba(0, 220, 195, 0.5)',
+      },
+    ],
+  };
+
+  return <Bar data={newChartData} options={misoptions} />;
+}
