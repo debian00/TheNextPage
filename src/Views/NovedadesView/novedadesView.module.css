@@ -2,8 +2,6 @@
 .cardCont {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  margin-right: 20px;
-  margin-left: 5px;
   margin-top: 20px;
 }
 .card {
