@@ -201,7 +201,6 @@ const handleDelete = () => {
     </div> 
 
       <div style={{marginTop : "15px"}}>
-                    <label htmlFor="name">Nombre</label>
                     <input {...register("name" , {
                         required : {
                             value : true, 
@@ -242,7 +241,6 @@ const handleDelete = () => {
                   </div>
 
                 <div style={{margin : "15px"}}>
-                    <label>Nombre de Usuario </label>
                     <input {...register("userName" , {
                         required : {
                             value : true,
@@ -279,9 +277,8 @@ const handleDelete = () => {
                 </div>
                 <div className="d-flex flex-row justify-content-center alig-items-center">
           <div>
-            <label className={style.label}>Número de teléfono</label>
             <input className={style.inputs}
-            type="number" {...register("phoneNumber" , {
+            type="number" min={0} {...register("phoneNumber" , {
               required : {
                 value : true,
                 message : "Se requiere número telefónico"
@@ -315,8 +312,8 @@ const handleDelete = () => {
           </div>
 
           <div>
-            <label className={style.label}>Fecha de nacimiento</label>
             <input className={style.inputs}
+            style={{marginLeft : "10px"}}
             type="date" format="yyyy-mm-dd" {...register("birthDate" , {
               required : {
                 value : true,
