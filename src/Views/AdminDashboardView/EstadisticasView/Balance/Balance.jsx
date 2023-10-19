@@ -20,8 +20,8 @@ const Widget = ({ type }) => {
   const allSales = useSelector((state) => state.sale)
   const contact = useSelector((state) => state.contact);
   
-  const ventas = allSales.map((ele) => parseFloat(ele.totalPrice))
-  const sumaTotal = ventas.reduce(
+  const ventas = Array.isArray(allSales) ? allSales.map((ele) => parseFloat(ele.totalPrice)) : [];
+  const sumaTotal = ventas?.reduce(
     (accumulator, currentValue) => accumulator + currentValue,
     0
   )
@@ -30,17 +30,17 @@ const Widget = ({ type }) => {
   const getDynamicValue = (type, users) => {
     switch (type) {
       case 'user':
-        return users.length ? users.length : 0
+        return users?.length ? users.length : 0
       case 'order':
         return allBooks.count
           ? allBooks.count
           : 0 /* Lógica para calcular el valor de órdenes */
       case "earning":
 
-        return sumaTotal.toFixed(2) /* Lógica para calcular el valor de ganancias */;
+        return sumaTotal?.toFixed(2) /* Lógica para calcular el valor de ganancias */;
       case "balance":
 
-      return contact.length  ? contact.length : 0
+      return contact?.length  ? contact.length : 0
       default:
         return 0
     }
@@ -158,7 +158,7 @@ const Widget = ({ type }) => {
   return (
     <div className={style.widget}>
       <div className={style.left}>
-        <span className={style.title}>{data.title}</span>
+        <span className={style.title}>{data?.title}</span>
         <span className={style.counter}>
           {data?.isMoney && '$'} {amount}
         </span>
