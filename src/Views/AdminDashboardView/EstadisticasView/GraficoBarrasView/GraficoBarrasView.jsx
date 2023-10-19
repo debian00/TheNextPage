@@ -121,7 +121,7 @@ export default function Bars() {
   const labels = Object.keys(bookCounts);
   const data = Object.values(bookCounts);
   const labelsWithNames = labels.map((id) => {
-    const book = libros.find((book) => book.id === id);
+    const book = libros?.find((book) => book.id === id);
     return book ? book.title : id;
   });
 
