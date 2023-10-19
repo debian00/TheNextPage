@@ -13,20 +13,20 @@ const ComprasView = () => {
   useEffect(() => {
     const { id } = JSON.parse(localStorage.getItem('user'))
     dispatch(getSaleByUser(id))
-  }, [])
+  }, [localStorage.getItem('user')])
   return (
     <div className={style.container}>
-      {mySales.map((ele) => {
+      {mySales?.map((ele) => {
         return (
           <div style={{ display: 'flex', width: '100%' }} key={ele.id}>
             <CardReview
               id={ele.id}
-              author={ele.book.author}
-              title={ele.book.title}
+              author={ele.book?.author}
+              title={ele.book?.title}
               price={ele.totalPrice}
               quantity={ele.quantity}
-              image={ele.book.images[0]}
-              bookId={ele.book.id}
+              image={ele.book?.images[0]}
+              bookId={ele.book?.id}
               userId={ele.userId}
             />
           </div>

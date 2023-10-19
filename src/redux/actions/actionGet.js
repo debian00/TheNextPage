@@ -449,7 +449,7 @@ export const getSaleByUser = (id) => async (dispatch) => {
 export const getAllSale = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`/sale/`)
+      const { data } = await axios(`/sale`)
       return dispatch({
         type: GET_ALL_SALE,
         payload: data,

@@ -21,12 +21,12 @@ const EstadisticasView = () => {
       >
         Mis métricas
       </h1>
-      <div className={style.widgets}>
+      {/* <div className={style.widgets}>
         <Widget type="user" />
         <Widget type="order" />
         <Widget type="earning" />
         <Widget type="balance" />
-      </div>
+      </div> */}
       <div>
         <p className="m-2">
           <b>Ventas Mensuales </b>Gráfico de líneas
