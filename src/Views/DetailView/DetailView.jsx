@@ -77,15 +77,18 @@ function DetailView() {
     showSuccessNotification('¡Se añadió al carrito con éxito!')
     console.log('Se guardó en el carrito')
   }
-
   useEffect(() => {
-    const idUser = JSON.parse(localStorage.getItem('user'))
-    const userId = idUser.id
-    dispatch(getBookById(id))
-    dispatch(getGenres())
-    dispatch(getAllFavs(userId))
-  }, [dispatch, id])
-
+    const idUser = JSON.parse(localStorage.getItem('user'));
+    if (idUser && idUser.id) {
+      const userId = idUser.id;
+      dispatch(getBookById(id));
+      dispatch(getGenres());
+      dispatch(getAllFavs(userId));
+    } else{
+      dispatch(getBookById(id));
+      dispatch(getGenres());
+    }
+  }, [dispatch, id]);
   return (
     <div>
       <div className={styles.container}>
