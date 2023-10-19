@@ -1,9 +1,12 @@
 @import url("https://fonts.cdnfonts.com/css/avenir");
 .cardCont {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   margin-top: 20px; 
+}
+.card {
+  display: flex;
+  position: relative;
 }
 .individualCard {
   width: calc(20% - 2rem);

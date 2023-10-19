@@ -57,7 +57,7 @@ const NovedadesView = () => {
         </h1>
         <div className={style.cardCont}>
           {allBooks?.rows?.map((ele) => (
-            <div key={ele.id} className={style.individualCard}>
+            <div key={ele.id} className={style.card}>
               <Card
                 title={ele.title}
                 image={ele.images[0]}
