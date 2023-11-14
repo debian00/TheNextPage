@@ -7,8 +7,8 @@ const AboutUs = () => {
   return (
     <div className={style.about}>
       <div className={`row ${style.content}`}>
-        <div className={`col-4 `}>
-          <img src={imagenAbout} alt="" />
+        <div className={`col-4 `} >
+          <img src={imagenAbout} alt="" width={'100%'}/>
         </div>
         <div className={`col-8 ${style.conten2}`}>
         <h2 style={{fontWeight: 'bold', justifyContent:'center', display:"flex", marginTop:"1rem"}}>

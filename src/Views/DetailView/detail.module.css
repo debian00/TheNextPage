@@ -208,7 +208,7 @@ body {
 
 .page__content-blockquote-text {
   font-family: var(--title);
-  font-size: 1.2em;
+  font-size: 1em;
   text-align: left;
 }
 
